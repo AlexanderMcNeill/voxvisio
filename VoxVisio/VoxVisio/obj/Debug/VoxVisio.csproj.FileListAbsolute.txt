@@ -1,0 +1,8 @@
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\bin\Debug\VoxVisio.exe
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\bin\Debug\VoxVisio.pdb
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.VoxVisio.resources
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.Properties.Resources.resources
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csproj.GenerateResource.Cache
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.exe
+C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.pdb
