@@ -8,6 +8,6 @@ namespace VoxVisio
     abstract class ControlState
     {
         public abstract void VoiceInput(String voiceData); // TODO : Alex check if this datatype is fine for your system
-        public abstract void EyeInput(); 
+        public abstract void EyeInput(); // TODO : Add in eyex input data type
     }
 }

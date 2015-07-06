@@ -7,5 +7,14 @@ namespace VoxVisio
 {
     class StandardState : ControlState
     {
+        public override void VoiceInput(string voiceData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void EyeInput()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
