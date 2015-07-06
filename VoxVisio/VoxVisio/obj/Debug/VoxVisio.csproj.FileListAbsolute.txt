@@ -6,3 +6,5 @@ C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.Pr
 C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csproj.GenerateResource.Cache
 C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.exe
 C:\Users\Daniel\Documents\GitHub\EyeGaze\VoxVisio\VoxVisio\obj\Debug\VoxVisio.pdb
+C:\Users\Daniel\Documents\GitHub\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.exe
+C:\Users\Daniel\Documents\GitHub\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.pdb
