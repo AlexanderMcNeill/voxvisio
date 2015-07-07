@@ -1,0 +1,18 @@
+Installing Tobii EyeX Libraries
+
+
+First create the project that you would like to use the library in.
+
+Find the "references" folder and right click.
+
+Select add reference
+
+Browse and find this folder and select "tobii.EyeX.Client.Net20.dll" and "EyeXFramework.dll"
+
+Now add the "Tobii.EyeX.Client.dll" to the project by draging it to the project folder.
+
+Finally select "Tobii.EyeX.Client.dll" you just added to the project and change the property "copy to output directory" to either "copy if newer" or "copy always"
+
+
+If you are still unable to access the library watch this video to see step by step how it is added https://www.youtube.com/watch?v=w13JQW41D54. 
+Ignore the part about editing the dll for a earlier version of .net

@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using EyeXFramework;
+using System.Speech.Recognition;
 
 namespace VoxVisio
 {
@@ -13,6 +15,8 @@ namespace VoxVisio
     {
         private readonly NotifyIcon notifyicon;
         private IContainer component;
+        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
+        private EyeXHost eyeXHost = new EyeXHost();
 
         public VoxVisio()
         {
