@@ -7,12 +7,12 @@ namespace VoxVisio
 {
     class StandardState : ControlState
     {
-        public override void VoiceInput(string voiceData)
+        public override void VoiceInput(string voiceData, ControlContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override void EyeInput()
+        public override void EyeInput(ControlContext context, IFixationData fixation)
         {
             throw new NotImplementedException();
         }

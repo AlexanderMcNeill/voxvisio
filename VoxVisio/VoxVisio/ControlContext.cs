@@ -19,5 +19,15 @@ namespace VoxVisio
             get { return _state; }
             set { _state = value; }
         }
+
+        public void EyeRequest(Fixation fixation)
+        {
+            _state.EyeInput(this, fixation);
+        }
+        public void VoiceRequest(string voice)
+        {
+            _state.VoiceInput(voice, this);
+        }
+
     }
 }
