@@ -21,6 +21,7 @@ namespace VoxVisio
     {
         eFixationPhase GetFixationPhase();
         Point GetFixationLocation();
+        void setFixationFinished();
     }
 
     /// <summary>
@@ -59,6 +60,11 @@ namespace VoxVisio
         public Point GetFixationLocation()
         {
             return _location;
+        }
+
+        public void setFixationFinished()
+        {
+            _currentEFixationPhase = eFixationPhase.finished;
         }
     }
 }
