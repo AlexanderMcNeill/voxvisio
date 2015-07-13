@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
 
@@ -36,6 +37,15 @@ namespace VoxVisio
         public void StateChanged()
         {
             //TODO : Do stuff here that needs to be done once state has changed
+            if (controlState.ControlState.GetType() == typeof (StandardState))
+            {
+                
+            }
+            else if (controlState.ControlState.GetType() == typeof(DictationState))
+            {
+                
+            }
+           
         }
     }
 }
