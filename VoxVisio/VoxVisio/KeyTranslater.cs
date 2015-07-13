@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using WindowsInput.Native;
 
+// https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
+
+
 namespace VoxVisio
 {
     struct KeyCombo
@@ -75,7 +78,11 @@ namespace VoxVisio
             new KeyCombo("-", VirtualKeyCode.OEM_MINUS), 
             new KeyCombo("+", VirtualKeyCode.OEM_PLUS), 
             new KeyCombo("win", VirtualKeyCode.LWIN),
-            new KeyCombo("enter", VirtualKeyCode.EXECUTE)
+            new KeyCombo("enter", VirtualKeyCode.RETURN),
+            new KeyCombo("left", VirtualKeyCode.LEFT),
+            new KeyCombo("right", VirtualKeyCode.RIGHT),
+            new KeyCombo("up", VirtualKeyCode.UP),
+            new KeyCombo("down", VirtualKeyCode.DOWN)
         };
 
         public VirtualKeyCode GetKeyCode(string keyString)
