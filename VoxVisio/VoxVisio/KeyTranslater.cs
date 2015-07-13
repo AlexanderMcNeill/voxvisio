@@ -22,6 +22,24 @@ namespace VoxVisio
     {
         private KeyCombo[] keyCombos =
         {
+            new KeyCombo("m1", VirtualKeyCode.LBUTTON),
+            new KeyCombo("m2", VirtualKeyCode.RBUTTON),
+            new KeyCombo("m3", VirtualKeyCode.MBUTTON),
+            new KeyCombo("f1", VirtualKeyCode.F1),
+            new KeyCombo("f2", VirtualKeyCode.F2),
+            new KeyCombo("f3", VirtualKeyCode.F3),
+            new KeyCombo("f4", VirtualKeyCode.F4),
+            new KeyCombo("f5", VirtualKeyCode.F5),
+            new KeyCombo("f6", VirtualKeyCode.F6),
+            new KeyCombo("f7", VirtualKeyCode.F7),
+            new KeyCombo("f8", VirtualKeyCode.F8),
+            new KeyCombo("f9", VirtualKeyCode.F9),
+            new KeyCombo("f10", VirtualKeyCode.F10),
+            new KeyCombo("f11", VirtualKeyCode.F11),
+            new KeyCombo("f12", VirtualKeyCode.F12),
+            new KeyCombo("tab", VirtualKeyCode.TAB),
+            new KeyCombo("ctrl", VirtualKeyCode.CONTROL),
+            new KeyCombo("alt", VirtualKeyCode.MENU),
             new KeyCombo("a", VirtualKeyCode.VK_A), 
             new KeyCombo("b", VirtualKeyCode.VK_B), 
             new KeyCombo("c", VirtualKeyCode.VK_C), 
@@ -60,7 +78,8 @@ namespace VoxVisio
             new KeyCombo("0", VirtualKeyCode.VK_0), 
             new KeyCombo("-", VirtualKeyCode.OEM_MINUS), 
             new KeyCombo("+", VirtualKeyCode.OEM_PLUS), 
-            new KeyCombo("win", VirtualKeyCode.LWIN)
+            new KeyCombo("win", VirtualKeyCode.LWIN),
+            new KeyCombo("enter", VirtualKeyCode.EXECUTE)
         };
 
         public VirtualKeyCode GetKeyCode(string keyString)

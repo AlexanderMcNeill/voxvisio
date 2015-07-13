@@ -109,6 +109,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CommandsXML.xml" />
     <Content Include="Tobii.EyeX.Client.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

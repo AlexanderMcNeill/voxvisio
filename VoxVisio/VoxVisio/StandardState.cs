@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WindowsInput;
 
 namespace VoxVisio
 {
@@ -10,11 +11,13 @@ namespace VoxVisio
         private List<IFixationData> _finishedFixations;
         private IFixationData _currentFixation;
         private int BUFFERSIZE = 8;
+        private InputSimulator inputsim;
 
         public StandardState()
         {
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
+            inputsim = new InputSimulator();
         } 
 
         public override void VoiceInput(string voiceData, ControlContext context)
@@ -25,7 +28,6 @@ namespace VoxVisio
         public override void EyeInput(ControlContext context, IFixationData fixation)
         {
             buffering(fixation);
-            
         }
 
         private void buffering(IFixationData fixation)
