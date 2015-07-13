@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
     <Compile Include="ControlContext.cs" />
     <Compile Include="ControlState.cs" />
     <Compile Include="DictationState.cs" />

@@ -3,7 +3,7 @@
   <Class Name="VoxVisio.ControlContext">
     <Position X="4.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACAAAAAAAACAAAAAAAAAAAAIAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAABAACAAAAAAAACAAAAAAAAAAAAIAAAAAAAAQ=</HashCode>
       <FileName>ControlContext.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,7 +17,7 @@
   <Class Name="VoxVisio.DictationState">
     <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAABAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>DictationState.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -32,7 +32,7 @@
   <Class Name="VoxVisio.KeyTranslater">
     <Position X="9.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>KeyTranslater.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -46,11 +46,11 @@
   <Class Name="VoxVisio.MainEngine">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAABAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAABAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>MainEngine.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="VoxVisio.KeyCombo">
+  <Struct Name="VoxVisio.KeyRep">
     <Position X="10" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
