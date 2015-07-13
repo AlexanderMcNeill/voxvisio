@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace VoxVisio
+﻿namespace VoxVisio
 {
+    public delegate void StateChanged();
     class ControlContext
     {
         private ControlState _state;
+        public event StateChanged changedState;
 
         public ControlContext(ControlState state)
         {
@@ -17,7 +14,14 @@ namespace VoxVisio
         public ControlState ControlState
         {
             get { return _state; }
-            set { _state = value; }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    changedState();
+                }
+            }
         }
 
         public void EyeRequest(Fixation fixation)

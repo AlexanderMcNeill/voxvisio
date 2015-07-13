@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using EyeXFramework;
+using Tobii.EyeX.Framework;
 
 namespace VoxVisio
 {
@@ -18,21 +15,27 @@ namespace VoxVisio
         {
             controlState = new ControlContext(new StandardState());
             eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(Tobii.EyeX.Framework.FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
+            controlState.changedState += StateChanged;
+            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
         }
 
-        public void Fixation(Tobii.EyeX.Framework.FixationDataEventType t, int x, int y, double timeStamp)
+        public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
         {
             Fixation fx = null;
-            if (t == Tobii.EyeX.Framework.FixationDataEventType.Begin)
+            if (t == FixationDataEventType.Begin)
             {
                 fx = new Fixation(new Point(x, y), eFixationPhase.start);
             }
-            if (t == Tobii.EyeX.Framework.FixationDataEventType.End)
+            if (t == FixationDataEventType.End)
             {
                 fx = new Fixation(new Point(x,y),eFixationPhase.finished );
             }
             controlState.EyeRequest(fx);
+        }
+
+        public void StateChanged()
+        {
+            //TODO : Do stuff here that needs to be done once state has changed
         }
     }
 }

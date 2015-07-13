@@ -1,11 +1,13 @@
-﻿namespace VoxVisio
+﻿using System.ComponentModel;
+
+namespace VoxVisio
 {
     partial class VoxVisio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
