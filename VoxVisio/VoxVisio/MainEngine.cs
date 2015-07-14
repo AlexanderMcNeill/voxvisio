@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using WindowsInput;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
@@ -32,8 +33,8 @@ namespace VoxVisio
             inputSimulator = new InputSimulator();
             controlState.changedState += StateChanged;
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
-            commands = new List<Command>();
-            commandGrammar = null; //TODO: Add dans get grammar method
+            loadCommands();
+            loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
 
             speechRecognizer.RequestRecognizerUpdate();
@@ -65,8 +66,8 @@ namespace VoxVisio
 
         public void loadCommands()
         {
-            List<CommandStrings> commandStrings = new List<CommandStrings>();
-            using (StreamReader reader = File.OpenText(@"c:\person.json"))
+            var commandStrings = new List<CommandStrings>();
+            using (StreamReader reader = File.OpenText(@"Commands.json"))
             {
                 JArray oa = (JArray) JToken.ReadFrom(new JsonTextReader(reader));
                 foreach (JObject VARIABLE in oa)
@@ -80,9 +81,16 @@ namespace VoxVisio
             }
         }
 
+        public void loadCommandGrammar()
+        {
+            var keywords = commands.Select(coms => coms.VoiceKeyword);
+            Choices sList = new Choices();
+            sList.Add(keywords.ToArray());
+            commandGrammar = new Grammar(new GrammarBuilder(sList));
+        }
+
         public void StateChanged()
         {
-            
             if (controlState.ControlState.GetType() == typeof (StandardState))
             {
                 speechRecognizer.LoadGrammar(commandGrammar);

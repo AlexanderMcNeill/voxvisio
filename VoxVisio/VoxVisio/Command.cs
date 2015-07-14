@@ -27,8 +27,8 @@ namespace VoxVisio
     }
     class Command
     {
-        private string VoiceKeyword;
-        private KeyCombo keyCombo;
+        public string VoiceKeyword { get; }
+        private KeyCombo keyCombo { get; }
 
         public Command(CommandStrings temp, InputSimulator inputSimulator)
         {
