@@ -2,15 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using WindowsInput;
 using WindowsInput.Native;
 
 namespace VoxVisio
 {
+
+    /// <summary>
+    /// Used for loading in the xml command strings before they are converted to their final form.
+    /// </summary>
+    [Serializable()]
+    class CommandStrings
+    {
+        public string commandWord { get; set; }
+        
+        public string keyStrings { get; set; }
+
+        public CommandStrings(string commandWord, string keyStrings)
+        {
+            this.commandWord = commandWord;
+            this.keyStrings = keyStrings;
+        }
+    }
     class Command
     {
         private string VoiceKeyword;
         private KeyCombo keyCombo;
+
+        public Command(CommandStrings temp, InputSimulator inputSimulator)
+        {
+            this.VoiceKeyword = temp.commandWord;
+            this.keyCombo = new KeyCombo(temp.keyStrings, inputSimulator);
+        }
     }
 
     class KeyCombo

@@ -18,3 +18,7 @@ C:\Users\mcnear1\Desktop\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csprojReso
 C:\Users\mcnear1\Desktop\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.VoxVisio.resources
 C:\Users\mcnear1\Desktop\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.Properties.Resources.resources
 C:\Users\mcnear1\Desktop\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csproj.GenerateResource.Cache
+C:\Users\Daniel\Documents\GitHub\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.VoxVisio.resources
+C:\Users\Daniel\Documents\GitHub\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.Properties.Resources.resources
+C:\Users\Daniel\Documents\GitHub\voxviso\VoxVisio\VoxVisio\obj\Debug\VoxVisio.csproj.GenerateResource.Cache
