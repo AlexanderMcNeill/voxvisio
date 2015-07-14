@@ -12,16 +12,16 @@ namespace VoxVisio
         private int BUFFERSIZE = 8;
         private InputSimulator inputsim;
 
-        public StandardState()
+        public StandardState(InputSimulator inputsim)
         {
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
-            inputsim = new InputSimulator();
+            this.inputsim = inputsim;
         } 
 
         public override void VoiceInput(string voiceData, ControlContext context)
         {
-            //context.ControlState = new DictationState(); //How to swap to dictation mode
+            //context.ControlState = new DictationState(inputsim); //How to swap to dictation mode
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)

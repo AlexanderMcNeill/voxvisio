@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using WindowsInput;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
 
@@ -9,13 +10,15 @@ namespace VoxVisio
     {
         private ControlContext controlState;
         private EyeXHost eyex;
+        private readonly InputSimulator inputSimulator;
 
         //TODO : Alex add in voice requiered classes
 
         public MainEngine()
         {
-            controlState = new ControlContext(new StandardState());
+            controlState = new ControlContext(new StandardState(inputSimulator));
             eyex = new EyeXHost();
+            inputSimulator = new InputSimulator();
             controlState.changedState += StateChanged;
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
         }
