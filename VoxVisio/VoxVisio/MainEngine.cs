@@ -2,6 +2,7 @@
 using System.Drawing;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
+using System.Speech.Recognition;
 
 namespace VoxVisio
 {
@@ -9,8 +10,9 @@ namespace VoxVisio
     {
         private ControlContext controlState;
         private EyeXHost eyex;
-
-        //TODO : Alex add in voice requiered classes
+        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
+        private Grammar commandGrammar;
+        private Grammar dictationGrammar;
 
         public MainEngine()
         {
@@ -18,7 +20,17 @@ namespace VoxVisio
             eyex = new EyeXHost();
             controlState.changedState += StateChanged;
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
+
+            commandGrammar = null; //TODO: Add dans get grammar method
+            dictationGrammar = new DictationGrammar();
+
+            speechRecognizer.RequestRecognizerUpdate();
+            speechRecognizer.LoadGrammar(commandGrammar);
+            speechRecognizer.SpeechRecognized += SpeechRecognised;
+            speechRecognizer.SetInputToDefaultAudioDevice();
+            speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
         }
+
 
         public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
         {
@@ -34,15 +46,21 @@ namespace VoxVisio
             controlState.EyeRequest(fx);
         }
 
+        public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
+        {
+            controlState.VoiceRequest(e.Result.Text);
+        }
+
         public void StateChanged()
         {
-            //TODO : Do stuff here that needs to be done once state has changed
+            
             if (controlState.ControlState.GetType() == typeof (StandardState))
             {
-                
+                speechRecognizer.LoadGrammar(commandGrammar);
             }
             else if (controlState.ControlState.GetType() == typeof(DictationState))
             {
+                speechRecognizer.LoadGrammar(dictationGrammar);
                 
             }
            

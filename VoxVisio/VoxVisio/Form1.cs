@@ -11,8 +11,6 @@ namespace VoxVisio
     {
         private readonly NotifyIcon notifyicon;
         private IContainer component;
-        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
-        private EyeXHost eyeXHost = new EyeXHost();
 
         public VoxVisio()
         {
