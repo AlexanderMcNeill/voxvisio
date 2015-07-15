@@ -34,8 +34,8 @@ namespace VoxVisio
             inputSimulator = new InputSimulator();
             controlState.changedState += StateChanged;
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
-            //loadCommands(); need to fix your file reading daniel
-            //loadCommandGrammar();
+            loadCommands();// need to fix your file reading daniel
+            loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
             commandList = CommandSingleton.Instance();
             commandList.SetCommands(commands);
@@ -74,16 +74,15 @@ namespace VoxVisio
         public void loadCommands()
         {
             var commandStrings = new List<CommandStrings>();
+            commands = new List<Command>();
+            JArray csArray;
             using (StreamReader reader = File.OpenText(@"Commands.json"))
             {
-                JArray oa = (JArray) JToken.ReadFrom(new JsonTextReader(reader));
-                foreach (JObject VARIABLE in oa)
+                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                JArray a = (JArray)o.SelectToken("command");
+                foreach (JObject variable in a)
                 {
-                    commandStrings.Add(new CommandStrings((string)VARIABLE.Property("word"), (string)VARIABLE.Property("keys"))); 
-                }
-                foreach (var VARIABLE in commandStrings)
-                {
-                    commands.Add(new Command(VARIABLE, inputSimulator));
+                    commands.Add(new Command(new CommandStrings((string)variable["word"], (string)variable["keys"]) , inputSimulator));
                 }
             }
         }

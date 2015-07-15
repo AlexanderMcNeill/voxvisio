@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using WindowsInput;
 using WindowsInput.Native;
+using Newtonsoft.Json;
 
 namespace VoxVisio
 {
@@ -44,11 +45,12 @@ namespace VoxVisio
     /// <summary>
     /// Used for loading in the xml command strings before they are converted to their final form.
     /// </summary>
-    [Serializable()]
+    [JsonObject("command")]
     public class CommandStrings
     {
+        [JsonProperty("word")]
         public string commandWord { get; set; }
-        
+        [JsonProperty("keys")]
         public string keyStrings { get; set; }
 
         public CommandStrings(string commandWord, string keyStrings)

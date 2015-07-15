@@ -1,5 +1,4 @@
 ﻿{
-
     "command": [
       {
         "word": "click",
@@ -15,7 +14,7 @@
       },
       {
         "word": "kill",
-        "keys": "atl,f4"
+        "keys": "alt,f4"
       },
       {
         "word": "open",
