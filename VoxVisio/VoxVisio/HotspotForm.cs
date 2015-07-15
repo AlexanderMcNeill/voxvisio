@@ -15,6 +15,8 @@ namespace VoxVisio
         private int percentFill = 0;
         private Rectangle hotspotBounds;
         private Graphics canvas;
+        private Graphics bufferGraphics;
+        private Bitmap buffer;
         public HotspotForm()
         {
             InitializeComponent();
@@ -24,8 +26,16 @@ namespace VoxVisio
             hotspotBounds = new Rectangle(new Point(0, 0), new Size(Width, Height));
 
             canvas = CreateGraphics();
+            buffer = new Bitmap(Width, Height);
+            bufferGraphics = Graphics.FromImage(buffer);
+            
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            drawHotspot();
+        }
         public void updateHotspot(Point fixationLocation)
         {
             if (hotspotBounds.Contains(fixationLocation))
@@ -42,16 +52,29 @@ namespace VoxVisio
 
         public void drawHotspot()
         {
-            canvas.FillEllipse(Brushes.AliceBlue, hotspotBounds);
+            bufferGraphics.FillRectangle(Brushes.LightCoral, 0, 0, Width, Height);
+            bufferGraphics.FillEllipse(Brushes.Blue, hotspotBounds);
             int fillWidth = (Width / 100) * percentFill;
             int fillHeight = (Height / 100) * percentFill;
-            canvas.FillEllipse(Brushes.Red,0,0,fillWidth, fillHeight);
+            int xPos = (Width - fillWidth) / 2;
+            int yPos = (Height - fillHeight) / 2;
+            bufferGraphics.FillEllipse(Brushes.Red, xPos, yPos, fillWidth, fillHeight);
+            canvas.DrawImage(buffer, 0, 0);
         }
 
         public int PercentFill
         {
             get { return percentFill; }
             set { percentFill = value; }
+        }
+
+        public void requestClose()
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                // close the form on the forms thread
+                this.Close();
+            });
         }
     }
 }
