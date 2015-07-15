@@ -53,15 +53,17 @@ namespace VoxVisio
         public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
         {
             Fixation fx = null;
-            if (t == FixationDataEventType.Begin)
+            switch (t)
             {
-                fx = new Fixation(new Point(x, y), eFixationPhase.start);
+                case FixationDataEventType.Begin:
+                    fx = new Fixation(new Point(x, y), eFixationPhase.start);
+                    controlState.EyeRequest(fx);
+                    break;
+                case FixationDataEventType.End:
+                    fx = new Fixation(new Point(x,y),eFixationPhase.finished );
+                    controlState.EyeRequest(fx);
+                    break;
             }
-            if (t == FixationDataEventType.End)
-            {
-                fx = new Fixation(new Point(x,y),eFixationPhase.finished );
-            }
-            controlState.EyeRequest(fx);
         }
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
