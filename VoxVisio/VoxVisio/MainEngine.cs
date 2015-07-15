@@ -29,22 +29,24 @@ namespace VoxVisio
 
         public MainEngine()
         {
-            controlState = new ControlContext(new DictationState(inputSimulator));
+            controlState = new ControlContext(new DictationState(inputSimulator)); //Change back to command state once working
             eyex = new EyeXHost();
             inputSimulator = new InputSimulator();
             controlState.changedState += StateChanged;
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
-            loadCommands();
-            loadCommandGrammar();
+            //loadCommands(); need to fix your file reading daniel
+            //loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
             commandList = CommandSingleton.Instance();
             commandList.SetCommands(commands);
 
             speechRecognizer.RequestRecognizerUpdate();
-            speechRecognizer.LoadGrammar(dictationGrammar);
+            speechRecognizer.LoadGrammar(dictationGrammar); //Change back to command grammar once working
             speechRecognizer.SpeechRecognized += SpeechRecognised;
             speechRecognizer.SetInputToDefaultAudioDevice();
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+            eyex.Start();
         }
 
 

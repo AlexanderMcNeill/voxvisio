@@ -24,11 +24,14 @@ namespace VoxVisio
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
         {
-            hotspotForm.updateHotspot(fixation.GetFixationLocation());
-            if (hotspotForm.PercentFill >= 100)
+            if (fixation != null) //shouldnt need this need to figure out why we are getting nulls
             {
-                hotspotForm.Close();
-                context.ControlState = new StandardState(inputsim);
+                hotspotForm.updateHotspot(fixation.GetFixationLocation());
+                if (hotspotForm.PercentFill >= 100)
+                {
+                    //hotspotForm.Close(); Can't close this form due to being on the wrong thread
+                    context.ControlState = new StandardState(inputsim);
+                }
             }
         }
     }
