@@ -41,6 +41,7 @@ namespace VoxVisio
             this.lvCommandList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CommandWord,
             this.HotKeyCombo});
+            this.lvCommandList.GridLines = true;
             this.lvCommandList.Location = new System.Drawing.Point(856, 12);
             this.lvCommandList.Name = "lvCommandList";
             this.lvCommandList.Size = new System.Drawing.Size(293, 549);
