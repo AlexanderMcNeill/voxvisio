@@ -17,8 +17,6 @@ namespace VoxVisio.Tests
         {
             CommandSingleton cs = CommandSingleton.Instance();
             CommandSingleton cs2 = CommandSingleton.Instance();
-            
-
             Assert.AreEqual(cs, cs2);
         }
 
