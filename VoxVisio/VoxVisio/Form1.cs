@@ -11,6 +11,8 @@ namespace VoxVisio
     {
         private readonly NotifyIcon notifyicon;
         private IContainer component;
+        private MainEngine mainEngine;
+
 
         public VoxVisio()
         {
@@ -32,6 +34,8 @@ namespace VoxVisio
             notifyicon.Text = "VoxVisio";
 
             this.Resize += frmMain_Resize;
+
+            mainEngine = new MainEngine();
         }
 
         private void VoxVisio_Load(object sender, EventArgs e)

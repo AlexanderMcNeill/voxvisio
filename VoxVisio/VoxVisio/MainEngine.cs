@@ -29,7 +29,7 @@ namespace VoxVisio
 
         public MainEngine()
         {
-            controlState = new ControlContext(new StandardState(inputSimulator));
+            controlState = new ControlContext(new DictationState(inputSimulator));
             eyex = new EyeXHost();
             inputSimulator = new InputSimulator();
             controlState.changedState += StateChanged;
@@ -41,7 +41,7 @@ namespace VoxVisio
             commandList.SetCommands(commands);
 
             speechRecognizer.RequestRecognizerUpdate();
-            speechRecognizer.LoadGrammar(commandGrammar);
+            speechRecognizer.LoadGrammar(dictationGrammar);
             speechRecognizer.SpeechRecognized += SpeechRecognised;
             speechRecognizer.SetInputToDefaultAudioDevice();
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);

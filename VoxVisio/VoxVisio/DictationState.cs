@@ -7,28 +7,29 @@ namespace VoxVisio
     class DictationState : ControlState
     {
 
-        private Rectangle endDictationHotspot;
-        private int endDictationCounter = 0;
-        private const int SELECTIONTIME = 3000;
         private InputSimulator inputsim;
+        private HotspotForm hotspotForm;
 
         public DictationState(InputSimulator inputsim)
         {
             this.inputsim = inputsim;
+            hotspotForm = new HotspotForm();
+            hotspotForm.Show();
         }
 
         public override void VoiceInput(string voiceData, ControlContext context)
         {
-            throw new NotImplementedException();
+            inputsim.Keyboard.TextEntry(voiceData);
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
         {
-            if (endDictationHotspot.Contains(fixation.GetFixationLocation()))
+            hotspotForm.updateHotspot(fixation.GetFixationLocation());
+            if (hotspotForm.PercentFill >= 100)
             {
-                endDictationCounter++;
+                hotspotForm.Close();
+                context.ControlState = new StandardState(inputsim);
             }
-            throw new NotImplementedException();
         }
     }
 }
