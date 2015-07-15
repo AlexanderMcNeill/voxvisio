@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Speech.Recognition;
@@ -13,6 +14,7 @@ namespace VoxVisio
         private readonly NotifyIcon notifyicon;
         private IContainer component;
         private MainEngine mainEngine;
+        private CommandSingleton commandList;
 
 
         public VoxVisio()
@@ -37,11 +39,21 @@ namespace VoxVisio
             this.Resize += frmMain_Resize;
 
             mainEngine = new MainEngine();
+            commandList = CommandSingleton.Instance();
+            populateList();
         }
 
         private void VoxVisio_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void populateList()
+        {
+            foreach (var VARIABLE in commandList.Commands)
+            {
+                lvCommandList.Items.Add(new ListViewItem(new string[] {VARIABLE.VoiceKeyword, VARIABLE.keyCombo.GetKeyString()}));
+            }
         }
 
 

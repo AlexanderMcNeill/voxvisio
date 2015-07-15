@@ -70,6 +70,8 @@ namespace VoxVisio
             this.VoiceKeyword = temp.commandWord;
             this.keyCombo = new KeyCombo(temp.keyStrings, inputSimulator);
         }
+
+        
     }
 
     public class KeyCombo
@@ -108,6 +110,13 @@ namespace VoxVisio
             {
                 inputSimulator.Keyboard.KeyUp(virtualKeyCode);
             }
+        }
+        public string GetKeyString()
+        {
+            var toReturn =
+                from k in Keys
+                select KeyTranslater.GetKeyString(k);
+            return String.Join(",", toReturn);
         }
     }
 }

@@ -74,9 +74,7 @@ namespace VoxVisio
 
         public void loadCommands()
         {
-            var commandStrings = new List<CommandStrings>();
             commands = new List<Command>();
-            JArray csArray;
             using (StreamReader reader = File.OpenText(@"Commands.json"))
             {
                 

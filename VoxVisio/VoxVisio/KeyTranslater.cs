@@ -96,6 +96,15 @@ namespace VoxVisio
                 select keyStrings.KeyCode;
             return toreturnCode.First();
         }
+
+        public static string GetKeyString(VirtualKeyCode code)
+        {
+            var toreturnCode =
+                from keyStrings in _keyReps
+                where keyStrings.KeyCode == code
+                select keyStrings.Key;
+            return toreturnCode.First();
+        }
     }
 
 }
