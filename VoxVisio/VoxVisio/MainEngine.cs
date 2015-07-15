@@ -10,6 +10,7 @@ using System.Speech.Recognition;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using VoxVisio.Properties;
 
 namespace VoxVisio
 {
@@ -78,8 +79,10 @@ namespace VoxVisio
             JArray csArray;
             using (StreamReader reader = File.OpenText(@"Commands.json"))
             {
+                
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 JArray a = (JArray)o.SelectToken("command");
+                
                 foreach (JObject variable in a)
                 {
                     commands.Add(new Command(new CommandStrings((string)variable["word"], (string)variable["keys"]) , inputSimulator));

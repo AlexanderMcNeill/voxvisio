@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Speech.Recognition;
 using System.Windows.Forms;
 using EyeXFramework;
+using VoxVisio.Properties;
 
 namespace VoxVisio
 {
@@ -25,7 +26,7 @@ namespace VoxVisio
 
             // The Icon property sets the icon that will appear 
             // in the systray for this application.
-            Icon icon = new Icon("favicon.ico");
+            Icon icon = Resources.favicon;
             notifyicon.Icon = icon;
             
 
