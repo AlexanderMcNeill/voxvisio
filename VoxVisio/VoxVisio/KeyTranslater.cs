@@ -20,7 +20,7 @@ namespace VoxVisio
             KeyCode = keyCode;
         }
     }
-    class KeyTranslater
+    public class KeyTranslater
     {
         private static KeyRep[] _keyReps =
         {

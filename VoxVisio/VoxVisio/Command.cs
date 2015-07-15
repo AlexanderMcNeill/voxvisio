@@ -8,12 +8,44 @@ using WindowsInput.Native;
 
 namespace VoxVisio
 {
+    public class CommandSingleton
+    {
+        private static CommandSingleton _singleton;
+        private List<Command> commands;
+
+        protected CommandSingleton()
+        {
+            
+        }
+
+        public List<Command> Commands
+        {
+            get { return commands; }
+        }
+
+        public static CommandSingleton Instance()
+        {
+            // Uses lazy initialization.
+            // Note: this is not thread safe.
+            if (_singleton == null)
+            {
+                _singleton = new CommandSingleton();
+            }
+
+            return _singleton;
+        }
+
+        public void SetCommands(List<Command> commands)
+        {
+            this.commands = commands;
+        }
+    }
 
     /// <summary>
     /// Used for loading in the xml command strings before they are converted to their final form.
     /// </summary>
     [Serializable()]
-    class CommandStrings
+    public class CommandStrings
     {
         public string commandWord { get; set; }
         
@@ -25,10 +57,11 @@ namespace VoxVisio
             this.keyStrings = keyStrings;
         }
     }
-    class Command
+
+    public class Command
     {
         public string VoiceKeyword { get; }
-        private KeyCombo keyCombo { get; }
+        public KeyCombo keyCombo { get; }
 
         public Command(CommandStrings temp, InputSimulator inputSimulator)
         {
@@ -37,13 +70,14 @@ namespace VoxVisio
         }
     }
 
-    class KeyCombo
+    public class KeyCombo
     {
         public List<VirtualKeyCode> Keys;
         private readonly InputSimulator inputSimulator;
 
         public KeyCombo(string keysString, InputSimulator inputSimulator)
         {
+            Keys = new List<VirtualKeyCode>();
             this.inputSimulator = inputSimulator;
             foreach (string VARIABLE in keysString.Split(','))
             {

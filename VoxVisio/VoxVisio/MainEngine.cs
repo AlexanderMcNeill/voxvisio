@@ -18,6 +18,7 @@ namespace VoxVisio
         private ControlContext controlState;
         private EyeXHost eyex;
         private readonly InputSimulator inputSimulator;
+        private CommandSingleton commandList;
 
         private List<Command> commands; 
 
@@ -36,6 +37,8 @@ namespace VoxVisio
             loadCommands();
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
+            commandList = CommandSingleton.Instance();
+            commandList.SetCommands(commands);
 
             speechRecognizer.RequestRecognizerUpdate();
             speechRecognizer.LoadGrammar(commandGrammar);

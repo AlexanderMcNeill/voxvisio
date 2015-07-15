@@ -11,17 +11,20 @@ namespace VoxVisio
         private IFixationData _currentFixation;
         private int BUFFERSIZE = 8;
         private InputSimulator inputsim;
+        private CommandSingleton commandList;
 
         public StandardState(InputSimulator inputsim)
         {
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
             this.inputsim = inputsim;
+            commandList = CommandSingleton.Instance();
         } 
 
         public override void VoiceInput(string voiceData, ControlContext context)
         {
             //context.ControlState = new DictationState(inputsim); //How to swap to dictation mode
+            commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys(); // Check this functions properly
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
