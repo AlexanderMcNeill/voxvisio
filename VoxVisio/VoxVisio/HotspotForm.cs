@@ -11,6 +11,8 @@ namespace VoxVisio
 {
     public partial class HotspotForm : Form
     {
+        private const int GROWSPEED = 10;
+        private const int SHRINKSPEED = 5;
 
         private int percentFill = 0;
         private Rectangle hotspotBounds;
@@ -41,11 +43,19 @@ namespace VoxVisio
             Point relativeLocation = new Point(fixationLocation.X - Left, fixationLocation.Y - Top);
             if (hotspotBounds.Contains(relativeLocation))
             {
-                percentFill++;
+                if(percentFill < 100)
+                {
+                    percentFill += GROWSPEED;
+                }
+                    
             }
             else
             {
-                //percentFill--;
+                if(percentFill > 0)
+                {
+                    percentFill -= SHRINKSPEED;
+                }
+                    
             }
 
             drawHotspot();

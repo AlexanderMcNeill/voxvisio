@@ -119,5 +119,11 @@ namespace VoxVisio
                 
             }
         }
+
+        internal void close()
+        {
+            speechRecognizer.Dispose();
+            eyex.Dispose();
+        }
     }
 }

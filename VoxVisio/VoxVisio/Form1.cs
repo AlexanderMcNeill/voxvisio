@@ -48,6 +48,8 @@ namespace VoxVisio
 
         }
 
+
+
         private void populateList()
         {
             foreach (var VARIABLE in commandList.Commands)
@@ -83,6 +85,11 @@ namespace VoxVisio
         private void fIileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void VoxVisio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mainEngine.close();
         }
     }
 

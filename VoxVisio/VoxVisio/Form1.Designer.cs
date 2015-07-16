@@ -70,6 +70,7 @@ namespace VoxVisio
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VoxVisio";
             this.Text = "VoxVisio";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VoxVisio_FormClosing);
             this.Load += new System.EventHandler(this.VoxVisio_Load);
             this.ResumeLayout(false);
 
