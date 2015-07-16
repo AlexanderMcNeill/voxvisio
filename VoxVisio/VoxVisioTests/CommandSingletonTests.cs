@@ -26,10 +26,10 @@ namespace VoxVisio.Tests
             CommandSingleton cs = CommandSingleton.Instance();
             CommandSingleton cs2 = CommandSingleton.Instance();
             List<Command> commands = new List<Command>();
-            commands.Add(new Command(new CommandStrings("open", "enter"), new InputSimulator()));
+            commands.Add(new Command("open", "enter", new InputSimulator()));
             cs.SetCommands(commands);
             Assert.AreEqual(cs.Commands,cs2.Commands);
-            commands.Add(new Command(new CommandStrings("click", "m1"), new InputSimulator()));
+            commands.Add(new Command("click", "m1", new InputSimulator()));
             Assert.AreEqual(cs.Commands.Count, 2);
             Assert.AreEqual(cs2.Commands.Count, 2);
 

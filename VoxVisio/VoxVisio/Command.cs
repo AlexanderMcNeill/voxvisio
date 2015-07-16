@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Speech.Synthesis.TtsEngine;
 using System.Text;
 using System.Xml.Serialization;
 using WindowsInput;
@@ -42,33 +43,15 @@ namespace VoxVisio
         }
     }
 
-    /// <summary>
-    /// Used for loading in the xml command strings before they are converted to their final form.
-    /// </summary>
-    [JsonObject("command")]
-    public class CommandStrings
-    {
-        [JsonProperty("word")]
-        public string commandWord { get; set; }
-        [JsonProperty("keys")]
-        public string keyStrings { get; set; }
-
-        public CommandStrings(string commandWord, string keyStrings)
-        {
-            this.commandWord = commandWord;
-            this.keyStrings = keyStrings;
-        }
-    }
-
     public class Command
     {
         public string VoiceKeyword { set; get; }
         public KeyCombo keyCombo { set; get; }
 
-        public Command(CommandStrings temp, InputSimulator inputSimulator)
+        public Command(string commandWord, string keyStrings, InputSimulator inputSimulator)
         {
-            this.VoiceKeyword = temp.commandWord;
-            this.keyCombo = new KeyCombo(temp.keyStrings, inputSimulator);
+            this.VoiceKeyword = commandWord;
+            this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
         }
 
         
@@ -95,12 +78,22 @@ namespace VoxVisio
             PressDownKeys();
             ReleaseHeldKeys();
         }
-
         public void PressDownKeys()
         {
             foreach (VirtualKeyCode virtualKeyCode in Keys)
             {
-                inputSimulator.Keyboard.KeyDown(virtualKeyCode);
+                switch (virtualKeyCode)
+                {
+                    case VirtualKeyCode.LBUTTON:
+                        inputSimulator.Mouse.LeftButtonClick();
+                        break;
+                    case VirtualKeyCode.RBUTTON:
+                        inputSimulator.Mouse.RightButtonClick();
+                        break;
+                    default:
+                        inputSimulator.Keyboard.KeyDown(virtualKeyCode);
+                        break;
+                }
             }
         }
 

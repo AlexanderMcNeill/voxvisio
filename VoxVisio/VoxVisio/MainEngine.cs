@@ -85,13 +85,12 @@ namespace VoxVisio
             commands = new List<Command>();
             using (StreamReader reader = File.OpenText(@"Commands.json"))
             {
-                
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 JArray a = (JArray)o.SelectToken("command");
                 
                 foreach (JObject variable in a)
                 {
-                    commands.Add(new Command(new CommandStrings((string)variable["word"], (string)variable["keys"]) , inputSimulator));
+                    commands.Add(new Command((string)variable["word"], (string)variable["keys"] , inputSimulator));
                 }
             }
         }

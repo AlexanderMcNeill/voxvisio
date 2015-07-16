@@ -5,6 +5,10 @@
         "keys": "m1"
       },
       {
+        "word": "double click",
+        "keys": "m1,m1"
+      },
+      {
         "word": "right Click",
         "keys": "m2"
       },

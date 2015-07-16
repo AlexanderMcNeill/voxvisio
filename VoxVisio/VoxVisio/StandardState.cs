@@ -19,7 +19,7 @@ namespace VoxVisio
             _currentFixation = null;
             this.inputsim = inputsim;
             commandList = CommandSingleton.Instance();
-        } 
+        }
 
         public override void VoiceInput(string voiceData, ControlContext context)
         {
@@ -27,11 +27,12 @@ namespace VoxVisio
             {
                 context.ControlState = new DictationState(inputsim);
             }
-            else 
+            else
             {
+                inputsim.Mouse.MoveMouseTo(GetLatestFixation().GetFixationLocation().X,
+                    GetLatestFixation().GetFixationLocation().Y);
                 commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys();
             }
-            
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
