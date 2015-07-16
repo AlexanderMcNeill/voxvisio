@@ -23,8 +23,15 @@ namespace VoxVisio
 
         public override void VoiceInput(string voiceData, ControlContext context)
         {
-            //context.ControlState = new DictationState(inputsim); //How to swap to dictation mode
-            commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys(); // Check this functions properly
+            if (voiceData.Equals("dictation"))
+            {
+                context.ControlState = new DictationState(inputsim);
+            }
+            else 
+            {
+                commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys();
+            }
+            
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)

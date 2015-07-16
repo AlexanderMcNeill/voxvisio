@@ -11,7 +11,6 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
-using System.Threading;
 
 namespace VoxVisio
 {
@@ -32,7 +31,7 @@ namespace VoxVisio
         {
             inputSimulator = new InputSimulator();
             
-            controlState = new ControlContext(new StandardState(inputSimulator)); //Change back to command state once working
+            controlState = new ControlContext(new StandardState(inputSimulator));
             controlState.changedState += StateChanged;
 
 
@@ -102,6 +101,7 @@ namespace VoxVisio
             var keywords = commands.Select(coms => coms.VoiceKeyword);
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
+            sList.Add("dictation");
             GrammarBuilder gb = new GrammarBuilder(sList);
             commandGrammar = new Grammar(gb);
         }
