@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
+using System.Threading;
 
 namespace VoxVisio
 {
@@ -23,30 +24,38 @@ namespace VoxVisio
 
         private List<Command> commands; 
 
-        //TODO : Alex add in voice requiered classes
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
 
         public MainEngine()
         {
-            controlState = new ControlContext(new DictationState(inputSimulator)); //Change back to command state once working
-            eyex = new EyeXHost();
             inputSimulator = new InputSimulator();
+            
+            controlState = new ControlContext(new StandardState(inputSimulator)); //Change back to command state once working
             controlState.changedState += StateChanged;
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType ,(int)e.X, (int)e.Y, e.Timestamp);
-            loadCommands();// need to fix your file reading daniel
+
+
+
+            loadCommands();
+
+            //Setting up the grammars for the voice recognizer
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
+
             commandList = CommandSingleton.Instance();
             commandList.SetCommands(commands);
 
+            //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             speechRecognizer.RequestRecognizerUpdate();
-            speechRecognizer.LoadGrammar(dictationGrammar); //Change back to command grammar once working
+            speechRecognizer.LoadGrammar(commandGrammar); 
             speechRecognizer.SpeechRecognized += SpeechRecognised;
             speechRecognizer.SetInputToDefaultAudioDevice();
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
 
+            //Instantiating and starting the eye tracker host
+            eyex = new EyeXHost();
+            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
             eyex.Start();
         }
 
@@ -93,17 +102,20 @@ namespace VoxVisio
             var keywords = commands.Select(coms => coms.VoiceKeyword);
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
-            commandGrammar = new Grammar(new GrammarBuilder(sList));
+            GrammarBuilder gb = new GrammarBuilder(sList);
+            commandGrammar = new Grammar(gb);
         }
 
         public void StateChanged()
         {
             if (controlState.ControlState.GetType() == typeof (StandardState))
             {
+                speechRecognizer.UnloadAllGrammars();
                 speechRecognizer.LoadGrammar(commandGrammar);
             }
             else if (controlState.ControlState.GetType() == typeof(DictationState))
             {
+                speechRecognizer.UnloadAllGrammars();
                 speechRecognizer.LoadGrammar(dictationGrammar);
                 
             }

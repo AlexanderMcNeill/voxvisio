@@ -38,13 +38,14 @@ namespace VoxVisio
         }
         public void updateHotspot(Point fixationLocation)
         {
-            if (hotspotBounds.Contains(fixationLocation))
+            Point relativeLocation = new Point(fixationLocation.X - Left, fixationLocation.Y - Top);
+            if (hotspotBounds.Contains(relativeLocation))
             {
                 percentFill++;
             }
             else
             {
-                percentFill--;
+                //percentFill--;
             }
 
             drawHotspot();

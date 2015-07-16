@@ -40,9 +40,12 @@ namespace VoxVisio
                     _currentFixation = fixation;
                     break;
                 case eFixationPhase.finished:
-                    _currentFixation.setFixationFinished();
-                    _finishedFixations.Add(_currentFixation);
-                    _currentFixation = null;
+                    if (_currentFixation != null)
+                    {
+                        _currentFixation.setFixationFinished();
+                        _finishedFixations.Add(_currentFixation);
+                        _currentFixation = null;
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
