@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using WindowsInput;
 
 namespace VoxVisio
@@ -29,10 +30,23 @@ namespace VoxVisio
             }
             else
             {
-                inputsim.Mouse.MoveMouseTo(GetLatestFixation().GetFixationLocation().X,
-                    GetLatestFixation().GetFixationLocation().Y);
+                IFixationData latestFixation = GetLatestFixation();
+                double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
+                double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
+                inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
                 commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys();
             }
+        }
+
+
+        private double convertXToAbsolute(int x)
+        {
+            return ((double)65535 * x) / (double)Screen.PrimaryScreen.Bounds.Width;
+        }
+
+        private double convertYToAbsolute(int y)
+        {
+            return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
