@@ -101,12 +101,15 @@ namespace VoxVisio
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
             sList.Add("dictation");
+            sList.Add("scroll");
+            sList.Add("exit scroll");
             GrammarBuilder gb = new GrammarBuilder(sList);
             commandGrammar = new Grammar(gb);
         }
 
         public void StateChanged()
         {
+
             if (controlState.ControlState.GetType() == typeof (StandardState))
             {
                 speechRecognizer.UnloadAllGrammars();

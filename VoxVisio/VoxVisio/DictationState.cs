@@ -13,6 +13,8 @@ namespace VoxVisio
         public DictationState(InputSimulator inputsim)
         {
             this.inputsim = inputsim;
+
+            //Creating the hotspot form that allows the user to exit the state
             hotspotForm = new HotspotForm();
             hotspotForm.Show();
         }
@@ -24,9 +26,11 @@ namespace VoxVisio
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
         {
+            //Updating the hotspot and checking if it has been looked at long enough to exit the state
             hotspotForm.updateHotspot(fixation.GetFixationLocation());
             if (hotspotForm.PercentFill >= 100)
             {
+                //Closing the form and changing to the command state
                 hotspotForm.requestClose();
                 context.ControlState = new StandardState(inputsim);
             }
