@@ -27,6 +27,8 @@ namespace VoxVisio
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
 
+        private ToastForm toastForm;
+
         public MainEngine()
         {
             inputSimulator = new InputSimulator();
@@ -56,6 +58,10 @@ namespace VoxVisio
             eyex = new EyeXHost();
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
             eyex.Start();
+
+            toastForm = new ToastForm();
+            toastForm.Show();
+            toastForm.showToast("Program Running");
         }
 
 
@@ -114,12 +120,13 @@ namespace VoxVisio
             {
                 speechRecognizer.UnloadAllGrammars();
                 speechRecognizer.LoadGrammar(commandGrammar);
+                toastForm.showToast("Command Mode");
             }
             else if (controlState.ControlState.GetType() == typeof(DictationState))
             {
                 speechRecognizer.UnloadAllGrammars();
                 speechRecognizer.LoadGrammar(dictationGrammar);
-                
+                toastForm.showToast("Dictation Mode");
             }
         }
 

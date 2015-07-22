@@ -75,6 +75,10 @@
       {
         "word": "zoom out",
         "keys": "win,-"
+      },
+	  {
+        "word": "full zoom out",
+        "keys": "win,esc"
       }
     ]
   
