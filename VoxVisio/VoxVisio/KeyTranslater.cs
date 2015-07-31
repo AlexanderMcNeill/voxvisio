@@ -86,7 +86,8 @@ namespace VoxVisio
             new KeyRep("right", VirtualKeyCode.RIGHT),
             new KeyRep("up", VirtualKeyCode.UP),
             new KeyRep("down", VirtualKeyCode.DOWN),
-            new KeyRep("esc", VirtualKeyCode.ESCAPE)
+            new KeyRep("esc", VirtualKeyCode.ESCAPE),
+            new KeyRep("eyexclick", VirtualKeyCode.LCONTROL)
         };
 
         public static VirtualKeyCode GetKeyCode(string keyString)

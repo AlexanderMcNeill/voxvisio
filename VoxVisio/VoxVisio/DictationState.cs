@@ -17,11 +17,13 @@ namespace VoxVisio
             //Creating the hotspot form that allows the user to exit the state
             hotspotForm = new HotspotForm();
             hotspotForm.Show();
+
+            inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
         }
 
         public override void VoiceInput(string voiceData, ControlContext context)
         {
-            inputsim.Keyboard.TextEntry(voiceData);
+            
         }
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
@@ -33,6 +35,7 @@ namespace VoxVisio
                 //Closing the form and changing to the command state
                 hotspotForm.requestClose();
                 context.ControlState = new StandardState(inputsim);
+                inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
             }
         }
     }
