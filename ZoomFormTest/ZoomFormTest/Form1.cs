@@ -63,19 +63,12 @@ namespace ZoomFormTest
             int xPos = MousePosition.X - (Width / 2);
             int yPos = MousePosition.Y - (Height / 2);
 
-
-
             g.CopyFromScreen(xPos, yPos, 0, 0, new Size(Width, Height));
-           
-
 
             int zoomWidth = bmp.Width * MAXZOOM;
             int zoomHeight = bmp.Height * MAXZOOM;
 
-
             int zoomXPos = -((zoomWidth - bmp.Width) / 2);
-
-
             int zoomYPos = -((zoomHeight - bmp.Height) / 2);
 
 
@@ -108,7 +101,7 @@ namespace ZoomFormTest
             int mouseOnFormX = MousePosition.X - Left;
             int mouseOnFormY = MousePosition.Y - Top;
 
-            Point mousePos = new Point((mouseOnFormX + borderX/ MAXZOOM) + Left, (mouseOnFormY + borderY / MAXZOOM) + Top);
+            Point mousePos = new Point(((mouseOnFormX + borderX)/ MAXZOOM) + Left, ((mouseOnFormY + borderY) / MAXZOOM) + Top);
 
             ClickPoint(mousePos);
         }
@@ -118,7 +111,8 @@ namespace ZoomFormTest
             double mouseXPos = convertXToAbsolute(mousePos.X);
             double mouseYPos = convertYToAbsolute(mousePos.Y);
             inputSim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
-            //inputSim.Mouse.LeftButtonClick();
+            
+            inputSim.Mouse.LeftButtonClick();
         }
 
 
