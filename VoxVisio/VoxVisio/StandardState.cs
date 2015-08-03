@@ -58,7 +58,17 @@ namespace VoxVisio
                 inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
                 //Firing the command
-                commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys();
+                KeyCombo keyCombo = commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
+
+                if (keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.LBUTTON) || keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.RBUTTON))
+                {
+                    ZoomForm zoomForm = new ZoomForm(keyCombo, inputsim);
+                    zoomForm.Show();
+                }
+                else
+                {
+                    keyCombo.PressKeys();
+                }
             }
         }
 

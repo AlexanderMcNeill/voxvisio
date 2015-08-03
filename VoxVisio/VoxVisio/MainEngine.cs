@@ -125,8 +125,11 @@ namespace VoxVisio
             else if (controlState.ControlState.GetType() == typeof(DictationState))
             {
                 speechRecognizer.UnloadAllGrammars();
-                speechRecognizer.LoadGrammar(dictationGrammar);
-                toastForm.showToast("Dictation Mode");
+                speechRecognizer.LoadGrammar(commandGrammar);
+                toastForm.showToast("Command Mode");
+                //speechRecognizer.UnloadAllGrammars();
+                //speechRecognizer.LoadGrammar(dictationGrammar);
+                //toastForm.showToast("Dictation Mode");
             }
         }
 

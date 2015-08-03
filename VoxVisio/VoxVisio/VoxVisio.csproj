@@ -104,6 +104,12 @@
     <Compile Include="ToastForm.Designer.cs">
       <DependentUpon>ToastForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZoomForm.Designer.cs">
+      <DependentUpon>ZoomForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +128,9 @@
     </Compile>
     <EmbeddedResource Include="ToastForm.resx">
       <DependentUpon>ToastForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZoomForm.resx">
+      <DependentUpon>ZoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />

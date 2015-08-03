@@ -24,7 +24,7 @@ namespace SubjectTesting
 
         private void btnStartTest_Click(object sender, EventArgs e)
         {
-            RunTestForm runTestForm = new RunTestForm(new String[] { "Test 1", "test 2", "test 3" });
+            RunTestForm runTestForm = new RunTestForm(new String[] { "Question 1", "Question 2", "Question 3" });
             runTestForm.Show();
         }
     }
