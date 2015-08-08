@@ -14,28 +14,35 @@ namespace MagnifierTest
     public partial class Form1 : Form
     {
         private Magnifier mag;
+
         public Form1()
         {
             InitializeComponent();
-
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             mag = new Magnifier(this);
-            mag.Magnification = (float)1.5;
+            //mag.baseMagnification = (float)1.5;
+           
             mag.UpdateMaginifier();
+            timer1.Enabled = true;
         }
 
         private void Form1_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = !timer1.Enabled;
+            //mag.SetWindowPos(MousePosition);
+            mag.MagnifyCenter = MousePosition;
+            mag.UpdateMaginifier();
+            mag.setMagnifyWindowPos(MousePosition);
+            //timer1.Enabled = !timer1.Enabled;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            mag.Magnification = mag.Magnification * (float)1.1;
+            //mag.baseMagnification = mag.baseMagnification * (float)1.1;
+            mag.UpdateMaginifier();
         }
+
     }
 }

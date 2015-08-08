@@ -10,23 +10,34 @@ namespace Karna.Magnification
     {
         private Form form;
         private IntPtr hwndMag;
-        private float magnification;
+        private float baseMagnification;
+        private float currentMagnification;
         private bool initialized;
         private RECT magWindowRect = new RECT();
         private System.Windows.Forms.Timer timer;
+        private Point magnifyCenter;
+        private Point startZoomPoint;
+        private bool isZooming;
+        private int currentZoomStep;
+        private const int MAXZOOMSTEPS = 200;
+        private Timer zoomTimer;
 
         public Magnifier(Form form)
         {
             if (form == null)
                 throw new ArgumentNullException("form");
 
-            magnification = 2.0f;
+            baseMagnification = 2.0f;
+            currentMagnification = baseMagnification;
+            isZooming = false;
             this.form = form;
             this.form.Resize += new EventHandler(form_Resize);
             this.form.FormClosing += new FormClosingEventHandler(form_FormClosing);
 
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
+            zoomTimer = new Timer {Interval = 100};
+            zoomTimer.Tick += ZoomTimer_Tick;
 
             initialized = NativeMethods.MagInitialize();
             if (initialized)
@@ -35,6 +46,33 @@ namespace Karna.Magnification
                 timer.Interval = NativeMethods.USER_TIMER_MINIMUM;
                 timer.Enabled = true;
             }
+        }
+
+        public void startZooming()
+        {
+            startZooming(magnifyCenter);
+        }
+        public void startZooming(Point p)
+        {
+            isZooming = true;
+            startZoomPoint = p;
+            currentMagnification = baseMagnification;
+            currentZoomStep = 0;
+        }
+
+        private void ZoomTimer_Tick(object sender, EventArgs e)
+        {
+            MoveWindowTowardsPos();
+            currentZoomStep++;
+            if (currentZoomStep < MAXZOOMSTEPS)
+            {
+                isZooming = false;
+            }
+        }
+
+        private void MoveWindowTowardsPos()
+        {
+            throw new NotImplementedException();
         }
 
         void form_FormClosing(object sender, FormClosingEventArgs e)
@@ -67,19 +105,30 @@ namespace Karna.Magnification
                     magWindowRect.left, magWindowRect.top, magWindowRect.right, magWindowRect.bottom, 0);
             }
         }
+        public void setMagnifyWindowPos(Point newPos)
+        {
+            form.Top = newPos.Y - (form.Height / 2);
+            form.Left = newPos.X - (form.Width / 2);
+        }
+        public void SetWindowPos(Point newPos)
+        {
+            magWindowRect.top = newPos.Y - (magWindowRect.bottom - magWindowRect.top);
+            magWindowRect.left = newPos.X - (magWindowRect.right - magWindowRect.left);
+            //ResizeMagnifier();
+        }
 
         public virtual void UpdateMaginifier()
         {
             if ((!initialized) || (hwndMag == IntPtr.Zero))
                 return;
 
-            POINT mousePoint = new POINT();
+            POINT mousePoint = new POINT(magnifyCenter.X, magnifyCenter.Y);
             RECT sourceRect = new RECT();
 
-            NativeMethods.GetCursorPos(ref mousePoint);
+            
 
-            int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
-            int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
+            int width = (int)((magWindowRect.right - magWindowRect.left) / baseMagnification);
+            int height = (int)((magWindowRect.bottom - magWindowRect.top) / baseMagnification);
 
             sourceRect.left = mousePoint.x - width / 2;
             sourceRect.top = mousePoint.y - height / 2;
@@ -129,19 +178,25 @@ namespace Karna.Magnification
             NativeMethods.InvalidateRect(hwndMag, IntPtr.Zero, true);
         }
 
-        public float Magnification
+        public float BaseMagnification
         {
-            get { return magnification; }
+            get { return baseMagnification; }
             set
             {
-                if (magnification != value)
+                if (baseMagnification != value)
                 {
-                    magnification = value;
-                    // Set the magnification factor.
-                    Transformation matrix = new Transformation(magnification);
+                    baseMagnification = value;
+                    // Set the baseMagnification factor.
+                    Transformation matrix = new Transformation(baseMagnification);
                     NativeMethods.MagSetWindowTransform(hwndMag, ref matrix);
                 }
             }
+        }
+
+        public Point MagnifyCenter
+        {
+            get { return magnifyCenter; }
+            set { magnifyCenter = value; }
         }
 
         protected void SetupMagnifier()
@@ -170,8 +225,8 @@ namespace Karna.Magnification
                 return;
             }
 
-            // Set the magnification factor.
-            Transformation matrix = new Transformation(magnification);
+            // Set the baseMagnification factor.
+            Transformation matrix = new Transformation(baseMagnification);
             NativeMethods.MagSetWindowTransform(hwndMag, ref matrix);
         }
 
