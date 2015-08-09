@@ -8,29 +8,24 @@ namespace Karna.Magnification
 {
     public class Magnifier : IDisposable
     {
-        private const int ZOOMTIME = 1000; //Zoom time in zoom ticks
-        private readonly Form form;
+        private Form form;
         private IntPtr hwndMag;
         private float magnification;
-        private readonly bool initialized;
+        private bool initialized;
         private RECT magWindowRect = new RECT();
         private System.Windows.Forms.Timer timer;
-        private Point _windowCenter;
-        private int _zoomTimer;
 
         public Magnifier(Form form)
         {
             if (form == null)
                 throw new ArgumentNullException("form");
 
-            _zoomTimer = 0;
             magnification = 2.0f;
             this.form = form;
             this.form.Resize += new EventHandler(form_Resize);
             this.form.FormClosing += new FormClosingEventHandler(form_FormClosing);
 
             timer = new Timer();
-            timer.Interval = 10;
             timer.Tick += new EventHandler(timer_Tick);
 
             initialized = NativeMethods.MagInitialize();
@@ -50,20 +45,6 @@ namespace Karna.Magnification
         void timer_Tick(object sender, EventArgs e)
         {
             UpdateMaginifier();
-            if (_zoomTimer > ZOOMTIME)
-                timer.Enabled = false;
-            else
-            {
-                _zoomTimer++;
-                magnification += (float)0.01;
-            }
-            
-        }
-
-        public void StartZoom()
-        {
-            _zoomTimer = 0;
-            timer.Enabled = true;
         }
 
         void form_Resize(object sender, EventArgs e)
@@ -92,10 +73,10 @@ namespace Karna.Magnification
             if ((!initialized) || (hwndMag == IntPtr.Zero))
                 return;
 
-            POINT mousePoint = new POINT(_windowCenter.X, _windowCenter.Y);
+            POINT mousePoint = new POINT();
             RECT sourceRect = new RECT();
 
-            //NativeMethods.GetCursorPos(ref mousePoint);
+            NativeMethods.GetCursorPos(ref mousePoint);
 
             int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
             int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
@@ -161,12 +142,6 @@ namespace Karna.Magnification
                     NativeMethods.MagSetWindowTransform(hwndMag, ref matrix);
                 }
             }
-        }
-
-        public Point WindowCenter
-        {
-            get { return _windowCenter; }
-            set { _windowCenter = value; }
         }
 
         protected void SetupMagnifier()
