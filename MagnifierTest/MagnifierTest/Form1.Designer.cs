@@ -1,4 +1,4 @@
-﻿namespace MagnifierTest
+﻿namespace MagnifierForm
 {
     partial class Form1
     {

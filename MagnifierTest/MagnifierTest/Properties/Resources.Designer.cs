@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MagnifierTest.Properties
+namespace MagnifierForm.Properties
 {
 
 

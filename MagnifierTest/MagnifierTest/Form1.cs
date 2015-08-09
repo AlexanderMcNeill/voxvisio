@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Karna.Magnification;
 
-namespace MagnifierTest
+namespace MagnifierForm
 {
     public partial class Form1 : Form
     {
@@ -13,6 +13,7 @@ namespace MagnifierTest
         {
             InitializeComponent();
         }
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
