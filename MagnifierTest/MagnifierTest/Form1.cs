@@ -30,7 +30,9 @@ namespace MagnifierTest
 
         private void Form1_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = !timer1.Enabled;
+            //timer1.Enabled = !timer1.Enabled;
+            mag.WindowCenter = MousePosition;
+            mag.UpdateMaginifier();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
