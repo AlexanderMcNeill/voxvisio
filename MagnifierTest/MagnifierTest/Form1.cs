@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Karna.Magnification;
 
@@ -27,14 +21,15 @@ namespace MagnifierTest
            
             mag.UpdateMaginifier();
             timer1.Enabled = true;
+            mag.MagnifyCenter = new Point((Left +(Width/2)), (Top + (Height/2)));
         }
 
         private void Form1_Click(object sender, EventArgs e)
         {
             //mag.SetWindowPos(MousePosition);
-            mag.MagnifyCenter = MousePosition;
-            mag.UpdateMaginifier();
-            mag.setMagnifyWindowPos(MousePosition);
+           // mag.MagnifyCenter = MousePosition;
+            //mag.UpdateMaginifier();
+            mag.startZooming();
             //timer1.Enabled = !timer1.Enabled;
         }
 

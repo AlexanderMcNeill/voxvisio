@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Windows;
+using Point = System.Drawing.Point;
+
 
 namespace Karna.Magnification
 {
@@ -14,8 +17,8 @@ namespace Karna.Magnification
         private float currentMagnification;
         private bool initialized;
         private RECT magWindowRect = new RECT();
-        private System.Windows.Forms.Timer timer;
-        private Point magnifyCenter;
+        private Timer timer;
+        private Point magnifyCenter; // The center of where the magnifier is aimed (Not the window itself but the magnified image)
         private Point startZoomPoint;
         private bool isZooming;
         private int currentZoomStep;
@@ -48,32 +51,51 @@ namespace Karna.Magnification
             }
         }
 
+        /// <summary>
+        /// Start the zoom function with the start point as the current location of the maginifier
+        /// </summary>
         public void startZooming()
         {
             startZooming(magnifyCenter);
         }
+        /// <summary>
+        /// Start zooming with the provided point as the start location of the zoom
+        /// </summary>
+        /// <param name="p">Location to start the zoom from</param>
         public void startZooming(Point p)
         {
             isZooming = true;
             startZoomPoint = p;
             currentMagnification = baseMagnification;
             currentZoomStep = 0;
+            zoomTimer.Enabled = isZooming;
         }
 
         private void ZoomTimer_Tick(object sender, EventArgs e)
         {
-            MoveWindowTowardsPos();
+            POINT cursorPos = new POINT();
+            NativeMethods.GetCursorPos(ref cursorPos);
+            MoveWindowTowardsPos(new Point(cursorPos.x, cursorPos.y));
             currentZoomStep++;
-            if (currentZoomStep < MAXZOOMSTEPS)
+            currentMagnification += (float)0.01;
+            if (currentZoomStep > MAXZOOMSTEPS)
             {
                 isZooming = false;
+                zoomTimer.Enabled = isZooming;
             }
         }
 
-        private void MoveWindowTowardsPos()
+        private void MoveWindowTowardsPos(Point moveTowards)
         {
-            throw new NotImplementedException();
+            double vectorX = moveTowards.X - startZoomPoint.X;
+            double vectorY = moveTowards.Y - startZoomPoint.Y;
+            Vector v = new Vector(vectorX, vectorY );
+            v.Normalize();
+            Point newWindowPos = new Point((int)(form.Left + (form.Width / 2) + v.X*3), (int)(form.Top +(form.Height /2)+ v.Y*3));
+            magnifyCenter = newWindowPos;
+            setMagnifyWindowPos(newWindowPos);
         }
+        
 
         void form_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -105,16 +127,14 @@ namespace Karna.Magnification
                     magWindowRect.left, magWindowRect.top, magWindowRect.right, magWindowRect.bottom, 0);
             }
         }
+        /// <summary>
+        /// Sets the position of the form on the screen
+        /// </summary>
+        /// <param name="newPos">The new position to center the form on.</param>
         public void setMagnifyWindowPos(Point newPos)
         {
             form.Top = newPos.Y - (form.Height / 2);
             form.Left = newPos.X - (form.Width / 2);
-        }
-        public void SetWindowPos(Point newPos)
-        {
-            magWindowRect.top = newPos.Y - (magWindowRect.bottom - magWindowRect.top);
-            magWindowRect.left = newPos.X - (magWindowRect.right - magWindowRect.left);
-            //ResizeMagnifier();
         }
 
         public virtual void UpdateMaginifier()
@@ -193,7 +213,7 @@ namespace Karna.Magnification
             }
         }
 
-        public Point MagnifyCenter
+        public System.Drawing.Point MagnifyCenter
         {
             get { return magnifyCenter; }
             set { magnifyCenter = value; }
