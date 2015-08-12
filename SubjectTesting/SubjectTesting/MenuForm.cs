@@ -27,5 +27,13 @@ namespace SubjectTesting
             RunTestForm runTestForm = new RunTestForm(new String[] { "Question 1", "Question 2", "Question 3" });
             runTestForm.Show();
         }
+
+        private void btnLoadTasks_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openTasksDialog = new OpenFileDialog();
+
+            openTasksDialog.Filter = "JSON File (.json)|*.json";
+
+        }
     }
 }
