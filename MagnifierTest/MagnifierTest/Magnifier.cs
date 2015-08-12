@@ -13,8 +13,8 @@ namespace Karna.Magnification
     {
         private Form form;
         private IntPtr hwndMag;
+        private float startMag;
         private float baseMagnification;
-        private float currentMagnification;
         private bool initialized;
         private RECT magWindowRect = new RECT();
         private Timer timer;
@@ -30,8 +30,8 @@ namespace Karna.Magnification
             if (form == null)
                 throw new ArgumentNullException("form");
 
-            baseMagnification = 1.2f;
-            currentMagnification = baseMagnification;
+            startMag = 1.2f;
+            baseMagnification = startMag;
             isZooming = false;
             this.form = form;
             this.form.Resize += new EventHandler(form_Resize);
@@ -57,7 +57,7 @@ namespace Karna.Magnification
         public void startZooming()
         {
             isZooming = true;
-            currentMagnification = baseMagnification;
+            baseMagnification = startMag;
             currentZoomStep = 0;
             zoomTimer.Enabled = isZooming;
         }
@@ -70,7 +70,7 @@ namespace Karna.Magnification
             
             MoveMagWindowTowardsPos(currentMousePos);
             currentZoomStep++;
-            currentMagnification += (float)0.1;
+            BaseMagnification += (float)0.05;
             
             if (currentZoomStep > MAXZOOMSTEPS)
             {
@@ -146,8 +146,8 @@ namespace Karna.Magnification
 
             
 
-            int width = (int)((magWindowRect.right - magWindowRect.left) / currentMagnification);
-            int height = (int)((magWindowRect.bottom - magWindowRect.top) / currentMagnification);
+            int width = (int)((magWindowRect.right - magWindowRect.left) / baseMagnification);
+            int height = (int)((magWindowRect.bottom - magWindowRect.top) / baseMagnification);
 
             sourceRect.left = mousePoint.x - width / 2;
             sourceRect.top = mousePoint.y - height / 2;
