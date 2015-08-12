@@ -93,7 +93,7 @@ namespace Karna.Magnification
             v.Normalize();
             Point newWindowPos = new Point((int)(form.Left + (form.Width / 2) + v.X*3), (int)(form.Top +(form.Height /2)+ v.Y*3));
             magnifyCenter = newWindowPos;
-            setMagnifyWindowPos(newWindowPos);
+            //setMagnifyWindowPos(newWindowPos);
         }
         
 

@@ -33,7 +33,7 @@ namespace VoxVisio
         {
             inputSimulator = new InputSimulator();
             
-            controlState = new ControlContext(new StandardState(inputSimulator));
+            controlState = new ControlContext(new CommandState(inputSimulator));
             controlState.changedState += StateChanged;
 
 
@@ -116,7 +116,7 @@ namespace VoxVisio
         public void StateChanged()
         {
 
-            if (controlState.ControlState.GetType() == typeof (StandardState))
+            if (controlState.ControlState.GetType() == typeof (CommandState))
             {
                 speechRecognizer.UnloadAllGrammars();
                 speechRecognizer.LoadGrammar(commandGrammar);

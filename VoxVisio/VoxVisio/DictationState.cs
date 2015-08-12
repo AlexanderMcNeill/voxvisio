@@ -32,7 +32,7 @@ namespace VoxVisio
             {
                 //Closing the form and changing to the command state
                 hotspotForm.requestClose();
-                context.ControlState = new StandardState(inputsim);
+                context.ControlState = new CommandState(inputsim);
             }
         }
     }

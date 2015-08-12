@@ -7,7 +7,7 @@ using WindowsInput;
 
 namespace VoxVisio
 {
-    class StandardState : ControlState
+    class CommandState : ControlState
     {
         private List<IFixationData> _finishedFixations;
         private IFixationData _currentFixation;
@@ -21,7 +21,7 @@ namespace VoxVisio
 
         private bool inScrollState = false;
 
-        public StandardState(InputSimulator inputsim)
+        public CommandState(InputSimulator inputsim)
         {
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
