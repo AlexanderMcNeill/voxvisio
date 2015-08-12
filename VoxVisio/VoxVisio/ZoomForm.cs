@@ -25,20 +25,20 @@ namespace VoxVisio
         private KeyCombo inputKeys;
         private EyeXHost eyex;
         private Fixation fx;
-        public ZoomForm(KeyCombo inputKeys, InputSimulator inputSim)
+        private Rectangle zoomRect;
+        public ZoomForm(InputSimulator inputSim)
         {
             InitializeComponent();
 
             formGraphics = panel1.CreateGraphics();
             bmp = new Bitmap(Width, Height);
             g = Graphics.FromImage(bmp);
-            this.inputSim = inputSim;
-            this.inputKeys = inputKeys;
+
             eyex = new EyeXHost();
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
             eyex.Start();
-
-            startZoomClick();
+            this.inputSim = inputSim;
+            this.Visible = false;
         }
 
         public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
@@ -49,34 +49,41 @@ namespace VoxVisio
         public void DrawScreen()
         {
 
-            int xPos = MousePosition.X - (Width / 2);
-            int yPos = MousePosition.Y - (Height / 2);
+            formGraphics.DrawImage(bmp, zoomRect.X, zoomRect.Y, zoomRect.Width, zoomRect.Height);
 
-            g.CopyFromScreen(xPos, yPos, 0, 0, new Size(Width, Height));
-
-            int zoomWidth = bmp.Width * MAXZOOM;
-            int zoomHeight = bmp.Height * MAXZOOM;
-
-            int zoomXPos = -((zoomWidth - bmp.Width) / 2);
-            int zoomYPos = -((zoomHeight - bmp.Height) / 2);
-
-
-            formGraphics.DrawImage(bmp, zoomXPos, zoomYPos, zoomWidth, zoomHeight);
-            Top = yPos;
-            Left = xPos;
         }
 
-        public void startZoomClick()
+        public void startZoomClick(KeyCombo inputKeys)
         {
-            this.Show();
-            zoomCounter = 0;
-            
-            zoomTimer.Start();
+                
+                int xPos = MousePosition.X - (Width / 2);
+                int yPos = MousePosition.Y - (Height / 2);
+                Top = yPos;
+                Left = xPos;
+
+                g.CopyFromScreen(Left, Top, 0, 0, new Size(Width, Height));
+
+                int zoomWidth = bmp.Width * MAXZOOM;
+                int zoomHeight = bmp.Height * MAXZOOM;
+
+                int zoomXPos = -((zoomWidth - bmp.Width) / 2);
+                int zoomYPos = -((zoomHeight - bmp.Height) / 2);
+
+                zoomRect = new Rectangle(zoomXPos, zoomYPos, zoomWidth, zoomHeight);
+
+                zoomCounter = 0;
+
+                this.inputKeys = inputKeys;
+
+                this.Visible = true;
+                DrawScreen();
+                zoomTimer.Start();
+
         }
 
         public void endZoomClick()
         {
-            this.Hide();
+            this.Visible = false;
 
             int zoomWidth = bmp.Width * MAXZOOM;
             int zoomHeight = bmp.Height * MAXZOOM;
@@ -94,7 +101,7 @@ namespace VoxVisio
                 ClickPoint(mousePos);
             }
 
-            this.Close();
+            this.Hide();
         }
 
         private void ClickPoint(Point mousePos)
@@ -120,10 +127,7 @@ namespace VoxVisio
 
         private void zoomTimer_Tick(object sender, EventArgs e)
         {
-            if (zoomCounter == 0)
-            {
-                DrawScreen();
-            }
+            DrawScreen();
             if (zoomCounter == ZOOMTIME)
             {
                 zoomTimer.Stop();

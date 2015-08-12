@@ -7,6 +7,12 @@ using WindowsInput;
 
 namespace VoxVisio
 {
+
+    public enum eScrollState { 
+        SCROLLUP,
+        SCROLLDOWN,
+        NOSCROLL
+    }
     class StandardState : ControlState
     {
         private List<IFixationData> _finishedFixations;
@@ -14,12 +20,13 @@ namespace VoxVisio
         private int BUFFERSIZE = 8;
         private InputSimulator inputsim;
         private CommandSingleton commandList;
+        private Timer scrollTimer;
 
         //Hotspots from scrolling up and down
         private Rectangle upScrollHotspot;
         private Rectangle downScrollHotspot;
-
-        private bool inScrollState = false;
+        private eScrollState scrollState = eScrollState.NOSCROLL;
+        ZoomForm zoomForm;
 
         public StandardState(InputSimulator inputsim)
         {
@@ -29,8 +36,11 @@ namespace VoxVisio
             commandList = CommandSingleton.Instance();
 
             //Creating the hotspots that allow a user to scroll up and down
-            upScrollHotspot = new Rectangle(0, -100, Screen.PrimaryScreen.Bounds.Width, 100);
-            downScrollHotspot = new Rectangle(0, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width, 100);
+            upScrollHotspot = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, 200);
+            downScrollHotspot = new Rectangle(0, Screen.PrimaryScreen.Bounds.Height - 200, Screen.PrimaryScreen.Bounds.Width, 200);
+            scrollTimer = new Timer();
+            scrollTimer.Tick += new System.EventHandler(this.scrollTimer_Tick);
+            zoomForm = new ZoomForm(inputsim);
         }
 
         public override void VoiceInput(string voiceData, ControlContext context)
@@ -42,11 +52,11 @@ namespace VoxVisio
             }
             else if (voiceData.Equals("scroll"))
             {
-                inScrollState = true;
+                scrollTimer.Start();
             }
-            else if (voiceData.Equals("exit scroll"))
+            else if (voiceData.Equals("stop scroll"))
             {
-                inScrollState = false;
+                scrollTimer.Stop();
             }
             //Running a normal voice command
             else
@@ -62,8 +72,7 @@ namespace VoxVisio
 
                 if (keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.LBUTTON) || keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.RBUTTON))
                 {
-                    ZoomForm zoomForm = new ZoomForm(keyCombo, inputsim);
-                    zoomForm.Show();
+                    zoomForm.startZoomClick(keyCombo);
                 }
                 else
                 {
@@ -74,18 +83,6 @@ namespace VoxVisio
 
         public override void EyeInput(ControlContext context, IFixationData fixation)
         {
-            //If in the scroll state checking if the user is looking at one of the hotspots and scolling appropriately
-            if (inScrollState)
-            {
-                if (upScrollHotspot.Contains(fixation.GetFixationLocation()))
-                {
-                    inputsim.Mouse.VerticalScroll(1);
-                }
-                else if (downScrollHotspot.Contains(fixation.GetFixationLocation()))
-                {
-                    inputsim.Mouse.VerticalScroll(-1);
-                }
-            }
 
             //Buffering the fixation data for later commands
             buffering(fixation);
@@ -115,6 +112,36 @@ namespace VoxVisio
             {
                 _finishedFixations.RemoveAt(0);
             }
+        }
+
+        private void scrollTimer_Tick(object sender, EventArgs e)
+        {
+            if (upScrollHotspot.Contains(GetLatestFixation().GetFixationLocation()))
+            {
+                scrollState = eScrollState.SCROLLUP;
+            }
+            else if (downScrollHotspot.Contains(GetLatestFixation().GetFixationLocation()))
+            {
+                scrollState = eScrollState.SCROLLDOWN;
+            }
+            else
+            {
+                scrollState = eScrollState.NOSCROLL;
+            }
+
+            switch (scrollState)
+            { 
+                case eScrollState.SCROLLUP:
+                    inputsim.Mouse.VerticalScroll(1);
+                    break;
+                case eScrollState.SCROLLDOWN:
+                    inputsim.Mouse.VerticalScroll(-1);
+                    break;
+            
+            }
+
+
+
         }
 
         //Method for converting the X position in pixels to the absolute number needed from the input simulator

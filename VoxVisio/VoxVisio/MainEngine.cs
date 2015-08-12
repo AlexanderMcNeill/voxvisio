@@ -108,7 +108,7 @@ namespace VoxVisio
             sList.Add(keywords.ToArray());
             sList.Add("dictation");
             sList.Add("scroll");
-            sList.Add("exit scroll");
+            sList.Add("stop scroll");
             GrammarBuilder gb = new GrammarBuilder(sList);
             commandGrammar = new Grammar(gb);
         }
