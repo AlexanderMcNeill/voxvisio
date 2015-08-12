@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Security.Policy;
 using System.Windows;
 using Point = System.Drawing.Point;
 
@@ -19,18 +19,18 @@ namespace Karna.Magnification
         private RECT magWindowRect = new RECT();
         private Timer timer;
         private Point magnifyCenter; // The center of where the magnifier is aimed (Not the window itself but the magnified image)
-        private Point startZoomPoint;
         private bool isZooming;
         private int currentZoomStep;
-        private const int MAXZOOMSTEPS = 200;
+        private const int MAXZOOMSTEPS = 180;
         private Timer zoomTimer;
+        public Point currentMousePos { get; set; }
 
         public Magnifier(Form form)
         {
             if (form == null)
                 throw new ArgumentNullException("form");
 
-            baseMagnification = 2.0f;
+            baseMagnification = 1.2f;
             currentMagnification = baseMagnification;
             isZooming = false;
             this.form = form;
@@ -39,7 +39,7 @@ namespace Karna.Magnification
 
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
-            zoomTimer = new Timer {Interval = 100};
+            zoomTimer = new Timer {Interval = 15};
             zoomTimer.Tick += ZoomTimer_Tick;
 
             initialized = NativeMethods.MagInitialize();
@@ -56,16 +56,7 @@ namespace Karna.Magnification
         /// </summary>
         public void startZooming()
         {
-            startZooming(magnifyCenter);
-        }
-        /// <summary>
-        /// Start zooming with the provided point as the start location of the zoom
-        /// </summary>
-        /// <param name="p">Location to start the zoom from</param>
-        public void startZooming(Point p)
-        {
             isZooming = true;
-            startZoomPoint = p;
             currentMagnification = baseMagnification;
             currentZoomStep = 0;
             zoomTimer.Enabled = isZooming;
@@ -73,11 +64,14 @@ namespace Karna.Magnification
 
         private void ZoomTimer_Tick(object sender, EventArgs e)
         {
-            POINT cursorPos = new POINT();
-            NativeMethods.GetCursorPos(ref cursorPos);
-            MoveWindowTowardsPos(new Point(cursorPos.x, cursorPos.y));
+            //POINT cursorPos = new POINT();
+            //NativeMethods.GetCursorPos(ref cursorPos); // Giving weird calculations on multi monitors
+            //MoveMagWindowTowardsPos(new Point(cursorPos.x, cursorPos.y));
+            
+            MoveMagWindowTowardsPos(currentMousePos);
             currentZoomStep++;
-            currentMagnification += (float)0.01;
+            currentMagnification += (float)0.1;
+            
             if (currentZoomStep > MAXZOOMSTEPS)
             {
                 isZooming = false;
@@ -85,17 +79,22 @@ namespace Karna.Magnification
             }
         }
 
-        private void MoveWindowTowardsPos(Point moveTowards)
+        private void MoveMagWindowTowardsPos(Point moveTowards)
         {
-            double vectorX = moveTowards.X - startZoomPoint.X;
-            double vectorY = moveTowards.Y - startZoomPoint.Y;
-            Vector v = new Vector(vectorX, vectorY );
-            v.Normalize();
-            Point newWindowPos = new Point((int)(form.Left + (form.Width / 2) + v.X*3), (int)(form.Top +(form.Height /2)+ v.Y*3));
+            Point mvt = moveTowards;
+
+            double nX = mvt.X - (magWindowRect.right/2);
+            double nY = mvt.Y - (magWindowRect.bottom/2);
+            Vector moveVector = new Vector(nX, nY);
+            moveVector.Normalize();
+            int newX = (int)(magnifyCenter.X + moveVector.X);
+            int newY = (int) (magnifyCenter.Y + moveVector.Y);
+            //TODO: Implement stopping when looking exactly on point
+            Point newWindowPos = new Point(newX,newY);
             magnifyCenter = newWindowPos;
             //setMagnifyWindowPos(newWindowPos);
-        }
-        
+            UpdateMaginifier();
+        }     
 
         void form_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -147,8 +146,8 @@ namespace Karna.Magnification
 
             
 
-            int width = (int)((magWindowRect.right - magWindowRect.left) / baseMagnification);
-            int height = (int)((magWindowRect.bottom - magWindowRect.top) / baseMagnification);
+            int width = (int)((magWindowRect.right - magWindowRect.left) / currentMagnification);
+            int height = (int)((magWindowRect.bottom - magWindowRect.top) / currentMagnification);
 
             sourceRect.left = mousePoint.x - width / 2;
             sourceRect.top = mousePoint.y - height / 2;
@@ -217,6 +216,12 @@ namespace Karna.Magnification
         {
             get { return magnifyCenter; }
             set { magnifyCenter = value; }
+        }
+
+        private Point _getWindowCenter()
+        {
+            Point centerPoint = new Point(form.DisplayRectangle.X + form.DisplayRectangle.Width, form.DisplayRectangle.Y + form.DisplayRectangle.Height);
+            return centerPoint;
         }
 
         protected void SetupMagnifier()

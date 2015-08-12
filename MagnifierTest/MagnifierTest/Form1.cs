@@ -19,16 +19,14 @@ namespace MagnifierForm
         {
             mag = new Magnifier(this);
             //mag.baseMagnification = (float)1.5;
-           
-            mag.UpdateMaginifier();
+            mag.MagnifyCenter = new Point((Left + (Width / 2)), (Top + (Height / 2)));
             timer1.Enabled = true;
-            mag.MagnifyCenter = new Point((Left +(Width/2)), (Top + (Height/2)));
         }
 
         private void Form1_Click(object sender, EventArgs e)
         {
             //mag.SetWindowPos(MousePosition);
-           // mag.MagnifyCenter = MousePosition;
+            // mag.MagnifyCenter = MousePosition;
             //mag.UpdateMaginifier();
             mag.startZooming();
             //timer1.Enabled = !timer1.Enabled;
@@ -36,9 +34,17 @@ namespace MagnifierForm
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //mag.baseMagnification = mag.baseMagnification * (float)1.1;
             mag.UpdateMaginifier();
         }
 
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            mag.currentMousePos = e.Location;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           mag.Dispose();
+        }
     }
 }
