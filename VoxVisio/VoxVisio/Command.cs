@@ -10,38 +10,6 @@ using Newtonsoft.Json;
 
 namespace VoxVisio
 {
-    public class CommandSingleton
-    {
-        private static CommandSingleton _singleton;
-        private List<Command> commands;
-
-        protected CommandSingleton()
-        {
-            
-        }
-
-        public List<Command> Commands
-        {
-            get { return commands; }
-        }
-
-        public static CommandSingleton Instance()
-        {
-            // Uses lazy initialization.
-            // Note: this is not thread safe.
-            if (_singleton == null)
-            {
-                _singleton = new CommandSingleton();
-            }
-
-            return _singleton;
-        }
-
-        public void SetCommands(List<Command> commands)
-        {
-            this.commands = commands;
-        }
-    }
 
     public class Command
     {
@@ -53,8 +21,6 @@ namespace VoxVisio
             this.VoiceKeyword = commandWord;
             this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
         }
-
-        
     }
 
     public class KeyCombo

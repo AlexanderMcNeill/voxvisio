@@ -13,7 +13,7 @@ namespace VoxVisio
         private IFixationData _currentFixation;
         private int BUFFERSIZE = 8;
         private InputSimulator inputsim;
-        private CommandSingleton commandList;
+        private SettingsSingleton _settings;
 
         //Hotspots from scrolling up and down
         private Rectangle upScrollHotspot;
@@ -26,7 +26,7 @@ namespace VoxVisio
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
             this.inputsim = inputsim;
-            commandList = CommandSingleton.Instance();
+            _settings = SettingsSingleton.Instance();
 
             //Creating the hotspots that allow a user to scroll up and down
             upScrollHotspot = new Rectangle(0, -100, Screen.PrimaryScreen.Bounds.Width, 100);
@@ -58,7 +58,7 @@ namespace VoxVisio
                 inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
                 //Firing the command
-                commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys();
+                _settings.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo.PressKeys();
             }
         }
 

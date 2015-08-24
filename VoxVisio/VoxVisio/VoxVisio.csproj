@@ -98,6 +98,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandState.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ToastForm.cs">
       <SubType>Form</SubType>
     </Compile>

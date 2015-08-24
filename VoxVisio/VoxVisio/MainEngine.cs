@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
+using System.Speech.Recognition;
 using WindowsInput;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
-using System.Speech.Recognition;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using VoxVisio.Properties;
 
 namespace VoxVisio
 {
@@ -19,7 +13,7 @@ namespace VoxVisio
         private ControlContext controlState;
         private EyeXHost eyex;
         private readonly InputSimulator inputSimulator;
-        private CommandSingleton commandList;
+        private SettingsSingleton _settings;
 
         private List<Command> commands; 
 
@@ -37,15 +31,12 @@ namespace VoxVisio
             controlState.changedState += StateChanged;
 
 
-
-            loadCommands();
-
             //Setting up the grammars for the voice recognizer
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
 
-            commandList = CommandSingleton.Instance();
-            commandList.SetCommands(commands);
+            _settings = SettingsSingleton.Instance();
+            //_settings.SetCommands(commands);
 
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             speechRecognizer.RequestRecognizerUpdate();
@@ -86,20 +77,7 @@ namespace VoxVisio
             controlState.VoiceRequest(e.Result.Text);
         }
 
-        public void loadCommands()
-        {
-            commands = new List<Command>();
-            using (StreamReader reader = File.OpenText(@"Commands.json"))
-            {
-                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-                JArray a = (JArray)o.SelectToken("command");
-                
-                foreach (JObject variable in a)
-                {
-                    commands.Add(new Command((string)variable["word"], (string)variable["keys"] , inputSimulator));
-                }
-            }
-        }
+
 
         public void loadCommandGrammar()
         {
@@ -128,6 +106,11 @@ namespace VoxVisio
                 speechRecognizer.LoadGrammar(dictationGrammar);
                 toastForm.showToast("Dictation Mode");
             }
+        }
+
+        ~MainEngine()
+        {
+            close();
         }
 
         internal void close()

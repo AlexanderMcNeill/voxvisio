@@ -13,8 +13,7 @@ namespace VoxVisio
     {
         private readonly NotifyIcon notifyicon;
         private IContainer component;
-        private MainEngine mainEngine;
-        private CommandSingleton commandList;
+        private SettingsSingleton _settings;
 
 
         public VoxVisio()
@@ -37,22 +36,15 @@ namespace VoxVisio
             notifyicon.Text = "VoxVisio";
 
             this.Resize += frmMain_Resize;
-
-            mainEngine = new MainEngine();
-            commandList = CommandSingleton.Instance();
+            _settings = SettingsSingleton.Instance();
             populateList();
-        }
-
-        private void VoxVisio_Load(object sender, EventArgs e)
-        {
-
         }
 
 
 
         private void populateList()
         {
-            foreach (var VARIABLE in commandList.Commands)
+            foreach (var VARIABLE in _settings.Commands)
             {
                 lvCommandList.Items.Add(new ListViewItem(new string[] {VARIABLE.VoiceKeyword, VARIABLE.keyCombo.GetKeyString()}));
             }
@@ -82,15 +74,6 @@ namespace VoxVisio
             notifyicon.Visible = false;
         }
 
-        private void fIileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void VoxVisio_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            mainEngine.close();
-        }
     }
 
 
