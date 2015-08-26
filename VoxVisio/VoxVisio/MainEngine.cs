@@ -62,11 +62,11 @@ namespace VoxVisio
             switch (t)
             {
                 case FixationDataEventType.Begin:
-                    fx = new Fixation(new Point(x, y), eFixationPhase.start);
+                    fx = new Fixation(new Point(x, y), eFixationPhase.start, timeStamp);
                     controlState.EyeRequest(fx);
                     break;
                 case FixationDataEventType.End:
-                    fx = new Fixation(new Point(x,y),eFixationPhase.finished );
+                    fx = new Fixation(new Point(x,y),eFixationPhase.finished,timeStamp );
                     controlState.EyeRequest(fx);
                     break;
             }

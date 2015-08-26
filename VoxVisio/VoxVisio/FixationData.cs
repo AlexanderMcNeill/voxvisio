@@ -16,6 +16,7 @@ namespace VoxVisio
     {
         eFixationPhase GetFixationPhase();
         Point GetFixationLocation();
+        double GetFixationLength();
         void setFixationFinished();
     }
 
@@ -27,11 +28,13 @@ namespace VoxVisio
         
         private readonly Point _location;
         private eFixationPhase _currentEFixationPhase;
+        private double _fixationLength;
 
-        public Fixation(Point location, eFixationPhase currentEFixationPhase)
+        public Fixation(Point location, eFixationPhase currentEFixationPhase, double length)
         {
             _location = location;
             _currentEFixationPhase = currentEFixationPhase;
+            _fixationLength = length;
         }
 
         /// <summary>
@@ -55,6 +58,11 @@ namespace VoxVisio
         public Point GetFixationLocation()
         {
             return _location;
+        }
+
+        public double GetFixationLength()
+        {
+            return _fixationLength;
         }
 
         public void setFixationFinished()
