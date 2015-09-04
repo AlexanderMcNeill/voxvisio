@@ -92,10 +92,12 @@ namespace VoxVisio
                     if (_currentFixation != null)
                     {
                         _currentFixation.setFixationFinished();
+                        _currentFixation.SetFixationLength(fixation.getFixationTimeStamp() - _currentFixation.getFixationTimeStamp());
                         _finishedFixations.Add(_currentFixation);
                         _currentFixation = null;
                     }
                     break;
+                
                 default:
                     throw new ArgumentOutOfRangeException();
             }

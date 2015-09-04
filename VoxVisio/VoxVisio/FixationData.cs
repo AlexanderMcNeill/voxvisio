@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace VoxVisio
 {
@@ -14,10 +15,13 @@ namespace VoxVisio
     /// </summary>
     interface IFixationData
     {
+        void SetFixationTimeStamp(double timesramp);
+        Double getFixationTimeStamp();
         eFixationPhase GetFixationPhase();
         Point GetFixationLocation();
         double GetFixationLength();
-        void setFixationFinished();
+        void SetFixationLength(double toSet);
+        void setFixationFinished();        
     }
 
     /// <summary>
@@ -29,12 +33,15 @@ namespace VoxVisio
         private readonly Point _location;
         private eFixationPhase _currentEFixationPhase;
         private double _fixationLength;
+        private double _timeStamp;
 
-        public Fixation(Point location, eFixationPhase currentEFixationPhase, double length)
+        public Fixation(Point location, eFixationPhase currentEFixationPhase, double timeStamp)
         {
             _location = location;
             _currentEFixationPhase = currentEFixationPhase;
-            _fixationLength = length;
+            _timeStamp = timeStamp;
+            _fixationLength = 0;
+            
         }
 
         /// <summary>
@@ -68,6 +75,21 @@ namespace VoxVisio
         public void setFixationFinished()
         {
             _currentEFixationPhase = eFixationPhase.finished;
+        }
+
+        public void SetFixationLength(double toSet)
+        {
+            _fixationLength = toSet;
+        }
+
+        public void SetFixationTimeStamp(double timestamp)
+        {
+            _timeStamp = timestamp;
+        }
+
+        public double getFixationTimeStamp()
+        {
+            return _timeStamp;
         }
     }
 }
