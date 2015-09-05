@@ -76,11 +76,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="ControlContext.cs" />
-    <Compile Include="ControlState.cs" />
-    <Compile Include="DictationState.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="States\ControlContext.cs" />
+    <Compile Include="States\ControlState.cs" />
+    <Compile Include="States\DictationState.cs" />
     <Compile Include="FixationData.cs" />
+    <Compile Include="Screen Overlay\Hotspot.cs" />
     <Compile Include="Screen Overlay\Overlay.cs" />
     <Compile Include="Screen Overlay\OverlayForm.cs">
       <SubType>Form</SubType>
@@ -103,17 +104,11 @@
     <Compile Include="HotspotForm.Designer.cs">
       <DependentUpon>HotspotForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="KeyTranslater.cs" />
+    <Compile Include="Commands\KeyTranslater.cs" />
     <Compile Include="MainEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StandardState.cs" />
-    <Compile Include="ToastForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToastForm.Designer.cs">
-      <DependentUpon>ToastForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="States\StandardState.cs" />
     <Compile Include="ZoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,15 +134,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ToastForm.resx">
-      <DependentUpon>ToastForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ZoomForm.resx">
       <DependentUpon>ZoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="Commands.json" />
+    <None Include="Commands\Commands.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

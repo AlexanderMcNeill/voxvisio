@@ -28,8 +28,6 @@ namespace VoxVisio
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
 
-        private ToastForm toastForm;
-
         public MainEngine()
         {
             sharedData = SharedDataSingleton.Instance();
@@ -41,7 +39,16 @@ namespace VoxVisio
 
 
             loadCommands();
+            SetupSpeechRecognition();
 
+            //Instantiating and starting the eye tracker host
+            eyex = new EyeXHost();
+            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
+            eyex.Start();
+        }
+
+        private void SetupSpeechRecognition()
+        {
             //Setting up the grammars for the voice recognizer
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
@@ -54,19 +61,10 @@ namespace VoxVisio
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             speechRecognizer.RequestRecognizerUpdate();
             speechRecognizer.LoadGrammar(dictationGrammar);
-            speechRecognizer.LoadGrammar(commandGrammar); 
+            speechRecognizer.LoadGrammar(commandGrammar);
             speechRecognizer.SpeechRecognized += SpeechRecognised;
             speechRecognizer.SetInputToDefaultAudioDevice();
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
-
-            //Instantiating and starting the eye tracker host
-            eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
-            eyex.Start();
-
-            toastForm = new ToastForm();
-            toastForm.Show();
-            toastForm.showToast("Program Running");
         }
 
 
