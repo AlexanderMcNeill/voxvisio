@@ -28,14 +28,15 @@ namespace VoxVisio
         private Grammar dictationGrammar;
 
         private ToastForm toastForm;
+        private ZoomForm zoomForm;
 
         public MainEngine()
         {
             inputSimulator = new InputSimulator();
-            
-            controlState = new ControlContext(new StandardState(inputSimulator));
+            zoomForm = new ZoomForm(inputSimulator);
+            controlState = new ControlContext(new StandardState(inputSimulator,zoomForm));
             controlState.changedState += StateChanged;
-
+            System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
 
 
             loadCommands();
@@ -43,12 +44,15 @@ namespace VoxVisio
             //Setting up the grammars for the voice recognizer
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
+            dictationGrammar.Name = "dictation";
 
             commandList = CommandSingleton.Instance();
             commandList.SetCommands(commands);
+            commandGrammar.Name = "command";
 
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             speechRecognizer.RequestRecognizerUpdate();
+            speechRecognizer.LoadGrammar(dictationGrammar);
             speechRecognizer.LoadGrammar(commandGrammar); 
             speechRecognizer.SpeechRecognized += SpeechRecognised;
             speechRecognizer.SetInputToDefaultAudioDevice();
@@ -83,7 +87,15 @@ namespace VoxVisio
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
-            controlState.VoiceRequest(e.Result.Text);
+
+            if (controlState.ControlState.GetType() == typeof(StandardState) && e.Result.Grammar.Name == "command")
+            {
+                controlState.VoiceRequest(e.Result.Text);
+            }
+            else if (controlState.ControlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
+            {
+                controlState.VoiceRequest(e.Result.Text);
+            }
         }
 
         public void loadCommands()
@@ -116,21 +128,6 @@ namespace VoxVisio
         public void StateChanged()
         {
 
-            if (controlState.ControlState.GetType() == typeof (StandardState))
-            {
-                speechRecognizer.UnloadAllGrammars();
-                speechRecognizer.LoadGrammar(commandGrammar);
-                toastForm.showToast("Command Mode");
-            }
-            else if (controlState.ControlState.GetType() == typeof(DictationState))
-            {
-                speechRecognizer.UnloadAllGrammars();
-                speechRecognizer.LoadGrammar(commandGrammar);
-                toastForm.showToast("Command Mode");
-                //speechRecognizer.UnloadAllGrammars();
-                //speechRecognizer.LoadGrammar(dictationGrammar);
-                //toastForm.showToast("Dictation Mode");
-            }
         }
 
         internal void close()

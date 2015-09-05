@@ -24,7 +24,7 @@ namespace VoiceApiRequest
         {
             InitializeComponent();
 
-            richTextBox1.Text = RequestSpeechToText("test.flac");
+            
         }
 
         public string RequestSpeechToText(string audioFile)
@@ -40,7 +40,7 @@ namespace VoiceApiRequest
                 HttpWebRequest _HWR_SpeechToText = null;
                 _HWR_SpeechToText =
                             (HttpWebRequest)HttpWebRequest.Create(
-                                "https://www.google.com/speech-api/v2/recognize?output=json&lang=en-us&key=AIzaSyBiQkwh5zYOCRKEaZ-xUbBleL7yvGrVvqM");
+                                "https://www.google.com/speech-api/v2/recognize?output=json&lang=en-us&key=AIzaSyDllyTlpQxY_9tWJ48TKDdlQgB_lHd-WzY");
                 _HWR_SpeechToText.Credentials = CredentialCache.DefaultCredentials;
                 _HWR_SpeechToText.Method = "POST";
                 _HWR_SpeechToText.ContentType = "audio/x-flac; rate=44100";
@@ -83,7 +83,7 @@ namespace VoiceApiRequest
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text = RequestSpeechToText("test.flac");
         }
     }
 }

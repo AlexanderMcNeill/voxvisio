@@ -24,7 +24,7 @@ namespace VoxVisio
         private readonly InputSimulator inputSim;
         private KeyCombo inputKeys;
         private EyeXHost eyex;
-        private Fixation fx;
+        private Point fx;
         private Rectangle zoomRect;
         public ZoomForm(InputSimulator inputSim)
         {
@@ -34,16 +34,13 @@ namespace VoxVisio
             bmp = new Bitmap(Width, Height);
             g = Graphics.FromImage(bmp);
 
-            eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
-            eyex.Start();
             this.inputSim = inputSim;
             this.Visible = false;
         }
 
-        public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
+        public void Fixation(Point fixationLocation)
         {
-            fx = new Fixation(new Point(x, y), eFixationPhase.finished);
+            fx = fixationLocation;
         }
 
         public void DrawScreen()
@@ -93,8 +90,8 @@ namespace VoxVisio
 
             if (fx != null)
             {
-                int mouseOnFormX = fx.GetFixationLocation().X - Left;
-                int mouseOnFormY = fx.GetFixationLocation().Y - Top;
+                int mouseOnFormX = fx.X - Left;
+                int mouseOnFormY = fx.Y - Top;
 
                 Point mousePos = new Point(((mouseOnFormX + borderX) / MAXZOOM) + Left, ((mouseOnFormY + borderY) / MAXZOOM) + Top);
 
@@ -112,6 +109,8 @@ namespace VoxVisio
 
             inputKeys.PressKeys();
         }
+
+       
 
         //Method for converting the X position in pixels to the absolute number needed from the input simulator
         private double convertXToAbsolute(int x)

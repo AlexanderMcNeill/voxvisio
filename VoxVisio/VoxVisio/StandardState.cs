@@ -26,9 +26,9 @@ namespace VoxVisio
         private Rectangle upScrollHotspot;
         private Rectangle downScrollHotspot;
         private eScrollState scrollState = eScrollState.NOSCROLL;
-        ZoomForm zoomForm;
+        private ZoomForm zoomForm;
 
-        public StandardState(InputSimulator inputsim)
+        public StandardState(InputSimulator inputsim, ZoomForm zoomForm)
         {
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
@@ -40,7 +40,7 @@ namespace VoxVisio
             downScrollHotspot = new Rectangle(0, Screen.PrimaryScreen.Bounds.Height - 200, Screen.PrimaryScreen.Bounds.Width, 200);
             scrollTimer = new Timer();
             scrollTimer.Tick += new System.EventHandler(this.scrollTimer_Tick);
-            zoomForm = new ZoomForm(inputsim);
+            this.zoomForm = zoomForm;
         }
 
         public override void VoiceInput(string voiceData, ControlContext context)
@@ -48,7 +48,7 @@ namespace VoxVisio
             //Checking all the cases that change state. This is for testing and will be changed in the future
             if (voiceData.Equals("dictation"))
             {
-                context.ControlState = new DictationState(inputsim);
+                context.ControlState = new DictationState(inputsim, zoomForm);
             }
             else if (voiceData.Equals("scroll"))
             {
@@ -86,6 +86,8 @@ namespace VoxVisio
 
             //Buffering the fixation data for later commands
             buffering(fixation);
+
+            zoomForm.Fixation(fixation.GetFixationLocation());
         }
 
         private void buffering(IFixationData fixation)
@@ -164,6 +166,5 @@ namespace VoxVisio
         {
             return _currentFixation ?? _finishedFixations.Last();
         }
-
     }
 }

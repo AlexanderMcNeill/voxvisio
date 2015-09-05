@@ -9,8 +9,9 @@ namespace VoxVisio
 
         private InputSimulator inputsim;
         private HotspotForm hotspotForm;
+        private ZoomForm zoomForm;
 
-        public DictationState(InputSimulator inputsim)
+        public DictationState(InputSimulator inputsim, ZoomForm zoomForm)
         {
             this.inputsim = inputsim;
 
@@ -19,6 +20,7 @@ namespace VoxVisio
             hotspotForm.Show();
 
             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
+            this.zoomForm = zoomForm;
         }
 
         public override void VoiceInput(string voiceData, ControlContext context)
@@ -34,7 +36,7 @@ namespace VoxVisio
             {
                 //Closing the form and changing to the command state
                 hotspotForm.requestClose();
-                context.ControlState = new StandardState(inputsim);
+                context.ControlState = new StandardState(inputsim, zoomForm);
                 inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
             }
         }
