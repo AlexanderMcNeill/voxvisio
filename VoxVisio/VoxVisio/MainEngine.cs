@@ -20,6 +20,7 @@ namespace VoxVisio
         private EyeXHost eyex;
         private readonly InputSimulator inputSimulator;
         private CommandSingleton commandList;
+        private SharedDataSingleton sharedData;
 
         private List<Command> commands; 
 
@@ -28,13 +29,13 @@ namespace VoxVisio
         private Grammar dictationGrammar;
 
         private ToastForm toastForm;
-        private ZoomForm zoomForm;
 
         public MainEngine()
         {
-            inputSimulator = new InputSimulator();
-            zoomForm = new ZoomForm(inputSimulator);
-            controlState = new ControlContext(new StandardState(inputSimulator,zoomForm));
+            sharedData = SharedDataSingleton.Instance();
+            inputSimulator = sharedData.inputSimulator;
+            
+            controlState = new ControlContext(new StandardState(inputSimulator,sharedData.zoomForm));
             controlState.changedState += StateChanged;
             System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
 

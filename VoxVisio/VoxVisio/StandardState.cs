@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using VoxVisio.Screen_Overlay;
 using WindowsInput;
 
 namespace VoxVisio
 {
-
-    public enum eScrollState { 
-        SCROLLUP,
-        SCROLLDOWN,
-        NOSCROLL
-    }
     class StandardState : ControlState
     {
         private List<IFixationData> _finishedFixations;
@@ -20,12 +15,8 @@ namespace VoxVisio
         private int BUFFERSIZE = 8;
         private InputSimulator inputsim;
         private CommandSingleton commandList;
-        private Timer scrollTimer;
 
-        //Hotspots from scrolling up and down
-        private Rectangle upScrollHotspot;
-        private Rectangle downScrollHotspot;
-        private eScrollState scrollState = eScrollState.NOSCROLL;
+        private ScrollManager scrollManager;
         private ZoomForm zoomForm;
 
         public StandardState(InputSimulator inputsim, ZoomForm zoomForm)
@@ -35,12 +26,9 @@ namespace VoxVisio
             this.inputsim = inputsim;
             commandList = CommandSingleton.Instance();
 
-            //Creating the hotspots that allow a user to scroll up and down
-            upScrollHotspot = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, 200);
-            downScrollHotspot = new Rectangle(0, Screen.PrimaryScreen.Bounds.Height - 200, Screen.PrimaryScreen.Bounds.Width, 200);
-            scrollTimer = new Timer();
-            scrollTimer.Tick += new System.EventHandler(this.scrollTimer_Tick);
             this.zoomForm = zoomForm;
+
+            scrollManager = new ScrollManager();
         }
 
         public override void VoiceInput(string voiceData, ControlContext context)
@@ -52,11 +40,11 @@ namespace VoxVisio
             }
             else if (voiceData.Equals("scroll"))
             {
-                scrollTimer.Start();
+                scrollManager.Start();
             }
             else if (voiceData.Equals("stop scroll"))
             {
-                scrollTimer.Stop();
+                scrollManager.Stop();
             }
             //Running a normal voice command
             else
@@ -87,6 +75,7 @@ namespace VoxVisio
             //Buffering the fixation data for later commands
             buffering(fixation);
 
+            scrollManager.UpdateScroll(fixation.GetFixationLocation());
             zoomForm.Fixation(fixation.GetFixationLocation());
         }
 
@@ -114,36 +103,6 @@ namespace VoxVisio
             {
                 _finishedFixations.RemoveAt(0);
             }
-        }
-
-        private void scrollTimer_Tick(object sender, EventArgs e)
-        {
-            if (upScrollHotspot.Contains(GetLatestFixation().GetFixationLocation()))
-            {
-                scrollState = eScrollState.SCROLLUP;
-            }
-            else if (downScrollHotspot.Contains(GetLatestFixation().GetFixationLocation()))
-            {
-                scrollState = eScrollState.SCROLLDOWN;
-            }
-            else
-            {
-                scrollState = eScrollState.NOSCROLL;
-            }
-
-            switch (scrollState)
-            { 
-                case eScrollState.SCROLLUP:
-                    inputsim.Mouse.VerticalScroll(1);
-                    break;
-                case eScrollState.SCROLLDOWN:
-                    inputsim.Mouse.VerticalScroll(-1);
-                    break;
-            
-            }
-
-
-
         }
 
         //Method for converting the X position in pixels to the absolute number needed from the input simulator

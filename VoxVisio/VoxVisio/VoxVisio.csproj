@@ -81,10 +81,20 @@
     <Compile Include="ControlState.cs" />
     <Compile Include="DictationState.cs" />
     <Compile Include="FixationData.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Screen Overlay\Overlay.cs" />
+    <Compile Include="Screen Overlay\OverlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Screen Overlay\OverlayForm.Designer.cs">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screen Overlay\ScrollManager.cs" />
+    <Compile Include="Screen Overlay\Toast.cs" />
+    <Compile Include="SharedDataSingleton.cs" />
+    <Compile Include="UI\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="HotspotForm.cs">
@@ -110,7 +120,10 @@
     <Compile Include="ZoomForm.Designer.cs">
       <DependentUpon>ZoomForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Screen Overlay\OverlayForm.resx">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HotspotForm.resx">
@@ -175,6 +188,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
