@@ -16,7 +16,7 @@ namespace VoxVisio
             this.inputsim = inputsim;
            
             this.context = context;
-            closeHotspot = new Hotspot(new Rectangle(0, 0, 100, 100), HotspotCallback);
+            closeHotspot = new Hotspot(new Rectangle(0, 0, 250, 250), HotspotCallback);
 
             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
         }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -14,10 +15,14 @@ namespace VoxVisio.Screen_Overlay
         protected int percentFill = 0;
         protected Action callback;
         protected OverlayForm overlayForm;
+        protected bool finished = false;
+        protected Timer updateTimer;
+
         public Hotspot(Rectangle hotspotRect, Action callback)
         {
             SharedDataSingleton sharedData = SharedDataSingleton.Instance();
-            sharedData.updateTimer.Tick += updateTimer_Tick;
+            updateTimer = sharedData.updateTimer;
+            updateTimer.Tick += updateTimer_Tick;
             overlayForm = sharedData.overlayForm;
             overlayForm.RegisterOverlay(this);
             this.hotspotRect = hotspotRect;
@@ -44,8 +49,10 @@ namespace VoxVisio.Screen_Overlay
                 
             }
 
-            if (percentFill >= 100)
+            if (percentFill >= 100 && !finished)
             {
+                finished = true;
+                updateTimer.Tick -= updateTimer_Tick;
                 overlayForm.RemoveOverlay(this);
                 callback();
             }
