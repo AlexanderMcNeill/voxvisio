@@ -25,6 +25,7 @@ namespace VoxVisio
         private KeyCombo inputKeys;
         private Point fx;
         private Rectangle zoomRect;
+        private Point formOffset;
         public ZoomForm(InputSimulator inputSim)
         {
             InitializeComponent();
@@ -54,10 +55,10 @@ namespace VoxVisio
                 
                 int xPos = MousePosition.X - (Width / 2);
                 int yPos = MousePosition.Y - (Height / 2);
-                Top = yPos;
-                Left = xPos;
+                GetFormPos(xPos, yPos);
 
-                g.CopyFromScreen(Left, Top, 0, 0, new Size(Width, Height));
+                g.FillRectangle(Brushes.Black, Bounds);
+                g.CopyFromScreen(xPos, yPos, 0, 0, new Size(Width, Height));
 
                 int zoomWidth = bmp.Width * MAXZOOM;
                 int zoomHeight = bmp.Height * MAXZOOM;
@@ -77,6 +78,42 @@ namespace VoxVisio
 
         }
 
+        public void GetFormPos(int xPos, int yPos)
+        {
+            formOffset = new Point();
+            if (xPos < 0)
+            {
+                formOffset.X = xPos;
+                Left = 0;
+            }
+            else if (xPos + Width > Screen.PrimaryScreen.Bounds.Width)
+            {
+                formOffset.X = (xPos + Width) - Screen.PrimaryScreen.Bounds.Width;
+                Left = Screen.PrimaryScreen.Bounds.Width - Width;
+            }
+            else
+            {
+                formOffset.X = 0;
+                Left = xPos;
+            }
+
+            if (yPos < 0)
+            {
+                formOffset.Y = yPos;
+                Top = 0;
+            }
+            else if (yPos + Height > Screen.PrimaryScreen.Bounds.Height)
+            {
+                formOffset.Y = (yPos + Height) - Screen.PrimaryScreen.Bounds.Height;
+                Top = Screen.PrimaryScreen.Bounds.Height - Height;
+            }
+            else
+            {
+                formOffset.Y = 0;
+                Top = yPos;
+            }
+        }
+
         public void endZoomClick()
         {
             this.Visible = false;
@@ -93,6 +130,9 @@ namespace VoxVisio
                 int mouseOnFormY = fx.Y - Top;
 
                 Point mousePos = new Point(((mouseOnFormX + borderX) / MAXZOOM) + Left, ((mouseOnFormY + borderY) / MAXZOOM) + Top);
+
+                mousePos.X += formOffset.X;
+                mousePos.Y += formOffset.Y;
 
                 ClickPoint(mousePos);
             }
