@@ -1,6 +1,6 @@
-﻿namespace VoxVisio
+﻿namespace VoxVisio.Screen_Overlay
 {
-    partial class HotspotForm
+    partial class OverlayForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,17 +30,19 @@
         {
             this.SuspendLayout();
             // 
-            // HotspotForm
+            // OverlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightCoral;
-            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ClientSize = new System.Drawing.Size(284, 262);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "HotspotForm";
+            this.Name = "OverlayForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "HotspotForm";
-            this.TransparencyKey = System.Drawing.Color.LightCoral;
+            this.Text = "OverlayForm";
+            this.TopMost = true;
+            this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ResumeLayout(false);
 
         }
