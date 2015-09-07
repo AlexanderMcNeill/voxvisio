@@ -18,6 +18,7 @@ namespace VoxVisio.Screen_Overlay
 
     class ScrollManager : Overlay
     {
+        //Far into the screen the hotspots show
         private const int HOTSPOTSIZE = 200;
 
         private Rectangle topHotspot;
@@ -25,7 +26,8 @@ namespace VoxVisio.Screen_Overlay
         private eScrollState scrollState;
         private InputSimulator inputSimulator;
         private bool running = false;
-
+        private Bitmap upArrow;
+        private Bitmap downArrow;
         private OverlayForm overlayForm;
 
 
@@ -37,6 +39,10 @@ namespace VoxVisio.Screen_Overlay
             sharedData.updateTimer.Tick += updateTimer_Tick;
 
             scrollState = eScrollState.NOSCROLL;
+
+            //Getting the images that will be used to 
+            upArrow = new Bitmap("UpArrow.png");
+            downArrow = new Bitmap("DownArrow.png");
 
             setupHotspots();
         }
@@ -62,7 +68,6 @@ namespace VoxVisio.Screen_Overlay
 
         public void RunScroll()
         {
-            
                 switch (scrollState)
                 {
                     case eScrollState.SCROLLUP:
@@ -106,8 +111,8 @@ namespace VoxVisio.Screen_Overlay
 
         public void Draw(Graphics g)
         {
-            g.FillRectangle(Brushes.Blue, topHotspot);
-            g.FillRectangle(Brushes.Blue, bottomHotspot);
+            g.DrawImage(upArrow, topHotspot);
+            g.DrawImage(downArrow, bottomHotspot);
         }
     }
 }

@@ -108,7 +108,7 @@
     <Compile Include="MainEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\StandardState.cs" />
+    <Compile Include="States\CommandState.cs" />
     <Compile Include="ZoomForm.cs">
       <SubType>Form</SubType>
     </Compile>

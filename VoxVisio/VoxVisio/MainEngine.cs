@@ -33,9 +33,11 @@ namespace VoxVisio
             sharedData = SharedDataSingleton.Instance();
             inputSimulator = sharedData.inputSimulator;
             
-            controlState = new ControlContext(new StandardState(inputSimulator,sharedData.zoomForm));
+            controlState = new ControlContext();
             controlState.changedState += StateChanged;
-            System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
+            controlState.ControlState = new CommandState(inputSimulator, controlState);
+            
+            //System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
 
 
             loadCommands();
@@ -87,7 +89,7 @@ namespace VoxVisio
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
 
-            if (controlState.ControlState.GetType() == typeof(StandardState) && e.Result.Grammar.Name == "command")
+            if (controlState.ControlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
             {
                 controlState.VoiceRequest(e.Result.Text);
             }

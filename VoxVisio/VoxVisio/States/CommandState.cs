@@ -8,7 +8,7 @@ using WindowsInput;
 
 namespace VoxVisio
 {
-    class StandardState : ControlState
+    class CommandState : ControlState
     {
         private List<IFixationData> _finishedFixations;
         private IFixationData _currentFixation;
@@ -19,24 +19,26 @@ namespace VoxVisio
         private ScrollManager scrollManager;
         private ZoomForm zoomForm;
 
-        public StandardState(InputSimulator inputsim, ZoomForm zoomForm)
+        private ControlContext context;
+
+        public CommandState(InputSimulator inputsim, ControlContext context)
         {
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
             this.inputsim = inputsim;
             commandList = CommandSingleton.Instance();
-
-            this.zoomForm = zoomForm;
+            this.context = context;
+            this.zoomForm = SharedDataSingleton.Instance().zoomForm;
 
             scrollManager = new ScrollManager();
         }
 
-        public override void VoiceInput(string voiceData, ControlContext context)
+        public override void VoiceInput(string voiceData)
         {
             //Checking all the cases that change state. This is for testing and will be changed in the future
             if (voiceData.Equals("dictation"))
             {
-                context.ControlState = new DictationState(inputsim, zoomForm);
+                context.ControlState = new DictationState(inputsim, context);
             }
             else if (voiceData.Equals("scroll"))
             {
@@ -69,7 +71,7 @@ namespace VoxVisio
             }
         }
 
-        public override void EyeInput(ControlContext context, IFixationData fixation)
+        public override void EyeInput(IFixationData fixation)
         {
 
             //Buffering the fixation data for later commands

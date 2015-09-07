@@ -23,7 +23,6 @@ namespace VoxVisio
         private int zoomCounter;
         private readonly InputSimulator inputSim;
         private KeyCombo inputKeys;
-        private EyeXHost eyex;
         private Point fx;
         private Rectangle zoomRect;
         public ZoomForm(InputSimulator inputSim)

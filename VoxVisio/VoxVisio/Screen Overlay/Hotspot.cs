@@ -9,13 +9,19 @@ namespace VoxVisio.Screen_Overlay
 {
     class Hotspot : Overlay
     {
-        private Rectangle hotspotRect;
-        private bool hasFocus = false;
-        private int percentFill = 0;
-        public Hotspot(Rectangle hotspotRect)
+        protected Rectangle hotspotRect;
+        protected bool hasFocus = false;
+        protected int percentFill = 0;
+        protected Action callback;
+        protected OverlayForm overlayForm;
+        public Hotspot(Rectangle hotspotRect, Action callback)
         {
             SharedDataSingleton sharedData = SharedDataSingleton.Instance();
             sharedData.updateTimer.Tick += updateTimer_Tick;
+            overlayForm = sharedData.overlayForm;
+            overlayForm.RegisterOverlay(this);
+            this.hotspotRect = hotspotRect;
+            this.callback = callback;
         }
 
         private void updateTimer_Tick(object sender, EventArgs e)
@@ -27,16 +33,21 @@ namespace VoxVisio.Screen_Overlay
         {
             if (hasFocus)
             {
-                percentFill++;
+                percentFill += 10;
             }
             else
             {
-                percentFill--;
+                if(percentFill > 0)
+                {
+                    percentFill -= 10;
+                }
+                
             }
 
             if (percentFill >= 100)
             {
-
+                overlayForm.RemoveOverlay(this);
+                callback();
             }
         }
 

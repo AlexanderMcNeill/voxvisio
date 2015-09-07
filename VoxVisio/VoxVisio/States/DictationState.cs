@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using VoxVisio.Screen_Overlay;
 using WindowsInput;
 
 namespace VoxVisio
@@ -8,37 +9,32 @@ namespace VoxVisio
     {
 
         private InputSimulator inputsim;
-        private HotspotForm hotspotForm;
-        private ZoomForm zoomForm;
-
-        public DictationState(InputSimulator inputsim, ZoomForm zoomForm)
+        private Hotspot closeHotspot;
+        private ControlContext context;
+        public DictationState(InputSimulator inputsim, ControlContext context)
         {
             this.inputsim = inputsim;
-
-            //Creating the hotspot form that allows the user to exit the state
-            hotspotForm = new HotspotForm();
-            hotspotForm.Show();
+           
+            this.context = context;
+            closeHotspot = new Hotspot(new Rectangle(0, 0, 100, 100), HotspotCallback);
 
             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
-            this.zoomForm = zoomForm;
         }
 
-        public override void VoiceInput(string voiceData, ControlContext context)
+        public override void VoiceInput(string voiceData)
         {
             
         }
 
-        public override void EyeInput(ControlContext context, IFixationData fixation)
+        public void HotspotCallback()
         {
-            //Updating the hotspot and checking if it has been looked at long enough to exit the state
-            hotspotForm.updateHotspot(fixation.GetFixationLocation());
-            if (hotspotForm.PercentFill >= 100)
-            {
-                //Closing the form and changing to the command state
-                hotspotForm.requestClose();
-                context.ControlState = new StandardState(inputsim, zoomForm);
-                inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
-            }
+            context.ControlState = new CommandState(inputsim, context);
+            inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
+        }
+
+        public override void EyeInput(IFixationData fixation)
+        {
+            closeHotspot.update(fixation.GetFixationLocation());
         }
     }
 }

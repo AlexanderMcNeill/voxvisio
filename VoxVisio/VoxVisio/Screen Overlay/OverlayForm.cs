@@ -62,6 +62,9 @@ namespace VoxVisio.Screen_Overlay
         public OverlayForm()
         {
             InitializeComponent();
+            
+            TopLevel = true;
+            TopMost = true;
 
             //Setting form to fill the primary screen of the computer
             Top = 0;
@@ -92,6 +95,8 @@ namespace VoxVisio.Screen_Overlay
 
         public void DrawOverlays()
         {
+            TopMost = true;
+
             //Clearing the buffer to the transparent color of the form
             bufferGraphics.Clear(BackColor);
 

@@ -6,9 +6,9 @@
         private ControlState _state;
         public event StateChanged changedState;
 
-        public ControlContext(ControlState state)
+        public ControlContext()
         {
-            this._state = state;
+            
         }
 
         public ControlState ControlState
@@ -26,11 +26,11 @@
 
         public void EyeRequest(Fixation fixation)
         {
-            _state.EyeInput(this, fixation);
+            _state.EyeInput(fixation);
         }
         public void VoiceRequest(string voice)
         {
-            _state.VoiceInput(voice, this);
+            _state.VoiceInput(voice);
         }
 
     }
