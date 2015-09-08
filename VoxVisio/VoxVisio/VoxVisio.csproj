@@ -102,14 +102,8 @@
     <Compile Include="MainEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
-    <Compile Include="CommandState.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="ToastForm.cs">
-=======
     <Compile Include="States\CommandState.cs" />
     <Compile Include="ZoomForm.cs">
->>>>>>> Overlay
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ZoomForm.Designer.cs">
