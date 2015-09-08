@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnStartTest = new System.Windows.Forms.Button();
-            this.btnEditQuestions = new System.Windows.Forms.Button();
+            this.btnLoadTasks = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStartTest
@@ -42,22 +42,22 @@
             this.btnStartTest.UseVisualStyleBackColor = true;
             this.btnStartTest.Click += new System.EventHandler(this.btnStartTest_Click);
             // 
-            // btnEditQuestions
+            // btnLoadTasks
             // 
-            this.btnEditQuestions.Location = new System.Drawing.Point(384, 241);
-            this.btnEditQuestions.Name = "btnEditQuestions";
-            this.btnEditQuestions.Size = new System.Drawing.Size(190, 74);
-            this.btnEditQuestions.TabIndex = 1;
-            this.btnEditQuestions.Text = "Edit Questions";
-            this.btnEditQuestions.UseVisualStyleBackColor = true;
-            this.btnEditQuestions.Click += new System.EventHandler(this.btnEditQuestions_Click);
+            this.btnLoadTasks.Location = new System.Drawing.Point(833, 477);
+            this.btnLoadTasks.Name = "btnLoadTasks";
+            this.btnLoadTasks.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadTasks.TabIndex = 1;
+            this.btnLoadTasks.Text = "Load Tasks";
+            this.btnLoadTasks.UseVisualStyleBackColor = true;
+            this.btnLoadTasks.Click += new System.EventHandler(this.btnLoadTasks_Click);
             // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 537);
-            this.Controls.Add(this.btnEditQuestions);
+            this.Controls.Add(this.btnLoadTasks);
             this.Controls.Add(this.btnStartTest);
             this.Name = "MenuForm";
             this.Text = "MenuForm";
@@ -68,6 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnStartTest;
-        private System.Windows.Forms.Button btnEditQuestions;
+        private System.Windows.Forms.Button btnLoadTasks;
     }
 }

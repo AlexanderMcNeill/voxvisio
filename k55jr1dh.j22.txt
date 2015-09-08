@@ -1,0 +1,133 @@
+﻿Merge branch 'Overlay'
+
+Conflicts:
+	VoxVisio/VoxVisio/CommandState.cs
+	VoxVisio/VoxVisio/DictationState.cs
+	VoxVisio/VoxVisio/MainEngine.cs
+	VoxVisio/VoxVisio/StandardState.cs
+	VoxVisio/VoxVisio/States/CommandState.cs
+	VoxVisio/VoxVisio/VoxVisio.csproj
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	deleted:    SubjectTesting/SubjectTesting/EditQuestionsForm.Designer.cs
+#	deleted:    SubjectTesting/SubjectTesting/EditQuestionsForm.cs
+#	modified:   SubjectTesting/SubjectTesting/MenuForm.Designer.cs
+#	modified:   SubjectTesting/SubjectTesting/MenuForm.cs
+#	modified:   SubjectTesting/SubjectTesting/SubjectTesting.csproj
+#	new file:   SubjectTesting/SubjectTesting/TestTask.cs
+#	new file:   SubjectTesting/SubjectTesting/packages.config
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/Newtonsoft.Json.7.0.1.nupkg
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/Newtonsoft.Json.7.0.1.nuspec
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.dll
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.xml
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.dll
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.xml
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net40/Newtonsoft.Json.dll
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net40/Newtonsoft.Json.xml
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.dll
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.xml
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml
+#	new file:   SubjectTesting/packages/Newtonsoft.Json.7.0.1/tools/install.ps1
+#	new file:   SubjectTesting/packages/repositories.config
+#	new file:   VoiceApiRequest/VoiceApiRequest.sln
+#	new file:   VoiceApiRequest/VoiceApiRequest/App.config
+#	new file:   VoiceApiRequest/VoiceApiRequest/Form1.Designer.cs
+#	new file:   VoiceApiRequest/VoiceApiRequest/Form1.cs
+#	renamed:    VoxVisio/VoxVisio/HotspotForm.resx -> VoiceApiRequest/VoiceApiRequest/Form1.resx
+#	new file:   VoiceApiRequest/VoiceApiRequest/Program.cs
+#	new file:   VoiceApiRequest/VoiceApiRequest/Properties/AssemblyInfo.cs
+#	new file:   VoiceApiRequest/VoiceApiRequest/Properties/Resources.Designer.cs
+#	new file:   VoiceApiRequest/VoiceApiRequest/Properties/Resources.resx
+#	new file:   VoiceApiRequest/VoiceApiRequest/Properties/Settings.Designer.cs
+#	new file:   VoiceApiRequest/VoiceApiRequest/Properties/Settings.settings
+#	new file:   VoiceApiRequest/VoiceApiRequest/VoiceApiRequest.csproj
+#	new file:   VoiceApiRequest/VoiceApiRequest/packages.config
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/NAudio.1.7.3.nupkg
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/NAudio.1.7.3.nuspec
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/lib/net35/NAudio.XML
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/lib/net35/NAudio.dll
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/lib/windows8/NAudio.Win8.XML
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/lib/windows8/NAudio.Win8.dll
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/license.txt
+#	new file:   VoiceApiRequest/packages/NAudio.1.7.3/readme.txt
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/Newtonsoft.Json.7.0.1.nupkg
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/Newtonsoft.Json.7.0.1.nuspec
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.dll
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.xml
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.dll
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.xml
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net40/Newtonsoft.Json.dll
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net40/Newtonsoft.Json.xml
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.dll
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.xml
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml
+#	new file:   VoiceApiRequest/packages/Newtonsoft.Json.7.0.1/tools/install.ps1
+#	new file:   VoiceApiRequest/packages/repositories.config
+#	renamed:    VoxVisio/VoxVisio/Command.cs -> VoxVisio/VoxVisio/Commands/Command.cs
+#	renamed:    VoxVisio/VoxVisio/Commands.json -> VoxVisio/VoxVisio/Commands/Commands.json
+#	renamed:    VoxVisio/VoxVisio/KeyTranslater.cs -> VoxVisio/VoxVisio/Commands/KeyTranslater.cs
+#	deleted:    VoxVisio/VoxVisio/ControlState.cs
+#	deleted:    VoxVisio/VoxVisio/DictationState.cs
+#	deleted:    VoxVisio/VoxVisio/HotspotForm.cs
+#	modified:   VoxVisio/VoxVisio/MainEngine.cs
+#	modified:   VoxVisio/VoxVisio/Properties/Resources.Designer.cs
+#	modified:   VoxVisio/VoxVisio/Properties/Resources.resx
+#	new file:   VoxVisio/VoxVisio/Screen Overlay/Hotspot.cs
+#	new file:   VoxVisio/VoxVisio/Screen Overlay/Overlay.cs
+#	renamed:    VoxVisio/VoxVisio/HotspotForm.Designer.cs -> VoxVisio/VoxVisio/Screen Overlay/OverlayForm.Designer.cs
+#	new file:   VoxVisio/VoxVisio/Screen Overlay/OverlayForm.cs
+#	new file:   VoxVisio/VoxVisio/Screen Overlay/OverlayForm.resx
+#	new file:   VoxVisio/VoxVisio/Screen Overlay/ScrollManager.cs
+#	new file:   VoxVisio/VoxVisio/Screen Overlay/Toast.cs
+#	new file:   VoxVisio/VoxVisio/SharedDataSingleton.cs
+#	new file:   VoxVisio/VoxVisio/States/CommandState.cs
+#	renamed:    VoxVisio/VoxVisio/ControlContext.cs -> VoxVisio/VoxVisio/States/ControlContext.cs
+#	new file:   VoxVisio/VoxVisio/States/ControlState.cs
+#	new file:   VoxVisio/VoxVisio/States/DictationState.cs
+#	deleted:    VoxVisio/VoxVisio/ToastForm.cs
+#	renamed:    VoxVisio/VoxVisio/Form1.Designer.cs -> VoxVisio/VoxVisio/UI/Form1.Designer.cs
+#	renamed:    VoxVisio/VoxVisio/Form1.cs -> VoxVisio/VoxVisio/UI/Form1.cs
+#	renamed:    VoxVisio/VoxVisio/Form1.resx -> VoxVisio/VoxVisio/UI/Form1.resx
+#	modified:   VoxVisio/VoxVisio/VoxVisio.csproj
+#	renamed:    VoxVisio/VoxVisio/ToastForm.Designer.cs -> VoxVisio/VoxVisio/ZoomForm.Designer.cs
+#	new file:   VoxVisio/VoxVisio/ZoomForm.cs
+#	renamed:    VoxVisio/VoxVisio/ToastForm.resx -> VoxVisio/VoxVisio/ZoomForm.resx
+#	new file:   ZoomFormTest/ZoomFormTest.sln
+#	new file:   ZoomFormTest/ZoomFormTest/App.config
+#	new file:   ZoomFormTest/ZoomFormTest/Form1.Designer.cs
+#	new file:   ZoomFormTest/ZoomFormTest/Form1.cs
+#	new file:   ZoomFormTest/ZoomFormTest/Form1.resx
+#	new file:   ZoomFormTest/ZoomFormTest/Program.cs
+#	new file:   ZoomFormTest/ZoomFormTest/Properties/AssemblyInfo.cs
+#	new file:   ZoomFormTest/ZoomFormTest/Properties/Resources.Designer.cs
+#	new file:   ZoomFormTest/ZoomFormTest/Properties/Resources.resx
+#	new file:   ZoomFormTest/ZoomFormTest/Properties/Settings.Designer.cs
+#	new file:   ZoomFormTest/ZoomFormTest/Properties/Settings.settings
+#	new file:   ZoomFormTest/ZoomFormTest/ZoomFormTest.csproj
+#	new file:   ZoomFormTest/ZoomFormTest/packages.config
+#	new file:   ZoomFormTest/packages/InputSimulator.1.0.4.0/InputSimulator.1.0.4.0.nupkg
+#	new file:   ZoomFormTest/packages/InputSimulator.1.0.4.0/InputSimulator.1.0.4.0.nuspec
+#	new file:   ZoomFormTest/packages/InputSimulator.1.0.4.0/lib/net20/WindowsInput.dll
+#	new file:   ZoomFormTest/packages/InputSimulator.1.0.4.0/lib/net20/WindowsInput.xml
+#	new file:   ZoomFormTest/packages/repositories.config
+#
+
