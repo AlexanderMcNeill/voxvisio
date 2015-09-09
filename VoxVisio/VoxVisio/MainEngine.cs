@@ -21,9 +21,6 @@ namespace VoxVisio
         private readonly InputSimulator inputSimulator;
         private CommandSingleton commandList;
         private SharedDataSingleton sharedData;
-
-        private List<Command> commands; 
-
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
@@ -31,6 +28,7 @@ namespace VoxVisio
         public MainEngine()
         {
             sharedData = SharedDataSingleton.Instance();
+            commandList = CommandSingleton.Instance();
             inputSimulator = sharedData.inputSimulator;
             
             controlState = new ControlContext();
@@ -39,8 +37,6 @@ namespace VoxVisio
             
             //System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
 
-
-            loadCommands();
             SetupSpeechRecognition();
 
             //Instantiating and starting the eye tracker host
@@ -51,13 +47,14 @@ namespace VoxVisio
 
         private void SetupSpeechRecognition()
         {
+
             //Setting up the grammars for the voice recognizer
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
             dictationGrammar.Name = "dictation";
 
-            commandList = CommandSingleton.Instance();
-            commandList.SetCommands(commands);
+            
+            
             commandGrammar.Name = "command";
 
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
@@ -99,24 +96,11 @@ namespace VoxVisio
             }
         }
 
-        public void loadCommands()
-        {
-            commands = new List<Command>();
-            using (StreamReader reader = File.OpenText(@"Commands.json"))
-            {
-                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-                JArray a = (JArray)o.SelectToken("command");
-                
-                foreach (JObject variable in a)
-                {
-                    commands.Add(new Command((string)variable["word"], (string)variable["keys"] , inputSimulator));
-                }
-            }
-        }
+       
 
         public void loadCommandGrammar()
         {
-            var keywords = commands.Select(coms => coms.VoiceKeyword);
+            var keywords = commandList.Commands.Select(coms => coms.VoiceKeyword);
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
             sList.Add("dictation");

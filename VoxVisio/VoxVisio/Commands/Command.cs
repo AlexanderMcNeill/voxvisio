@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Speech.Synthesis.TtsEngine;
 using System.Text;
-using System.Xml.Serialization;
+using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
+using FMUtils.KeyboardHook;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace VoxVisio
 {
@@ -14,12 +16,23 @@ namespace VoxVisio
     {
         private static CommandSingleton _singleton;
         private List<Command> commands;
+        private List<SpecialCommand> specialCommands;
+        private Hook keyboardHook;
 
         protected CommandSingleton()
         {
-            
+            loadCommands();
+            keyboardHook = new Hook("Global Action Hook");
+            keyboardHook.KeyDownEvent += keyPressedDown;
         }
 
+        private void keyPressedDown(KeyboardHookEventArgs e)
+        {
+            var keyPressed = e.Key;
+        }
+
+
+        // A list of all currently loaded commands
         public List<Command> Commands
         {
             get { return commands; }
@@ -41,6 +54,28 @@ namespace VoxVisio
         {
             this.commands = commands;
         }
+
+        private void loadCommands()
+        {
+            commands = new List<Command>();
+            using (StreamReader reader = File.OpenText(@"Commands.json"))
+            {
+                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                JArray a = (JArray)o.SelectToken("command");
+
+                foreach (JObject variable in a)
+                {
+                    commands.Add(new Command((string)variable["word"], (string)variable["keys"], SharedDataSingleton.Instance().inputSimulator));
+                }
+            }
+        }
+    }
+
+    public class SpecialCommand
+    {
+        // Key that triggers the command
+
+        // Delegate to the method that needs to be called on trigger
     }
 
     public class Command
