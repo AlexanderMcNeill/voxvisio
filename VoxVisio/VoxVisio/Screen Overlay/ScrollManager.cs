@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsInput;
+using VoxVisio.Properties;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -41,8 +42,8 @@ namespace VoxVisio.Screen_Overlay
             scrollState = eScrollState.NOSCROLL;
 
             //Getting the images that will be used to 
-            upArrow = new Bitmap("UpArrow.png");
-            downArrow = new Bitmap("DownArrow.png");
+            upArrow = new Bitmap(Resources.UpArrow);
+            downArrow = new Bitmap(Resources.DownArrow);
 
             setupHotspots();
         }
