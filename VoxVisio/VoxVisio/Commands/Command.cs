@@ -58,7 +58,8 @@ namespace VoxVisio
         private void loadCommands()
         {
             commands = new List<Command>();
-            using (StreamReader reader = File.OpenText(@"Commands.json"))
+            string fileContents = Properties.Resources.Commands;
+            using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
             {
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 JArray a = (JArray)o.SelectToken("command");

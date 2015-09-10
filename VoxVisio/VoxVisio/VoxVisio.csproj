@@ -150,6 +150,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Commands\Commands.txt" />
     <Content Include="favicon.ico" />
     <None Include="Resources\DownArrow.png" />
     <Content Include="UpArrow.png" />
