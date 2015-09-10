@@ -6,15 +6,18 @@ using System.Speech.Recognition;
 using System.Windows.Forms;
 using EyeXFramework;
 using VoxVisio.Properties;
+using VoxVisio.UI;
 
 namespace VoxVisio
 {
     public partial class VoxVisio : Form
     {
+        private const int HIDDENYPOS = -80;
         private readonly NotifyIcon notifyicon;
         private IContainer component;
         private MainEngine mainEngine;
-        private CommandSingleton commandList;
+        private HelpForm helpForm;
+        private SettingsForm settingsForm;
 
 
         public VoxVisio()
@@ -39,25 +42,10 @@ namespace VoxVisio
             this.Resize += frmMain_Resize;
 
             mainEngine = new MainEngine();
-            commandList = CommandSingleton.Instance();
-            populateList();
+
+            settingsForm = new SettingsForm();
+            helpForm = new HelpForm();
         }
-
-        private void VoxVisio_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void populateList()
-        {
-            foreach (var VARIABLE in commandList.Commands)
-            {
-                lvCommandList.Items.Add(new ListViewItem(new string[] {VARIABLE.VoiceKeyword, VARIABLE.keyCombo.GetKeyString()}));
-            }
-        }
-
 
         // Minimize the program to the icon tray
         private void frmMain_Resize(object sender, EventArgs e)
@@ -90,6 +78,16 @@ namespace VoxVisio
         private void VoxVisio_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainEngine.close();
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            helpForm.ShowDialog(this);
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            settingsForm.ShowDialog(this);
         }
     }
 
