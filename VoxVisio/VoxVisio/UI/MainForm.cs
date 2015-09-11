@@ -23,61 +23,14 @@ namespace VoxVisio
         public VoxVisio()
         {
             InitializeComponent();
-
-            this.component = new Container();
-            // Create the NotifyIcon. 
-            notifyicon = new NotifyIcon(component);
-            notifyicon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
-
-            // The Icon property sets the icon that will appear 
-            // in the systray for this application.
-            Icon icon = Resources.favicon;
-            notifyicon.Icon = icon;
-            
-
-            // The Text property sets the text that will be displayed, 
-            // in a tooltip, when the mouse hovers over the systray icon.
-            notifyicon.Text = "VoxVisio";
-
-            this.Resize += frmMain_Resize;
+            TopMost = true;
+            Top = 0;
+            Left = Screen.PrimaryScreen.Bounds.Width / 2 - Width / 2;
 
             mainEngine = new MainEngine();
 
             settingsForm = new SettingsForm();
             helpForm = new HelpForm();
-        }
-
-        // Minimize the program to the icon tray
-        private void frmMain_Resize(object sender, EventArgs e)
-        {
-            switch (this.WindowState)
-            {
-                case FormWindowState.Minimized:
-                    notifyicon.Visible = true;
-                    this.ShowInTaskbar = false;
-                    this.Hide();
-                    break;
-                case FormWindowState.Normal:
-                    notifyicon.Visible = false;
-                    this.Show();
-                    break;
-            }
-        }
-        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
-            this.ShowInTaskbar = true;
-            notifyicon.Visible = false;
-        }
-
-        private void fIileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void VoxVisio_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            mainEngine.close();
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
@@ -88,6 +41,12 @@ namespace VoxVisio
         private void btnSettings_Click(object sender, EventArgs e)
         {
             settingsForm.ShowDialog(this);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            mainEngine.close();
+            Close();
         }
     }
 
