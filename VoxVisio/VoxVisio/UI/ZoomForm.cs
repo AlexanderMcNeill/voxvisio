@@ -45,9 +45,7 @@ namespace VoxVisio
 
         public void DrawScreen()
         {
-
             formGraphics.DrawImage(bmp, zoomRect.X, zoomRect.Y, zoomRect.Width, zoomRect.Height);
-
         }
 
         public void startZoomClick(KeyCombo inputKeys)

@@ -10,6 +10,9 @@ using FMUtils.KeyboardHook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+// KeysConverter
+// Keys <=> Cast VirtualKeyCode
+
 namespace VoxVisio
 {
     public class CommandSingleton
@@ -29,6 +32,9 @@ namespace VoxVisio
         private void keyPressedDown(KeyboardHookEventArgs e)
         {
             var keyPressed = e.Key;
+             string keyRep = keyPressed.ToString();
+            KeysConverter kc = new KeysConverter();           
+            
         }
 
 
@@ -75,8 +81,15 @@ namespace VoxVisio
     public class SpecialCommand
     {
         // Key that triggers the command
-
+        private Keys triggerKey;
         // Delegate to the method that needs to be called on trigger
+        private Action commandToRun;
+
+        public SpecialCommand(Action commandToRun, Keys triggerKey)
+        {
+            this.triggerKey = triggerKey;
+            this.commandToRun = commandToRun;            
+        }
     }
 
     public class Command
@@ -88,9 +101,7 @@ namespace VoxVisio
         {
             this.VoiceKeyword = commandWord;
             this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
-        }
-
-        
+        }        
     }
 
     public class KeyCombo
@@ -145,7 +156,7 @@ namespace VoxVisio
             var toReturn =
                 from k in Keys
                 select KeyTranslater.GetKeyString(k);
-            return String.Join(",", toReturn);
+            return String.Join(", ", toReturn);
         }
     }
 }
