@@ -2,23 +2,28 @@
     "command": [
       {
         "word": "click",
-        "keys": "m1"
+        "keys": "LButton"
       },
       {
         "word": "double click",
-        "keys": "m1,m1"
+        "keys": "LButton,LButton"
       },
       {
         "word": "right Click",
-        "keys": "m2"
+        "keys": "RButton"
       },
       {
         "word": "help",
-        "keys": "f1"
+        "keys": "F1"
       },
       {
+<<<<<<< HEAD
         "word": "close",
         "keys": "alt,f4"
+=======
+        "word": "kill",
+        "keys": "Menu,F4"
+>>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
       },
 	    {
         "word": "new folder",
@@ -54,56 +59,82 @@
       },
       {
         "word": "open",
-        "keys": "ctrl,o"
+        "keys": "Control,O"
       },
 	  {
         "word": "enter",
         "keys": "enter"
       },
       {
+<<<<<<< HEAD
         "word": "switch window",
         "keys": "ctrl,win,tab"
+=======
+        "word": "switch app",
+        "keys": "Menu,Tab"
+>>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
       },
       {
         "word": "find",
-        "keys": "ctrl,f"
+        "keys": "Control,F"
       },
       {
         "word": "snap left",
-        "keys": "win,left"
+        "keys": "LWin,Left"
       },
       {
         "word": "snap right",
-        "keys": "win,right"
+        "keys": "LWin,Right"
       },
       {
         "word": "copy",
-        "keys": "ctrl,c"
+        "keys": "Control,C"
       },
       {
         "word": "paste",
-        "keys": "ctrl,v"
+        "keys": "Control,V"
       },
       {
         "word": "cut",
-        "keys": "ctrl,x"
+        "keys": "Control,X"
       },
       {
         "word": "select all",
-        "keys": "ctrl,a"
+        "keys": "Control,A"
       },
       {
         "word": "print",
-        "keys": "ctrl,p"
+        "keys": "Control,P"
       },
       {
         "word": "minimize",
-        "keys": "win,down"
+        "keys": "LWin,Down"
       },
       {
         "word": "maximize",
+<<<<<<< HEAD
         "keys": "win,up"
+=======
+        "keys": "LWin,Up"
+      },
+      {
+        "word": "zoom in",
+        "keys": "LWin,Oemplus"
+      },
+      {
+        "word": "zoom out",
+        "keys": "LWin,Oemplus"
+      },
+	  {
+        "word": "full zoom out",
+        "keys": "LWin,Escape"
+>>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
       }
-    ]
+    ],
+	"specialcommands" :  [
+		{
+			"commandkey" : "Left"
+		}
+	]
   
 }

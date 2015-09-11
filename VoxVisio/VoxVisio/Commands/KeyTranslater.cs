@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Forms;
 using WindowsInput.Native;
 
 // https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
@@ -22,6 +23,7 @@ namespace VoxVisio
     }
     public class KeyTranslater
     {
+<<<<<<< HEAD
         private static KeyRep[] _keyReps =
         {
             new KeyRep("m1", VirtualKeyCode.LBUTTON),
@@ -91,23 +93,19 @@ namespace VoxVisio
             new KeyRep("shift", VirtualKeyCode.SHIFT),
             new KeyRep("del", VirtualKeyCode.DELETE)
         };
+=======
+        private static KeysConverter kc = new KeysConverter();
+>>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
 
         public static VirtualKeyCode GetKeyCode(string keyString)
-        {
-            var toreturnCode =
-                from keyStrings in _keyReps
-                where keyStrings.Key == keyString
-                select keyStrings.KeyCode;
-            return toreturnCode.First();
+        {            
+            var toReturn = kc.ConvertFromString(keyString);
+            return (VirtualKeyCode)toReturn;
         }
-
         public static string GetKeyString(VirtualKeyCode code)
-        {
-            var toreturnCode =
-                from keyStrings in _keyReps
-                where keyStrings.KeyCode == code
-                select keyStrings.Key;
-            return toreturnCode.First();
+        {      
+            var toreturnCode = kc.ConvertToString((Keys)code);                
+            return toreturnCode;
         }
     }
 
