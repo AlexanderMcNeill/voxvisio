@@ -17,66 +17,56 @@
         "keys": "F1"
       },
       {
-<<<<<<< HEAD
-        "word": "close",
-        "keys": "alt,f4"
-=======
         "word": "kill",
         "keys": "Menu,F4"
->>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
       },
 	    {
         "word": "new folder",
-        "keys": "ctrl,shift,n"
+        "keys": "ControlKey,Shift,N"
       },
 	  {
         "word": "properties",
-        "keys": "alt,m1,m1"
+        "keys": "Menu,LButton,LButton"
       },
 	  {
         "word": "delete item",
-        "keys": "m1,del"
+        "keys": "LButton,Delete"
       },
 	  	  {
         "word": "exterminate",
-        "keys": "m1,del"
+        "keys": "LButton,Delete"
       },
 	  {
         "word": "start",
-        "keys": "win"
+        "keys": "LWin"
       },
 	  {
         "word": "show desktop",
-        "keys": "win,d"
+        "keys": "LWin,D"
       },
 	  	  {
         "word": "my computer",
-        "keys": "win,e"
+        "keys": "LWin,E"
       },
 	  	  {
         "word": "lock computer",
-        "keys": "win,l"
+        "keys": "LWin,L"
       },
       {
         "word": "open",
-        "keys": "Control,O"
+        "keys": "ControlKey,O"
       },
 	  {
-        "word": "enter",
-        "keys": "enter"
+        "word": "Enter",
+        "keys": "Enter"
       },
       {
-<<<<<<< HEAD
-        "word": "switch window",
-        "keys": "ctrl,win,tab"
-=======
         "word": "switch app",
         "keys": "Menu,Tab"
->>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
       },
       {
         "word": "find",
-        "keys": "Control,F"
+        "keys": "ControlKey,F"
       },
       {
         "word": "snap left",
@@ -88,23 +78,23 @@
       },
       {
         "word": "copy",
-        "keys": "Control,C"
+        "keys": "ControlKey,C"
       },
       {
         "word": "paste",
-        "keys": "Control,V"
+        "keys": "ControlKey,V"
       },
       {
         "word": "cut",
-        "keys": "Control,X"
+        "keys": "ControlKey,X"
       },
       {
         "word": "select all",
-        "keys": "Control,A"
+        "keys": "ControlKey,A"
       },
       {
         "word": "print",
-        "keys": "Control,P"
+        "keys": "ControlKey,P"
       },
       {
         "word": "minimize",
@@ -112,9 +102,6 @@
       },
       {
         "word": "maximize",
-<<<<<<< HEAD
-        "keys": "win,up"
-=======
         "keys": "LWin,Up"
       },
       {
@@ -128,7 +115,6 @@
 	  {
         "word": "full zoom out",
         "keys": "LWin,Escape"
->>>>>>> edfa7cf087b8ae3a817562c5fa9c40802e78e1a8
       }
     ],
 	"specialcommands" :  [
