@@ -17,16 +17,52 @@
         "keys": "f1"
       },
       {
-        "word": "kill",
+        "word": "close",
         "keys": "alt,f4"
+      },
+	    {
+        "word": "new folder",
+        "keys": "ctrl,shift,n"
+      },
+	  {
+        "word": "properties",
+        "keys": "alt,m1,m1"
+      },
+	  {
+        "word": "delete item",
+        "keys": "m1,del"
+      },
+	  	  {
+        "word": "exterminate",
+        "keys": "m1,del"
+      },
+	  {
+        "word": "start",
+        "keys": "win"
+      },
+	  {
+        "word": "show desktop",
+        "keys": "win,d"
+      },
+	  	  {
+        "word": "my computer",
+        "keys": "win,e"
+      },
+	  	  {
+        "word": "lock computer",
+        "keys": "win,l"
       },
       {
         "word": "open",
         "keys": "ctrl,o"
       },
+	  {
+        "word": "enter",
+        "keys": "enter"
+      },
       {
-        "word": "switch app",
-        "keys": "alt,tab"
+        "word": "switch window",
+        "keys": "ctrl,win,tab"
       },
       {
         "word": "find",
@@ -67,18 +103,6 @@
       {
         "word": "maximize",
         "keys": "win,up"
-      },
-      {
-        "word": "zoom in",
-        "keys": "win,+"
-      },
-      {
-        "word": "zoom out",
-        "keys": "win,-"
-      },
-	  {
-        "word": "full zoom out",
-        "keys": "win,esc"
       }
     ]
   

@@ -103,8 +103,8 @@ namespace VoxVisio
             var keywords = commandList.Commands.Select(coms => coms.VoiceKeyword);
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
-            sList.Add("dictation");
-            sList.Add("scroll");
+            sList.Add("start dictation");
+            sList.Add("start scroll");
             sList.Add("stop scroll");
             GrammarBuilder gb = new GrammarBuilder(sList);
             commandGrammar = new Grammar(gb);
