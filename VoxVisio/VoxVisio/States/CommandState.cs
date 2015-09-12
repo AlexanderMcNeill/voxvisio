@@ -36,11 +36,11 @@ namespace VoxVisio
         public override void VoiceInput(string voiceData)
         {
             //Checking all the cases that change state. This is for testing and will be changed in the future
-            if (voiceData.Equals("dictation"))
+            if (voiceData.Equals("start dictation"))
             {
                 context.ControlState = new DictationState(inputsim, context);
             }
-            else if (voiceData.Equals("scroll"))
+            else if (voiceData.Equals("start scroll"))
             {
                 scrollManager.Start();
             }
