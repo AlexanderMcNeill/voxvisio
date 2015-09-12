@@ -35,6 +35,12 @@ namespace VoxVisio
 
         public override void VoiceInput(string voiceData)
         {
+            //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
+            IFixationData latestFixation = GetLatestFixation();
+            double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
+            double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
+            inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
+
             //Checking all the cases that change state. This is for testing and will be changed in the future
             if (voiceData.Equals("start dictation"))
             {
@@ -51,11 +57,7 @@ namespace VoxVisio
             //Running a normal voice command
             else
             {
-                //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
-                IFixationData latestFixation = GetLatestFixation();
-                double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
-                double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
-                inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
+
 
                 //Firing the command
                 KeyCombo keyCombo = commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
