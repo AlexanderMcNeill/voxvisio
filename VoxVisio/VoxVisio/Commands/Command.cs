@@ -32,9 +32,9 @@ namespace VoxVisio
         private void keyPressedDown(KeyboardHookEventArgs e)
         {
             var keyPressed = e.Key;
-             string keyRep = keyPressed.ToString();
-            KeysConverter kc = new KeysConverter();           
-            
+            string keyRep = keyPressed.ToString();
+            KeysConverter kc = new KeysConverter();
+
         }
 
 
@@ -60,6 +60,38 @@ namespace VoxVisio
         {
             this.commands = commands;
         }
+        private void saveCommands()
+        {
+
+            JsonSerializer serializer = new JsonSerializer();            
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+
+            using (StreamWriter sw = new StreamWriter(@"c:\json.txt"))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                writer.Formatting = Formatting.Indented;
+
+                writer.WriteStartObject();
+                writer.WritePropertyName("command");
+                writer.WriteStartArray();
+                foreach (var item in commands)
+                {
+                    var dict = item.getDict();
+                    writer.WriteStartObject();
+                    foreach (var dictItem in dict)
+                    {
+                        writer.WritePropertyName(dictItem.Key);
+                        writer.WriteValue(dictItem.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+                writer.WriteEndObject();
+                writer.Close();             
+               
+            }
+        }
+
 
         private void loadCommands()
         {
@@ -75,7 +107,9 @@ namespace VoxVisio
                     commands.Add(new Command((string)variable["word"], (string)variable["keys"], SharedDataSingleton.Instance().inputSimulator));
                 }
             }
+            saveCommands();
         }
+
     }
 
     public class SpecialCommand
@@ -88,7 +122,7 @@ namespace VoxVisio
         public SpecialCommand(Action commandToRun, Keys triggerKey)
         {
             this.triggerKey = triggerKey;
-            this.commandToRun = commandToRun;            
+            this.commandToRun = commandToRun;
         }
     }
 
@@ -101,7 +135,15 @@ namespace VoxVisio
         {
             this.VoiceKeyword = commandWord;
             this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
-        }        
+        }
+
+        public Dictionary<string,string> getDict()
+        {
+            Dictionary<string, string> toReturn = new Dictionary<string, string>();
+            toReturn.Add("voice keyword", VoiceKeyword);
+            toReturn.Add("keys", keyCombo.GetKeyString());
+            return toReturn;
+        }
     }
 
     public class KeyCombo
@@ -119,6 +161,18 @@ namespace VoxVisio
                 Keys.Add(keyCode);
             }
         }
+        ////public string GetKeys()
+        ////{
+        ////    string toReturn = "";
+        ////    foreach (var item in Keys)
+        ////    {
+        ////        toReturn += KeyTranslater.GetKeyString(item);
+        ////        toReturn += " ";
+        ////    }
+        ////    toReturn.TrimEnd();
+        ////    toReturn.Replace(' ', ',');
+        ////    return toReturn;
+        ////}
 
         public void PressKeys()
         {
