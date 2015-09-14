@@ -95,7 +95,7 @@ namespace VoxVisio.Screen_Overlay
 
         public void DrawOverlays()
         {
-            TopMost = true;
+            //TopMost = true;
 
             //Clearing the buffer to the transparent color of the form
             bufferGraphics.Clear(BackColor);

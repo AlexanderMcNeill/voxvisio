@@ -104,17 +104,29 @@
     <Compile Include="Screen Overlay\ScrollManager.cs" />
     <Compile Include="Screen Overlay\Toast.cs" />
     <Compile Include="SharedDataSingleton.cs" />
-    <Compile Include="UI\Form1.cs">
+    <Compile Include="UI\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\HelpForm.Designer.cs">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\KeyTranslater.cs" />
     <Compile Include="MainEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\CommandState.cs" />
+    <Compile Include="UI\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ZoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,13 +136,19 @@
     <EmbeddedResource Include="Screen Overlay\OverlayForm.resx">
       <DependentUpon>OverlayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="UI\HelpForm.resx">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ZoomForm.resx">
       <DependentUpon>ZoomForm.cs</DependentUpon>
