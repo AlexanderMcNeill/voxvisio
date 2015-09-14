@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
+using VoxVisio.Singletons;
 using WindowsInput;
 using FMUtils.KeyboardHook;
 
@@ -11,25 +12,18 @@ namespace VoxVisio
 {
     class CommandState : ControlState
     {
-        private List<IFixationData> _finishedFixations;
-        private IFixationData _currentFixation;
-        private int BUFFERSIZE = 8;
+        private IFixationData latestFixation;
         private InputSimulator inputsim;
         private SettingsSingleton _settingsList;
 
         private ScrollManager scrollManager;
         private ZoomForm zoomForm;
 
-        private ControlContext context;
-
-        public CommandState(InputSimulator inputsim, ControlContext context)
+        public CommandState()
         {
-            _finishedFixations = new List<IFixationData>();
-            _currentFixation = null;
-            this.inputsim = inputsim;
+            inputsim = SharedObjectsSingleton.Instance().inputSimulator;
             _settingsList = SettingsSingleton.Instance();
-            this.context = context;
-            this.zoomForm = SharedDataSingleton.Instance().zoomForm;
+            zoomForm = SharedFormsSingleton.Instance().zoomForm;
 
             scrollManager = new ScrollManager();
             _settingsList.keyboardHook.KeyDownEvent += keyPressedDown;
@@ -55,17 +49,12 @@ namespace VoxVisio
         public override void VoiceInput(string voiceData)
         {
             //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
-            IFixationData latestFixation = GetLatestFixation();
             double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
             double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
             inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
             //Checking all the cases that change state. This is for testing and will be changed in the future
-            if (voiceData.Equals("start dictation"))
-            {
-                context.ControlState = new DictationState(inputsim, context);
-            }
-            else if (voiceData.Equals("start scroll"))
+            if (voiceData.Equals("start scroll"))
             {
                 scrollManager.Start();
             }
@@ -76,8 +65,6 @@ namespace VoxVisio
             //Running a normal voice command
             else
             {
-
-
                 //Firing the command
                 KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
 
@@ -94,38 +81,10 @@ namespace VoxVisio
 
         public override void EyeInput(IFixationData fixation)
         {
-
-            //Buffering the fixation data for later commands
-            buffering(fixation);
+            latestFixation = fixation;
 
             scrollManager.UpdateScroll(fixation.GetFixationLocation());
             zoomForm.Fixation(fixation.GetFixationLocation());
-        }
-
-        private void buffering(IFixationData fixation)
-        {
-            switch (fixation.GetFixationPhase())
-            {
-                case eFixationPhase.start:
-                    _currentFixation = fixation;
-                    break;
-                case eFixationPhase.finished:
-                    if (_currentFixation != null)
-                    {
-                        _currentFixation.setFixationFinished();
-                        _finishedFixations.Add(_currentFixation);
-                        _currentFixation = null;
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            //Remove the oldest fixation if the buffer has reached a certain size
-            if (_finishedFixations.Count > BUFFERSIZE)
-            {
-                _finishedFixations.RemoveAt(0);
-            }
         }
 
         //Method for converting the X position in pixels to the absolute number needed from the input simulator
@@ -138,15 +97,6 @@ namespace VoxVisio
         private double convertYToAbsolute(int y)
         {
             return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
-        }
-
-        /// <summary>
-        /// Return current fixation if it is not null, else returns the most recently finished fixation
-        /// </summary>
-        /// <returns>The most recent fixation.</returns>
-        private IFixationData GetLatestFixation()
-        {
-            return _currentFixation ?? _finishedFixations.Last();
         }
     }
 }
