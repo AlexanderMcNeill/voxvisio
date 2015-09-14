@@ -5,7 +5,8 @@ namespace VoxVisio
     enum eFixationPhase
     {
         start,
-        finished
+        finished,
+        data
     }
 
     /// <summary>

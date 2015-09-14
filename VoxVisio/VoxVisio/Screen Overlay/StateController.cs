@@ -15,6 +15,7 @@ namespace VoxVisio.Screen_Overlay
 
         private Rectangle commandStateHotspot;
         private int commandStateCounter = 0;
+
         private Rectangle dictationStateHotspot;
         private int dictationStateCounter = 0;
 
@@ -36,7 +37,7 @@ namespace VoxVisio.Screen_Overlay
 
         
 
-        public void Draw()
+        public void Draw(Graphics g)
         { 
         
         }

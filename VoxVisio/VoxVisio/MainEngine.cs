@@ -11,13 +11,13 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
+using VoxVisio.Singletons;
 
 namespace VoxVisio
 {
     public class MainEngine
     {
-        private ControlContext controlState;
-        private EyeXHost eyex;
+        private ControlState controlState;
         private readonly InputSimulator inputSimulator;
         private CommandSingleton commandList;
         private SharedDataSingleton sharedData;
@@ -27,22 +27,19 @@ namespace VoxVisio
 
         public MainEngine()
         {
-            sharedData = SharedDataSingleton.Instance();
             commandList = CommandSingleton.Instance();
-            inputSimulator = sharedData.inputSimulator;
-            
-            controlState = new ControlContext();
-            controlState.changedState += StateChanged;
-            controlState.ControlState = new CommandState(inputSimulator, controlState);
-            
-            //System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
+
+            controlState = new CommandState();
 
             SetupSpeechRecognition();
 
-            //Instantiating and starting the eye tracker host
-            eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
-            eyex.Start();
+
+            EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+        }
+
+        void sharedData_fixationEvent(Fixation newFixation)
+        {
+            controlState.EyeInput(newFixation);
         }
 
         private void SetupSpeechRecognition()
@@ -66,33 +63,16 @@ namespace VoxVisio
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
         }
 
-
-        public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
-        {
-            Fixation fx = null;
-            switch (t)
-            {
-                case FixationDataEventType.Begin:
-                    fx = new Fixation(new Point(x, y), eFixationPhase.start);
-                    controlState.EyeRequest(fx);
-                    break;
-                case FixationDataEventType.End:
-                    fx = new Fixation(new Point(x,y),eFixationPhase.finished );
-                    controlState.EyeRequest(fx);
-                    break;
-            }
-        }
-
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
 
-            if (controlState.ControlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
+            if (controlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
             {
-                controlState.VoiceRequest(e.Result.Text);
+                controlState.VoiceInput(e.Result.Text);
             }
-            else if (controlState.ControlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
+            else if (controlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
             {
-                controlState.VoiceRequest(e.Result.Text);
+                controlState.VoiceInput(e.Result.Text);
             }
         }
 
@@ -110,15 +90,9 @@ namespace VoxVisio
             commandGrammar = new Grammar(gb);
         }
 
-        public void StateChanged()
-        {
-
-        }
-
         internal void close()
         {
             speechRecognizer.Dispose();
-            eyex.Dispose();
         }
     }
 }

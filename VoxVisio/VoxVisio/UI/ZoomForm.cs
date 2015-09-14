@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tobii.EyeX.Framework;
+using VoxVisio.Singletons;
 using WindowsInput;
 
 namespace VoxVisio
@@ -26,15 +27,15 @@ namespace VoxVisio
         private Point fx;
         private Rectangle zoomRect;
         private Point formOffset;
-        public ZoomForm(InputSimulator inputSim)
+        public ZoomForm()
         {
             InitializeComponent();
-
             formGraphics = panel1.CreateGraphics();
             bmp = new Bitmap(Width, Height);
             g = Graphics.FromImage(bmp);
 
-            this.inputSim = inputSim;
+            //Getting the input simulator from the shared objects
+            this.inputSim = SharedObjectsSingleton.Instance().inputSimulator;
             this.Visible = false;
         }
 
