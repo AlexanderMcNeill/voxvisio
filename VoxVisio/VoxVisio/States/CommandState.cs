@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
 using WindowsInput;
+using FMUtils.KeyboardHook;
 
 namespace VoxVisio
 {
@@ -14,7 +15,7 @@ namespace VoxVisio
         private IFixationData _currentFixation;
         private int BUFFERSIZE = 8;
         private InputSimulator inputsim;
-        private CommandSingleton commandList;
+        private SettingsSingleton _settingsList;
 
         private ScrollManager scrollManager;
         private ZoomForm zoomForm;
@@ -26,16 +27,28 @@ namespace VoxVisio
             _finishedFixations = new List<IFixationData>();
             _currentFixation = null;
             this.inputsim = inputsim;
-            commandList = CommandSingleton.Instance();
+            _settingsList = SettingsSingleton.Instance();
             this.context = context;
             this.zoomForm = SharedDataSingleton.Instance().zoomForm;
 
             scrollManager = new ScrollManager();
+            _settingsList.keyboardHook.KeyDownEvent += keyPressedDown;
+            _settingsList.specialCommands.Add(new SpecialCommand("click", Keys.F12));
+
+        }
+        private void keyPressedDown(KeyboardHookEventArgs e)
+        {
+            // Gets the associated command word from the pressed key
+            var firstOrDefault = _settingsList.specialCommands.FirstOrDefault(x => x.triggerKey == e.Key);
+            if (firstOrDefault == null) return;
+            string commandWord = firstOrDefault.commandWord;
+            //Call the voice input method with the assicated command word
+            VoiceInput(commandWord);
         }
 
         public void ZoomCLick()
         {
-            KeyCombo keyCombo = commandList.Commands.Find(i => i.VoiceKeyword == "click").keyCombo;
+            KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == "click").keyCombo;
             zoomForm.startZoomClick(keyCombo);
         }
 
@@ -64,7 +77,7 @@ namespace VoxVisio
                 inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
                 //Firing the command
-                KeyCombo keyCombo = commandList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
+                KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
 
                 if (keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.LBUTTON) || keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.RBUTTON))
                 {

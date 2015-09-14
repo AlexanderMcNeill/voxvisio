@@ -14,7 +14,7 @@ namespace VoxVisio
         private readonly NotifyIcon notifyicon;
         private IContainer component;
         private MainEngine mainEngine;
-        private CommandSingleton commandList;
+        private SettingsSingleton _settingsList;
 
 
         public VoxVisio()
@@ -39,7 +39,7 @@ namespace VoxVisio
             this.Resize += frmMain_Resize;
 
             mainEngine = new MainEngine();
-            commandList = CommandSingleton.Instance();
+            _settingsList = SettingsSingleton.Instance();
             populateList();
         }
 
@@ -52,7 +52,7 @@ namespace VoxVisio
 
         private void populateList()
         {
-            foreach (var VARIABLE in commandList.Commands)
+            foreach (var VARIABLE in _settingsList.Commands)
             {
                 lvCommandList.Items.Add(new ListViewItem(new string[] {VARIABLE.VoiceKeyword, VARIABLE.keyCombo.GetKeyString()}));
             }

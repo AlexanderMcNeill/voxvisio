@@ -19,7 +19,7 @@ namespace VoxVisio
         private ControlContext controlState;
         private EyeXHost eyex;
         private readonly InputSimulator inputSimulator;
-        private CommandSingleton commandList;
+        private SettingsSingleton _settingsList;
         private SharedDataSingleton sharedData;
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
@@ -28,7 +28,7 @@ namespace VoxVisio
         public MainEngine()
         {
             sharedData = SharedDataSingleton.Instance();
-            commandList = CommandSingleton.Instance();
+            _settingsList = SettingsSingleton.Instance();
             inputSimulator = sharedData.inputSimulator;
             
             controlState = new ControlContext();
@@ -100,7 +100,7 @@ namespace VoxVisio
 
         public void loadCommandGrammar()
         {
-            var keywords = commandList.Commands.Select(coms => coms.VoiceKeyword);
+            var keywords = _settingsList.Commands.Select(coms => coms.VoiceKeyword);
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
             sList.Add("start dictation");

@@ -15,25 +15,22 @@ using Newtonsoft.Json.Linq;
 
 namespace VoxVisio
 {
-    public class CommandSingleton
+    public class SettingsSingleton
     {
-        private static CommandSingleton _singleton;
+        private static SettingsSingleton _singleton;
         private List<Command> commands;
-        private readonly List<SpecialCommand> specialCommands;
-        private readonly Hook keyboardHook;
+        public readonly List<SpecialCommand> specialCommands;
+        public readonly Hook keyboardHook;
 
-        protected CommandSingleton()
+        protected SettingsSingleton()
         {
             loadCommands();
             specialCommands = new List<SpecialCommand>();
             keyboardHook = new Hook("Global Action Hook");
-            keyboardHook.KeyDownEvent += keyPressedDown;
+            
         }
 
-        private void keyPressedDown(KeyboardHookEventArgs e)
-        {
-            specialCommands.FirstOrDefault(x => x.triggerKey == e.Key)?.commandToRun.Invoke();
-        }
+        
 
         public void addSpecialCommand(SpecialCommand toAddCommand)
         {
@@ -47,13 +44,13 @@ namespace VoxVisio
             get { return commands; }
         }
 
-        public static CommandSingleton Instance()
+        public static SettingsSingleton Instance()
         {
             // Uses lazy initialization.
             // Note: this is not thread safe.
             if (_singleton == null)
             {
-                _singleton = new CommandSingleton();
+                _singleton = new SettingsSingleton();
             }
 
             return _singleton;
@@ -99,7 +96,7 @@ namespace VoxVisio
 
         private void loadCommands()
         {
-            commands = new List<Command>();
+            var tempList = new List<Command>();
             string fileContents = Properties.Resources.Commands;
             using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
             {
@@ -108,10 +105,11 @@ namespace VoxVisio
 
                 foreach (JObject variable in a)
                 {
-                    commands.Add(new Command((string)variable["word"], (string)variable["keys"], SharedDataSingleton.Instance().inputSimulator));
+                    tempList.Add(new Command((string)variable["word"], (string)variable["keys"], SharedDataSingleton.Instance().inputSimulator));
                 }
             }
-            saveCommands();
+            commands = tempList;
+            //saveCommands();
         }
 
     }
@@ -121,12 +119,12 @@ namespace VoxVisio
         // Key that triggers the command
         public readonly Keys triggerKey;
         // Delegate to the method that needs to be called on trigger
-        public readonly Action commandToRun;
+        public readonly string commandWord;
 
-        public SpecialCommand(Action commandToRun, Keys triggerKey)
+        public SpecialCommand(string commandWord, Keys triggerKey)
         {
             this.triggerKey = triggerKey;
-            this.commandToRun = commandToRun;
+            this.commandWord = commandWord;
         }
         
 
@@ -145,9 +143,11 @@ namespace VoxVisio
 
         public Dictionary<string,string> getDict()
         {
-            Dictionary<string, string> toReturn = new Dictionary<string, string>();
-            toReturn.Add("voice keyword", VoiceKeyword);
-            toReturn.Add("keys", keyCombo.GetKeyString());
+            var toReturn = new Dictionary<string, string>
+            {
+                {"voice keyword", VoiceKeyword},
+                {"keys", keyCombo.GetKeyString()}
+            };
             return toReturn;
         }
     }
@@ -167,18 +167,6 @@ namespace VoxVisio
                 Keys.Add(keyCode);
             }
         }
-        ////public string GetKeys()
-        ////{
-        ////    string toReturn = "";
-        ////    foreach (var item in Keys)
-        ////    {
-        ////        toReturn += KeyTranslater.GetKeyString(item);
-        ////        toReturn += " ";
-        ////    }
-        ////    toReturn.TrimEnd();
-        ////    toReturn.Replace(' ', ',');
-        ////    return toReturn;
-        ////}
 
         public void PressKeys()
         {
