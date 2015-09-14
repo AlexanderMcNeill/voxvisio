@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
 using VoxVisio.Singletons;
+using VoxVisio.Screen_Overlay;
 
 namespace VoxVisio
 {
@@ -22,6 +23,7 @@ namespace VoxVisio
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
+        private StateController stateController;
 
         public MainEngine()
         {
@@ -32,10 +34,13 @@ namespace VoxVisio
             SetupSpeechRecognition();
 
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+
+            stateController = new StateController(controlState);
         }
 
         void sharedData_fixationEvent(Fixation newFixation)
         {
+            stateController.Fixation(newFixation.GetFixationLocation());
             controlState.EyeInput(newFixation);
         }
 

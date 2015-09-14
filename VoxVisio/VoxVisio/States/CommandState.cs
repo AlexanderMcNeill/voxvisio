@@ -79,5 +79,10 @@ namespace VoxVisio
         {
             return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
         }
+
+        public override void Dispose()
+        {
+            //Dispose of the scroll manager
+        }
     }
 }
