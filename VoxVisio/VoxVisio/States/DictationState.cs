@@ -28,7 +28,7 @@ namespace VoxVisio
 
         public void HotspotCallback()
         {
-            context.ControlState = new CommandState(inputsim, context);
+            context.ControlState = new CommandState();
             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
         }
 

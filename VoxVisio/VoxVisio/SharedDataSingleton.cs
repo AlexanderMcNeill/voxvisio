@@ -46,7 +46,7 @@ namespace VoxVisio
 
             //Setting up the forms that need to always be available to the program
             overlayForm = new OverlayForm();
-            zoomForm = new ZoomForm(inputSimulator);
+            zoomForm = new ZoomForm();
 
             overlayForm.Show();
 

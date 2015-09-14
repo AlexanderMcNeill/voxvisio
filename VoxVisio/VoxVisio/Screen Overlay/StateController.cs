@@ -24,9 +24,6 @@ namespace VoxVisio.Screen_Overlay
         public StateController(CommandState state)
         {
             this.state = state;
-            SharedDataSingleton sharedData = SharedDataSingleton.Instance();
-            Timer updateTimer = sharedData.updateTimer;
-            updateTimer.Tick += updateTimer_Tick;
 
         }
 

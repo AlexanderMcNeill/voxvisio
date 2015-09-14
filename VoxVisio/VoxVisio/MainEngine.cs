@@ -18,9 +18,7 @@ namespace VoxVisio
     public class MainEngine
     {
         private ControlState controlState;
-        private readonly InputSimulator inputSimulator;
         private CommandSingleton commandList;
-        private SharedDataSingleton sharedData;
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
@@ -32,7 +30,6 @@ namespace VoxVisio
             controlState = new CommandState();
 
             SetupSpeechRecognition();
-
 
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
         }

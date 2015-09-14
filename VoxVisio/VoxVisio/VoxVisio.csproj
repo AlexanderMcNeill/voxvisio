@@ -90,6 +90,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Screen Overlay\StateController.cs" />
+    <Compile Include="Singletons\EventSingleton.cs" />
+    <Compile Include="Singletons\SharedFormsSingleton.cs" />
+    <Compile Include="Singletons\SharedObjectsSingleton.cs" />
     <Compile Include="States\ControlContext.cs" />
     <Compile Include="States\ControlState.cs" />
     <Compile Include="States\DictationState.cs" />
