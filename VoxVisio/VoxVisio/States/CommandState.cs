@@ -33,6 +33,12 @@ namespace VoxVisio
             scrollManager = new ScrollManager();
         }
 
+        public void ZoomCLick()
+        {
+            KeyCombo keyCombo = commandList.Commands.Find(i => i.VoiceKeyword == "click").keyCombo;
+            zoomForm.startZoomClick(keyCombo);
+        }
+
         public override void VoiceInput(string voiceData)
         {
             //Checking all the cases that change state. This is for testing and will be changed in the future

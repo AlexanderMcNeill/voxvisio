@@ -19,22 +19,25 @@ namespace VoxVisio
     {
         private static CommandSingleton _singleton;
         private List<Command> commands;
-        private List<SpecialCommand> specialCommands;
-        private Hook keyboardHook;
+        private readonly List<SpecialCommand> specialCommands;
+        private readonly Hook keyboardHook;
 
         protected CommandSingleton()
         {
             loadCommands();
+            specialCommands = new List<SpecialCommand>();
             keyboardHook = new Hook("Global Action Hook");
             keyboardHook.KeyDownEvent += keyPressedDown;
         }
 
         private void keyPressedDown(KeyboardHookEventArgs e)
         {
-            var keyPressed = e.Key;
-            string keyRep = keyPressed.ToString();
-            KeysConverter kc = new KeysConverter();
+            specialCommands.FirstOrDefault(x => x.triggerKey == e.Key)?.commandToRun.Invoke();
+        }
 
+        public void addSpecialCommand(SpecialCommand toAddCommand)
+        {
+            specialCommands.Add(toAddCommand);
         }
 
 
@@ -87,6 +90,7 @@ namespace VoxVisio
                 }
                 writer.WriteEndArray();
                 writer.WriteEndObject();
+
                 writer.Close();             
                
             }
@@ -115,15 +119,17 @@ namespace VoxVisio
     public class SpecialCommand
     {
         // Key that triggers the command
-        private Keys triggerKey;
+        public readonly Keys triggerKey;
         // Delegate to the method that needs to be called on trigger
-        private Action commandToRun;
+        public readonly Action commandToRun;
 
         public SpecialCommand(Action commandToRun, Keys triggerKey)
         {
             this.triggerKey = triggerKey;
             this.commandToRun = commandToRun;
         }
+        
+
     }
 
     public class Command
