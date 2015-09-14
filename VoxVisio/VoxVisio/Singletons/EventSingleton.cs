@@ -1,4 +1,5 @@
 ﻿using EyeXFramework;
+using FMUtils.KeyboardHook;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,22 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tobii.EyeX.Framework;
-using VoxVisio.Screen_Overlay;
-using WindowsInput;
 
-namespace VoxVisio
+namespace VoxVisio.Singletons
 {
-
     delegate void FixationEvent(Fixation newFixation);
-    class SharedDataSingleton
+
+    class EventSingleton
     {
-        private static SharedDataSingleton _singleton;
+        private static EventSingleton _singleton;
 
-        //Form for displaying graphics over the screen
-        public readonly OverlayForm overlayForm;
-
-        //Form for the zoom click
-        public readonly ZoomForm zoomForm;
+        //Constants for the timer delays
+        public const int DRAWINTERVAL = 100;
+        public const int UPDATEINTERVAL = 100;
 
         //Shared Timers
         //Shared timer for all objects that want to update themselves
@@ -31,50 +28,53 @@ namespace VoxVisio
         //Timer for objects that want to draw something to the screen
         public readonly Timer drawTimer = new Timer();
 
-        //Constants for the timer delays
-        public const int DRAWINTERVAL = 100;
-        public const int UPDATEINTERVAL = 100;
-        public readonly InputSimulator inputSimulator;
-
-        public event FixationEvent fixationEvent;
 
         private EyeXHost eyex;
+        public event FixationEvent fixationEvent;
 
-        protected SharedDataSingleton()
+        public readonly SpeechRecognitionEngine speechRecognizer;
+
+        public readonly Hook keyboardHook;
+
+        protected EventSingleton()
         {
-            inputSimulator = new InputSimulator();
-
-            //Setting up the forms that need to always be available to the program
-            overlayForm = new OverlayForm();
-            zoomForm = new ZoomForm(inputSimulator);
-
-            overlayForm.Show();
-
             //Setting up and starting the timers
             updateTimer.Interval = UPDATEINTERVAL;
             updateTimer.Start();
 
             drawTimer.Interval = DRAWINTERVAL;
-            drawTimer.Tick += drawTimer_Tick;
             drawTimer.Start();
 
-            fixationEvent += SharedDataSingleton_fixationEvent;
+            keyboardHook = new Hook("Global Action Hook");
+
+            //speechRecognizer = new SpeechRecognitionEngine();
+            SetupSpeechRecognition();
+
 
             //Instantiating and starting the eye tracker host
             eyex = new EyeXHost();
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp));
             eyex.Start();
         }
-
-        void SharedDataSingleton_fixationEvent(Fixation newFixation)
+        private void SetupSpeechRecognition()
         {
-            //throw new NotImplementedException();
+        }
+        public static EventSingleton Instance()
+        {
+            // Uses lazy initialization.
+            // Note: this is not thread safe.
+            if (_singleton == null)
+            {
+                _singleton = new EventSingleton();
+            }
+
+            return _singleton;
         }
 
-        public Fixation CreateFixation(FixationDataEventType t, int x, int y, double timeStamp)
+        private Fixation CreateFixation(FixationDataEventType fixationDataEventType, int x, int y, double timeStamp)
         {
             Fixation fx = null;
-            switch (t)
+            switch (fixationDataEventType)
             {
                 case FixationDataEventType.Begin:
                     fx = new Fixation(new Point(x, y), eFixationPhase.start);
@@ -88,23 +88,5 @@ namespace VoxVisio
             }
             return fx;
         }
-
-        void drawTimer_Tick(object sender, EventArgs e)
-        {
-            overlayForm.DrawOverlays();
-        }
-
-        public static SharedDataSingleton Instance()
-        {
-            // Uses lazy initialization.
-            // Note: this is not thread safe.
-            if (_singleton == null)
-            {
-                _singleton = new SharedDataSingleton();
-            }
-
-            return _singleton;
-        }
- 
     }
 }

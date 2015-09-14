@@ -89,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Screen Overlay\StateController.cs" />
     <Compile Include="States\ControlContext.cs" />
     <Compile Include="States\ControlState.cs" />
     <Compile Include="States\DictationState.cs" />
