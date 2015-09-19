@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
 using VoxVisio.Singletons;
+using VoxVisio.Screen_Overlay;
 
 namespace VoxVisio
 {
@@ -21,9 +22,11 @@ namespace VoxVisio
         private readonly InputSimulator inputSimulator;
         private SettingsSingleton _settingsList;
         private SharedDataSingleton sharedData;
+        private CommandSingleton commandList;
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
+        private StateController stateController;
 
         public MainEngine()
         {

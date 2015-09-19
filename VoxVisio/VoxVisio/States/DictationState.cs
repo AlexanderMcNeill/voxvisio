@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using VoxVisio.Screen_Overlay;
+using VoxVisio.Singletons;
 using WindowsInput;
 
 namespace VoxVisio
@@ -9,14 +10,9 @@ namespace VoxVisio
     {
 
         private InputSimulator inputsim;
-        private Hotspot closeHotspot;
-        private ControlContext context;
-        public DictationState(InputSimulator inputsim, ControlContext context)
+        public DictationState()
         {
-            this.inputsim = inputsim;
-           
-            this.context = context;
-            closeHotspot = new Hotspot(new Rectangle(0, 0, 250, 250), HotspotCallback);
+            this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
 
             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
         }
@@ -26,15 +22,14 @@ namespace VoxVisio
             
         }
 
-        public void HotspotCallback()
-        {
-            context.ControlState = new CommandState(inputsim, context);
-            inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
-        }
-
         public override void EyeInput(IFixationData fixation)
         {
-            closeHotspot.update(fixation.GetFixationLocation());
+
+        }
+
+        public override void Dispose()
+        {
+             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsInput;
 using VoxVisio.Properties;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -34,10 +35,9 @@ namespace VoxVisio.Screen_Overlay
 
         public ScrollManager()
         {
-            SharedDataSingleton sharedData = SharedDataSingleton.Instance();
-            overlayForm = sharedData.overlayForm;
-            inputSimulator = sharedData.inputSimulator;
-            sharedData.updateTimer.Tick += updateTimer_Tick;
+            overlayForm = SharedFormsSingleton.Instance().overlayForm;;
+            inputSimulator = SharedObjectsSingleton.Instance().inputSimulator;
+            EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
 
             scrollState = eScrollState.NOSCROLL;
 

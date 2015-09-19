@@ -14,7 +14,7 @@ namespace VoxVisio.Singletons
 {
     delegate void FixationEvent(Fixation newFixation);
 
-    class EventSingleton
+    class EventSingleton : IDisposable
     {
         private static EventSingleton _singleton;
 
@@ -50,12 +50,19 @@ namespace VoxVisio.Singletons
             //speechRecognizer = new SpeechRecognitionEngine();
             SetupSpeechRecognition();
 
+            fixationEvent += EventSingleton_fixationEvent;
 
             //Instantiating and starting the eye tracker host
             eyex = new EyeXHost();
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp));
             eyex.Start();
         }
+
+        void EventSingleton_fixationEvent(Fixation newFixation)
+        {
+            //throw new NotImplementedException();
+        }
+
         private void SetupSpeechRecognition()
         {
         }
@@ -87,6 +94,12 @@ namespace VoxVisio.Singletons
                     break;
             }
             return fx;
+        }
+
+        public void Dispose()
+        {
+            eyex.Dispose();
+            //speechRecognizer.Dispose();
         }
     }
 }

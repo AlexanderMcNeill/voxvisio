@@ -9,6 +9,7 @@ using WindowsInput.Native;
 using FMUtils.KeyboardHook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using VoxVisio.Singletons;
 
 // KeysConverter
 // Keys <=> Cast VirtualKeyCode
@@ -106,6 +107,9 @@ namespace VoxVisio
                 foreach (JObject variable in a)
                 {
                     tempList.Add(new Command((string)variable["word"], (string)variable["keys"], SharedDataSingleton.Instance().inputSimulator));
+=======
+                    commands.Add(new Command((string)variable["word"], (string)variable["keys"], SharedObjectsSingleton.Instance().inputSimulator));
+>>>>>>> alex
                 }
             }
             commands = tempList;

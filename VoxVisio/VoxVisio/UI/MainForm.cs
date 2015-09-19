@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using EyeXFramework;
 using VoxVisio.Properties;
 using VoxVisio.UI;
+using VoxVisio.Singletons;
 
 namespace VoxVisio
 {
@@ -46,7 +47,14 @@ namespace VoxVisio
         private void btnExit_Click(object sender, EventArgs e)
         {
             mainEngine.close();
+
             Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            EventSingleton.Instance().Dispose();
         }
     }
 
