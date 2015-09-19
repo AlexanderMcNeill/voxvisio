@@ -19,10 +19,13 @@ namespace VoxVisio
     public class MainEngine
     {
         private ControlState controlState;
+<<<<<<< HEAD
         private readonly InputSimulator inputSimulator;
         private SettingsSingleton _settingsList;
         private SharedDataSingleton sharedData;
+=======
         private CommandSingleton commandList;
+>>>>>>> alex
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
@@ -36,12 +39,14 @@ namespace VoxVisio
 
             SetupSpeechRecognition();
 
-
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+
+            stateController = new StateController(controlState);
         }
 
         void sharedData_fixationEvent(Fixation newFixation)
         {
+            stateController.Fixation(newFixation.GetFixationLocation());
             controlState.EyeInput(newFixation);
         }
 

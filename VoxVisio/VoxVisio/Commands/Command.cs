@@ -106,6 +106,7 @@ namespace VoxVisio
 
                 foreach (JObject variable in a)
                 {
+<<<<<<< HEAD
                     tempList.Add(new Command((string)variable["word"], (string)variable["keys"], SharedDataSingleton.Instance().inputSimulator));
 =======
                     commands.Add(new Command((string)variable["word"], (string)variable["keys"], SharedObjectsSingleton.Instance().inputSimulator));
