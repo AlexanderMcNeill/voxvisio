@@ -68,6 +68,7 @@ namespace VoxVisio.Singletons
                     writer.WriteStartObject();
                     foreach (var dictItem in dict)
                     {
+                        
                         writer.WritePropertyName(dictItem.Key);
                         writer.WriteValue(dictItem.Value);
                     }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WindowsInput;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.Tests
 {
@@ -25,11 +26,11 @@ namespace VoxVisio.Tests
         {
             SettingsSingleton cs = SettingsSingleton.Instance();
             SettingsSingleton cs2 = SettingsSingleton.Instance();
-            List<Command> commands = new List<Command>();
-            commands.Add(new Command("open", "enter", new InputSimulator()));
+            List<VoiceCommand> commands = new List<VoiceCommand>();
+            commands.Add(new VoiceCommand("open", "enter", new InputSimulator()));
             cs.SetCommands(commands);
             Assert.AreEqual(cs.Commands,cs2.Commands);
-            commands.Add(new Command("click", "m1", new InputSimulator()));
+            commands.Add(new VoiceCommand("click", "m1", new InputSimulator()));
             Assert.AreEqual(cs.Commands.Count, 2);
             Assert.AreEqual(cs2.Commands.Count, 2);
 

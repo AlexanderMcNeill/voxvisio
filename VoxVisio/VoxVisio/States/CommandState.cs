@@ -27,7 +27,7 @@ namespace VoxVisio
 
             scrollManager = new ScrollManager();
             _settingsList.keyboardHook.KeyDownEvent += keyPressedDown;
-            _settingsList.specialCommands.Add(new SpecialCommand("click", Keys.F12));
+            _settingsList.specialCommands.Add(new KeyPressCommand("click", Keys.F12));
 
         }
         private void keyPressedDown(KeyboardHookEventArgs e)

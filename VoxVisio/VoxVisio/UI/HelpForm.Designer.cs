@@ -47,17 +47,17 @@
             this.lvCommandList.TabIndex = 0;
             this.lvCommandList.UseCompatibleStateImageBehavior = false;
             // 
-            // Command
+            // VoiceCommand
             // 
             this.Command.DisplayIndex = 1;
             this.Command.Tag = "1";
-            this.Command.Text = "Command";
+            this.Command.Text = "VoiceCommand";
             // 
             // Action
             // 
             this.Action.DisplayIndex = 0;
             this.Action.Tag = "1";
-            this.Action.Text = "Command";
+            this.Action.Text = "VoiceCommand";
             // 
             // label1
             // 

@@ -1,126 +1,120 @@
 ﻿{
-    "command": [
-      {
-        "word": "click",
-        "keys": "LButton"
-      },
-      {
-        "word": "double click",
-        "keys": "LButton,LButton"
-      },
-      {
-        "word": "right Click",
-        "keys": "RButton"
-      },
-      {
-        "word": "help",
-        "keys": "F1"
-      },
-      {
-        "word": "kill",
-        "keys": "Menu,F4"
-      },
-	    {
-        "word": "new folder",
-        "keys": "ControlKey,Shift,N"
-      },
-	  {
-        "word": "properties",
-        "keys": "Menu,LButton,LButton"
-      },
-	  {
-        "word": "delete item",
-        "keys": "LButton,Delete"
-      },
-	  	  {
-        "word": "exterminate",
-        "keys": "LButton,Delete"
-      },
-	  {
-        "word": "start",
-        "keys": "LWin"
-      },
-	  {
-        "word": "show desktop",
-        "keys": "LWin,D"
-      },
-	  	  {
-        "word": "my computer",
-        "keys": "LWin,E"
-      },
-	  	  {
-        "word": "lock computer",
-        "keys": "LWin,L"
-      },
-      {
-        "word": "open",
-        "keys": "ControlKey,O"
-      },
-	  {
-        "word": "Enter",
-        "keys": "Enter"
-      },
-      {
-        "word": "switch app",
-        "keys": "Menu,Tab"
-      },
-      {
-        "word": "find",
-        "keys": "ControlKey,F"
-      },
-      {
-        "word": "snap left",
-        "keys": "LWin,Left"
-      },
-      {
-        "word": "snap right",
-        "keys": "LWin,Right"
-      },
-      {
-        "word": "copy",
-        "keys": "ControlKey,C"
-      },
-      {
-        "word": "paste",
-        "keys": "ControlKey,V"
-      },
-      {
-        "word": "cut",
-        "keys": "ControlKey,X"
-      },
-      {
-        "word": "select all",
-        "keys": "ControlKey,A"
-      },
-      {
-        "word": "print",
-        "keys": "ControlKey,P"
-      },
-      {
-        "word": "minimize",
-        "keys": "LWin,Down"
-      },
-      {
-        "word": "maximize",
-        "keys": "LWin,Up"
-      },
-      {
-        "word": "zoom in",
-        "keys": "LWin,Oemplus"
-      },
-      {
-        "word": "zoom out",
-        "keys": "LWin,Oemplus"
-      },
-	  {
-        "word": "full zoom out",
-        "keys": "LWin,Escape"
-      }
-    ],
-	"specialcommands" :  [
-		{
-			"commandkey" : "Left"
-		}
-	]
-  
+  "voice command" : [
+    {
+      "voice keyword": "click",
+      "keys": "LButton"
+    },
+    {
+      "voice keyword": "double click",
+      "keys": "LButton, LButton"
+    },
+    {
+      "voice keyword": "right Click",
+      "keys": "RButton"
+    },
+    {
+      "voice keyword": "help",
+      "keys": "F1"
+    },
+    {
+      "voice keyword": "kill",
+      "keys": "Menu, F4"
+    },
+    {
+      "voice keyword": "new folder",
+      "keys": "ControlKey, Shift+None, N"
+    },
+    {
+      "voice keyword": "properties",
+      "keys": "Menu, LButton, LButton"
+    },
+    {
+      "voice keyword": "delete item",
+      "keys": "LButton, Del"
+    },
+    {
+      "voice keyword": "exterminate",
+      "keys": "LButton, Del"
+    },
+    {
+      "voice keyword": "start",
+      "keys": "LWin"
+    },
+    {
+      "voice keyword": "show desktop",
+      "keys": "LWin, D"
+    },
+    {
+      "voice keyword": "my computer",
+      "keys": "LWin, E"
+    },
+    {
+      "voice keyword": "lock computer",
+      "keys": "LWin, L"
+    },
+    {
+      "voice keyword": "open",
+      "keys": "ControlKey, O"
+    },
+    {
+      "voice keyword": "Enter",
+      "keys": "Enter"
+    },
+    {
+      "voice keyword": "switch app",
+      "keys": "Menu, Tab"
+    },
+    {
+      "voice keyword": "find",
+      "keys": "ControlKey, F"
+    },
+    {
+      "voice keyword": "snap left",
+      "keys": "LWin, Left"
+    },
+    {
+      "voice keyword": "snap right",
+      "keys": "LWin, Right"
+    },
+    {
+      "voice keyword": "copy",
+      "keys": "ControlKey, C"
+    },
+    {
+      "voice keyword": "paste",
+      "keys": "ControlKey, V"
+    },
+    {
+      "voice keyword": "cut",
+      "keys": "ControlKey, X"
+    },
+    {
+      "voice keyword": "select all",
+      "keys": "ControlKey, A"
+    },
+    {
+      "voice keyword": "print",
+      "keys": "ControlKey, P"
+    },
+    {
+      "voice keyword": "minimize",
+      "keys": "LWin, Down"
+    },
+    {
+      "voice keyword": "maximize",
+      "keys": "LWin, Up"
+    },
+    {
+      "voice keyword": "zoom in",
+      "keys": "LWin, Oemplus"
+    },
+    {
+      "voice keyword": "zoom out",
+      "keys": "LWin, Oemplus"
+    },
+    {
+      "voice keyword": "full zoom out",
+      "keys": "LWin, Escape"
+    }
+  ]
 }
