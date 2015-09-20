@@ -31,9 +31,7 @@ namespace VoxVisio.Singletons
 
         private EyeXHost eyex;
         public event FixationEvent fixationEvent;
-
         public readonly SpeechRecognitionEngine speechRecognizer;
-
         public readonly Hook keyboardHook;
 
         protected EventSingleton()
