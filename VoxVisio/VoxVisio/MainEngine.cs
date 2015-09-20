@@ -7,10 +7,6 @@ using WindowsInput;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
 using System.Speech.Recognition;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using VoxVisio.Properties;
 using VoxVisio.Singletons;
 using VoxVisio.Screen_Overlay;
 
@@ -19,13 +15,9 @@ namespace VoxVisio
     public class MainEngine
     {
         private ControlState controlState;
-<<<<<<< HEAD
         private readonly InputSimulator inputSimulator;
         private SettingsSingleton _settingsList;
         private SharedDataSingleton sharedData;
-=======
-        private CommandSingleton commandList;
->>>>>>> alex
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
@@ -34,13 +26,9 @@ namespace VoxVisio
         public MainEngine()
         {
             _settingsList = SettingsSingleton.Instance();
-
             controlState = new CommandState();
-
             SetupSpeechRecognition();
-
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
-
             stateController = new StateController(controlState);
         }
 
@@ -57,11 +45,7 @@ namespace VoxVisio
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
             dictationGrammar.Name = "dictation";
-
-            
-            
             commandGrammar.Name = "command";
-
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             speechRecognizer.RequestRecognizerUpdate();
             speechRecognizer.LoadGrammar(dictationGrammar);
@@ -73,7 +57,6 @@ namespace VoxVisio
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
-
             if (controlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
             {
                 controlState.VoiceInput(e.Result.Text);
