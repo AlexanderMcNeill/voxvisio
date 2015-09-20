@@ -144,6 +144,11 @@
       "voice keyword": "full zoom out",
       "keys": "LWin, Escape",
       "command type": "voice command"
+    },
+    {
+      "trigger key": "F12",
+      "command word": "click",
+      "command type": "key press trigger"
     }
   ]
 }

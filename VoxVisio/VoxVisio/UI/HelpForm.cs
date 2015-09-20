@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
 
@@ -17,7 +18,9 @@ namespace VoxVisio.UI
 
         private void PopulateCommandList()
         {
-            foreach (VoiceCommand c in commandList.Commands)
+
+            //Currently only displays voice commands
+            foreach (VoiceCommand c in commandList.Commands.OfType<VoiceCommand>())
             {
                 lvCommandList.Items.Add(new ListViewItem(new string[] {c.VoiceKeyword, c.keyCombo.GetKeyString()}));
             }

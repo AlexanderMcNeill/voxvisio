@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
@@ -27,7 +25,8 @@ namespace VoxVisio
 
             scrollManager = new ScrollManager();
             _settingsList.keyboardHook.KeyDownEvent += keyPressedDown;
-            _settingsList.specialCommands.Add(new KeyPressCommand("click", Keys.F12));
+           // _settingsList.Commands.Add(new KeyPressCommand("click", Keys.F12));
+            //_settingsList.saveCommands();
 
         }
         private void keyPressedDown(KeyboardHookEventArgs e)

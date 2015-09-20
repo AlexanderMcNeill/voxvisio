@@ -20,7 +20,6 @@ namespace VoxVisio.Singletons
             loadCommands();
             specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
-            saveCommands();
         }
         public static SettingsSingleton Instance()
         {
@@ -36,7 +35,7 @@ namespace VoxVisio.Singletons
 
         public void addSpecialCommand(KeyPressCommand toAddCommand)
         {
-            specialCommands.Add(toAddCommand);
+            commands.Add(toAddCommand);
         }
 
         // A list of all currently loaded commands
@@ -50,7 +49,7 @@ namespace VoxVisio.Singletons
         {
             this.commands = commands;
         }
-        private void saveCommands()
+        public void saveCommands()
         {
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
@@ -82,7 +81,7 @@ namespace VoxVisio.Singletons
             {
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 JArray a = (JArray) o["commands"];
-                tempList.AddRange(from JObject variable in a select new VoiceCommand(variable));
+                tempList.AddRange(from JObject variable in a select CommandFactory.CreateCommandFromJson(variable));
             }
             commands = tempList;
         }

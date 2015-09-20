@@ -196,7 +196,6 @@ namespace VoxVisio
                 }
             }
         }
-
         private void ReleaseHeldKeys()
         {
             foreach (VirtualKeyCode virtualKeyCode in Keys)
