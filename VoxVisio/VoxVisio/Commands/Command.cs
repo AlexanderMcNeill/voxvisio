@@ -66,6 +66,7 @@ namespace VoxVisio
             JObject toReturn = new JObject();
             toReturn["trigger key"] = KeyTranslater.GetKeyString((VirtualKeyCode)triggerKey);
             toReturn["command word"] = commandWord;
+            toReturn["command type"] = GetCommandType();
             return toReturn;
         }
 
@@ -78,6 +79,24 @@ namespace VoxVisio
         public string GetCommandType()
         {
             return "key press trigger";
+        }
+    }
+
+    public class CommandFactory
+    {
+        public static Command CreateCommandFromJson(JObject jsonData)
+        {
+            Command commandObject = null;
+            switch ((string)jsonData["command type"])
+            {
+                case "key press trigger":
+                    commandObject = new KeyPressCommand(jsonData);
+                    break;
+                case "voice command":
+                    commandObject = new VoiceCommand(jsonData);
+                    break;
+            }
+            return commandObject;
         }
     }
 
@@ -114,7 +133,7 @@ namespace VoxVisio
 
         public void LoadFromJson(JObject jsonData)
         {
-            this.VoiceKeyword = (string)jsonData["word"];
+            this.VoiceKeyword = (string)jsonData["voice keyword"];
             this.keyCombo = new KeyCombo((string)jsonData["keys"], SharedDataSingleton.Instance().inputSimulator);
         }
 
@@ -123,6 +142,7 @@ namespace VoxVisio
             JObject toReturn = new JObject();
             toReturn["voice keyword"] = VoiceKeyword;
             toReturn["keys"] = keyCombo.GetKeyString();
+            toReturn["command type"] = GetCommandType();
             return toReturn;
         }
 

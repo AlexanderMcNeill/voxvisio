@@ -42,8 +42,9 @@ namespace VoxVisio
 
         public void ZoomCLick()
         {
-            KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == "click").keyCombo;
-            zoomForm.startZoomClick(keyCombo);
+            Action commandAction = new Action(_settingsList.Commands.Find(i => i.GetKeyWord() == "click").RunCommand);
+            //KeyCombo keyCombo = _settingsList.Commands.Find(i => i.GetKeyWord() == "click").RunComman;
+            //zoomForm.startZoomClick(keyCombo);
         }
 
         public override void VoiceInput(string voiceData)
@@ -66,15 +67,15 @@ namespace VoxVisio
             else
             {
                 //Firing the command
-                KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
+                Command commandToFire = _settingsList.Commands.Find(i => i.GetKeyWord() == voiceData);
 
-                if (keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.LBUTTON) || keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.RBUTTON))
+                if (commandToFire.GetKeyWord() == "LButton" || commandToFire.GetKeyWord() == "RButton")
                 {
-                    zoomForm.startZoomClick(keyCombo);
+                    zoomForm.startZoomClick(commandToFire);
                 }
                 else
                 {
-                    keyCombo.PressKeys();
+                    commandToFire.RunCommand();
                 }
             }
         }

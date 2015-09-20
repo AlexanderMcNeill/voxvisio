@@ -23,7 +23,7 @@ namespace VoxVisio
         private Graphics formGraphics;
         private int zoomCounter;
         private readonly InputSimulator inputSim;
-        private KeyCombo inputKeys;
+        private Command inputCommand;
         private Point fx;
         private Rectangle zoomRect;
         private Point formOffset;
@@ -49,7 +49,7 @@ namespace VoxVisio
             formGraphics.DrawImage(bmp, zoomRect.X, zoomRect.Y, zoomRect.Width, zoomRect.Height);
         }
 
-        public void startZoomClick(KeyCombo inputKeys)
+        public void startZoomClick(Command inputCommand)
         {
                 
                 int xPos = MousePosition.X - (Width / 2);
@@ -69,7 +69,7 @@ namespace VoxVisio
 
                 zoomCounter = 0;
 
-                this.inputKeys = inputKeys;
+                this.inputCommand = inputCommand;
 
                 this.Visible = true;
                 DrawScreen();
@@ -145,7 +145,7 @@ namespace VoxVisio
             double mouseYPos = convertYToAbsolute(mousePos.Y);
             inputSim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
-            inputKeys.PressKeys();
+            inputCommand.RunCommand();
         }
 
        

@@ -71,7 +71,7 @@ namespace VoxVisio
 
         public void loadCommandGrammar()
         {
-            var keywords = _settingsList.Commands.Select(coms => coms.VoiceKeyword);
+            var keywords = _settingsList.Commands.Select(coms => coms.GetKeyWord());
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
             sList.Add("start dictation");

@@ -1,120 +1,149 @@
 ﻿{
-  "voice command" : [
+  "commands": [
     {
       "voice keyword": "click",
-      "keys": "LButton"
+      "keys": "LButton",
+      "command type": "voice command"
     },
     {
       "voice keyword": "double click",
-      "keys": "LButton, LButton"
+      "keys": "LButton, LButton",
+      "command type": "voice command"
     },
     {
       "voice keyword": "right Click",
-      "keys": "RButton"
+      "keys": "RButton",
+      "command type": "voice command"
     },
     {
       "voice keyword": "help",
-      "keys": "F1"
+      "keys": "F1",
+      "command type": "voice command"
     },
     {
       "voice keyword": "kill",
-      "keys": "Menu, F4"
+      "keys": "Menu, F4",
+      "command type": "voice command"
     },
     {
       "voice keyword": "new folder",
-      "keys": "ControlKey, Shift+None, N"
+      "keys": "ControlKey, Shift+None, N",
+      "command type": "voice command"
     },
     {
       "voice keyword": "properties",
-      "keys": "Menu, LButton, LButton"
+      "keys": "Menu, LButton, LButton",
+      "command type": "voice command"
     },
     {
       "voice keyword": "delete item",
-      "keys": "LButton, Del"
+      "keys": "LButton, Del",
+      "command type": "voice command"
     },
     {
       "voice keyword": "exterminate",
-      "keys": "LButton, Del"
+      "keys": "LButton, Del",
+      "command type": "voice command"
     },
     {
       "voice keyword": "start",
-      "keys": "LWin"
+      "keys": "LWin",
+      "command type": "voice command"
     },
     {
       "voice keyword": "show desktop",
-      "keys": "LWin, D"
+      "keys": "LWin, D",
+      "command type": "voice command"
     },
     {
       "voice keyword": "my computer",
-      "keys": "LWin, E"
+      "keys": "LWin, E",
+      "command type": "voice command"
     },
     {
       "voice keyword": "lock computer",
-      "keys": "LWin, L"
+      "keys": "LWin, L",
+      "command type": "voice command"
     },
     {
       "voice keyword": "open",
-      "keys": "ControlKey, O"
+      "keys": "ControlKey, O",
+      "command type": "voice command"
     },
     {
       "voice keyword": "Enter",
-      "keys": "Enter"
+      "keys": "Enter",
+      "command type": "voice command"
     },
     {
       "voice keyword": "switch app",
-      "keys": "Menu, Tab"
+      "keys": "Menu, Tab",
+      "command type": "voice command"
     },
     {
       "voice keyword": "find",
-      "keys": "ControlKey, F"
+      "keys": "ControlKey, F",
+      "command type": "voice command"
     },
     {
       "voice keyword": "snap left",
-      "keys": "LWin, Left"
+      "keys": "LWin, Left",
+      "command type": "voice command"
     },
     {
       "voice keyword": "snap right",
-      "keys": "LWin, Right"
+      "keys": "LWin, Right",
+      "command type": "voice command"
     },
     {
       "voice keyword": "copy",
-      "keys": "ControlKey, C"
+      "keys": "ControlKey, C",
+      "command type": "voice command"
     },
     {
       "voice keyword": "paste",
-      "keys": "ControlKey, V"
+      "keys": "ControlKey, V",
+      "command type": "voice command"
     },
     {
       "voice keyword": "cut",
-      "keys": "ControlKey, X"
+      "keys": "ControlKey, X",
+      "command type": "voice command"
     },
     {
       "voice keyword": "select all",
-      "keys": "ControlKey, A"
+      "keys": "ControlKey, A",
+      "command type": "voice command"
     },
     {
       "voice keyword": "print",
-      "keys": "ControlKey, P"
+      "keys": "ControlKey, P",
+      "command type": "voice command"
     },
     {
       "voice keyword": "minimize",
-      "keys": "LWin, Down"
+      "keys": "LWin, Down",
+      "command type": "voice command"
     },
     {
       "voice keyword": "maximize",
-      "keys": "LWin, Up"
+      "keys": "LWin, Up",
+      "command type": "voice command"
     },
     {
       "voice keyword": "zoom in",
-      "keys": "LWin, Oemplus"
+      "keys": "LWin, Oemplus",
+      "command type": "voice command"
     },
     {
       "voice keyword": "zoom out",
-      "keys": "LWin, Oemplus"
+      "keys": "LWin, Oemplus",
+      "command type": "voice command"
     },
     {
       "voice keyword": "full zoom out",
-      "keys": "LWin, Escape"
+      "keys": "LWin, Escape",
+      "command type": "voice command"
     }
   ]
 }

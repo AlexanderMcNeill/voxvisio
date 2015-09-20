@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FMUtils.KeyboardHook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,7 +11,7 @@ namespace VoxVisio.Singletons
     public class SettingsSingleton
     {
         private static SettingsSingleton _singleton;
-        private List<VoiceCommand> commands;
+        private List<Command> commands;
         public readonly List<KeyPressCommand> specialCommands;
         public readonly Hook keyboardHook;
 
@@ -19,7 +20,7 @@ namespace VoxVisio.Singletons
             loadCommands();
             specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
-            //saveCommands();
+            saveCommands();
         }
         public static SettingsSingleton Instance()
         {
@@ -39,13 +40,13 @@ namespace VoxVisio.Singletons
         }
 
         // A list of all currently loaded commands
-        public List<VoiceCommand> Commands
+        public List<Command> Commands
         {
             get { return commands; }
         }
         
 
-        public void SetCommands(List<VoiceCommand> commands)
+        public void SetCommands(List<Command> commands)
         {
             this.commands = commands;
         }
@@ -60,19 +61,11 @@ namespace VoxVisio.Singletons
                 writer.Formatting = Formatting.Indented;
 
                 writer.WriteStartObject();
-                writer.WritePropertyName("voice command");
+                writer.WritePropertyName("commands");
                 writer.WriteStartArray();
                 foreach (var item in commands)
                 {
-                    var dict = item.getDict();
-                    writer.WriteStartObject();
-                    foreach (var dictItem in dict)
-                    {
-                        
-                        writer.WritePropertyName(dictItem.Key);
-                        writer.WriteValue(dictItem.Value);
-                    }
-                    writer.WriteEndObject();
+                    item.SaveToJson().WriteTo(writer);
                 }
                 writer.WriteEndArray();
                 writer.WriteEndObject();
@@ -81,22 +74,15 @@ namespace VoxVisio.Singletons
             }
         }
 
-
         private void loadCommands()
         {
-            var tempList = new List<VoiceCommand>();
+            var tempList = new List<Command>();
             string fileContents = Properties.Resources.Commands;
             using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
             {
-                
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-
-                JArray a = (JArray) o["voice command"];
-
-                foreach (JObject variable in a)
-                {
-                    tempList.Add(new VoiceCommand(variable));
-                }
+                JArray a = (JArray) o["commands"];
+                tempList.AddRange(from JObject variable in a select new VoiceCommand(variable));
             }
             commands = tempList;
         }
