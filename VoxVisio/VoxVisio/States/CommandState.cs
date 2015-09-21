@@ -32,7 +32,8 @@ namespace VoxVisio
         private void keyPressedDown(KeyboardHookEventArgs e)
         {
             // Gets the associated command word from the pressed key
-            var firstOrDefault = _settingsList.specialCommands.FirstOrDefault(x => x.triggerKey == e.Key);
+            //var firstOrDefault = _settingsList.Commands.FirstOrDefault(x => x.triggerKey == e.Key);
+            var firstOrDefault =  _settingsList.Commands.OfType<KeyPressCommand>().FirstOrDefault(x => x.triggerKey == e.Key);
             if (firstOrDefault == null) return;
             string commandWord = firstOrDefault.commandWord;
             //Call the voice input method with the assicated command word
