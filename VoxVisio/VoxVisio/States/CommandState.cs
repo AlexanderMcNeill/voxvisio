@@ -39,13 +39,6 @@ namespace VoxVisio
             VoiceInput(commandWord);
         }
 
-        public void ZoomCLick()
-        {
-            Action commandAction = new Action(_settingsList.Commands.Find(i => i.GetKeyWord() == "click").RunCommand);
-            //KeyCombo keyCombo = _settingsList.Commands.Find(i => i.GetKeyWord() == "click").RunComman;
-            //zoomForm.startZoomClick(keyCombo);
-        }
-
         public override void VoiceInput(string voiceData)
         {
             //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
@@ -68,7 +61,7 @@ namespace VoxVisio
                 //Firing the command
                 Command commandToFire = _settingsList.Commands.Find(i => i.GetKeyWord() == voiceData);
 
-                if (commandToFire.GetKeyWord() == "LButton" || commandToFire.GetKeyWord() == "RButton")
+                if (commandToFire.GetKeyWord().Contains("LButton") || commandToFire.GetKeyWord().Contains("RButton"))
                 {
                     zoomForm.startZoomClick(commandToFire);
                 }
