@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
@@ -19,25 +21,38 @@ namespace VoxVisio
 
         public CommandState()
         {
-            inputsim = SharedObjectsSingleton.Instance().inputSimulator;
+<<<<<<< HEAD
+            _finishedFixations = new List<IFixationData>();
+            _currentFixation = null;
+            this.inputsim = inputsim;
             _settingsList = SettingsSingleton.Instance();
+            this.context = context;
+            this.zoomForm = SharedDataSingleton.Instance().zoomForm;
+=======
+            inputsim = SharedObjectsSingleton.Instance().inputSimulator;
+            commandList = CommandSingleton.Instance();
             zoomForm = SharedFormsSingleton.Instance().zoomForm;
+>>>>>>> alex
 
             scrollManager = new ScrollManager();
             _settingsList.keyboardHook.KeyDownEvent += keyPressedDown;
-           // _settingsList.Commands.Add(new KeyPressCommand("click", Keys.F12));
-            //_settingsList.saveCommands();
+            _settingsList.specialCommands.Add(new SpecialCommand("click", Keys.F12));
 
         }
         private void keyPressedDown(KeyboardHookEventArgs e)
         {
             // Gets the associated command word from the pressed key
-            //var firstOrDefault = _settingsList.Commands.FirstOrDefault(x => x.triggerKey == e.Key);
-            var firstOrDefault =  _settingsList.Commands.OfType<KeyPressCommand>().FirstOrDefault(x => x.triggerKey == e.Key);
+            var firstOrDefault = _settingsList.specialCommands.FirstOrDefault(x => x.triggerKey == e.Key);
             if (firstOrDefault == null) return;
             string commandWord = firstOrDefault.commandWord;
             //Call the voice input method with the assicated command word
             VoiceInput(commandWord);
+        }
+
+        public void ZoomCLick()
+        {
+            KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == "click").keyCombo;
+            zoomForm.startZoomClick(keyCombo);
         }
 
         public override void VoiceInput(string voiceData)
@@ -60,15 +75,15 @@ namespace VoxVisio
             else
             {
                 //Firing the command
-                VoiceCommand commandToFire = _settingsList.Commands.OfType<VoiceCommand>().FirstOrDefault(i => i.GetKeyWord() == voiceData);
+                KeyCombo keyCombo = _settingsList.Commands.Find(i => i.VoiceKeyword == voiceData).keyCombo;
 
-                if (commandToFire.keyCombo.GetKeyString().Contains("LButton") || commandToFire.keyCombo.GetKeyString().Contains("RButton"))
+                if (keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.LBUTTON) || keyCombo.Keys.Contains(WindowsInput.Native.VirtualKeyCode.RBUTTON))
                 {
-                    zoomForm.startZoomClick(commandToFire);
+                    zoomForm.startZoomClick(keyCombo);
                 }
                 else
                 {
-                    commandToFire.RunCommand();
+                    keyCombo.PressKeys();
                 }
             }
         }
@@ -91,11 +106,6 @@ namespace VoxVisio
         private double convertYToAbsolute(int y)
         {
             return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
-        }
-
-        public override void Dispose()
-        {
-            //Dispose of the scroll manager
         }
     }
 }

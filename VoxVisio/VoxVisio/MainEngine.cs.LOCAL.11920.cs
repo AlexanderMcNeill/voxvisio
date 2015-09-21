@@ -7,35 +7,42 @@ using WindowsInput;
 using EyeXFramework;
 using Tobii.EyeX.Framework;
 using System.Speech.Recognition;
-using VoxVisio.Singletons;
-using VoxVisio.Screen_Overlay;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using VoxVisio.Properties;
 
 namespace VoxVisio
 {
     public class MainEngine
     {
-        private ControlState controlState;
+        private ControlContext controlState;
+        private EyeXHost eyex;
         private readonly InputSimulator inputSimulator;
         private SettingsSingleton _settingsList;
         private SharedDataSingleton sharedData;
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
-        private StateController stateController;
 
         public MainEngine()
         {
+            sharedData = SharedDataSingleton.Instance();
             _settingsList = SettingsSingleton.Instance();
-            controlState = new CommandState();
-            SetupSpeechRecognition();
-            EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
-            stateController = new StateController(controlState);
-        }
+            inputSimulator = sharedData.inputSimulator;
+            
+            controlState = new ControlContext();
+            controlState.changedState += StateChanged;
+            controlState.ControlState = new CommandState(inputSimulator, controlState);
+            
+            //System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
 
-        void sharedData_fixationEvent(Fixation newFixation)
-        {
-            stateController.Fixation(newFixation.GetFixationLocation());
-            controlState.EyeInput(newFixation);
+            SetupSpeechRecognition();
+
+            //Instantiating and starting the eye tracker host
+            eyex = new EyeXHost();
+            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
+            eyex.Start();
         }
 
         private void SetupSpeechRecognition()
@@ -45,7 +52,11 @@ namespace VoxVisio
             loadCommandGrammar();
             dictationGrammar = new DictationGrammar();
             dictationGrammar.Name = "dictation";
+
+            
+            
             commandGrammar.Name = "command";
+
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             speechRecognizer.RequestRecognizerUpdate();
             speechRecognizer.LoadGrammar(dictationGrammar);
@@ -55,15 +66,33 @@ namespace VoxVisio
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
         }
 
+
+        public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
+        {
+            Fixation fx = null;
+            switch (t)
+            {
+                case FixationDataEventType.Begin:
+                    fx = new Fixation(new Point(x, y), eFixationPhase.start);
+                    controlState.EyeRequest(fx);
+                    break;
+                case FixationDataEventType.End:
+                    fx = new Fixation(new Point(x,y),eFixationPhase.finished );
+                    controlState.EyeRequest(fx);
+                    break;
+            }
+        }
+
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
-            if (controlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
+
+            if (controlState.ControlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
             {
-                controlState.VoiceInput(e.Result.Text);
+                controlState.VoiceRequest(e.Result.Text);
             }
-            else if (controlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
+            else if (controlState.ControlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
             {
-                controlState.VoiceInput(e.Result.Text);
+                controlState.VoiceRequest(e.Result.Text);
             }
         }
 
@@ -71,7 +100,7 @@ namespace VoxVisio
 
         public void loadCommandGrammar()
         {
-            var keywords = _settingsList.Commands.Select(coms => coms.GetKeyWord());
+            var keywords = _settingsList.Commands.Select(coms => coms.VoiceKeyword);
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
             sList.Add("start dictation");
@@ -81,9 +110,15 @@ namespace VoxVisio
             commandGrammar = new Grammar(gb);
         }
 
+        public void StateChanged()
+        {
+
+        }
+
         internal void close()
         {
             speechRecognizer.Dispose();
+            eyex.Dispose();
         }
     }
 }

@@ -89,7 +89,7 @@ namespace VoxVisio
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(194, 50);
             this.lblInfo.TabIndex = 0;
-            this.lblInfo.Text = "Command Mode";
+            this.lblInfo.Text = "VoiceCommand Mode";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnExit
