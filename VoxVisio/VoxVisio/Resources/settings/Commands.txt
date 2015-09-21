@@ -147,7 +147,7 @@
     },
     {
       "trigger key": "F12",
-      "command word": "click",
+      "command word": "double click",
       "command type": "key press trigger"
     }
   ]

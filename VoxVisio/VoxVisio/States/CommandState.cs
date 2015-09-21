@@ -60,9 +60,9 @@ namespace VoxVisio
             else
             {
                 //Firing the command
-                Command commandToFire = _settingsList.Commands.Find(i => i.GetKeyWord() == voiceData);
+                VoiceCommand commandToFire = _settingsList.Commands.OfType<VoiceCommand>().FirstOrDefault(i => i.GetKeyWord() == voiceData);
 
-                if (commandToFire.GetKeyWord().Contains("LButton") || commandToFire.GetKeyWord().Contains("RButton"))
+                if (commandToFire.keyCombo.GetKeyString().Contains("LButton") || commandToFire.keyCombo.GetKeyString().Contains("RButton"))
                 {
                     zoomForm.startZoomClick(commandToFire);
                 }
