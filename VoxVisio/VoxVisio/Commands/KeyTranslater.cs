@@ -23,7 +23,7 @@ namespace VoxVisio
     }
     public class KeyTranslater
     {
-
+        
         private static KeysConverter kc = new KeysConverter();
 
         public static VirtualKeyCode GetKeyCode(string keyString)

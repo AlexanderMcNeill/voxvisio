@@ -21,13 +21,13 @@
       "command type": "voice command"
     },
     {
-      "voice keyword": "kill",
+      "voice keyword": "close",
       "keys": "Menu, F4",
       "command type": "voice command"
     },
     {
       "voice keyword": "new folder",
-      "keys": "ControlKey, Shift+None, N",
+      "keys": "ControlKey, ShiftKey, N",
       "command type": "voice command"
     },
     {
@@ -37,11 +37,6 @@
     },
     {
       "voice keyword": "delete item",
-      "keys": "LButton, Del",
-      "command type": "voice command"
-    },
-    {
-      "voice keyword": "exterminate",
       "keys": "LButton, Del",
       "command type": "voice command"
     },
@@ -61,13 +56,13 @@
       "command type": "voice command"
     },
     {
-      "voice keyword": "lock computer",
-      "keys": "LWin, L",
-      "command type": "voice command"
-    },
-    {
       "voice keyword": "open",
       "keys": "ControlKey, O",
+      "command type": "voice command"
+    },
+	{
+      "voice keyword": "open item",
+      "keys": "LButton, LButton",
       "command type": "voice command"
     },
     {
@@ -77,7 +72,7 @@
     },
     {
       "voice keyword": "switch app",
-      "keys": "Menu, Tab",
+      "keys": "ControlKey, LWin, Tab",
       "command type": "voice command"
     },
     {
@@ -100,9 +95,19 @@
       "keys": "ControlKey, C",
       "command type": "voice command"
     },
+	{
+      "voice keyword": "copy item",
+      "keys": "LButton, ControlKey, C",
+      "command type": "voice command"
+    },
     {
       "voice keyword": "paste",
       "keys": "ControlKey, V",
+      "command type": "voice command"
+    },
+	    {
+      "voice keyword": "paste item",
+      "keys": "LButton, ControlKey, V",
       "command type": "voice command"
     },
     {
@@ -110,7 +115,12 @@
       "keys": "ControlKey, X",
       "command type": "voice command"
     },
-    {
+	{
+      "voice keyword": "cut item",
+      "keys": "LButton, ControlKey, X",
+      "command type": "voice command"
+    },
+	{
       "voice keyword": "select all",
       "keys": "ControlKey, A",
       "command type": "voice command"
@@ -128,21 +138,6 @@
     {
       "voice keyword": "maximize",
       "keys": "LWin, Up",
-      "command type": "voice command"
-    },
-    {
-      "voice keyword": "zoom in",
-      "keys": "LWin, Oemplus",
-      "command type": "voice command"
-    },
-    {
-      "voice keyword": "zoom out",
-      "keys": "LWin, Oemplus",
-      "command type": "voice command"
-    },
-    {
-      "voice keyword": "full zoom out",
-      "keys": "LWin, Escape",
       "command type": "voice command"
     },
     {

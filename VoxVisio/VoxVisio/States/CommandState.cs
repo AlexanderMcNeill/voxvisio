@@ -56,6 +56,14 @@ namespace VoxVisio
             {
                 scrollManager.Stop();
             }
+            else if (voiceData.Equals("start keyboard"))
+            {
+                System.Diagnostics.Process.Start("C:/Program Files (x86)/OptiKey/OptiKey.exe");
+            }
+            else if (voiceData.Equals("stop keyboard"))
+            {
+                
+            }
             //Running a normal voice command
             else
             {
