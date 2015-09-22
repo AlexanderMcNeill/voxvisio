@@ -16,5 +16,17 @@ namespace VoxVisio.UI
         {
             InitializeComponent();
         }
+
+        private void btnAddCommand_Click(object sender, EventArgs e)
+        {
+            CreateCommandForm newCreateCommandForm = new CreateCommandForm();
+            newCreateCommandForm.ShowDialog();
+
+            if (newCreateCommandForm.DialogResult == DialogResult.OK)
+            {
+                Command newCommand = newCreateCommandForm.Command;
+            }
+            newCreateCommandForm.Dispose();
+        }
     }
 }

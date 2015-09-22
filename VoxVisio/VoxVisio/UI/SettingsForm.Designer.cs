@@ -32,7 +32,9 @@
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
+            this.btnAddCommand = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
+            this.tabGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -48,6 +50,7 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.btnAddCommand);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -75,6 +78,16 @@
             this.tabVoiceRecognition.Text = "Voice Recognition";
             this.tabVoiceRecognition.UseVisualStyleBackColor = true;
             // 
+            // btnAddCommand
+            // 
+            this.btnAddCommand.Location = new System.Drawing.Point(19, 515);
+            this.btnAddCommand.Name = "btnAddCommand";
+            this.btnAddCommand.Size = new System.Drawing.Size(75, 23);
+            this.btnAddCommand.TabIndex = 0;
+            this.btnAddCommand.Text = "Add command";
+            this.btnAddCommand.UseVisualStyleBackColor = true;
+            this.btnAddCommand.Click += new System.EventHandler(this.btnAddCommand_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -84,6 +97,7 @@
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.tabControl1.ResumeLayout(false);
+            this.tabGeneral.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -94,5 +108,6 @@
         private System.Windows.Forms.TabPage tabGeneral;
         private System.Windows.Forms.TabPage tabEyeTracking;
         private System.Windows.Forms.TabPage tabVoiceRecognition;
+        private System.Windows.Forms.Button btnAddCommand;
     }
 }
