@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsInput.Native;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.UI
 {
     public partial class CreateCommandForm : Form
     {
         private Command command;
-        private List<Keys> pressedKeys; 
+        private List<Keys> pressedKeys;
+        private Keys? triggerKey;
         public CreateCommandForm()
         {
             InitializeComponent();
             command = null;
             pressedKeys = new List<Keys>();
+            triggerKey = null;
         }
         public CreateCommandForm(Command command)
         {
@@ -71,16 +74,26 @@ namespace VoxVisio.UI
             switch (checkedButton.Text)
             {
                 case "Voice Command":
-                    
+                    enableSinglePanel(pnlVoiceCommand);
                     break;
                 case "Trigger Key":
-                    
+                    enableSinglePanel(pnlTriggerKey);
+                    cmbxCommandWords.Items.Clear();
+                    SettingsSingleton.Instance().Commands.ForEach(x => cmbxCommandWords.Items.Add(x.GetKeyWord()));
                     break;
                 case "Open Program":
-                   
+                    enableSinglePanel(pnlOpenProgram);
                     break;
-
             }
+        }
+
+        private void enableSinglePanel(Panel toEnablePanel)
+        {
+            foreach (var panel in this.Controls.OfType<Panel>())
+            {
+                panel.Visible = panel == toEnablePanel;
+            }
+            
         }
 
         private void btnAddCommand_Click(object sender, EventArgs e)
@@ -90,15 +103,10 @@ namespace VoxVisio.UI
             switch (checkedButton.Text)
             {
                 case "Voice Command":
-                    string keystrings = "";
-                    pressedKeys.ForEach(x => keystrings += (x).ToString() +" ");
-                    keystrings = keystrings.TrimEnd();
-                    keystrings = keystrings.Replace(" ", ",");
-                    command = new VoiceCommand(txtboxOne.Text, keystrings,SharedDataSingleton.Instance().inputSimulator );
-                    this.DialogResult = DialogResult.OK;
+                    CreateVoiceCommand();
                     break;
                 case "Trigger Key":
-                    
+                    CreateTriggerCommand();
                     break;
                 case "Open Program":
                     
@@ -110,6 +118,34 @@ namespace VoxVisio.UI
             }
             //this.DialogResult = DialogResult.OK;
 
+        }
+
+        private void CreateVoiceCommand()
+        {
+            string keystrings = "";
+            pressedKeys.ForEach(x => keystrings += (x).ToString() + " ");
+            keystrings = keystrings.TrimEnd();
+            keystrings = keystrings.Replace(" ", ",");
+            command = new VoiceCommand(txtboxOne.Text, keystrings, SharedDataSingleton.Instance().inputSimulator);
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void CreateTriggerCommand()
+        {
+            if (string.IsNullOrEmpty(cmbxCommandWords.SelectedText))
+            {
+                MessageBox.Show("You must select a command that is triggered when the key is pressed","Incorrect Input",
+                    MessageBoxButtons.OK);
+                return;
+            }
+            if (triggerKey == null)
+            {
+                MessageBox.Show("You must set a key that triggers the command", "Incorrect Input",
+                   MessageBoxButtons.OK);
+                return;
+            }
+            KeyPressCommand newCommand = new KeyPressCommand(cmbxCommandWords.SelectedText, (Keys) triggerKey);
+            this.DialogResult = DialogResult.OK;
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
@@ -135,7 +171,7 @@ namespace VoxVisio.UI
         {
             txtboxTwo.Text = "";
             pressedKeys.Add(e.KeyCode);
-            pressedKeys.ForEach(x => txtboxTwo.Text += x.ToString());
+            pressedKeys.ForEach(x => txtboxTwo.Text += x.ToString() + ",");
         }
     }
 }
