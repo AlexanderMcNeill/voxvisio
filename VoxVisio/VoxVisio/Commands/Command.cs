@@ -28,6 +28,52 @@ namespace VoxVisio
         string GetCommandType();
     }
 
+    public class OpenProgramCommand : Command
+    {
+        // How to start a program System.Diagnostics.Process.Start("C:/Program Files (x86)/OptiKey/OptiKey.exe");
+        private string ProgramLocation;
+        private string KeyWord;
+
+        public OpenProgramCommand(string programLocation, string KeyWord)
+        {
+            this.ProgramLocation = programLocation;
+            this.KeyWord = KeyWord;
+        }
+
+        public OpenProgramCommand(JObject jsonData)
+        {
+            LoadFromJson(jsonData);
+        }
+
+        public void RunCommand()
+        {
+            System.Diagnostics.Process.Start(ProgramLocation);
+        }
+
+        public void LoadFromJson(JObject jsonData)
+        {
+            ProgramLocation = (string) jsonData["program location"];
+            KeyWord =  (string)jsonData["KeyWord"];
+        }
+
+        public JObject SaveToJson()
+        {
+            JObject toReturn = new JObject();
+            toReturn["program location"] = ProgramLocation;
+            toReturn["KeyWord"] = KeyWord;
+            return toReturn;
+        }
+
+        public string GetKeyWord()
+        {
+            return KeyWord;
+        }
+
+        public string GetCommandType()
+        {
+            return "open program command";
+        }
+    }
 
     public class KeyPressCommand : Command
     {
@@ -94,6 +140,9 @@ namespace VoxVisio
                     break;
                 case "voice command":
                     commandObject = new VoiceCommand(jsonData);
+                    break;
+                case "open program command":
+                    commandObject = new OpenProgramCommand(jsonData);
                     break;
             }
             return commandObject;
