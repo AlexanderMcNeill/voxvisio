@@ -17,7 +17,6 @@ namespace VoxVisio
         private ControlState controlState;
         private readonly InputSimulator inputSimulator;
         private SettingsSingleton _settingsList;
-        private SharedDataSingleton sharedData;
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;
         private Grammar dictationGrammar;
@@ -77,6 +76,8 @@ namespace VoxVisio
             sList.Add("start dictation");
             sList.Add("start scroll");
             sList.Add("stop scroll");
+            sList.Add("start keyboard");
+            sList.Add("stop keyboard");
             GrammarBuilder gb = new GrammarBuilder(sList);
             commandGrammar = new Grammar(gb);
         }

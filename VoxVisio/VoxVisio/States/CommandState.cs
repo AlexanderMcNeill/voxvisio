@@ -25,7 +25,6 @@ namespace VoxVisio
 
             scrollManager = new ScrollManager();
             _settingsList.keyboardHook.KeyDownEvent += keyPressedDown;
-           // _settingsList.Commands.Add(new KeyPressCommand("click", Keys.F12));
             //_settingsList.saveCommands();
 
         }
@@ -55,6 +54,14 @@ namespace VoxVisio
             else if (voiceData.Equals("stop scroll"))
             {
                 scrollManager.Stop();
+            }
+            else if (voiceData.Equals("start keyboard"))
+            {
+                System.Diagnostics.Process.Start("C:/Program Files (x86)/OptiKey/OptiKey.exe");
+            }
+            else if (voiceData.Equals("stop keyboard"))
+            {
+                
             }
             //Running a normal voice command
             else

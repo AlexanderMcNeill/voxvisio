@@ -108,7 +108,6 @@
     </Compile>
     <Compile Include="Screen Overlay\ScrollManager.cs" />
     <Compile Include="Screen Overlay\Toast.cs" />
-    <Compile Include="SharedDataSingleton.cs" />
     <Compile Include="UI\CreateCommandForm.cs">
       <SubType>Form</SubType>
     </Compile>
