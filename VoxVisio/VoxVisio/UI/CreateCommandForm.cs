@@ -51,22 +51,22 @@ namespace VoxVisio.UI
 
         private void rbVoiceCommand_CheckedChanged(object sender, EventArgs e)
         {
-            SetCorrectPanel();
+            ChangeCommandType();
         }
 
         private void rbKeyTrigger_CheckedChanged(object sender, EventArgs e)
         {
-            SetCorrectPanel();
+            ChangeCommandType();
         }
 
         private void rbOpenProgram_CheckedChanged(object sender, EventArgs e)
         {
-            SetCorrectPanel();
+            ChangeCommandType();
         }
 
-        private void SetCorrectPanel()
+        private void ChangeCommandType()
         {
-            var checkedButton = this.Controls.OfType<RadioButton>()
+            var checkedButton = grpbxCommand.Controls.OfType<RadioButton>()
                            .FirstOrDefault(n => n.Checked);
             switch (checkedButton.Text)
             {

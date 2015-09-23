@@ -20,7 +20,7 @@ namespace VoxVisio.UI
         private void btnAddCommand_Click(object sender, EventArgs e)
         {
             CreateCommandForm newCreateCommandForm = new CreateCommandForm();
-            newCreateCommandForm.ShowDialog();
+            newCreateCommandForm.ShowDialog(this);
 
             if (newCreateCommandForm.DialogResult == DialogResult.OK)
             {
