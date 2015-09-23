@@ -126,7 +126,7 @@ namespace VoxVisio.UI
             pressedKeys.ForEach(x => keystrings += (x).ToString() + " ");
             keystrings = keystrings.TrimEnd();
             keystrings = keystrings.Replace(" ", ",");
-            command = new VoiceCommand(txtboxOne.Text, keystrings, SharedDataSingleton.Instance().inputSimulator);
+            command = new VoiceCommand(txtboxOne.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
             this.DialogResult = DialogResult.OK;
         }
 

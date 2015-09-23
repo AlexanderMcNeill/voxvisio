@@ -134,7 +134,7 @@ namespace VoxVisio
         public void LoadFromJson(JObject jsonData)
         {
             this.VoiceKeyword = (string)jsonData["voice keyword"];
-            this.keyCombo = new KeyCombo((string)jsonData["keys"], SharedDataSingleton.Instance().inputSimulator);
+            this.keyCombo = new KeyCombo((string)jsonData["keys"], SharedObjectsSingleton.Instance().inputSimulator);
         }
 
         public JObject SaveToJson()
