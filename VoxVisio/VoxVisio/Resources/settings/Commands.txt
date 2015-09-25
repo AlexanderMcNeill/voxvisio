@@ -65,6 +65,11 @@
       "keys": "LButton, LButton",
       "command type": "voice command"
     },
+	{
+      "voice keyword": "rename item",
+      "keys": "LButton, F2",
+      "command type": "voice command"
+    },
     {
       "voice keyword": "Enter",
       "keys": "Enter",

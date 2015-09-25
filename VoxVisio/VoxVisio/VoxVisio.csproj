@@ -90,6 +90,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Screen Overlay\StateController.cs" />
+    <Compile Include="Screen Overlay\StateHotspot.cs" />
     <Compile Include="Singletons\EventSingleton.cs" />
     <Compile Include="Singletons\SettingsSingleton.cs" />
     <Compile Include="Singletons\SharedFormsSingleton.cs" />
