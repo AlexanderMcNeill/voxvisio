@@ -27,6 +27,7 @@ namespace VoxVisio
         private Point fx;
         private Rectangle zoomRect;
         private Point formOffset;
+        private bool running = false;
         public ZoomForm()
         {
             InitializeComponent();
@@ -42,6 +43,12 @@ namespace VoxVisio
         public void Fixation(Point fixationLocation)
         {
             fx = fixationLocation;
+            if (!Bounds.Contains(fx) && running)
+            {
+                zoomTimer.Stop();
+                running = false;
+                Invoke(new Action(() => this.Hide()));
+            }
         }
 
         public void DrawScreen()
@@ -51,7 +58,9 @@ namespace VoxVisio
 
         public void startZoomClick(Command inputCommand)
         {
-                
+            if(!running)
+            {
+            running = true;    
                 int xPos = MousePosition.X - (Width / 2);
                 int yPos = MousePosition.Y - (Height / 2);
                 GetFormPos(xPos, yPos);
@@ -74,7 +83,7 @@ namespace VoxVisio
                 this.Visible = true;
                 DrawScreen();
                 zoomTimer.Start();
-
+            }
         }
 
         public void GetFormPos(int xPos, int yPos)
@@ -135,7 +144,7 @@ namespace VoxVisio
 
                 ClickPoint(mousePos);
             }
-
+            running = false;
             this.Hide();
         }
 
