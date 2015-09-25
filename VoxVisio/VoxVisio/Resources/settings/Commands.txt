@@ -149,6 +149,11 @@
       "trigger key": "F12",
       "command word": "double click",
       "command type": "key press trigger"
+    },
+	{
+      "keyword": "open google",
+      "program location": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+	  "command type": "open program command"
     }
   ]
 }

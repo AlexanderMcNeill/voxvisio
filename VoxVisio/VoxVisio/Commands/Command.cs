@@ -53,14 +53,14 @@ namespace VoxVisio
         public void LoadFromJson(JObject jsonData)
         {
             ProgramLocation = (string) jsonData["program location"];
-            KeyWord =  (string)jsonData["KeyWord"];
+            KeyWord =  (string)jsonData["keyword"];
         }
 
         public JObject SaveToJson()
         {
             JObject toReturn = new JObject();
             toReturn["program location"] = ProgramLocation;
-            toReturn["KeyWord"] = KeyWord;
+            toReturn["keyword"] = KeyWord;
             return toReturn;
         }
 
@@ -143,6 +143,8 @@ namespace VoxVisio
                     break;
                 case "open program command":
                     commandObject = new OpenProgramCommand(jsonData);
+                    break;
+                default:
                     break;
             }
             return commandObject;
