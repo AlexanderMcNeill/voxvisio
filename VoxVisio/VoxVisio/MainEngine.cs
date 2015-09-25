@@ -15,7 +15,6 @@ namespace VoxVisio
     public class MainEngine
     {
         private ControlState controlState;
-        private readonly InputSimulator inputSimulator;
         private SettingsSingleton _settingsList;
         private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
         private Grammar commandGrammar;

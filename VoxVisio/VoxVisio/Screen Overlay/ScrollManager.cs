@@ -28,6 +28,8 @@ namespace VoxVisio.Screen_Overlay
         private eScrollState scrollState;
         private InputSimulator inputSimulator;
         private bool running = false;
+        private Bitmap upArrowFocused;
+        private Bitmap downArrowFocused;
         private Bitmap upArrow;
         private Bitmap downArrow;
         private OverlayForm overlayForm;
@@ -42,8 +44,17 @@ namespace VoxVisio.Screen_Overlay
             scrollState = eScrollState.NOSCROLL;
 
             //Getting the images that will be used to 
-            upArrow = new Bitmap(Resources.UpArrow);
-            downArrow = new Bitmap(Resources.DownArrow);
+            upArrow = new Bitmap(Resources.Arrow);
+            upArrow.MakeTransparent();
+            downArrow = new Bitmap(Resources.Arrow);
+            downArrow.MakeTransparent();
+            downArrow.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+            upArrowFocused = new Bitmap(Resources.ArrowFocused);
+            upArrowFocused.MakeTransparent();
+            downArrowFocused = new Bitmap(Resources.ArrowFocused);
+            downArrowFocused.MakeTransparent();
+            downArrowFocused.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             setupHotspots();
         }
@@ -112,8 +123,22 @@ namespace VoxVisio.Screen_Overlay
 
         public void Draw(Graphics g)
         {
-            g.DrawImage(upArrow, topHotspot);
-            g.DrawImage(downArrow, bottomHotspot);
+
+            switch (scrollState)
+            {
+                case eScrollState.SCROLLUP:
+                    g.DrawImage(upArrowFocused, topHotspot);
+                    g.DrawImage(downArrow, bottomHotspot);
+                    break;
+                case eScrollState.SCROLLDOWN:
+                    g.DrawImage(upArrow, topHotspot);
+                    g.DrawImage(downArrowFocused, bottomHotspot);
+                    break;
+                default:
+                    g.DrawImage(upArrow, topHotspot);
+                    g.DrawImage(downArrow, bottomHotspot);
+                    break;
+            }
         }
     }
 }
