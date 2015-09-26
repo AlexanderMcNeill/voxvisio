@@ -54,21 +54,13 @@ namespace VoxVisio
             {
                 scrollManager.Stop();
             }
-            else if (voiceData.Equals("start keyboard"))
-            {
-                System.Diagnostics.Process.Start("C:/Program Files (x86)/OptiKey/OptiKey.exe");
-            }
-            else if (voiceData.Equals("stop keyboard"))
-            {
-                
-            }
             //Running a normal voice command
             else
             {
-                //Firing the command
-                Command commandToFire = _settingsList.Commands.FirstOrDefault(i => i.GetKeyWord() == voiceData);
+                //Load the command that matches the command word, that isnt a key press command.
+                Command commandToFire = _settingsList.Commands.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
 
-                if (commandToFire.GetCommandType().Equals("voice command") || commandToFire.GetCommandType().Equals("key press trigger"))
+                if (commandToFire.GetCommandType() == eCommandType.VoiceCommand)
                 {
                     VoiceCommand vc = (VoiceCommand)commandToFire;
                     if (vc.keyCombo.GetKeyString().Contains("LButton") || vc.keyCombo.GetKeyString().Contains("RButton"))

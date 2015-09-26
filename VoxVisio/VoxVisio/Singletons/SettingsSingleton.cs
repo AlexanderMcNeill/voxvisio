@@ -20,6 +20,7 @@ namespace VoxVisio.Singletons
             loadCommands();
             specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
+            saveCommands();
         }
         public static SettingsSingleton Instance()
         {
