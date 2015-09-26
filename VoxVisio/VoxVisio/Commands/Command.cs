@@ -188,7 +188,14 @@ namespace VoxVisio
 
         public void RunCommand()
         {
-            keyCombo.PressKeys();
+            if (keyCombo.GetKeyString().Contains("LButton") || keyCombo.GetKeyString().Contains("RButton"))
+            {
+                SharedFormsSingleton.Instance().zoomForm.startZoomClick(this);
+            }
+            else
+            {
+                keyCombo.PressKeys();
+            }
         }
 
         public void LoadFromJson(JObject jsonData)

@@ -30,7 +30,6 @@ namespace VoxVisio.Singletons
             {
                 _singleton = new SettingsSingleton();
             }
-
             return _singleton;
         }
 
@@ -44,7 +43,6 @@ namespace VoxVisio.Singletons
         {
             get { return commands; }
         }
-        
 
         public void SetCommands(List<Command> commands)
         {

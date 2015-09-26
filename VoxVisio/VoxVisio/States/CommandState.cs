@@ -59,23 +59,9 @@ namespace VoxVisio
             {
                 //Load the command that matches the command word, that isnt a key press command.
                 Command commandToFire = _settingsList.Commands.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
-
-                if (commandToFire.GetCommandType() == eCommandType.VoiceCommand)
-                {
-                    VoiceCommand vc = (VoiceCommand)commandToFire;
-                    if (vc.keyCombo.GetKeyString().Contains("LButton") || vc.keyCombo.GetKeyString().Contains("RButton"))
-                    {
-                        zoomForm.startZoomClick(commandToFire);
-                    }
-                    else
-                    {
-                        vc.RunCommand();
-                    }
-                }
-                else
-                {
-                    commandToFire.RunCommand();
-                }
+                
+                commandToFire.RunCommand();
+                
             }
         }
 
