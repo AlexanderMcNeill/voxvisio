@@ -40,14 +40,18 @@
             this.btnAddCommand = new System.Windows.Forms.Button();
             this.pnlVoiceCommand = new System.Windows.Forms.Panel();
             this.pnlTriggerKey = new System.Windows.Forms.Panel();
-            this.pnlOpenProgram = new System.Windows.Forms.Panel();
-            this.cmbxCommandWords = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbxCommandWords = new System.Windows.Forms.ComboBox();
+            this.pnlOpenProgram = new System.Windows.Forms.Panel();
+            this.txtFileAddress = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtProgramKeyWord = new System.Windows.Forms.TextBox();
             this.grpbxCommand.SuspendLayout();
             this.pnlVoiceCommand.SuspendLayout();
             this.pnlTriggerKey.SuspendLayout();
+            this.pnlOpenProgram.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpbxCommand
@@ -135,9 +139,9 @@
             // 
             // btnOpenProgram
             // 
-            this.btnOpenProgram.Location = new System.Drawing.Point(186, 145);
+            this.btnOpenProgram.Location = new System.Drawing.Point(112, 47);
             this.btnOpenProgram.Name = "btnOpenProgram";
-            this.btnOpenProgram.Size = new System.Drawing.Size(100, 23);
+            this.btnOpenProgram.Size = new System.Drawing.Size(64, 23);
             this.btnOpenProgram.TabIndex = 4;
             this.btnOpenProgram.Text = "Browse..";
             this.btnOpenProgram.UseVisualStyleBackColor = true;
@@ -171,36 +175,11 @@
             this.pnlTriggerKey.Controls.Add(this.textBox1);
             this.pnlTriggerKey.Controls.Add(this.label3);
             this.pnlTriggerKey.Controls.Add(this.cmbxCommandWords);
-            this.pnlTriggerKey.Location = new System.Drawing.Point(167, 12);
+            this.pnlTriggerKey.Location = new System.Drawing.Point(159, 20);
             this.pnlTriggerKey.Name = "pnlTriggerKey";
             this.pnlTriggerKey.Size = new System.Drawing.Size(261, 75);
             this.pnlTriggerKey.TabIndex = 6;
             this.pnlTriggerKey.Visible = false;
-            // 
-            // pnlOpenProgram
-            // 
-            this.pnlOpenProgram.Location = new System.Drawing.Point(13, 185);
-            this.pnlOpenProgram.Name = "pnlOpenProgram";
-            this.pnlOpenProgram.Size = new System.Drawing.Size(202, 114);
-            this.pnlOpenProgram.TabIndex = 7;
-            this.pnlOpenProgram.Visible = false;
-            // 
-            // cmbxCommandWords
-            // 
-            this.cmbxCommandWords.FormattingEnabled = true;
-            this.cmbxCommandWords.Location = new System.Drawing.Point(117, 8);
-            this.cmbxCommandWords.Name = "cmbxCommandWords";
-            this.cmbxCommandWords.Size = new System.Drawing.Size(121, 21);
-            this.cmbxCommandWords.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Command to Trigger :";
             // 
             // label4
             // 
@@ -218,15 +197,67 @@
             this.textBox1.Size = new System.Drawing.Size(121, 20);
             this.textBox1.TabIndex = 5;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Command to Trigger :";
+            // 
+            // cmbxCommandWords
+            // 
+            this.cmbxCommandWords.FormattingEnabled = true;
+            this.cmbxCommandWords.Location = new System.Drawing.Point(117, 8);
+            this.cmbxCommandWords.Name = "cmbxCommandWords";
+            this.cmbxCommandWords.Size = new System.Drawing.Size(121, 21);
+            this.cmbxCommandWords.TabIndex = 1;
+            // 
+            // pnlOpenProgram
+            // 
+            this.pnlOpenProgram.Controls.Add(this.label5);
+            this.pnlOpenProgram.Controls.Add(this.txtProgramKeyWord);
+            this.pnlOpenProgram.Controls.Add(this.txtFileAddress);
+            this.pnlOpenProgram.Controls.Add(this.btnOpenProgram);
+            this.pnlOpenProgram.Location = new System.Drawing.Point(168, 14);
+            this.pnlOpenProgram.Name = "pnlOpenProgram";
+            this.pnlOpenProgram.Size = new System.Drawing.Size(202, 114);
+            this.pnlOpenProgram.TabIndex = 7;
+            this.pnlOpenProgram.Visible = false;
+            // 
+            // txtFileAddress
+            // 
+            this.txtFileAddress.Enabled = false;
+            this.txtFileAddress.Location = new System.Drawing.Point(6, 49);
+            this.txtFileAddress.Name = "txtFileAddress";
+            this.txtFileAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtFileAddress.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Voice Key Word :";
+            // 
+            // txtProgramKeyWord
+            // 
+            this.txtProgramKeyWord.Location = new System.Drawing.Point(95, 13);
+            this.txtProgramKeyWord.Name = "txtProgramKeyWord";
+            this.txtProgramKeyWord.Size = new System.Drawing.Size(100, 20);
+            this.txtProgramKeyWord.TabIndex = 7;
+            // 
             // CreateCommandForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 311);
+            this.ClientSize = new System.Drawing.Size(454, 177);
             this.Controls.Add(this.pnlOpenProgram);
             this.Controls.Add(this.pnlTriggerKey);
             this.Controls.Add(this.pnlVoiceCommand);
-            this.Controls.Add(this.btnOpenProgram);
             this.Controls.Add(this.btnAddCommand);
             this.Controls.Add(this.grpbxCommand);
             this.Name = "CreateCommandForm";
@@ -238,6 +269,8 @@
             this.pnlVoiceCommand.PerformLayout();
             this.pnlTriggerKey.ResumeLayout(false);
             this.pnlTriggerKey.PerformLayout();
+            this.pnlOpenProgram.ResumeLayout(false);
+            this.pnlOpenProgram.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -261,5 +294,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbxCommandWords;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtProgramKeyWord;
+        private System.Windows.Forms.TextBox txtFileAddress;
     }
 }

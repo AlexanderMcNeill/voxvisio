@@ -12,7 +12,6 @@ namespace VoxVisio
         private IFixationData latestFixation;
         private InputSimulator inputsim;
         private SettingsSingleton _settingsList;
-
         private ScrollManager scrollManager;
         private ZoomForm zoomForm;
 
@@ -59,7 +58,6 @@ namespace VoxVisio
             {
                 //Load the command that matches the command word, that isnt a key press command.
                 Command commandToFire = _settingsList.Commands.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
-                
                 commandToFire.RunCommand();
                 
             }

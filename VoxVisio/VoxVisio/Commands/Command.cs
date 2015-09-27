@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
-using FMUtils.KeyboardHook;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Singletons;
 

@@ -19,6 +19,7 @@ namespace VoxVisio.UI
             pressedKeys = new List<Keys>();
             triggerKey = null;
         }
+
         public CreateCommandForm(Command command)
         {
             InitializeComponent();
@@ -26,24 +27,12 @@ namespace VoxVisio.UI
             pressedKeys = new List<Keys>();
         }
 
-     
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnOpenProgram_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                //txtProgramAddress.Text = ofd.FileName;
+                txtFileAddress.Text = ofd.FileName;
             }
         }
 
@@ -109,7 +98,7 @@ namespace VoxVisio.UI
                     CreateTriggerCommand();
                     break;
                 case "Open Program":
-                    
+                    CreateOpenProgramCommand();
                     break;
                 default:
                     this.DialogResult = DialogResult.Cancel;
@@ -118,6 +107,17 @@ namespace VoxVisio.UI
             }
             //this.DialogResult = DialogResult.OK;
 
+        }
+
+        private void CreateOpenProgramCommand()
+        {
+            if (txtFileAddress.Text == "")
+            {
+                MessageBox.Show("A executable file's address is requiered", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            command = new OpenProgramCommand(txtFileAddress.Text, txtProgramKeyWord.Text);
+            this.DialogResult = DialogResult.OK;
         }
 
         private void CreateVoiceCommand()
@@ -173,5 +173,6 @@ namespace VoxVisio.UI
             pressedKeys.Add(e.KeyCode);
             pressedKeys.ForEach(x => txtboxTwo.Text += x.ToString() + ",");
         }
+
     }
 }

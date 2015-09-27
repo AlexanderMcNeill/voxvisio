@@ -32,9 +32,11 @@
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnAddCommand = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.tabControl1.SuspendLayout();
-            this.tabGeneral.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -42,6 +44,7 @@
             this.tabControl1.Controls.Add(this.tabGeneral);
             this.tabControl1.Controls.Add(this.tabEyeTracking);
             this.tabControl1.Controls.Add(this.tabVoiceRecognition);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -50,7 +53,6 @@
             // 
             // tabGeneral
             // 
-            this.tabGeneral.Controls.Add(this.btnAddCommand);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -78,15 +80,34 @@
             this.tabVoiceRecognition.Text = "Voice Recognition";
             this.tabVoiceRecognition.UseVisualStyleBackColor = true;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.listView1);
+            this.tabPage1.Controls.Add(this.btnAddCommand);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1131, 565);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "Commands";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // btnAddCommand
             // 
-            this.btnAddCommand.Location = new System.Drawing.Point(19, 515);
+            this.btnAddCommand.Location = new System.Drawing.Point(42, 517);
             this.btnAddCommand.Name = "btnAddCommand";
             this.btnAddCommand.Size = new System.Drawing.Size(75, 23);
-            this.btnAddCommand.TabIndex = 0;
+            this.btnAddCommand.TabIndex = 2;
             this.btnAddCommand.Text = "Add command";
             this.btnAddCommand.UseVisualStyleBackColor = true;
-            this.btnAddCommand.Click += new System.EventHandler(this.btnAddCommand_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(23, 30);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(132, 270);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // SettingsForm
             // 
@@ -97,7 +118,7 @@
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.tabControl1.ResumeLayout(false);
-            this.tabGeneral.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -108,6 +129,8 @@
         private System.Windows.Forms.TabPage tabGeneral;
         private System.Windows.Forms.TabPage tabEyeTracking;
         private System.Windows.Forms.TabPage tabVoiceRecognition;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button btnAddCommand;
+        private System.Windows.Forms.ListView listView1;
     }
 }
