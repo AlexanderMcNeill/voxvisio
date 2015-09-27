@@ -30,6 +30,8 @@ namespace VoxVisio.UI
         private void btnOpenProgram_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles);
+            ofd.Filter = "Executable (*.exe)|*.exe";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 txtFileAddress.Text = ofd.FileName;

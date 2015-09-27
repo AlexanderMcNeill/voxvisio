@@ -140,11 +140,11 @@
             // 
             // btnOpenProgram
             // 
-            this.btnOpenProgram.Location = new System.Drawing.Point(201, 47);
+            this.btnOpenProgram.Location = new System.Drawing.Point(194, 47);
             this.btnOpenProgram.Name = "btnOpenProgram";
-            this.btnOpenProgram.Size = new System.Drawing.Size(64, 23);
+            this.btnOpenProgram.Size = new System.Drawing.Size(25, 23);
             this.btnOpenProgram.TabIndex = 4;
-            this.btnOpenProgram.Text = "Browse..";
+            this.btnOpenProgram.Text = "...";
             this.btnOpenProgram.UseVisualStyleBackColor = true;
             this.btnOpenProgram.Click += new System.EventHandler(this.btnOpenProgram_Click);
             // 
