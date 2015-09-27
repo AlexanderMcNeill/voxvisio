@@ -29,31 +29,18 @@ namespace VoxVisio.UI
 
         private void btnOpenProgram_Click(object sender, EventArgs e)
         {
+            //Creating open file dialog for user to find the program they want to command to open
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles);
             ofd.Filter = "Executable (*.exe)|*.exe";
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 txtFileAddress.Text = ofd.FileName;
             }
         }
 
-        private void CreateCommandForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rbVoiceCommand_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeCommandType();
-        }
-
-        private void rbKeyTrigger_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeCommandType();
-        }
-
-        private void rbOpenProgram_CheckedChanged(object sender, EventArgs e)
+        private void radioButtons_CheckChanged(object sender, EventArgs e)
         {
             ChangeCommandType();
         }
@@ -62,6 +49,7 @@ namespace VoxVisio.UI
         {
             var checkedButton = grpbxCommand.Controls.OfType<RadioButton>()
                            .FirstOrDefault(n => n.Checked);
+
             switch (checkedButton.Text)
             {
                 case "Voice Command":
@@ -156,23 +144,9 @@ namespace VoxVisio.UI
             this.DialogResult = DialogResult.OK;
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-
-        }
         public Command Command
         {
             get { return command; }
-        }
-
-        private void textBox2_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
         }
 
         private void txtboxTwo_KeyUp(object sender, KeyEventArgs e)

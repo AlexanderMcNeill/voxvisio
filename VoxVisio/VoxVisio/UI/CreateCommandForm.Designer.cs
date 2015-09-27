@@ -76,7 +76,7 @@
             this.rbOpenProgram.TabIndex = 2;
             this.rbOpenProgram.Text = "Open Program";
             this.rbOpenProgram.UseVisualStyleBackColor = true;
-            this.rbOpenProgram.CheckedChanged += new System.EventHandler(this.rbOpenProgram_CheckedChanged);
+            this.rbOpenProgram.CheckedChanged += new System.EventHandler(this.radioButtons_CheckChanged);
             // 
             // rbKeyTrigger
             // 
@@ -87,7 +87,7 @@
             this.rbKeyTrigger.TabIndex = 1;
             this.rbKeyTrigger.Text = "Trigger Key";
             this.rbKeyTrigger.UseVisualStyleBackColor = true;
-            this.rbKeyTrigger.CheckedChanged += new System.EventHandler(this.rbKeyTrigger_CheckedChanged);
+            this.rbKeyTrigger.CheckedChanged += new System.EventHandler(this.radioButtons_CheckChanged);
             // 
             // rbVoiceCommand
             // 
@@ -100,7 +100,7 @@
             this.rbVoiceCommand.TabStop = true;
             this.rbVoiceCommand.Text = "Voice Command";
             this.rbVoiceCommand.UseVisualStyleBackColor = true;
-            this.rbVoiceCommand.CheckedChanged += new System.EventHandler(this.rbVoiceCommand_CheckedChanged);
+            this.rbVoiceCommand.CheckedChanged += new System.EventHandler(this.radioButtons_CheckChanged);
             // 
             // txtKeysToPress
             // 
@@ -108,8 +108,6 @@
             this.txtKeysToPress.Name = "txtKeysToPress";
             this.txtKeysToPress.Size = new System.Drawing.Size(100, 20);
             this.txtKeysToPress.TabIndex = 3;
-            this.txtKeysToPress.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
-            this.txtKeysToPress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             this.txtKeysToPress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtboxTwo_KeyUp);
             // 
             // txtVoiceKeyword
@@ -118,7 +116,6 @@
             this.txtVoiceKeyword.Name = "txtVoiceKeyword";
             this.txtVoiceKeyword.Size = new System.Drawing.Size(100, 20);
             this.txtVoiceKeyword.TabIndex = 2;
-            this.txtVoiceKeyword.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // label2
             // 
@@ -272,7 +269,6 @@
             this.Controls.Add(this.grpbxCommand);
             this.Name = "CreateCommandForm";
             this.Text = "CreateCommandForm";
-            this.Load += new System.EventHandler(this.CreateCommandForm_Load);
             this.grpbxCommand.ResumeLayout(false);
             this.grpbxCommand.PerformLayout();
             this.pnlVoiceCommand.ResumeLayout(false);
