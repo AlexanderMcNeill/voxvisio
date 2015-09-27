@@ -137,7 +137,7 @@ namespace VoxVisio
         {
             Command commandObject = null;
             
-            string commandType = (string) jsonData["command type"];
+            string commandType= (string) jsonData["command type"];
 
             if (commandType == eCommandType.KeyPressCommand.ToString())
             {
