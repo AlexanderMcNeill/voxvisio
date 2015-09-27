@@ -32,8 +32,8 @@
             this.rbOpenProgram = new System.Windows.Forms.RadioButton();
             this.rbKeyTrigger = new System.Windows.Forms.RadioButton();
             this.rbVoiceCommand = new System.Windows.Forms.RadioButton();
-            this.txtboxTwo = new System.Windows.Forms.TextBox();
-            this.txtboxOne = new System.Windows.Forms.TextBox();
+            this.txtKeysToPress = new System.Windows.Forms.TextBox();
+            this.txtVoiceKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOpenProgram = new System.Windows.Forms.Button();
@@ -102,23 +102,23 @@
             this.rbVoiceCommand.UseVisualStyleBackColor = true;
             this.rbVoiceCommand.CheckedChanged += new System.EventHandler(this.rbVoiceCommand_CheckedChanged);
             // 
-            // txtboxTwo
+            // txtKeysToPress
             // 
-            this.txtboxTwo.Location = new System.Drawing.Point(99, 39);
-            this.txtboxTwo.Name = "txtboxTwo";
-            this.txtboxTwo.Size = new System.Drawing.Size(100, 20);
-            this.txtboxTwo.TabIndex = 3;
-            this.txtboxTwo.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
-            this.txtboxTwo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
-            this.txtboxTwo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtboxTwo_KeyUp);
+            this.txtKeysToPress.Location = new System.Drawing.Point(99, 39);
+            this.txtKeysToPress.Name = "txtKeysToPress";
+            this.txtKeysToPress.Size = new System.Drawing.Size(100, 20);
+            this.txtKeysToPress.TabIndex = 3;
+            this.txtKeysToPress.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
+            this.txtKeysToPress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            this.txtKeysToPress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtboxTwo_KeyUp);
             // 
-            // txtboxOne
+            // txtVoiceKeyword
             // 
-            this.txtboxOne.Location = new System.Drawing.Point(99, 9);
-            this.txtboxOne.Name = "txtboxOne";
-            this.txtboxOne.Size = new System.Drawing.Size(100, 20);
-            this.txtboxOne.TabIndex = 2;
-            this.txtboxOne.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.txtVoiceKeyword.Location = new System.Drawing.Point(99, 9);
+            this.txtVoiceKeyword.Name = "txtVoiceKeyword";
+            this.txtVoiceKeyword.Size = new System.Drawing.Size(100, 20);
+            this.txtVoiceKeyword.TabIndex = 2;
+            this.txtVoiceKeyword.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // label2
             // 
@@ -161,10 +161,10 @@
             // pnlVoiceCommand
             // 
             this.pnlVoiceCommand.Controls.Add(this.label1);
-            this.pnlVoiceCommand.Controls.Add(this.txtboxOne);
+            this.pnlVoiceCommand.Controls.Add(this.txtVoiceKeyword);
             this.pnlVoiceCommand.Controls.Add(this.label2);
-            this.pnlVoiceCommand.Controls.Add(this.txtboxTwo);
-            this.pnlVoiceCommand.Location = new System.Drawing.Point(162, 18);
+            this.pnlVoiceCommand.Controls.Add(this.txtKeysToPress);
+            this.pnlVoiceCommand.Location = new System.Drawing.Point(159, 19);
             this.pnlVoiceCommand.Name = "pnlVoiceCommand";
             this.pnlVoiceCommand.Size = new System.Drawing.Size(283, 123);
             this.pnlVoiceCommand.TabIndex = 5;
@@ -175,7 +175,7 @@
             this.pnlTriggerKey.Controls.Add(this.textBox1);
             this.pnlTriggerKey.Controls.Add(this.label3);
             this.pnlTriggerKey.Controls.Add(this.cmbxCommandWords);
-            this.pnlTriggerKey.Location = new System.Drawing.Point(163, 19);
+            this.pnlTriggerKey.Location = new System.Drawing.Point(159, 19);
             this.pnlTriggerKey.Name = "pnlTriggerKey";
             this.pnlTriggerKey.Size = new System.Drawing.Size(283, 123);
             this.pnlTriggerKey.TabIndex = 6;
@@ -221,7 +221,7 @@
             this.pnlOpenProgram.Controls.Add(this.txtProgramKeyWord);
             this.pnlOpenProgram.Controls.Add(this.txtFileAddress);
             this.pnlOpenProgram.Controls.Add(this.btnOpenProgram);
-            this.pnlOpenProgram.Location = new System.Drawing.Point(163, 19);
+            this.pnlOpenProgram.Location = new System.Drawing.Point(159, 19);
             this.pnlOpenProgram.Name = "pnlOpenProgram";
             this.pnlOpenProgram.Size = new System.Drawing.Size(283, 123);
             this.pnlOpenProgram.TabIndex = 7;
@@ -291,8 +291,8 @@
         private System.Windows.Forms.RadioButton rbOpenProgram;
         private System.Windows.Forms.RadioButton rbKeyTrigger;
         private System.Windows.Forms.RadioButton rbVoiceCommand;
-        private System.Windows.Forms.TextBox txtboxTwo;
-        private System.Windows.Forms.TextBox txtboxOne;
+        private System.Windows.Forms.TextBox txtKeysToPress;
+        private System.Windows.Forms.TextBox txtVoiceKeyword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOpenProgram;

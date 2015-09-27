@@ -122,11 +122,17 @@ namespace VoxVisio.UI
 
         private void CreateVoiceCommand()
         {
+            if (txtVoiceKeyword.Text == "" || txtKeysToPress.Text == "")
+            {
+                MessageBox.Show("Please ensure you have added a voice keyword and selected the keys you want to fire.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
             string keystrings = "";
             pressedKeys.ForEach(x => keystrings += (x).ToString() + " ");
             keystrings = keystrings.TrimEnd();
             keystrings = keystrings.Replace(" ", ",");
-            command = new VoiceCommand(txtboxOne.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
+            command = new VoiceCommand(txtVoiceKeyword.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -169,9 +175,9 @@ namespace VoxVisio.UI
 
         private void txtboxTwo_KeyUp(object sender, KeyEventArgs e)
         {
-            txtboxTwo.Text = "";
+            txtKeysToPress.Text = "";
             pressedKeys.Add(e.KeyCode);
-            pressedKeys.ForEach(x => txtboxTwo.Text += x.ToString() + ",");
+            pressedKeys.ForEach(x => txtKeysToPress.Text += x.ToString() + ",");
         }
 
     }
