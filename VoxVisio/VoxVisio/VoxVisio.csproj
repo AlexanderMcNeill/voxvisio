@@ -181,8 +181,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\Command State\DownArrow.png" />
-    <Content Include="Resources\Images\Command State\UpArrow.png" />
+    <Content Include="Resources\Images\Command State\Arrow.bmp" />
+    <Content Include="Resources\Images\Command State\ArrowFocused.bmp" />
     <Content Include="Resources\Images\Icons\VoxLogo.png" />
     <None Include="Resources\Images\Icons\favicon.ico" />
     <None Include="Resources\settings\Commands.txt" />

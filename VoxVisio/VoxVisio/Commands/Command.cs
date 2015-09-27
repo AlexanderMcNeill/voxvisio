@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,19 @@ using VoxVisio.Singletons;
 
 namespace VoxVisio
 {
+    public enum eCommandType
+    {
+        VoiceCommand,
+        KeyPressCommand,
+        OpenProgramCommand,
+    }
     public interface Command
     {
         void RunCommand();
         void LoadFromJson(JObject jsonData);
         JObject SaveToJson();
         string GetKeyWord();
-        string GetCommandType();
+        eCommandType GetCommandType();
     }
 
     public class OpenProgramCommand : Command
@@ -53,14 +60,15 @@ namespace VoxVisio
         public void LoadFromJson(JObject jsonData)
         {
             ProgramLocation = (string) jsonData["program location"];
-            KeyWord =  (string)jsonData["KeyWord"];
+            KeyWord =  (string)jsonData["keyword"];
         }
 
         public JObject SaveToJson()
         {
             JObject toReturn = new JObject();
             toReturn["program location"] = ProgramLocation;
-            toReturn["KeyWord"] = KeyWord;
+            toReturn["keyword"] = KeyWord;
+            toReturn["command type"] = GetCommandType().ToString();
             return toReturn;
         }
 
@@ -69,9 +77,9 @@ namespace VoxVisio
             return KeyWord;
         }
 
-        public string GetCommandType()
+        public eCommandType GetCommandType()
         {
-            return "open program command";
+            return eCommandType.OpenProgramCommand;
         }
     }
 
@@ -112,7 +120,7 @@ namespace VoxVisio
             JObject toReturn = new JObject();
             toReturn["trigger key"] = KeyTranslater.GetKeyString((VirtualKeyCode)triggerKey);
             toReturn["command word"] = commandWord;
-            toReturn["command type"] = GetCommandType();
+            toReturn["command type"] = GetCommandType().ToString();
             return toReturn;
         }
 
@@ -122,9 +130,9 @@ namespace VoxVisio
             return commandWord;
         }
 
-        public string GetCommandType()
+        public eCommandType GetCommandType()
         {
-            return "key press trigger";
+            return eCommandType.KeyPressCommand;
         }
     }
 
@@ -133,18 +141,21 @@ namespace VoxVisio
         public static Command CreateCommandFromJson(JObject jsonData)
         {
             Command commandObject = null;
-            switch ((string)jsonData["command type"])
+            
+            string commandType = (string) jsonData["command type"];
+
+            if (commandType == eCommandType.KeyPressCommand.ToString())
             {
-                case "key press trigger":
-                    commandObject = new KeyPressCommand(jsonData);
-                    break;
-                case "voice command":
-                    commandObject = new VoiceCommand(jsonData);
-                    break;
-                case "open program command":
-                    commandObject = new OpenProgramCommand(jsonData);
-                    break;
+                commandObject = new KeyPressCommand(jsonData);
+            } else if (commandType == eCommandType.VoiceCommand.ToString())
+            {
+                commandObject = new VoiceCommand(jsonData);
             }
+            else if (commandType == eCommandType.OpenProgramCommand.ToString())
+            {
+                commandObject = new OpenProgramCommand(jsonData);
+            }
+
             return commandObject;
         }
     }
@@ -177,7 +188,14 @@ namespace VoxVisio
 
         public void RunCommand()
         {
-            keyCombo.PressKeys();
+            if (keyCombo.GetKeyString().Contains("LButton") || keyCombo.GetKeyString().Contains("RButton"))
+            {
+                SharedFormsSingleton.Instance().zoomForm.startZoomClick(this);
+            }
+            else
+            {
+                keyCombo.PressKeys();
+            }
         }
 
         public void LoadFromJson(JObject jsonData)
@@ -191,7 +209,7 @@ namespace VoxVisio
             JObject toReturn = new JObject();
             toReturn["voice keyword"] = VoiceKeyword;
             toReturn["keys"] = keyCombo.GetKeyString();
-            toReturn["command type"] = GetCommandType();
+            toReturn["command type"] = GetCommandType().ToString();
             return toReturn;
         }
 
@@ -200,9 +218,9 @@ namespace VoxVisio
             return VoiceKeyword;
         }
 
-        public string GetCommandType()
+        public eCommandType GetCommandType()
         {
-            return "voice command";
+            return eCommandType.VoiceCommand;
         }
     }
 

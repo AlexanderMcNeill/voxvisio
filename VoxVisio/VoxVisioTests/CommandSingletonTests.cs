@@ -26,7 +26,7 @@ namespace VoxVisio.Tests
         {
             SettingsSingleton cs = SettingsSingleton.Instance();
             SettingsSingleton cs2 = SettingsSingleton.Instance();
-            List<VoiceCommand> commands = new List<VoiceCommand>();
+            List<Command> commands = new List<Command>();
             commands.Add(new VoiceCommand("open", "enter", new InputSimulator()));
             cs.SetCommands(commands);
             Assert.AreEqual(cs.Commands,cs2.Commands);

@@ -14,8 +14,6 @@ namespace VoxVisio
     public partial class VoxVisio : Form
     {
         private const int HIDDENYPOS = -80;
-        private readonly NotifyIcon notifyicon;
-        private IContainer component;
         private MainEngine mainEngine;
         private HelpForm helpForm;
         private SettingsForm settingsForm;
