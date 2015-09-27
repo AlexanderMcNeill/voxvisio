@@ -26,7 +26,7 @@
       "command type": "voice command"
     },
     {
-      "voice keyword": "new folder",
+      "voice keyword": "create folder",
       "keys": "ControlKey, ShiftKey, N",
       "command type": "voice command"
     },
@@ -78,6 +78,11 @@
     {
       "voice keyword": "switch app",
       "keys": "ControlKey, LWin, Tab",
+      "command type": "voice command"
+    },
+	{
+      "voice keyword": "save",
+      "keys": "ControlKey, S",
       "command type": "voice command"
     },
     {
@@ -153,6 +158,16 @@
 	{
       "keyword": "open google",
       "program location": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+	  "command type": "open program command"
+    },
+	{
+      "keyword": "open word",
+      "program location": "C:/Program Files (x86)/Microsoft Office/Office15/WINWORD.EXE",
+	  "command type": "open program command"
+    },
+	{
+      "keyword": "open media player",
+      "program location": "C:/Program Files (x86)/Windows Media Player/wmplayer.exe",
 	  "command type": "open program command"
     }
   ]
