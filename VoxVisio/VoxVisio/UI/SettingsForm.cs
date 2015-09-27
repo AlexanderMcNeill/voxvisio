@@ -29,10 +29,5 @@ namespace VoxVisio.UI
             newCreateCommandForm.Dispose();
         }
 
-        private void btnAddCommand_Click_1(object sender, EventArgs e)
-        {
-
-
-        }
     }
 }

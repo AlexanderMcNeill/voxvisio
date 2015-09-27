@@ -33,8 +33,8 @@
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnAddCommand = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.btnAddCommand = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +92,14 @@
             this.tabPage1.Text = "Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(23, 30);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(132, 270);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // btnAddCommand
             // 
             this.btnAddCommand.Location = new System.Drawing.Point(42, 517);
@@ -100,14 +108,7 @@
             this.btnAddCommand.TabIndex = 2;
             this.btnAddCommand.Text = "Add command";
             this.btnAddCommand.UseVisualStyleBackColor = true;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(23, 30);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(132, 270);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.btnAddCommand.Click += new System.EventHandler(this.btnAddCommand_Click);
             // 
             // SettingsForm
             // 

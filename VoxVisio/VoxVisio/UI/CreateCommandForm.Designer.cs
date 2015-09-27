@@ -45,9 +45,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbxCommandWords = new System.Windows.Forms.ComboBox();
             this.pnlOpenProgram = new System.Windows.Forms.Panel();
-            this.txtFileAddress = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtProgramKeyWord = new System.Windows.Forms.TextBox();
+            this.txtFileAddress = new System.Windows.Forms.TextBox();
             this.grpbxCommand.SuspendLayout();
             this.pnlVoiceCommand.SuspendLayout();
             this.pnlTriggerKey.SuspendLayout();
@@ -139,7 +140,7 @@
             // 
             // btnOpenProgram
             // 
-            this.btnOpenProgram.Location = new System.Drawing.Point(112, 47);
+            this.btnOpenProgram.Location = new System.Drawing.Point(201, 47);
             this.btnOpenProgram.Name = "btnOpenProgram";
             this.btnOpenProgram.Size = new System.Drawing.Size(64, 23);
             this.btnOpenProgram.TabIndex = 4;
@@ -163,11 +164,10 @@
             this.pnlVoiceCommand.Controls.Add(this.txtboxOne);
             this.pnlVoiceCommand.Controls.Add(this.label2);
             this.pnlVoiceCommand.Controls.Add(this.txtboxTwo);
-            this.pnlVoiceCommand.Location = new System.Drawing.Point(170, 15);
+            this.pnlVoiceCommand.Location = new System.Drawing.Point(162, 18);
             this.pnlVoiceCommand.Name = "pnlVoiceCommand";
-            this.pnlVoiceCommand.Size = new System.Drawing.Size(266, 91);
+            this.pnlVoiceCommand.Size = new System.Drawing.Size(283, 123);
             this.pnlVoiceCommand.TabIndex = 5;
-            this.pnlVoiceCommand.Visible = false;
             // 
             // pnlTriggerKey
             // 
@@ -175,9 +175,9 @@
             this.pnlTriggerKey.Controls.Add(this.textBox1);
             this.pnlTriggerKey.Controls.Add(this.label3);
             this.pnlTriggerKey.Controls.Add(this.cmbxCommandWords);
-            this.pnlTriggerKey.Location = new System.Drawing.Point(159, 20);
+            this.pnlTriggerKey.Location = new System.Drawing.Point(163, 19);
             this.pnlTriggerKey.Name = "pnlTriggerKey";
-            this.pnlTriggerKey.Size = new System.Drawing.Size(261, 75);
+            this.pnlTriggerKey.Size = new System.Drawing.Size(283, 123);
             this.pnlTriggerKey.TabIndex = 6;
             this.pnlTriggerKey.Visible = false;
             // 
@@ -216,23 +216,25 @@
             // 
             // pnlOpenProgram
             // 
+            this.pnlOpenProgram.Controls.Add(this.label6);
             this.pnlOpenProgram.Controls.Add(this.label5);
             this.pnlOpenProgram.Controls.Add(this.txtProgramKeyWord);
             this.pnlOpenProgram.Controls.Add(this.txtFileAddress);
             this.pnlOpenProgram.Controls.Add(this.btnOpenProgram);
-            this.pnlOpenProgram.Location = new System.Drawing.Point(168, 14);
+            this.pnlOpenProgram.Location = new System.Drawing.Point(163, 19);
             this.pnlOpenProgram.Name = "pnlOpenProgram";
-            this.pnlOpenProgram.Size = new System.Drawing.Size(202, 114);
+            this.pnlOpenProgram.Size = new System.Drawing.Size(283, 123);
             this.pnlOpenProgram.TabIndex = 7;
             this.pnlOpenProgram.Visible = false;
             // 
-            // txtFileAddress
+            // label6
             // 
-            this.txtFileAddress.Enabled = false;
-            this.txtFileAddress.Location = new System.Drawing.Point(6, 49);
-            this.txtFileAddress.Name = "txtFileAddress";
-            this.txtFileAddress.Size = new System.Drawing.Size(100, 20);
-            this.txtFileAddress.TabIndex = 5;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Program to start : ";
             // 
             // label5
             // 
@@ -249,6 +251,14 @@
             this.txtProgramKeyWord.Name = "txtProgramKeyWord";
             this.txtProgramKeyWord.Size = new System.Drawing.Size(100, 20);
             this.txtProgramKeyWord.TabIndex = 7;
+            // 
+            // txtFileAddress
+            // 
+            this.txtFileAddress.Enabled = false;
+            this.txtFileAddress.Location = new System.Drawing.Point(95, 49);
+            this.txtFileAddress.Name = "txtFileAddress";
+            this.txtFileAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtFileAddress.TabIndex = 5;
             // 
             // CreateCommandForm
             // 
@@ -297,5 +307,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtProgramKeyWord;
         private System.Windows.Forms.TextBox txtFileAddress;
+        private System.Windows.Forms.Label label6;
     }
 }
