@@ -12,6 +12,8 @@ namespace VoxVisio.Singletons
     {
         private static SettingsSingleton _singleton;
         private List<Command> commands;
+        private readonly List<VoiceCommand> voiceCommands;
+        private readonly List<OpenProgramCommand> openProgramCommand;
         public readonly List<KeyPressCommand> specialCommands;
         public readonly Hook keyboardHook;
 

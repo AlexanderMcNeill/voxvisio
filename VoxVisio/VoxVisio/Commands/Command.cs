@@ -72,6 +72,10 @@ namespace VoxVisio
             return KeyWord;
         }
 
+        public string GetProgramLocation()
+        {
+            return ProgramLocation;
+        }
         public eCommandType GetCommandType()
         {
             return eCommandType.OpenProgramCommand;
@@ -160,8 +164,11 @@ namespace VoxVisio
         public string VoiceKeyword { set; get; }
         public KeyCombo keyCombo { set; get; }
 
+        private string keyStrings;
+
         public VoiceCommand(string commandWord, string keyStrings, InputSimulator inputSimulator)
         {
+            this.keyStrings = keyStrings;
             this.VoiceKeyword = commandWord;
             this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
         }
@@ -196,6 +203,7 @@ namespace VoxVisio
         public void LoadFromJson(JObject jsonData)
         {
             this.VoiceKeyword = (string)jsonData["voice keyword"];
+            this.keyStrings = (string)jsonData["keys"];
             this.keyCombo = new KeyCombo((string)jsonData["keys"], SharedObjectsSingleton.Instance().inputSimulator);
         }
 
@@ -211,6 +219,11 @@ namespace VoxVisio
         public string GetKeyWord()
         {
             return VoiceKeyword;
+        }
+
+        public string GetKeyStrings()
+        {
+            return keyStrings;
         }
 
         public eCommandType GetCommandType()

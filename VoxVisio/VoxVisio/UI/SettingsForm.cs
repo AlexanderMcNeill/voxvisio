@@ -113,7 +113,7 @@ namespace VoxVisio.UI
             //Currently only displays voice commands
             foreach (VoiceCommand c in settings.Commands.OfType<VoiceCommand>())
             {
-                dgvVoiceCommands.Rows.Add(c.VoiceKeyword, c.keyCombo.ToString());
+                dgvVoiceCommands.Rows.Add(c.VoiceKeyword, c.GetKeyStrings());
             }
         }
 
@@ -123,7 +123,7 @@ namespace VoxVisio.UI
             //Currently only displays voice commands
             foreach (OpenProgramCommand c in settings.Commands.OfType<OpenProgramCommand>())
             {
-                dgvOpenProgram.Rows.Add(c.GetKeyWord(), c.GetKeyWord());
+                dgvOpenProgram.Rows.Add(c.GetKeyWord(), c.GetProgramLocation());
             }
         }
 
@@ -133,7 +133,7 @@ namespace VoxVisio.UI
 
             foreach (KeyPressCommand c in settings.Commands.OfType<KeyPressCommand>())
             {
-                dgvKeyBinding.Rows.Add(c.GetKeyWord(), c.GetKeyWord());
+                dgvKeyBinding.Rows.Add(c.triggerKey.ToString(), c.GetKeyWord());
             }
         }
 
