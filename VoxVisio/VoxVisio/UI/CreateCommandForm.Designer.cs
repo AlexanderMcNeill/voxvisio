@@ -218,7 +218,7 @@
             this.pnlOpenProgram.Controls.Add(this.txtProgramKeyWord);
             this.pnlOpenProgram.Controls.Add(this.txtFileAddress);
             this.pnlOpenProgram.Controls.Add(this.btnOpenProgram);
-            this.pnlOpenProgram.Location = new System.Drawing.Point(159, 19);
+            this.pnlOpenProgram.Location = new System.Drawing.Point(159, 148);
             this.pnlOpenProgram.Name = "pnlOpenProgram";
             this.pnlOpenProgram.Size = new System.Drawing.Size(283, 123);
             this.pnlOpenProgram.TabIndex = 7;

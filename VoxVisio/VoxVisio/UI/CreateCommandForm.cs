@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WindowsInput.Native;
 using VoxVisio.Singletons;
+using System.IO;
 
 namespace VoxVisio.UI
 {
@@ -50,6 +51,7 @@ namespace VoxVisio.UI
             var checkedButton = grpbxCommand.Controls.OfType<RadioButton>()
                            .FirstOrDefault(n => n.Checked);
 
+            // Displaying the panel associated with the selected radio button
             switch (checkedButton.Text)
             {
                 case "Voice Command":
@@ -57,6 +59,7 @@ namespace VoxVisio.UI
                     break;
                 case "Trigger Key":
                     enableSinglePanel(pnlTriggerKey);
+                    //Reloading the command words the selected key could trigger
                     cmbxCommandWords.Items.Clear();
                     SettingsSingleton.Instance().Commands.ForEach(x => cmbxCommandWords.Items.Add(x.GetKeyWord()));
                     break;
@@ -66,6 +69,7 @@ namespace VoxVisio.UI
             }
         }
 
+        //Method that displays the input panel and hides the rest
         private void enableSinglePanel(Panel toEnablePanel)
         {
             foreach (var panel in this.Controls.OfType<Panel>())
@@ -79,6 +83,7 @@ namespace VoxVisio.UI
         {
             var checkedButton = grpbxCommand.Controls.OfType<RadioButton>()
                            .FirstOrDefault(n => n.Checked);
+
             switch (checkedButton.Text)
             {
                 case "Voice Command":
@@ -101,9 +106,10 @@ namespace VoxVisio.UI
 
         private void CreateOpenProgramCommand()
         {
-            if (txtFileAddress.Text == "")
+            //Checking that the user has extered a valid program path
+            if (File.Exists(txtFileAddress.Text))
             {
-                MessageBox.Show("A executable file's address is requiered", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Please make sure the executable file's address is correct", "Error", MessageBoxButtons.OK);
                 return;
             }
             command = new OpenProgramCommand(txtFileAddress.Text, txtProgramKeyWord.Text);
@@ -112,6 +118,7 @@ namespace VoxVisio.UI
 
         private void CreateVoiceCommand()
         {
+            // Checking that the user has filled out the form correctly
             if (txtVoiceKeyword.Text == "" || txtKeysToPress.Text == "")
             {
                 MessageBox.Show("Please ensure you have added a voice keyword and selected the keys you want to fire.", "Error", MessageBoxButtons.OK);
