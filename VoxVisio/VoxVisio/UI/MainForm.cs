@@ -14,6 +14,8 @@ namespace VoxVisio
     public partial class VoxVisio : Form
     {
         private const int HIDDENYPOS = -80;
+        private const int DISPLAYTIME = 50;
+        private int counter = 0;
         private MainEngine mainEngine;
         private HelpForm helpForm;
         private SettingsForm settingsForm;
@@ -30,6 +32,39 @@ namespace VoxVisio
 
             settingsForm = new SettingsForm();
             helpForm = new HelpForm();
+
+            EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
+            EventSingleton.Instance().fixationEvent += VoxVisio_fixationEvent;
+        }
+
+        private void VoxVisio_fixationEvent(Fixation newFixation)
+        {
+            if (this.Bounds.Contains(newFixation.GetFixationLocation()))
+            {
+
+                Invoke(new Action(showForm));
+                
+            }
+        }
+
+
+        private void showForm()
+        {
+            this.Top = 0;
+            counter = 0;
+        }
+
+        private void updateTimer_Tick(object sender, EventArgs e)
+        {
+            if (counter > DISPLAYTIME && this.Top > HIDDENYPOS)
+            {
+                this.Top -= 10;
+            }
+            else
+            {
+                counter += 1;
+            }
+            
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
