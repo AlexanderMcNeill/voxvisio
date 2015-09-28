@@ -67,11 +67,17 @@
             this.colProgramPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colKeyBind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVoiceCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbAddVoiceCmd = new System.Windows.Forms.GroupBox();
+            this.gbAddProgramCmd = new System.Windows.Forms.GroupBox();
+            this.gbAddHotkeyCmd = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).BeginInit();
+            this.gbAddVoiceCmd.SuspendLayout();
+            this.gbAddProgramCmd.SuspendLayout();
+            this.gbAddHotkeyCmd.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -83,7 +89,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1139, 591);
+            this.tabControl1.Size = new System.Drawing.Size(1139, 598);
             this.tabControl1.TabIndex = 0;
             // 
             // tabGeneral
@@ -110,45 +116,29 @@
             // 
             this.tabVoiceRecognition.Location = new System.Drawing.Point(4, 22);
             this.tabVoiceRecognition.Name = "tabVoiceRecognition";
-            this.tabVoiceRecognition.Size = new System.Drawing.Size(1131, 565);
+            this.tabVoiceRecognition.Size = new System.Drawing.Size(1131, 572);
             this.tabVoiceRecognition.TabIndex = 3;
             this.tabVoiceRecognition.Text = "Voice Recognition";
             this.tabVoiceRecognition.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.gbAddHotkeyCmd);
+            this.tabPage1.Controls.Add(this.gbAddProgramCmd);
+            this.tabPage1.Controls.Add(this.gbAddVoiceCmd);
             this.tabPage1.Controls.Add(this.btnDeleteSelectedKeyBinding);
             this.tabPage1.Controls.Add(this.btnDeleteSelectedOpenProgramCommand);
             this.tabPage1.Controls.Add(this.btnDeleteSelectedVoiceCommands);
             this.tabPage1.Controls.Add(this.dgvKeyBinding);
             this.tabPage1.Controls.Add(this.dgvOpenProgram);
             this.tabPage1.Controls.Add(this.dgvVoiceCommands);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.txtVoiceCommandKeys);
-            this.tabPage1.Controls.Add(this.txtVoiceCommandWord);
-            this.tabPage1.Controls.Add(this.txtBindKey);
-            this.tabPage1.Controls.Add(this.cmbxCommandWords);
-            this.tabPage1.Controls.Add(this.btnOpenProgram);
-            this.tabPage1.Controls.Add(this.txtExecutablePath);
-            this.tabPage1.Controls.Add(this.txtOpenProgramCommandWord);
-            this.tabPage1.Controls.Add(this.btnClearKeyBinding);
-            this.tabPage1.Controls.Add(this.btnClearOpenProgram);
-            this.tabPage1.Controls.Add(this.btnClearVoiceCommand);
-            this.tabPage1.Controls.Add(this.btnAddKeyBinding);
-            this.tabPage1.Controls.Add(this.btnAddOpenProgramCommand);
-            this.tabPage1.Controls.Add(this.btnAddVoiceCommand);
             this.tabPage1.Controls.Add(this.lblKeyBindingTitle);
             this.tabPage1.Controls.Add(this.lblOpenProgramTitle);
             this.tabPage1.Controls.Add(this.lblVoiceCommandTitle);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1131, 565);
+            this.tabPage1.Size = new System.Drawing.Size(1131, 572);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -156,7 +146,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(952, 494);
+            this.label6.Location = new System.Drawing.Point(181, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 13);
             this.label6.TabIndex = 29;
@@ -165,7 +155,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(183, 494);
+            this.label5.Location = new System.Drawing.Point(180, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 28;
@@ -174,7 +164,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(568, 494);
+            this.label4.Location = new System.Drawing.Point(181, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 27;
@@ -183,7 +173,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(772, 494);
+            this.label3.Location = new System.Drawing.Point(6, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 26;
@@ -192,7 +182,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(388, 494);
+            this.label2.Location = new System.Drawing.Point(6, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 25;
@@ -201,7 +191,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 494);
+            this.label1.Location = new System.Drawing.Point(5, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 24;
@@ -209,39 +199,39 @@
             // 
             // txtVoiceCommandKeys
             // 
-            this.txtVoiceCommandKeys.Location = new System.Drawing.Point(186, 510);
+            this.txtVoiceCommandKeys.Location = new System.Drawing.Point(183, 39);
             this.txtVoiceCommandKeys.Name = "txtVoiceCommandKeys";
-            this.txtVoiceCommandKeys.Size = new System.Drawing.Size(170, 20);
+            this.txtVoiceCommandKeys.Size = new System.Drawing.Size(160, 20);
             this.txtVoiceCommandKeys.TabIndex = 23;
             this.txtVoiceCommandKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtVoiceCommandKeys_KeyUp);
             this.txtVoiceCommandKeys.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
             // 
             // txtVoiceCommandWord
             // 
-            this.txtVoiceCommandWord.Location = new System.Drawing.Point(7, 510);
+            this.txtVoiceCommandWord.Location = new System.Drawing.Point(6, 38);
             this.txtVoiceCommandWord.Name = "txtVoiceCommandWord";
-            this.txtVoiceCommandWord.Size = new System.Drawing.Size(170, 20);
+            this.txtVoiceCommandWord.Size = new System.Drawing.Size(160, 20);
             this.txtVoiceCommandWord.TabIndex = 22;
             // 
             // txtBindKey
             // 
-            this.txtBindKey.Location = new System.Drawing.Point(775, 510);
+            this.txtBindKey.Location = new System.Drawing.Point(9, 41);
             this.txtBindKey.Name = "txtBindKey";
-            this.txtBindKey.Size = new System.Drawing.Size(170, 20);
+            this.txtBindKey.Size = new System.Drawing.Size(160, 20);
             this.txtBindKey.TabIndex = 21;
             this.txtBindKey.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBindKey_KeyUp);
             // 
             // cmbxCommandWords
             // 
             this.cmbxCommandWords.FormattingEnabled = true;
-            this.cmbxCommandWords.Location = new System.Drawing.Point(955, 510);
+            this.cmbxCommandWords.Location = new System.Drawing.Point(184, 41);
             this.cmbxCommandWords.Name = "cmbxCommandWords";
-            this.cmbxCommandWords.Size = new System.Drawing.Size(170, 21);
+            this.cmbxCommandWords.Size = new System.Drawing.Size(160, 21);
             this.cmbxCommandWords.TabIndex = 20;
             // 
             // btnOpenProgram
             // 
-            this.btnOpenProgram.Location = new System.Drawing.Point(716, 508);
+            this.btnOpenProgram.Location = new System.Drawing.Point(319, 39);
             this.btnOpenProgram.Name = "btnOpenProgram";
             this.btnOpenProgram.Size = new System.Drawing.Size(25, 23);
             this.btnOpenProgram.TabIndex = 19;
@@ -252,23 +242,23 @@
             // txtExecutablePath
             // 
             this.txtExecutablePath.Enabled = false;
-            this.txtExecutablePath.Location = new System.Drawing.Point(571, 510);
+            this.txtExecutablePath.Location = new System.Drawing.Point(184, 41);
             this.txtExecutablePath.Name = "txtExecutablePath";
-            this.txtExecutablePath.Size = new System.Drawing.Size(145, 20);
+            this.txtExecutablePath.Size = new System.Drawing.Size(135, 20);
             this.txtExecutablePath.TabIndex = 18;
             // 
             // txtOpenProgramCommandWord
             // 
-            this.txtOpenProgramCommandWord.Location = new System.Drawing.Point(391, 510);
+            this.txtOpenProgramCommandWord.Location = new System.Drawing.Point(6, 41);
             this.txtOpenProgramCommandWord.Name = "txtOpenProgramCommandWord";
-            this.txtOpenProgramCommandWord.Size = new System.Drawing.Size(170, 20);
+            this.txtOpenProgramCommandWord.Size = new System.Drawing.Size(160, 20);
             this.txtOpenProgramCommandWord.TabIndex = 17;
             // 
             // btnClearKeyBinding
             // 
-            this.btnClearKeyBinding.Location = new System.Drawing.Point(955, 536);
+            this.btnClearKeyBinding.Location = new System.Drawing.Point(184, 65);
             this.btnClearKeyBinding.Name = "btnClearKeyBinding";
-            this.btnClearKeyBinding.Size = new System.Drawing.Size(170, 23);
+            this.btnClearKeyBinding.Size = new System.Drawing.Size(160, 23);
             this.btnClearKeyBinding.TabIndex = 16;
             this.btnClearKeyBinding.Text = "Clear";
             this.btnClearKeyBinding.UseVisualStyleBackColor = true;
@@ -276,9 +266,9 @@
             // 
             // btnClearOpenProgram
             // 
-            this.btnClearOpenProgram.Location = new System.Drawing.Point(571, 536);
+            this.btnClearOpenProgram.Location = new System.Drawing.Point(184, 65);
             this.btnClearOpenProgram.Name = "btnClearOpenProgram";
-            this.btnClearOpenProgram.Size = new System.Drawing.Size(170, 23);
+            this.btnClearOpenProgram.Size = new System.Drawing.Size(160, 23);
             this.btnClearOpenProgram.TabIndex = 15;
             this.btnClearOpenProgram.Text = "Clear";
             this.btnClearOpenProgram.UseVisualStyleBackColor = true;
@@ -286,9 +276,9 @@
             // 
             // btnClearVoiceCommand
             // 
-            this.btnClearVoiceCommand.Location = new System.Drawing.Point(186, 536);
+            this.btnClearVoiceCommand.Location = new System.Drawing.Point(183, 65);
             this.btnClearVoiceCommand.Name = "btnClearVoiceCommand";
-            this.btnClearVoiceCommand.Size = new System.Drawing.Size(170, 23);
+            this.btnClearVoiceCommand.Size = new System.Drawing.Size(160, 23);
             this.btnClearVoiceCommand.TabIndex = 14;
             this.btnClearVoiceCommand.Text = "Clear";
             this.btnClearVoiceCommand.UseVisualStyleBackColor = true;
@@ -296,9 +286,9 @@
             // 
             // btnAddKeyBinding
             // 
-            this.btnAddKeyBinding.Location = new System.Drawing.Point(775, 536);
+            this.btnAddKeyBinding.Location = new System.Drawing.Point(9, 67);
             this.btnAddKeyBinding.Name = "btnAddKeyBinding";
-            this.btnAddKeyBinding.Size = new System.Drawing.Size(170, 23);
+            this.btnAddKeyBinding.Size = new System.Drawing.Size(160, 23);
             this.btnAddKeyBinding.TabIndex = 13;
             this.btnAddKeyBinding.Text = "Add";
             this.btnAddKeyBinding.UseVisualStyleBackColor = true;
@@ -306,9 +296,9 @@
             // 
             // btnAddOpenProgramCommand
             // 
-            this.btnAddOpenProgramCommand.Location = new System.Drawing.Point(391, 536);
+            this.btnAddOpenProgramCommand.Location = new System.Drawing.Point(6, 67);
             this.btnAddOpenProgramCommand.Name = "btnAddOpenProgramCommand";
-            this.btnAddOpenProgramCommand.Size = new System.Drawing.Size(170, 23);
+            this.btnAddOpenProgramCommand.Size = new System.Drawing.Size(160, 23);
             this.btnAddOpenProgramCommand.TabIndex = 12;
             this.btnAddOpenProgramCommand.Text = "Add";
             this.btnAddOpenProgramCommand.UseVisualStyleBackColor = true;
@@ -316,9 +306,9 @@
             // 
             // btnAddVoiceCommand
             // 
-            this.btnAddVoiceCommand.Location = new System.Drawing.Point(7, 536);
+            this.btnAddVoiceCommand.Location = new System.Drawing.Point(6, 65);
             this.btnAddVoiceCommand.Name = "btnAddVoiceCommand";
-            this.btnAddVoiceCommand.Size = new System.Drawing.Size(170, 23);
+            this.btnAddVoiceCommand.Size = new System.Drawing.Size(160, 23);
             this.btnAddVoiceCommand.TabIndex = 11;
             this.btnAddVoiceCommand.Text = "Add";
             this.btnAddVoiceCommand.UseVisualStyleBackColor = true;
@@ -331,7 +321,7 @@
             this.lblKeyBindingTitle.Name = "lblKeyBindingTitle";
             this.lblKeyBindingTitle.Size = new System.Drawing.Size(350, 31);
             this.lblKeyBindingTitle.TabIndex = 10;
-            this.lblKeyBindingTitle.Text = "Key Binding";
+            this.lblKeyBindingTitle.Text = "Hotkey Commands";
             this.lblKeyBindingTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblOpenProgramTitle
@@ -341,7 +331,7 @@
             this.lblOpenProgramTitle.Name = "lblOpenProgramTitle";
             this.lblOpenProgramTitle.Size = new System.Drawing.Size(350, 31);
             this.lblOpenProgramTitle.TabIndex = 9;
-            this.lblOpenProgramTitle.Text = "Open Program";
+            this.lblOpenProgramTitle.Text = "Open Program Commands";
             this.lblOpenProgramTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblVoiceCommandTitle
@@ -465,20 +455,71 @@
             this.colVoiceCommand.Name = "colVoiceCommand";
             this.colVoiceCommand.ReadOnly = true;
             // 
+            // gbAddVoiceCmd
+            // 
+            this.gbAddVoiceCmd.Controls.Add(this.label1);
+            this.gbAddVoiceCmd.Controls.Add(this.btnAddVoiceCommand);
+            this.gbAddVoiceCmd.Controls.Add(this.btnClearVoiceCommand);
+            this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandWord);
+            this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandKeys);
+            this.gbAddVoiceCmd.Controls.Add(this.label5);
+            this.gbAddVoiceCmd.Location = new System.Drawing.Point(7, 472);
+            this.gbAddVoiceCmd.Name = "gbAddVoiceCmd";
+            this.gbAddVoiceCmd.Size = new System.Drawing.Size(349, 94);
+            this.gbAddVoiceCmd.TabIndex = 36;
+            this.gbAddVoiceCmd.TabStop = false;
+            this.gbAddVoiceCmd.Text = "Add Voice Command";
+            // 
+            // gbAddProgramCmd
+            // 
+            this.gbAddProgramCmd.Controls.Add(this.label4);
+            this.gbAddProgramCmd.Controls.Add(this.btnAddOpenProgramCommand);
+            this.gbAddProgramCmd.Controls.Add(this.btnClearOpenProgram);
+            this.gbAddProgramCmd.Controls.Add(this.txtOpenProgramCommandWord);
+            this.gbAddProgramCmd.Controls.Add(this.txtExecutablePath);
+            this.gbAddProgramCmd.Controls.Add(this.btnOpenProgram);
+            this.gbAddProgramCmd.Controls.Add(this.label2);
+            this.gbAddProgramCmd.Location = new System.Drawing.Point(391, 472);
+            this.gbAddProgramCmd.Name = "gbAddProgramCmd";
+            this.gbAddProgramCmd.Size = new System.Drawing.Size(350, 94);
+            this.gbAddProgramCmd.TabIndex = 37;
+            this.gbAddProgramCmd.TabStop = false;
+            this.gbAddProgramCmd.Text = "Add Open Program Command";
+            // 
+            // gbAddHotkeyCmd
+            // 
+            this.gbAddHotkeyCmd.Controls.Add(this.label3);
+            this.gbAddHotkeyCmd.Controls.Add(this.btnAddKeyBinding);
+            this.gbAddHotkeyCmd.Controls.Add(this.btnClearKeyBinding);
+            this.gbAddHotkeyCmd.Controls.Add(this.cmbxCommandWords);
+            this.gbAddHotkeyCmd.Controls.Add(this.txtBindKey);
+            this.gbAddHotkeyCmd.Controls.Add(this.label6);
+            this.gbAddHotkeyCmd.Location = new System.Drawing.Point(773, 472);
+            this.gbAddHotkeyCmd.Name = "gbAddHotkeyCmd";
+            this.gbAddHotkeyCmd.Size = new System.Drawing.Size(350, 94);
+            this.gbAddHotkeyCmd.TabIndex = 38;
+            this.gbAddHotkeyCmd.TabStop = false;
+            this.gbAddHotkeyCmd.Text = "Add Hotkey Command";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 615);
+            this.ClientSize = new System.Drawing.Size(1163, 622);
             this.Controls.Add(this.tabControl1);
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).EndInit();
+            this.gbAddVoiceCmd.ResumeLayout(false);
+            this.gbAddVoiceCmd.PerformLayout();
+            this.gbAddProgramCmd.ResumeLayout(false);
+            this.gbAddProgramCmd.PerformLayout();
+            this.gbAddHotkeyCmd.ResumeLayout(false);
+            this.gbAddHotkeyCmd.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -524,5 +565,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colVoiceCommand;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProgramCommandWord;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProgramPath;
+        private System.Windows.Forms.GroupBox gbAddHotkeyCmd;
+        private System.Windows.Forms.GroupBox gbAddProgramCmd;
+        private System.Windows.Forms.GroupBox gbAddVoiceCmd;
     }
 }
