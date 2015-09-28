@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WindowsInput.Native;
 using VoxVisio.Singletons;
+using System.IO;
 
 namespace VoxVisio.UI
 {
@@ -19,6 +20,7 @@ namespace VoxVisio.UI
             pressedKeys = new List<Keys>();
             triggerKey = null;
         }
+
         public CreateCommandForm(Command command)
         {
             InitializeComponent();
@@ -26,43 +28,20 @@ namespace VoxVisio.UI
             pressedKeys = new List<Keys>();
         }
 
-     
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnOpenProgram_Click(object sender, EventArgs e)
         {
+            //Creating open file dialog for user to find the program they want to command to open
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles);
+            ofd.Filter = "Executable (*.exe)|*.exe";
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                //txtProgramAddress.Text = ofd.FileName;
+                txtFileAddress.Text = ofd.FileName;
             }
         }
 
-        private void CreateCommandForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rbVoiceCommand_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeCommandType();
-        }
-
-        private void rbKeyTrigger_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeCommandType();
-        }
-
-        private void rbOpenProgram_CheckedChanged(object sender, EventArgs e)
+        private void radioButtons_CheckChanged(object sender, EventArgs e)
         {
             ChangeCommandType();
         }
@@ -71,6 +50,8 @@ namespace VoxVisio.UI
         {
             var checkedButton = grpbxCommand.Controls.OfType<RadioButton>()
                            .FirstOrDefault(n => n.Checked);
+
+            // Displaying the panel associated with the selected radio button
             switch (checkedButton.Text)
             {
                 case "Voice Command":
@@ -78,6 +59,7 @@ namespace VoxVisio.UI
                     break;
                 case "Trigger Key":
                     enableSinglePanel(pnlTriggerKey);
+                    //Reloading the command words the selected key could trigger
                     cmbxCommandWords.Items.Clear();
                     SettingsSingleton.Instance().Commands.ForEach(x => cmbxCommandWords.Items.Add(x.GetKeyWord()));
                     break;
@@ -87,6 +69,7 @@ namespace VoxVisio.UI
             }
         }
 
+        //Method that displays the input panel and hides the rest
         private void enableSinglePanel(Panel toEnablePanel)
         {
             foreach (var panel in this.Controls.OfType<Panel>())
@@ -100,6 +83,7 @@ namespace VoxVisio.UI
         {
             var checkedButton = grpbxCommand.Controls.OfType<RadioButton>()
                            .FirstOrDefault(n => n.Checked);
+
             switch (checkedButton.Text)
             {
                 case "Voice Command":
@@ -109,7 +93,7 @@ namespace VoxVisio.UI
                     CreateTriggerCommand();
                     break;
                 case "Open Program":
-                    
+                    CreateOpenProgramCommand();
                     break;
                 default:
                     this.DialogResult = DialogResult.Cancel;
@@ -120,13 +104,32 @@ namespace VoxVisio.UI
 
         }
 
+        private void CreateOpenProgramCommand()
+        {
+            //Checking that the user has extered a valid program path
+            if (File.Exists(txtFileAddress.Text))
+            {
+                MessageBox.Show("Please make sure the executable file's address is correct", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            command = new OpenProgramCommand(txtFileAddress.Text, txtProgramKeyWord.Text);
+            this.DialogResult = DialogResult.OK;
+        }
+
         private void CreateVoiceCommand()
         {
+            // Checking that the user has filled out the form correctly
+            if (txtVoiceKeyword.Text == "" || txtKeysToPress.Text == "")
+            {
+                MessageBox.Show("Please ensure you have added a voice keyword and selected the keys you want to fire.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
             string keystrings = "";
             pressedKeys.ForEach(x => keystrings += (x).ToString() + " ");
             keystrings = keystrings.TrimEnd();
             keystrings = keystrings.Replace(" ", ",");
-            command = new VoiceCommand(txtboxOne.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
+            command = new VoiceCommand(txtVoiceKeyword.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -148,30 +151,17 @@ namespace VoxVisio.UI
             this.DialogResult = DialogResult.OK;
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-
-        }
         public Command Command
         {
             get { return command; }
         }
 
-        private void textBox2_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
         private void txtboxTwo_KeyUp(object sender, KeyEventArgs e)
         {
-            txtboxTwo.Text = "";
+            txtKeysToPress.Text = "";
             pressedKeys.Add(e.KeyCode);
-            pressedKeys.ForEach(x => txtboxTwo.Text += x.ToString() + ",");
+            pressedKeys.ForEach(x => txtKeysToPress.Text += x.ToString() + ",");
         }
+
     }
 }

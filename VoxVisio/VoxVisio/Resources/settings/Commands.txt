@@ -26,7 +26,7 @@
       "command type": "VoiceCommand"
     },
     {
-      "voice keyword": "new folder",
+      "voice keyword": "create folder",
       "keys": "ControlKey, ShiftKey, N",
       "command type": "VoiceCommand"
     },
@@ -60,12 +60,12 @@
       "keys": "ControlKey, O",
       "command type": "VoiceCommand"
     },
-    {
+	{
       "voice keyword": "open item",
       "keys": "LButton, LButton",
       "command type": "VoiceCommand"
     },
-    {
+	{
       "voice keyword": "rename item",
       "keys": "LButton, F2",
       "command type": "VoiceCommand"
@@ -78,6 +78,11 @@
     {
       "voice keyword": "switch app",
       "keys": "ControlKey, LWin, Tab",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "save",
+      "keys": "ControlKey, S",
       "command type": "VoiceCommand"
     },
     {
@@ -100,7 +105,7 @@
       "keys": "ControlKey, C",
       "command type": "VoiceCommand"
     },
-    {
+	{
       "voice keyword": "copy item",
       "keys": "LButton, ControlKey, C",
       "command type": "VoiceCommand"
@@ -110,7 +115,7 @@
       "keys": "ControlKey, V",
       "command type": "VoiceCommand"
     },
-    {
+	    {
       "voice keyword": "paste item",
       "keys": "LButton, ControlKey, V",
       "command type": "VoiceCommand"
@@ -120,12 +125,12 @@
       "keys": "ControlKey, X",
       "command type": "VoiceCommand"
     },
-    {
+	{
       "voice keyword": "cut item",
       "keys": "LButton, ControlKey, X",
       "command type": "VoiceCommand"
     },
-    {
+	{
       "voice keyword": "select all",
       "keys": "ControlKey, A",
       "command type": "VoiceCommand"
@@ -150,15 +155,20 @@
       "command word": "double click",
       "command type": "KeyPressCommand"
     },
-    {
-      "program location": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+	{
       "keyword": "open google",
-      "command type": "OpenProgramCommand"
+      "program location": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+	  "command type": "OpenProgramCommand"
     },
-    {
-      "program location": ""C:/Program Files (x86)/OptiKey/OptiKey.exe",
-      "keyword": "start keyboard",
-      "command type": "OpenProgramCommand"
+	{
+      "keyword": "open word",
+      "program location": "C:/Program Files (x86)/Microsoft Office/Office15/WINWORD.EXE",
+	  "command type": "OpenProgramCommand"
+    },
+	{
+      "keyword": "open media player",
+      "program location": "C:/Program Files (x86)/Windows Media Player/wmplayer.exe",
+	  "command type": "OpenProgramCommand"
     }
   ]
 }

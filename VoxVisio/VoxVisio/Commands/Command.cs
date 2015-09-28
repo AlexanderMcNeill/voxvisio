@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
-using FMUtils.KeyboardHook;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Singletons;
 
@@ -77,6 +72,10 @@ namespace VoxVisio
             return KeyWord;
         }
 
+        public string GetProgramLocation()
+        {
+            return ProgramLocation;
+        }
         public eCommandType GetCommandType()
         {
             return eCommandType.OpenProgramCommand;
@@ -142,7 +141,7 @@ namespace VoxVisio
         {
             Command commandObject = null;
             
-            string commandType = (string) jsonData["command type"];
+            string commandType= (string) jsonData["command type"];
 
             if (commandType == eCommandType.KeyPressCommand.ToString())
             {
@@ -165,8 +164,11 @@ namespace VoxVisio
         public string VoiceKeyword { set; get; }
         public KeyCombo keyCombo { set; get; }
 
+        private string keyStrings;
+
         public VoiceCommand(string commandWord, string keyStrings, InputSimulator inputSimulator)
         {
+            this.keyStrings = keyStrings;
             this.VoiceKeyword = commandWord;
             this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
         }
@@ -201,6 +203,7 @@ namespace VoxVisio
         public void LoadFromJson(JObject jsonData)
         {
             this.VoiceKeyword = (string)jsonData["voice keyword"];
+            this.keyStrings = (string)jsonData["keys"];
             this.keyCombo = new KeyCombo((string)jsonData["keys"], SharedObjectsSingleton.Instance().inputSimulator);
         }
 
@@ -216,6 +219,11 @@ namespace VoxVisio
         public string GetKeyWord()
         {
             return VoiceKeyword;
+        }
+
+        public string GetKeyStrings()
+        {
+            return keyStrings;
         }
 
         public eCommandType GetCommandType()
