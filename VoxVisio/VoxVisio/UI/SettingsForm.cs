@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.Generic;using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -17,6 +16,7 @@ namespace VoxVisio.UI
         private List<Keys> voiceCommandKeys = new List<Keys>();
         private Keys? bindingKey = null;
         private SettingsSingleton settings;
+        private int commandFocusCounter;
         public SettingsForm()
         {
             InitializeComponent();
@@ -24,6 +24,7 @@ namespace VoxVisio.UI
             FillVoiceCommandTable();
             FillKeyBindingTable();
             FillStartProgramTable();
+            commandFocusCounter = 0;
         }
 
         private void btnAddCommand_Click(object sender, EventArgs e)
@@ -52,6 +53,7 @@ namespace VoxVisio.UI
                 keystrings = keystrings.TrimEnd();
                 keystrings = keystrings.Replace(" ", ",");
                 Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
+                settings.Commands.Add(command);
             }
 
 
@@ -64,7 +66,8 @@ namespace VoxVisio.UI
 
         private void txtVoiceCommandKeys_MouseDown(object sender, MouseEventArgs e)
         {
-            if (txtVoiceCommandKeys.Focused)
+            
+            if (commandFocusCounter > 0)
             {
                 MouseButtons mb = e.Button;
 
@@ -80,6 +83,10 @@ namespace VoxVisio.UI
                         addVoiceCommandKey(Keys.MButton);
                         break;
                 }
+            }
+            else
+            {
+                commandFocusCounter ++;
             }
             
         }
@@ -201,7 +208,8 @@ namespace VoxVisio.UI
 
         private void btnDeleteSelectedVoiceCommands_Click(object sender, EventArgs e)
         {
-
+            //If an item is selected
+            int totalSelected = dgvVoiceCommands.SelectedCells.Count;
         }
 
         private void btnDeleteSelectedOpenProgramCommand_Click(object sender, EventArgs e)
@@ -214,5 +222,9 @@ namespace VoxVisio.UI
 
         }
 
+        private void commandKeysFeildFocusChanged(object sender, EventArgs e)
+        {
+            commandFocusCounter = 0;
+        }
     }
 }
