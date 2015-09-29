@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
 
@@ -25,6 +22,7 @@ namespace VoxVisio.UI
             FillKeyBindingTable();
             FillStartProgramTable();
             commandFocusCounter = 0;
+           // settings.Commands.CollectionChanged += updateTables;
         }
 
         private void btnAddCommand_Click(object sender, EventArgs e)
@@ -37,6 +35,13 @@ namespace VoxVisio.UI
                 Command newCommand = newCreateCommandForm.Command;
             }
             newCreateCommandForm.Dispose();
+        }
+
+        private void updateTables(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            FillVoiceCommandTable();
+            FillKeyBindingTable();
+            FillStartProgramTable();
         }
 
         private void btnAddVoiceCommand_Click(object sender, EventArgs e)
@@ -54,6 +59,14 @@ namespace VoxVisio.UI
                 keystrings = keystrings.Replace(" ", ",");
                 Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
                 settings.Commands.Add(command);
+                // Update the list of commands
+                FillVoiceCommandTable();
+                // Clear the text fields for possible new input
+                txtVoiceCommandWord.Text = "";
+                txtVoiceCommandKeys.Text = "";
+                //Empty the keylist for new possible input
+                voiceCommandKeys = new List<Keys>();
+                FillVoiceCommandTable();
             }
 
 
@@ -168,7 +181,7 @@ namespace VoxVisio.UI
         {
             //Creating open file dialog for user to find the program they want to command to open
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles);
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             ofd.Filter = "Executable (*.exe)|*.exe";
 
             if (ofd.ShowDialog() == DialogResult.OK)

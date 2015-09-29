@@ -1,8 +1,6 @@
-﻿using System;
-using System.Drawing;
-using VoxVisio.Screen_Overlay;
+﻿using WindowsInput;
+using WindowsInput.Native;
 using VoxVisio.Singletons;
-using WindowsInput;
 
 namespace VoxVisio
 {
@@ -14,7 +12,7 @@ namespace VoxVisio
         {
             this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
 
-            inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
+            inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
 
         public override void VoiceInput(string voiceData)
@@ -29,7 +27,7 @@ namespace VoxVisio
 
         public override void Dispose()
         {
-             inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
+             inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
     }
 }

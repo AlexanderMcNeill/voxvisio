@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using WindowsInput;
-using EyeXFramework;
-using Tobii.EyeX.Framework;
+﻿using System.Linq;
 using System.Speech.Recognition;
-using VoxVisio.Singletons;
 using VoxVisio.Screen_Overlay;
+using VoxVisio.Singletons;
 
 namespace VoxVisio
 {

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
 
@@ -20,9 +17,7 @@ namespace VoxVisio.Screen_Overlay
         private const int MARGIN = 10;
 
         private List<StateHotspot> stateHotspots = new List<StateHotspot>();
-
         private OverlayForm overlayForm;
-
         private ControlState state;
 
         public StateController(ControlState state)

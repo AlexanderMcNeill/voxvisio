@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsInput;
@@ -49,7 +50,7 @@ namespace VoxVisio
 
         public void RunCommand()
         {
-            System.Diagnostics.Process.Start(ProgramLocation);
+            Process.Start(ProgramLocation);
         }
 
         public void LoadFromJson(JObject jsonData)

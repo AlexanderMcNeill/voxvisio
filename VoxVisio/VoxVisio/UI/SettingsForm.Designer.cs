@@ -1,11 +1,14 @@
-﻿namespace VoxVisio.UI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace VoxVisio.UI
 {
     partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -531,47 +534,47 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabGeneral;
-        private System.Windows.Forms.TabPage tabEyeTracking;
-        private System.Windows.Forms.TabPage tabVoiceRecognition;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label lblKeyBindingTitle;
-        private System.Windows.Forms.Label lblOpenProgramTitle;
-        private System.Windows.Forms.Label lblVoiceCommandTitle;
-        private System.Windows.Forms.Button btnClearKeyBinding;
-        private System.Windows.Forms.Button btnClearOpenProgram;
-        private System.Windows.Forms.Button btnClearVoiceCommand;
-        private System.Windows.Forms.Button btnAddKeyBinding;
-        private System.Windows.Forms.Button btnAddOpenProgramCommand;
-        private System.Windows.Forms.Button btnAddVoiceCommand;
-        private System.Windows.Forms.TextBox txtExecutablePath;
-        private System.Windows.Forms.TextBox txtOpenProgramCommandWord;
-        private System.Windows.Forms.Button btnOpenProgram;
-        private System.Windows.Forms.ComboBox cmbxCommandWords;
-        private System.Windows.Forms.TextBox txtBindKey;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtVoiceCommandKeys;
-        private System.Windows.Forms.TextBox txtVoiceCommandWord;
-        private System.Windows.Forms.Button btnDeleteSelectedKeyBinding;
-        private System.Windows.Forms.Button btnDeleteSelectedOpenProgramCommand;
-        private System.Windows.Forms.Button btnDeleteSelectedVoiceCommands;
-        private System.Windows.Forms.DataGridView dgvKeyBinding;
-        private System.Windows.Forms.DataGridView dgvOpenProgram;
-        private System.Windows.Forms.DataGridView dgvVoiceCommands;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommandWord;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKeys;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKeyBind;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colVoiceCommand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgramCommandWord;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgramPath;
-        private System.Windows.Forms.GroupBox gbAddHotkeyCmd;
-        private System.Windows.Forms.GroupBox gbAddProgramCmd;
-        private System.Windows.Forms.GroupBox gbAddVoiceCmd;
+        private TabControl tabControl1;
+        private TabPage tabGeneral;
+        private TabPage tabEyeTracking;
+        private TabPage tabVoiceRecognition;
+        private TabPage tabPage1;
+        private Label lblKeyBindingTitle;
+        private Label lblOpenProgramTitle;
+        private Label lblVoiceCommandTitle;
+        private Button btnClearKeyBinding;
+        private Button btnClearOpenProgram;
+        private Button btnClearVoiceCommand;
+        private Button btnAddKeyBinding;
+        private Button btnAddOpenProgramCommand;
+        private Button btnAddVoiceCommand;
+        private TextBox txtExecutablePath;
+        private TextBox txtOpenProgramCommandWord;
+        private Button btnOpenProgram;
+        private ComboBox cmbxCommandWords;
+        private TextBox txtBindKey;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private TextBox txtVoiceCommandKeys;
+        private TextBox txtVoiceCommandWord;
+        private Button btnDeleteSelectedKeyBinding;
+        private Button btnDeleteSelectedOpenProgramCommand;
+        private Button btnDeleteSelectedVoiceCommands;
+        private DataGridView dgvKeyBinding;
+        private DataGridView dgvOpenProgram;
+        private DataGridView dgvVoiceCommands;
+        private DataGridViewTextBoxColumn colCommandWord;
+        private DataGridViewTextBoxColumn colKeys;
+        private DataGridViewTextBoxColumn colKeyBind;
+        private DataGridViewTextBoxColumn colVoiceCommand;
+        private DataGridViewTextBoxColumn colProgramCommandWord;
+        private DataGridViewTextBoxColumn colProgramPath;
+        private GroupBox gbAddHotkeyCmd;
+        private GroupBox gbAddProgramCmd;
+        private GroupBox gbAddVoiceCmd;
     }
 }

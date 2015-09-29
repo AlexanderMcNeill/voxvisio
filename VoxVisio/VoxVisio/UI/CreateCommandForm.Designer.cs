@@ -1,11 +1,14 @@
-﻿namespace VoxVisio.UI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace VoxVisio.UI
 {
     partial class CreateCommandForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -283,26 +286,26 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpbxCommand;
-        private System.Windows.Forms.RadioButton rbOpenProgram;
-        private System.Windows.Forms.RadioButton rbKeyTrigger;
-        private System.Windows.Forms.RadioButton rbVoiceCommand;
-        private System.Windows.Forms.TextBox txtKeysToPress;
-        private System.Windows.Forms.TextBox txtVoiceKeyword;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnOpenProgram;
-        private System.Windows.Forms.Button btnAddCommand;
-        private System.Windows.Forms.Panel pnlVoiceCommand;
-        private System.Windows.Forms.Panel pnlTriggerKey;
-        private System.Windows.Forms.Panel pnlOpenProgram;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbxCommandWords;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtProgramKeyWord;
-        private System.Windows.Forms.TextBox txtFileAddress;
-        private System.Windows.Forms.Label label6;
+        private GroupBox grpbxCommand;
+        private RadioButton rbOpenProgram;
+        private RadioButton rbKeyTrigger;
+        private RadioButton rbVoiceCommand;
+        private TextBox txtKeysToPress;
+        private TextBox txtVoiceKeyword;
+        private Label label2;
+        private Label label1;
+        private Button btnOpenProgram;
+        private Button btnAddCommand;
+        private Panel pnlVoiceCommand;
+        private Panel pnlTriggerKey;
+        private Panel pnlOpenProgram;
+        private Label label4;
+        private TextBox textBox1;
+        private Label label3;
+        private ComboBox cmbxCommandWords;
+        private Label label5;
+        private TextBox txtProgramKeyWord;
+        private TextBox txtFileAddress;
+        private Label label6;
     }
 }

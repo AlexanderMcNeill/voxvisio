@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using WindowsInput.Native;
 using VoxVisio.Singletons;
-using System.IO;
 
 namespace VoxVisio.UI
 {
@@ -32,7 +31,7 @@ namespace VoxVisio.UI
         {
             //Creating open file dialog for user to find the program they want to command to open
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles);
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             ofd.Filter = "Executable (*.exe)|*.exe";
 
             if (ofd.ShowDialog() == DialogResult.OK)
