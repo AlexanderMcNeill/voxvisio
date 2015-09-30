@@ -25,6 +25,7 @@ namespace VoxVisio.UI
            // settings.Commands.CollectionChanged += updateTables;
         }
 
+<<<<<<< HEAD
         private void updateTables(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             FillVoiceCommandTable();
@@ -32,6 +33,8 @@ namespace VoxVisio.UI
             FillStartProgramTable();
         }
 
+=======
+>>>>>>> origin/alex
         private void btnAddVoiceCommand_Click(object sender, EventArgs e)
         {
             // Checking that the user has filled out the form correctly
@@ -47,6 +50,7 @@ namespace VoxVisio.UI
                 keystrings = keystrings.Replace(" ", ",");
                 Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
                 settings.Commands.Add(command);
+<<<<<<< HEAD
                 // Update the list of commands
                 FillVoiceCommandTable();
                 // Clear the text fields for possible new input
@@ -54,6 +58,8 @@ namespace VoxVisio.UI
                 txtVoiceCommandKeys.Text = "";
                 //Empty the keylist for new possible input
                 voiceCommandKeys = new List<Keys>();
+=======
+>>>>>>> origin/alex
                 FillVoiceCommandTable();
             }
 
