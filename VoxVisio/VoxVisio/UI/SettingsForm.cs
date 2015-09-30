@@ -26,18 +26,6 @@ namespace VoxVisio.UI
             FillStartProgramTable();
         }
 
-        private void btnAddCommand_Click(object sender, EventArgs e)
-        {
-            CreateCommandForm newCreateCommandForm = new CreateCommandForm();
-            newCreateCommandForm.ShowDialog(this);
-
-            if (newCreateCommandForm.DialogResult == DialogResult.OK)
-            {
-                Command newCommand = newCreateCommandForm.Command;
-            }
-            newCreateCommandForm.Dispose();
-        }
-
         private void btnAddVoiceCommand_Click(object sender, EventArgs e)
         {
             // Checking that the user has filled out the form correctly
@@ -52,6 +40,8 @@ namespace VoxVisio.UI
                 keystrings = keystrings.TrimEnd();
                 keystrings = keystrings.Replace(" ", ",");
                 Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
+                settings.Commands.Add(command);
+                FillVoiceCommandTable();
             }
 
 
