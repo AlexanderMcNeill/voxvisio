@@ -25,18 +25,6 @@ namespace VoxVisio.UI
            // settings.Commands.CollectionChanged += updateTables;
         }
 
-        private void btnAddCommand_Click(object sender, EventArgs e)
-        {
-            CreateCommandForm newCreateCommandForm = new CreateCommandForm();
-            newCreateCommandForm.ShowDialog(this);
-
-            if (newCreateCommandForm.DialogResult == DialogResult.OK)
-            {
-                Command newCommand = newCreateCommandForm.Command;
-            }
-            newCreateCommandForm.Dispose();
-        }
-
         private void updateTables(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             FillVoiceCommandTable();
