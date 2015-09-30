@@ -86,6 +86,8 @@ namespace VoxVisio
         internal void close()
         {
             speechRecognizer.Dispose();
+            EventSingleton.Instance().fixationEvent -= sharedData_fixationEvent;
+            EventSingleton.Instance().keyboardHook.KeyDownEvent -= sharedData_keyboardEvent;
         }
     }
 }
