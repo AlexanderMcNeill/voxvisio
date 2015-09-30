@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using FMUtils.KeyboardHook;
+using System.Linq;
 using System.Speech.Recognition;
 using VoxVisio.Screen_Overlay;
 using VoxVisio.Singletons;
@@ -19,8 +20,11 @@ namespace VoxVisio
             _settingsList = SettingsSingleton.Instance();
             controlState = new CommandState();
             SetupSpeechRecognition();
-            EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+
             stateController = new StateController(controlState);
+
+            EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+            EventSingleton.Instance().keyboardHook.KeyDownEvent += sharedData_keyboardEvent;
         }
 
         void sharedData_fixationEvent(Fixation newFixation)
@@ -44,6 +48,11 @@ namespace VoxVisio
             speechRecognizer.SpeechRecognized += SpeechRecognised;
             speechRecognizer.SetInputToDefaultAudioDevice();
             speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+        }
+
+        public void sharedData_keyboardEvent(KeyboardHookEventArgs e)
+        {
+            controlState.KeyboardInput(e.Key);
         }
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
