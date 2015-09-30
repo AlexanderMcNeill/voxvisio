@@ -1,6 +1,8 @@
 ﻿using WindowsInput;
 using WindowsInput.Native;
 using VoxVisio.Singletons;
+using System;
+using System.Windows.Forms;
 
 namespace VoxVisio
 {
@@ -15,7 +17,7 @@ namespace VoxVisio
             inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
 
-        public override void VoiceInput(string voiceData)
+        public override void VoiceInput(string voiceData, string grammarName)
         {
             
         }
@@ -23,6 +25,11 @@ namespace VoxVisio
         public override void EyeInput(IFixationData fixation)
         {
 
+        }
+
+        public override void KeyboardInput(Keys keyPressed)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Dispose()
