@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Speech.Recognition;
 using System.Windows.Forms;
-using EyeXFramework;
-using VoxVisio.Properties;
-using VoxVisio.UI;
 using VoxVisio.Singletons;
+using VoxVisio.UI;
 
 namespace VoxVisio
 {

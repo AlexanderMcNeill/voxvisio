@@ -1,13 +1,9 @@
-﻿using EyeXFramework;
-using FMUtils.KeyboardHook;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Speech.Recognition;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using EyeXFramework;
+using FMUtils.KeyboardHook;
 using Tobii.EyeX.Framework;
 
 namespace VoxVisio.Singletons

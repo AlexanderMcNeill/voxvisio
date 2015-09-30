@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace VoxVisio
 {
@@ -134,13 +135,13 @@ namespace VoxVisio
 
         #endregion
 
-        private System.Windows.Forms.Button btnSettings;
-        private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.Panel infoPanel;
-        private System.Windows.Forms.Label lblStateInfo;
-        private System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Panel panel1;
+        private Button btnSettings;
+        private Button btnHelp;
+        private Panel infoPanel;
+        private Label lblStateInfo;
+        private Label lblInfo;
+        private Button btnExit;
+        private Panel panel1;
 
     }
 }

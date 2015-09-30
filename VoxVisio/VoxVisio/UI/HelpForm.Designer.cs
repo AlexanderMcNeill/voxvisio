@@ -1,11 +1,14 @@
-﻿namespace VoxVisio.UI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace VoxVisio.UI
 {
     partial class HelpForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -88,9 +91,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView lvCommandList;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ColumnHeader Command;
-        private System.Windows.Forms.ColumnHeader Action;
+        private ListView lvCommandList;
+        private Label label1;
+        private ColumnHeader Command;
+        private ColumnHeader Action;
     }
 }

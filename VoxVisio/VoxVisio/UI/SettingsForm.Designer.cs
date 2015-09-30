@@ -1,11 +1,14 @@
-﻿namespace VoxVisio.UI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace VoxVisio.UI
 {
     partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -151,7 +154,9 @@
             this.gbAddHotkeyCmd.Controls.Add(this.cmbxCommandWords);
             this.gbAddHotkeyCmd.Controls.Add(this.txtBindKey);
             this.gbAddHotkeyCmd.Controls.Add(this.label6);
+
             this.gbAddHotkeyCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.gbAddHotkeyCmd.Location = new System.Drawing.Point(773, 472);
             this.gbAddHotkeyCmd.Name = "gbAddHotkeyCmd";
             this.gbAddHotkeyCmd.Size = new System.Drawing.Size(350, 94);
@@ -162,7 +167,9 @@
             // label3
             // 
             this.label3.AutoSize = true;
+
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.label3.Location = new System.Drawing.Point(6, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
@@ -171,6 +178,7 @@
             // 
             // btnAddKeyBinding
             // 
+
             this.btnAddKeyBinding.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddKeyBinding.Location = new System.Drawing.Point(9, 67);
             this.btnAddKeyBinding.Name = "btnAddKeyBinding";
@@ -182,7 +190,9 @@
             // 
             // btnClearKeyBinding
             // 
+
             this.btnClearKeyBinding.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.btnClearKeyBinding.Location = new System.Drawing.Point(184, 65);
             this.btnClearKeyBinding.Name = "btnClearKeyBinding";
             this.btnClearKeyBinding.Size = new System.Drawing.Size(160, 23);
@@ -193,7 +203,9 @@
             // 
             // cmbxCommandWords
             // 
+
             this.cmbxCommandWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.cmbxCommandWords.FormattingEnabled = true;
             this.cmbxCommandWords.Location = new System.Drawing.Point(184, 41);
             this.cmbxCommandWords.Name = "cmbxCommandWords";
@@ -202,6 +214,7 @@
             // 
             // txtBindKey
             // 
+
             this.txtBindKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBindKey.Location = new System.Drawing.Point(9, 41);
             this.txtBindKey.Name = "txtBindKey";
@@ -259,6 +272,7 @@
             // 
             // btnClearOpenProgram
             // 
+
             this.btnClearOpenProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearOpenProgram.Location = new System.Drawing.Point(184, 65);
             this.btnClearOpenProgram.Name = "btnClearOpenProgram";
@@ -270,7 +284,10 @@
             // 
             // txtOpenProgramCommandWord
             // 
+
+
             this.txtOpenProgramCommandWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.txtOpenProgramCommandWord.Location = new System.Drawing.Point(6, 41);
             this.txtOpenProgramCommandWord.Name = "txtOpenProgramCommandWord";
             this.txtOpenProgramCommandWord.Size = new System.Drawing.Size(160, 20);
@@ -279,17 +296,29 @@
             // txtExecutablePath
             // 
             this.txtExecutablePath.Enabled = false;
+
+            this.txtExecutablePath.Location = new System.Drawing.Point(184, 41);
+            this.txtExecutablePath.Name = "txtExecutablePath";
+            this.txtExecutablePath.Size = new System.Drawing.Size(135, 20);
+
             this.txtExecutablePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExecutablePath.Location = new System.Drawing.Point(184, 41);
             this.txtExecutablePath.Name = "txtExecutablePath";
             this.txtExecutablePath.Size = new System.Drawing.Size(133, 20);
+
             this.txtExecutablePath.TabIndex = 18;
             // 
             // btnOpenProgram
             // 
+
+            this.btnOpenProgram.Location = new System.Drawing.Point(319, 39);
+            this.btnOpenProgram.Name = "btnOpenProgram";
+            this.btnOpenProgram.Size = new System.Drawing.Size(25, 23);
+
             this.btnOpenProgram.Location = new System.Drawing.Point(317, 39);
             this.btnOpenProgram.Name = "btnOpenProgram";
             this.btnOpenProgram.Size = new System.Drawing.Size(27, 23);
+
             this.btnOpenProgram.TabIndex = 19;
             this.btnOpenProgram.Text = "...";
             this.btnOpenProgram.UseVisualStyleBackColor = true;
@@ -313,7 +342,10 @@
             this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandWord);
             this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandKeys);
             this.gbAddVoiceCmd.Controls.Add(this.label5);
+
+
             this.gbAddVoiceCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.gbAddVoiceCmd.Location = new System.Drawing.Point(7, 472);
             this.gbAddVoiceCmd.Name = "gbAddVoiceCmd";
             this.gbAddVoiceCmd.Size = new System.Drawing.Size(349, 94);
@@ -333,7 +365,10 @@
             // 
             // btnAddVoiceCommand
             // 
+
+
             this.btnAddVoiceCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.btnAddVoiceCommand.Location = new System.Drawing.Point(6, 65);
             this.btnAddVoiceCommand.Name = "btnAddVoiceCommand";
             this.btnAddVoiceCommand.Size = new System.Drawing.Size(160, 23);
@@ -344,7 +379,10 @@
             // 
             // btnClearVoiceCommand
             // 
+
+
             this.btnClearVoiceCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.btnClearVoiceCommand.Location = new System.Drawing.Point(183, 65);
             this.btnClearVoiceCommand.Name = "btnClearVoiceCommand";
             this.btnClearVoiceCommand.Size = new System.Drawing.Size(160, 23);
@@ -363,18 +401,30 @@
             // 
             // txtVoiceCommandKeys
             // 
+
+
             this.txtVoiceCommandKeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.txtVoiceCommandKeys.Location = new System.Drawing.Point(183, 39);
             this.txtVoiceCommandKeys.Name = "txtVoiceCommandKeys";
             this.txtVoiceCommandKeys.Size = new System.Drawing.Size(160, 20);
             this.txtVoiceCommandKeys.TabIndex = 23;
+
+            this.txtVoiceCommandKeys.Enter += new System.EventHandler(this.commandKeysFeildFocusChanged);
+            this.txtVoiceCommandKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtVoiceCommandKeys_KeyUp);
+            this.txtVoiceCommandKeys.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
+
             this.txtVoiceCommandKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtVoiceCommandKeys_KeyUp);
             this.txtVoiceCommandKeys.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
+
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+
+
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.label5.Location = new System.Drawing.Point(180, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 13);
@@ -421,7 +471,11 @@
             this.dgvKeyBinding.Location = new System.Drawing.Point(775, 51);
             this.dgvKeyBinding.Name = "dgvKeyBinding";
             this.dgvKeyBinding.ReadOnly = true;
+
+            this.dgvKeyBinding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+
             this.dgvKeyBinding.RowHeadersVisible = false;
+
             this.dgvKeyBinding.Size = new System.Drawing.Size(350, 384);
             this.dgvKeyBinding.TabIndex = 32;
             // 
@@ -449,7 +503,11 @@
             this.dgvOpenProgram.Location = new System.Drawing.Point(391, 51);
             this.dgvOpenProgram.Name = "dgvOpenProgram";
             this.dgvOpenProgram.ReadOnly = true;
+
+            this.dgvOpenProgram.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+
             this.dgvOpenProgram.RowHeadersVisible = false;
+
             this.dgvOpenProgram.Size = new System.Drawing.Size(350, 384);
             this.dgvOpenProgram.TabIndex = 31;
             // 
@@ -474,10 +532,15 @@
             this.dgvVoiceCommands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCommandWord,
             this.colKeys});
-            this.dgvVoiceCommands.Location = new System.Drawing.Point(6, 51);
+            this.dgvVoiceCommands.Location = new System.Drawing.Point(4, 51);
+            this.dgvVoiceCommands.MultiSelect = false;
             this.dgvVoiceCommands.Name = "dgvVoiceCommands";
             this.dgvVoiceCommands.ReadOnly = true;
+
+            this.dgvVoiceCommands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+
             this.dgvVoiceCommands.RowHeadersVisible = false;
+
             this.dgvVoiceCommands.Size = new System.Drawing.Size(350, 384);
             this.dgvVoiceCommands.TabIndex = 30;
             // 
@@ -497,7 +560,11 @@
             // 
             // lblKeyBindingTitle
             // 
+
+            this.lblKeyBindingTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.lblKeyBindingTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.lblKeyBindingTitle.Location = new System.Drawing.Point(775, 17);
             this.lblKeyBindingTitle.Name = "lblKeyBindingTitle";
             this.lblKeyBindingTitle.Size = new System.Drawing.Size(350, 31);
@@ -507,7 +574,11 @@
             // 
             // lblOpenProgramTitle
             // 
+
+            this.lblOpenProgramTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.lblOpenProgramTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.lblOpenProgramTitle.Location = new System.Drawing.Point(391, 17);
             this.lblOpenProgramTitle.Name = "lblOpenProgramTitle";
             this.lblOpenProgramTitle.Size = new System.Drawing.Size(350, 31);
@@ -517,7 +588,11 @@
             // 
             // lblVoiceCommandTitle
             // 
+
+            this.lblVoiceCommandTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.lblVoiceCommandTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
             this.lblVoiceCommandTitle.Location = new System.Drawing.Point(7, 17);
             this.lblVoiceCommandTitle.Name = "lblVoiceCommandTitle";
             this.lblVoiceCommandTitle.Size = new System.Drawing.Size(349, 31);
@@ -550,47 +625,47 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabGeneral;
-        private System.Windows.Forms.TabPage tabEyeTracking;
-        private System.Windows.Forms.TabPage tabVoiceRecognition;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label lblKeyBindingTitle;
-        private System.Windows.Forms.Label lblOpenProgramTitle;
-        private System.Windows.Forms.Label lblVoiceCommandTitle;
-        private System.Windows.Forms.Button btnClearKeyBinding;
-        private System.Windows.Forms.Button btnClearOpenProgram;
-        private System.Windows.Forms.Button btnClearVoiceCommand;
-        private System.Windows.Forms.Button btnAddKeyBinding;
-        private System.Windows.Forms.Button btnAddOpenProgramCommand;
-        private System.Windows.Forms.Button btnAddVoiceCommand;
-        private System.Windows.Forms.TextBox txtExecutablePath;
-        private System.Windows.Forms.TextBox txtOpenProgramCommandWord;
-        private System.Windows.Forms.Button btnOpenProgram;
-        private System.Windows.Forms.ComboBox cmbxCommandWords;
-        private System.Windows.Forms.TextBox txtBindKey;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtVoiceCommandKeys;
-        private System.Windows.Forms.TextBox txtVoiceCommandWord;
-        private System.Windows.Forms.Button btnDeleteSelectedKeyBinding;
-        private System.Windows.Forms.Button btnDeleteSelectedOpenProgramCommand;
-        private System.Windows.Forms.Button btnDeleteSelectedVoiceCommands;
-        private System.Windows.Forms.DataGridView dgvKeyBinding;
-        private System.Windows.Forms.DataGridView dgvOpenProgram;
-        private System.Windows.Forms.DataGridView dgvVoiceCommands;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommandWord;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKeys;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKeyBind;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colVoiceCommand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgramCommandWord;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgramPath;
-        private System.Windows.Forms.GroupBox gbAddHotkeyCmd;
-        private System.Windows.Forms.GroupBox gbAddProgramCmd;
-        private System.Windows.Forms.GroupBox gbAddVoiceCmd;
+        private TabControl tabControl1;
+        private TabPage tabGeneral;
+        private TabPage tabEyeTracking;
+        private TabPage tabVoiceRecognition;
+        private TabPage tabPage1;
+        private Label lblKeyBindingTitle;
+        private Label lblOpenProgramTitle;
+        private Label lblVoiceCommandTitle;
+        private Button btnClearKeyBinding;
+        private Button btnClearOpenProgram;
+        private Button btnClearVoiceCommand;
+        private Button btnAddKeyBinding;
+        private Button btnAddOpenProgramCommand;
+        private Button btnAddVoiceCommand;
+        private TextBox txtExecutablePath;
+        private TextBox txtOpenProgramCommandWord;
+        private Button btnOpenProgram;
+        private ComboBox cmbxCommandWords;
+        private TextBox txtBindKey;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private TextBox txtVoiceCommandKeys;
+        private TextBox txtVoiceCommandWord;
+        private Button btnDeleteSelectedKeyBinding;
+        private Button btnDeleteSelectedOpenProgramCommand;
+        private Button btnDeleteSelectedVoiceCommands;
+        private DataGridView dgvKeyBinding;
+        private DataGridView dgvOpenProgram;
+        private DataGridView dgvVoiceCommands;
+        private DataGridViewTextBoxColumn colCommandWord;
+        private DataGridViewTextBoxColumn colKeys;
+        private DataGridViewTextBoxColumn colKeyBind;
+        private DataGridViewTextBoxColumn colVoiceCommand;
+        private DataGridViewTextBoxColumn colProgramCommandWord;
+        private DataGridViewTextBoxColumn colProgramPath;
+        private GroupBox gbAddHotkeyCmd;
+        private GroupBox gbAddProgramCmd;
+        private GroupBox gbAddVoiceCmd;
     }
 }
