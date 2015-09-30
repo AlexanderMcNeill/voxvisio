@@ -1,4 +1,5 @@
 ﻿using FMUtils.KeyboardHook;
+using System.Collections.Generic;
 using System.Linq;
 using System.Speech.Recognition;
 using VoxVisio.Screen_Overlay;
@@ -9,22 +10,21 @@ namespace VoxVisio
     public class MainEngine
     {
         private ControlState controlState;
-        private SettingsSingleton _settingsList;
-        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
-        private Grammar commandGrammar;
-        private Grammar dictationGrammar;
+        private List<Command> commandList;
+        private SpeechRecognitionEngine speechRecognizer;
         private StateController stateController;
 
         public MainEngine()
         {
-            _settingsList = SettingsSingleton.Instance();
+            commandList = SettingsSingleton.Instance().Commands;
             controlState = new CommandState();
-            SetupSpeechRecognition();
+            speechRecognizer = CreateSpeechRecogntionEngine();
 
             stateController = new StateController(controlState);
 
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
             EventSingleton.Instance().keyboardHook.KeyDownEvent += sharedData_keyboardEvent;
+            speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
         void sharedData_fixationEvent(Fixation newFixation)
@@ -33,21 +33,24 @@ namespace VoxVisio
             controlState.EyeInput(newFixation);
         }
 
-        private void SetupSpeechRecognition()
+        private SpeechRecognitionEngine CreateSpeechRecogntionEngine()
         {
+            SpeechRecognitionEngine newSpeechRecognizer = new SpeechRecognitionEngine();
 
             //Setting up the grammars for the voice recognizer
-            loadCommandGrammar();
-            dictationGrammar = new DictationGrammar();
-            dictationGrammar.Name = "dictation";
-            commandGrammar.Name = "command";
+            Grammar commandGrammar = createCommandGrammar();
+
+            Grammar dictationGrammar = new DictationGrammar();
+            dictationGrammar.Name = DictationState.GRAMMARNAME;
+
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
-            speechRecognizer.RequestRecognizerUpdate();
-            speechRecognizer.LoadGrammar(dictationGrammar);
-            speechRecognizer.LoadGrammar(commandGrammar);
-            speechRecognizer.SpeechRecognized += SpeechRecognised;
-            speechRecognizer.SetInputToDefaultAudioDevice();
-            speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+            newSpeechRecognizer.RequestRecognizerUpdate();
+            newSpeechRecognizer.LoadGrammar(dictationGrammar);
+            newSpeechRecognizer.LoadGrammar(commandGrammar);
+            newSpeechRecognizer.SetInputToDefaultAudioDevice();
+            newSpeechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+            return newSpeechRecognizer;
         }
 
         public void sharedData_keyboardEvent(KeyboardHookEventArgs e)
@@ -57,30 +60,30 @@ namespace VoxVisio
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
-            if (controlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
-            {
-                controlState.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
-            }
-            else if (controlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
-            {
-                controlState.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
-            }
+            controlState.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
         }
 
        
 
-        public void loadCommandGrammar()
+        public Grammar createCommandGrammar()
         {
-            var keywords = _settingsList.Commands.Select(coms => coms.GetKeyWord());
+            var keywords = commandList.Select(coms => coms.GetKeyWord());
+
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
+
+
             sList.Add("start dictation");
             sList.Add("start scroll");
             sList.Add("stop scroll");
             sList.Add("start keyboard");
             sList.Add("stop keyboard");
+
             GrammarBuilder gb = new GrammarBuilder(sList);
-            commandGrammar = new Grammar(gb);
+            Grammar newCommandGrammar = new Grammar(gb);
+            newCommandGrammar.Name = CommandState.GRAMMARNAME;
+
+            return newCommandGrammar;
         }
 
         internal void close()
@@ -88,6 +91,7 @@ namespace VoxVisio
             speechRecognizer.Dispose();
             EventSingleton.Instance().fixationEvent -= sharedData_fixationEvent;
             EventSingleton.Instance().keyboardHook.KeyDownEvent -= sharedData_keyboardEvent;
+            speechRecognizer.SpeechRecognized -= SpeechRecognised;
         }
     }
 }

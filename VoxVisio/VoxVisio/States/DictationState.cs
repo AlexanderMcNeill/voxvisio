@@ -8,6 +8,7 @@ namespace VoxVisio
 {
     class DictationState : ControlState
     {
+        public const string GRAMMARNAME = "DictationGrammar";
 
         private InputSimulator inputsim;
         public DictationState()
@@ -29,7 +30,7 @@ namespace VoxVisio
 
         public override void KeyboardInput(Keys keyPressed)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void Dispose()

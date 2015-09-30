@@ -11,6 +11,8 @@ namespace VoxVisio
 {
     class CommandState : ControlState
     {
+        public const string GRAMMARNAME = "CommandGrammar";
+
         private IFixationData latestFixation;
         private InputSimulator inputsim;
         private List<Command> commandList;
@@ -28,27 +30,30 @@ namespace VoxVisio
 
         public override void VoiceInput(string voiceData, string grammarName)
         {
-            //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
-            double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
-            double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
-            inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
+            if (grammarName.Equals(GRAMMARNAME))
+            {
+                //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
+                double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
+                double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
+                inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
-            //Checking all the cases that change state. This is for testing and will be changed in the future
-            if (voiceData.Equals("start scroll"))
-            {
-                scrollManager.Start();
-            }
-            else if (voiceData.Equals("stop scroll"))
-            {
-                scrollManager.Stop();
-            }
-            //Running a normal voice command
-            else
-            {
-                //Load the command that matches the command word, that isnt a key press command.
-                Command commandToFire = commandList.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
-                commandToFire.RunCommand();
-                
+                //Checking all the cases that change state. This is for testing and will be changed in the future
+                if (voiceData.Equals("start scroll"))
+                {
+                    scrollManager.Start();
+                }
+                else if (voiceData.Equals("stop scroll"))
+                {
+                    scrollManager.Stop();
+                }
+                //Running a normal voice command
+                else
+                {
+                    //Load the command that matches the command word, that isnt a key press command.
+                    Command commandToFire = commandList.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
+                    commandToFire.RunCommand();
+
+                }
             }
         }
 
