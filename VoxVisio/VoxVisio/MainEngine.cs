@@ -60,10 +60,12 @@ namespace VoxVisio
             if (controlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
             {
                 controlState.VoiceInput(e.Result.Text);
+                controlState.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
             }
             else if (controlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
             {
                 controlState.VoiceInput(e.Result.Text);
+                controlState.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
             }
         }
 
