@@ -13,11 +13,10 @@ namespace VoxVisio.Singletons
     public class SettingsSingleton
     {
         private static SettingsSingleton _singleton;
+        public delegate void SettingsChangeEventHandler(object sender, SettingsSingleton e);
+        public event SettingsChangeEventHandler OnChange;
 
         private EventList<Command> commands;
-        //private readonly List<VoiceCommand> voiceCommands;
-        //private readonly List<OpenProgramCommand> openProgramCommand;
-        //public readonly List<KeyPressCommand> specialCommands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
         
