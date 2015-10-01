@@ -95,7 +95,6 @@
     <Compile Include="Singletons\SettingsSingleton.cs" />
     <Compile Include="Singletons\SharedFormsSingleton.cs" />
     <Compile Include="Singletons\SharedObjectsSingleton.cs" />
-    <Compile Include="States\ControlContext.cs" />
     <Compile Include="States\ControlState.cs" />
     <Compile Include="States\DictationState.cs" />
     <Compile Include="FixationData.cs" />
