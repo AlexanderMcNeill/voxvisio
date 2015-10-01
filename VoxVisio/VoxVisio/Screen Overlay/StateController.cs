@@ -11,7 +11,7 @@ namespace VoxVisio.Screen_Overlay
         Dictation,
         Command
     }
-    class StateController : Overlay
+    class StateController : ControlState, Overlay
     {
         private const int HOTSPOTSIZE = 100;
         private const int MARGIN = 10;
@@ -20,9 +20,9 @@ namespace VoxVisio.Screen_Overlay
         private OverlayForm overlayForm;
         private ControlState state;
 
-        public StateController(ControlState state)
+        public StateController()
         {
-            this.state = state;
+            state = new CommandState();
             int top = Screen.PrimaryScreen.Bounds.Height / 2 - MARGIN / 2 - HOTSPOTSIZE;
             int left = Screen.PrimaryScreen.Bounds.Width - HOTSPOTSIZE;
 
@@ -89,6 +89,26 @@ namespace VoxVisio.Screen_Overlay
             int xPos = (hotspotRect.Width - fillWidth) / 2 + hotspotRect.X;
             int yPos = (hotspotRect.Width - fillHeight) / 2 + hotspotRect.Y;
             g.FillEllipse(Brushes.Red, xPos, yPos, fillWidth, fillHeight);
+        }
+
+        public override void VoiceInput(string voiceData, string grammarName)
+        {
+            state.VoiceInput(voiceData, grammarName);
+        }
+
+        public override void EyeInput(IFixationData fixation)
+        {
+            state.EyeInput(fixation);
+        }
+
+        public override void KeyboardInput(Keys keyPressed)
+        {
+            state.KeyboardInput(keyPressed);
+        }
+
+        public override void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

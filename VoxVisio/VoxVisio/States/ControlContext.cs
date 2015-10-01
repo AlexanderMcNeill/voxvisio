@@ -30,7 +30,6 @@
         }
         public void VoiceRequest(string voice)
         {
-            _state.VoiceInput(voice);
         }
 
     }
