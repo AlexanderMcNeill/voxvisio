@@ -16,7 +16,7 @@ namespace VoxVisio
         public MainEngine()
         {
             commandList = SettingsSingleton.Instance().Commands;
-            speechRecognizer = CreateSpeechRecogntionEngine();
+            speechRecognizer = createSpeechRecogntionEngine();
 
             stateController = new StateController();
 
@@ -25,13 +25,12 @@ namespace VoxVisio
             speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
-        void sharedData_fixationEvent(Fixation newFixation)
+        private void sharedData_fixationEvent(Fixation newFixation)
         {
-            stateController.Fixation(newFixation.GetFixationLocation());
             stateController.EyeInput(newFixation);
         }
 
-        private SpeechRecognitionEngine CreateSpeechRecogntionEngine()
+        private SpeechRecognitionEngine createSpeechRecogntionEngine()
         {
             SpeechRecognitionEngine newSpeechRecognizer = new SpeechRecognitionEngine();
 
@@ -49,6 +48,13 @@ namespace VoxVisio
             newSpeechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
 
             return newSpeechRecognizer;
+        }
+
+        private void updateVoiceRecognition()
+        {
+            speechRecognizer.SpeechRecognized -= SpeechRecognised;
+            speechRecognizer = createSpeechRecogntionEngine();
+            speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
         public void sharedData_keyboardEvent(KeyboardHookEventArgs e)

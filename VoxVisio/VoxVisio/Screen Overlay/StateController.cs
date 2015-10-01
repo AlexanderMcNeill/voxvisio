@@ -61,14 +61,6 @@ namespace VoxVisio.Screen_Overlay
             }
         }
 
-        public void Fixation(Point fixation)
-        {
-            foreach (StateHotspot sh in stateHotspots)
-            {
-                sh.Fixation(fixation);
-            }
-        }
-
         public void Draw(Graphics g)
         {
             foreach (StateHotspot sh in stateHotspots)
@@ -98,6 +90,11 @@ namespace VoxVisio.Screen_Overlay
 
         public override void EyeInput(IFixationData fixation)
         {
+            foreach (StateHotspot sh in stateHotspots)
+            {
+                sh.Fixation(fixation.GetFixationLocation());
+            }
+
             state.EyeInput(fixation);
         }
 
