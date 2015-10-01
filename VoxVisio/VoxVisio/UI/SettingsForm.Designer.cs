@@ -33,6 +33,10 @@ namespace VoxVisio.UI
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -73,7 +77,14 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
+            this.tabGeneral.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.gbAddHotkeyCmd.SuspendLayout();
             this.gbAddProgramCmd.SuspendLayout();
@@ -81,6 +92,8 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -97,6 +110,7 @@ namespace VoxVisio.UI
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -104,6 +118,53 @@ namespace VoxVisio.UI
             this.tabGeneral.TabIndex = 1;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.trackBar1);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Location = new System.Drawing.Point(7, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1118, 244);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Zoom Click Settings";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Magnification:";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.LargeChange = 2;
+            this.trackBar1.Location = new System.Drawing.Point(102, 54);
+            this.trackBar1.Maximum = 5;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 1;
+            this.trackBar1.Value = 1;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 19);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBox1.Size = new System.Drawing.Size(65, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Enabled";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // tabEyeTracking
             // 
@@ -154,9 +215,7 @@ namespace VoxVisio.UI
             this.gbAddHotkeyCmd.Controls.Add(this.cmbxCommandWords);
             this.gbAddHotkeyCmd.Controls.Add(this.txtBindKey);
             this.gbAddHotkeyCmd.Controls.Add(this.label6);
-
             this.gbAddHotkeyCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.gbAddHotkeyCmd.Location = new System.Drawing.Point(773, 472);
             this.gbAddHotkeyCmd.Name = "gbAddHotkeyCmd";
             this.gbAddHotkeyCmd.Size = new System.Drawing.Size(350, 94);
@@ -167,9 +226,7 @@ namespace VoxVisio.UI
             // label3
             // 
             this.label3.AutoSize = true;
-
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.label3.Location = new System.Drawing.Point(6, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
@@ -178,7 +235,6 @@ namespace VoxVisio.UI
             // 
             // btnAddKeyBinding
             // 
-
             this.btnAddKeyBinding.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddKeyBinding.Location = new System.Drawing.Point(9, 67);
             this.btnAddKeyBinding.Name = "btnAddKeyBinding";
@@ -190,9 +246,7 @@ namespace VoxVisio.UI
             // 
             // btnClearKeyBinding
             // 
-
             this.btnClearKeyBinding.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.btnClearKeyBinding.Location = new System.Drawing.Point(184, 65);
             this.btnClearKeyBinding.Name = "btnClearKeyBinding";
             this.btnClearKeyBinding.Size = new System.Drawing.Size(160, 23);
@@ -203,9 +257,7 @@ namespace VoxVisio.UI
             // 
             // cmbxCommandWords
             // 
-
             this.cmbxCommandWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.cmbxCommandWords.FormattingEnabled = true;
             this.cmbxCommandWords.Location = new System.Drawing.Point(184, 41);
             this.cmbxCommandWords.Name = "cmbxCommandWords";
@@ -214,7 +266,6 @@ namespace VoxVisio.UI
             // 
             // txtBindKey
             // 
-
             this.txtBindKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBindKey.Location = new System.Drawing.Point(9, 41);
             this.txtBindKey.Name = "txtBindKey";
@@ -272,7 +323,6 @@ namespace VoxVisio.UI
             // 
             // btnClearOpenProgram
             // 
-
             this.btnClearOpenProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearOpenProgram.Location = new System.Drawing.Point(184, 65);
             this.btnClearOpenProgram.Name = "btnClearOpenProgram";
@@ -284,10 +334,7 @@ namespace VoxVisio.UI
             // 
             // txtOpenProgramCommandWord
             // 
-
-
             this.txtOpenProgramCommandWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.txtOpenProgramCommandWord.Location = new System.Drawing.Point(6, 41);
             this.txtOpenProgramCommandWord.Name = "txtOpenProgramCommandWord";
             this.txtOpenProgramCommandWord.Size = new System.Drawing.Size(160, 20);
@@ -296,29 +343,17 @@ namespace VoxVisio.UI
             // txtExecutablePath
             // 
             this.txtExecutablePath.Enabled = false;
-
-            this.txtExecutablePath.Location = new System.Drawing.Point(184, 41);
-            this.txtExecutablePath.Name = "txtExecutablePath";
-            this.txtExecutablePath.Size = new System.Drawing.Size(135, 20);
-
             this.txtExecutablePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExecutablePath.Location = new System.Drawing.Point(184, 41);
             this.txtExecutablePath.Name = "txtExecutablePath";
             this.txtExecutablePath.Size = new System.Drawing.Size(133, 20);
-
             this.txtExecutablePath.TabIndex = 18;
             // 
             // btnOpenProgram
             // 
-
-            this.btnOpenProgram.Location = new System.Drawing.Point(319, 39);
-            this.btnOpenProgram.Name = "btnOpenProgram";
-            this.btnOpenProgram.Size = new System.Drawing.Size(25, 23);
-
             this.btnOpenProgram.Location = new System.Drawing.Point(317, 39);
             this.btnOpenProgram.Name = "btnOpenProgram";
             this.btnOpenProgram.Size = new System.Drawing.Size(27, 23);
-
             this.btnOpenProgram.TabIndex = 19;
             this.btnOpenProgram.Text = "...";
             this.btnOpenProgram.UseVisualStyleBackColor = true;
@@ -342,10 +377,7 @@ namespace VoxVisio.UI
             this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandWord);
             this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandKeys);
             this.gbAddVoiceCmd.Controls.Add(this.label5);
-
-
             this.gbAddVoiceCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.gbAddVoiceCmd.Location = new System.Drawing.Point(7, 472);
             this.gbAddVoiceCmd.Name = "gbAddVoiceCmd";
             this.gbAddVoiceCmd.Size = new System.Drawing.Size(349, 94);
@@ -365,10 +397,7 @@ namespace VoxVisio.UI
             // 
             // btnAddVoiceCommand
             // 
-
-
             this.btnAddVoiceCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.btnAddVoiceCommand.Location = new System.Drawing.Point(6, 65);
             this.btnAddVoiceCommand.Name = "btnAddVoiceCommand";
             this.btnAddVoiceCommand.Size = new System.Drawing.Size(160, 23);
@@ -379,10 +408,7 @@ namespace VoxVisio.UI
             // 
             // btnClearVoiceCommand
             // 
-
-
             this.btnClearVoiceCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.btnClearVoiceCommand.Location = new System.Drawing.Point(183, 65);
             this.btnClearVoiceCommand.Name = "btnClearVoiceCommand";
             this.btnClearVoiceCommand.Size = new System.Drawing.Size(160, 23);
@@ -401,30 +427,20 @@ namespace VoxVisio.UI
             // 
             // txtVoiceCommandKeys
             // 
-
-
             this.txtVoiceCommandKeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.txtVoiceCommandKeys.Location = new System.Drawing.Point(183, 39);
             this.txtVoiceCommandKeys.Name = "txtVoiceCommandKeys";
             this.txtVoiceCommandKeys.Size = new System.Drawing.Size(160, 20);
             this.txtVoiceCommandKeys.TabIndex = 23;
-
             this.txtVoiceCommandKeys.Enter += new System.EventHandler(this.commandKeysFeildFocusChanged);
             this.txtVoiceCommandKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtVoiceCommandKeys_KeyUp);
-            this.txtVoiceCommandKeys.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
-
-            this.txtVoiceCommandKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtVoiceCommandKeys_KeyUp);
             this.txtVoiceCommandKeys.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
-
+            this.txtVoiceCommandKeys.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-
-
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.label5.Location = new System.Drawing.Point(180, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 13);
@@ -471,11 +487,8 @@ namespace VoxVisio.UI
             this.dgvKeyBinding.Location = new System.Drawing.Point(775, 51);
             this.dgvKeyBinding.Name = "dgvKeyBinding";
             this.dgvKeyBinding.ReadOnly = true;
-
-            this.dgvKeyBinding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
             this.dgvKeyBinding.RowHeadersVisible = false;
-
+            this.dgvKeyBinding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvKeyBinding.Size = new System.Drawing.Size(350, 384);
             this.dgvKeyBinding.TabIndex = 32;
             // 
@@ -503,11 +516,8 @@ namespace VoxVisio.UI
             this.dgvOpenProgram.Location = new System.Drawing.Point(391, 51);
             this.dgvOpenProgram.Name = "dgvOpenProgram";
             this.dgvOpenProgram.ReadOnly = true;
-
-            this.dgvOpenProgram.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
             this.dgvOpenProgram.RowHeadersVisible = false;
-
+            this.dgvOpenProgram.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOpenProgram.Size = new System.Drawing.Size(350, 384);
             this.dgvOpenProgram.TabIndex = 31;
             // 
@@ -536,11 +546,8 @@ namespace VoxVisio.UI
             this.dgvVoiceCommands.MultiSelect = false;
             this.dgvVoiceCommands.Name = "dgvVoiceCommands";
             this.dgvVoiceCommands.ReadOnly = true;
-
-            this.dgvVoiceCommands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
             this.dgvVoiceCommands.RowHeadersVisible = false;
-
+            this.dgvVoiceCommands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVoiceCommands.Size = new System.Drawing.Size(350, 384);
             this.dgvVoiceCommands.TabIndex = 30;
             // 
@@ -560,11 +567,7 @@ namespace VoxVisio.UI
             // 
             // lblKeyBindingTitle
             // 
-
-            this.lblKeyBindingTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.lblKeyBindingTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.lblKeyBindingTitle.Location = new System.Drawing.Point(775, 17);
             this.lblKeyBindingTitle.Name = "lblKeyBindingTitle";
             this.lblKeyBindingTitle.Size = new System.Drawing.Size(350, 31);
@@ -574,11 +577,7 @@ namespace VoxVisio.UI
             // 
             // lblOpenProgramTitle
             // 
-
-            this.lblOpenProgramTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.lblOpenProgramTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.lblOpenProgramTitle.Location = new System.Drawing.Point(391, 17);
             this.lblOpenProgramTitle.Name = "lblOpenProgramTitle";
             this.lblOpenProgramTitle.Size = new System.Drawing.Size(350, 31);
@@ -588,17 +587,45 @@ namespace VoxVisio.UI
             // 
             // lblVoiceCommandTitle
             // 
-
-            this.lblVoiceCommandTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.lblVoiceCommandTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-
             this.lblVoiceCommandTitle.Location = new System.Drawing.Point(7, 17);
             this.lblVoiceCommandTitle.Name = "lblVoiceCommandTitle";
             this.lblVoiceCommandTitle.Size = new System.Drawing.Size(349, 31);
             this.lblVoiceCommandTitle.TabIndex = 8;
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 139);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Form Width:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 180);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(67, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Form Height:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(102, 139);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 5;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(102, 180);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.TabIndex = 6;
             // 
             // SettingsForm
             // 
@@ -609,6 +636,10 @@ namespace VoxVisio.UI
             this.Name = "SettingsForm";
             this.Text = "Vox Viso Settings";
             this.tabControl1.ResumeLayout(false);
+            this.tabGeneral.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.gbAddHotkeyCmd.ResumeLayout(false);
             this.gbAddHotkeyCmd.PerformLayout();
@@ -619,6 +650,8 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -667,5 +700,13 @@ namespace VoxVisio.UI
         private GroupBox gbAddHotkeyCmd;
         private GroupBox gbAddProgramCmd;
         private GroupBox gbAddVoiceCmd;
+        private GroupBox groupBox1;
+        private Label label7;
+        private TrackBar trackBar1;
+        private CheckBox checkBox1;
+        private NumericUpDown numericUpDown2;
+        private NumericUpDown numericUpDown1;
+        private Label label9;
+        private Label label8;
     }
 }
