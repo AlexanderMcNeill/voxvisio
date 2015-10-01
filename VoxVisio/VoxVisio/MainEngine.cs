@@ -9,7 +9,6 @@ namespace VoxVisio
 {
     public class MainEngine
     {
-        private ControlState controlState;
         private List<Command> commandList;
         private SpeechRecognitionEngine speechRecognizer;
         private StateController stateController;
@@ -17,10 +16,9 @@ namespace VoxVisio
         public MainEngine()
         {
             commandList = SettingsSingleton.Instance().Commands;
-            controlState = new CommandState();
             speechRecognizer = CreateSpeechRecogntionEngine();
 
-            stateController = new StateController(controlState);
+            stateController = new StateController();
 
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
             EventSingleton.Instance().keyboardHook.KeyDownEvent += sharedData_keyboardEvent;
@@ -30,7 +28,7 @@ namespace VoxVisio
         void sharedData_fixationEvent(Fixation newFixation)
         {
             stateController.Fixation(newFixation.GetFixationLocation());
-            controlState.EyeInput(newFixation);
+            stateController.EyeInput(newFixation);
         }
 
         private SpeechRecognitionEngine CreateSpeechRecogntionEngine()
@@ -55,12 +53,12 @@ namespace VoxVisio
 
         public void sharedData_keyboardEvent(KeyboardHookEventArgs e)
         {
-            controlState.KeyboardInput(e.Key);
+            stateController.KeyboardInput(e.Key);
         }
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
-            controlState.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
+            stateController.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
         }
 
        
@@ -73,11 +71,8 @@ namespace VoxVisio
             sList.Add(keywords.ToArray());
 
 
-            sList.Add("start dictation");
             sList.Add("start scroll");
             sList.Add("stop scroll");
-            sList.Add("start keyboard");
-            sList.Add("stop keyboard");
 
             GrammarBuilder gb = new GrammarBuilder(sList);
             Grammar newCommandGrammar = new Grammar(gb);
