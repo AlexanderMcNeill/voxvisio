@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WindowsInput;
 using VoxVisio.Properties;
 using VoxVisio.Singletons;
+using System.Resources;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -40,15 +41,15 @@ namespace VoxVisio.Screen_Overlay
             scrollState = eScrollState.NOSCROLL;
 
             //Getting the images that will be used to 
-            upArrow = new Bitmap(Resources.Arrow);
+            upArrow = new Bitmap(Properties.Resources.Arrow);
             upArrow.MakeTransparent();
-            downArrow = new Bitmap(Resources.Arrow);
+            downArrow = new Bitmap(Properties.Resources.Arrow);
             downArrow.MakeTransparent();
             downArrow.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
-            upArrowFocused = new Bitmap(Resources.ArrowFocused);
+            upArrowFocused = new Bitmap(Properties.Resources.ArrowFocused);
             upArrowFocused.MakeTransparent();
-            downArrowFocused = new Bitmap(Resources.ArrowFocused);
+            downArrowFocused = new Bitmap(Properties.Resources.ArrowFocused);
             downArrowFocused.MakeTransparent();
             downArrowFocused.RotateFlip(RotateFlipType.RotateNoneFlipY);
 

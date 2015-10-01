@@ -6,6 +6,7 @@ using FMUtils.KeyboardHook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
+using VoxVisio.Resources;
 
 namespace VoxVisio.Singletons
 {
@@ -13,12 +14,13 @@ namespace VoxVisio.Singletons
     {
         private static SettingsSingleton _singleton;
 
-        private List<Command> commands;
+        private EventList<Command> commands;
         //private readonly List<VoiceCommand> voiceCommands;
         //private readonly List<OpenProgramCommand> openProgramCommand;
         //public readonly List<KeyPressCommand> specialCommands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
+        
 
         protected SettingsSingleton()
         {
@@ -26,7 +28,10 @@ namespace VoxVisio.Singletons
             //specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
             saveCommands();
+            
         }
+
+        
         public static SettingsSingleton Instance()
         {
             // Uses lazy initialization.
@@ -44,7 +49,7 @@ namespace VoxVisio.Singletons
         }
 
         // A list of all currently loaded commands
-        public List<Command> Commands
+        public EventList<Command> Commands
         {
             get
             {
@@ -56,7 +61,7 @@ namespace VoxVisio.Singletons
 
         public void SetCommands(List<Command> commands)
         {
-            this.commands = commands;
+            this.commands = (EventList<Command>)commands;
         }
         public void saveCommands()
         {
@@ -84,13 +89,14 @@ namespace VoxVisio.Singletons
 
         private void loadCommands()
         {
-            var tempList = new List<Command>();
-            string fileContents = Resources.Commands;
+            var tempList = new EventList<Command>();
+            string fileContents = Properties.Resources.Commands;
             using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
             {
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 JArray a = (JArray) o["commands"];
                 tempList.AddRange(from JObject variable in a select CommandFactory.CreateCommandFromJson(variable));
+                
             }
             commands = tempList;
         }
