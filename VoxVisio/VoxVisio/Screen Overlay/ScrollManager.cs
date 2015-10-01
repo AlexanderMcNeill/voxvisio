@@ -99,6 +99,23 @@ namespace VoxVisio.Screen_Overlay
             running = false;
         }
 
+        public bool VoiceInput(string voiceData)
+        {
+            switch (voiceData)
+            { 
+                case "start scroll":
+                    Start();
+                    break;
+                case "stop scroll":
+                    Stop();
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
+        }
+
         public void UpdateScroll(Point fixation)
         {
             //Checking if the fixation falls in one of the hotspots and changing to the 

@@ -37,17 +37,8 @@ namespace VoxVisio
                 double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
                 inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
-                //Checking all the cases that change state. This is for testing and will be changed in the future
-                if (voiceData.Equals("start scroll"))
-                {
-                    scrollManager.Start();
-                }
-                else if (voiceData.Equals("stop scroll"))
-                {
-                    scrollManager.Stop();
-                }
                 //Running a normal voice command
-                else
+                if(!scrollManager.VoiceInput(voiceData))
                 {
                     //Load the command that matches the command word, that isnt a key press command.
                     Command commandToFire = commandList.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
