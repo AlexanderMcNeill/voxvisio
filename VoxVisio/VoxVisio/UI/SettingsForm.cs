@@ -223,6 +223,11 @@ namespace VoxVisio.UI
         }
         private void deleteCommand<T>(DataGridView selecteDataGridView)
         {
+            if (MessageBox.Show("Are you sure you want to delete this command?", "Confirm deletion", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            {
+                // Break off the method if the user does not wish to delete the command
+                return;
+            }
             //Check if an item is selected
             if (selecteDataGridView.SelectedCells.Count == 0)
             {
