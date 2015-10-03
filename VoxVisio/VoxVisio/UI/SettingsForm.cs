@@ -206,79 +206,39 @@ namespace VoxVisio.UI
             txtBindKey.Clear();
             bindingKey = null;
         }
-
+        #region //delete functions
         private void btnDeleteSelectedVoiceCommands_Click(object sender, EventArgs e)
         {
-            //Check if an item is selected
-            if (dgvVoiceCommands.SelectedCells.Count == 0)
-            {
-                MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
-                return;
-            }
-            int selectedCommandWordIndex = dgvVoiceCommands.SelectedRows[0].Index;
-
-            //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
-            //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
-            int searchindex = 0;
-            foreach (VoiceCommand command in settings.Commands.OfType<VoiceCommand>())
-            {
-                if (searchindex == selectedCommandWordIndex)
-                {
-                    settings.Commands.Remove(command);
-                    return;
-                }
-                else
-                {
-                    searchindex++;
-                }
-            }
+            deleteCommand<VoiceCommand>(dgvVoiceCommands);
         }
 
         private void btnDeleteSelectedOpenProgramCommand_Click(object sender, EventArgs e)
         {
-            //Check if an item is selected
-            if (dgvOpenProgram.SelectedCells.Count == 0)
-            {
-                MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
-                return;
-            }
-            int selectedCommandWordIndex = dgvOpenProgram.SelectedRows[0].Index;
-
-            //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
-            //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
-            int searchindex = 0;
-            foreach (OpenProgramCommand command in settings.Commands.OfType<OpenProgramCommand>())
-            {
-                if (searchindex == selectedCommandWordIndex)
-                {
-                    settings.Commands.Remove(command);
-                    return;
-                }
-                else
-                {
-                    searchindex++;
-                }
-            }
+            deleteCommand<OpenProgramCommand>(dgvOpenProgram);
         }
 
         private void btnDeleteSelectedKeyBinding_Click(object sender, EventArgs e)
         {
+            deleteCommand<KeyPressCommand>(dgvKeyBinding);
+        }
+        private void deleteCommand<T>(DataGridView selecteDataGridView)
+        {
             //Check if an item is selected
-            if (dgvKeyBinding.SelectedCells.Count == 0)
+            if (selecteDataGridView.SelectedCells.Count == 0)
             {
                 MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
                 return;
             }
-            int selectedCommandWordIndex = dgvKeyBinding.SelectedRows[0].Index;
+            int selectedCommandWordIndex = selecteDataGridView.SelectedRows[0].Index;
 
             //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
             //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
             int searchindex = 0;
-            foreach (KeyPressCommand command in settings.Commands.OfType<KeyPressCommand>())
+            foreach (T command in settings.Commands.OfType<T>())
             {
                 if (searchindex == selectedCommandWordIndex)
                 {
-                    settings.Commands.Remove(command);
+                    settings.Commands.Remove((Command)command);
                     return;
                 }
                 else
@@ -287,6 +247,8 @@ namespace VoxVisio.UI
                 }
             }
         }
+
+        #endregion
 
         private void commandKeysFeildFocusChanged(object sender, EventArgs e)
         {
