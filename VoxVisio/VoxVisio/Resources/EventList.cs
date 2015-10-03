@@ -18,20 +18,34 @@ namespace VoxVisio.Resources
 
         public void Add(T item)
         {
+            base.Add(item);
             if (null != OnChange)
             {
                 OnChange(this, eListEvent.ItemAdded);
             }
-            base.Add(item);
+            
         }
 
         public void Remove(T item)
         {
+            base.Remove(item);
             if (null != OnChange)
             {
                 OnChange(this, eListEvent.ItemRemoved);
             }
-            base.Remove(item);
+            
         }
+
+        public void RemoveAt(int index)
+        {
+            base.RemoveAt(index);
+            if (null != OnChange)
+            {
+                OnChange(this, eListEvent.ItemRemoved);
+            }
+           
+        }
+        
+
     }
 }

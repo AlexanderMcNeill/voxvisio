@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using VoxVisio.Resources;
 using VoxVisio.Singletons;
 
 namespace VoxVisio.UI
@@ -22,10 +23,10 @@ namespace VoxVisio.UI
             FillKeyBindingTable();
             FillStartProgramTable();
             commandFocusCounter = 0;
-           // settings.Commands.CollectionChanged += updateTables;
+           settings.Commands.OnChange += updateTables;
         }
 
-        private void updateTables(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void updateTables(object sender, eListEvent changeType)
         {
             FillVoiceCommandTable();
             FillKeyBindingTable();
@@ -53,7 +54,6 @@ namespace VoxVisio.UI
                 txtVoiceCommandKeys.Text = "";
                 //Empty the keylist for new possible input
                 voiceCommandKeys = new List<Keys>();
-                FillVoiceCommandTable();
             }
 
 
@@ -122,6 +122,7 @@ namespace VoxVisio.UI
             {
                 dgvVoiceCommands.Rows.Add(c.VoiceKeyword, c.GetKeyStrings());
             }
+            dgvVoiceCommands.ClearSelection();
         }
 
         private void FillStartProgramTable()
@@ -208,23 +209,93 @@ namespace VoxVisio.UI
 
         private void btnDeleteSelectedVoiceCommands_Click(object sender, EventArgs e)
         {
-            //If an item is selected
-            int totalSelected = dgvVoiceCommands.SelectedCells.Count;
+            //Check if an item is selected
+            if (dgvVoiceCommands.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            int selectedCommandWordIndex = dgvVoiceCommands.SelectedRows[0].Index;
+
+            //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
+            //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
+            int searchindex = 0;
+            foreach (VoiceCommand command in settings.Commands.OfType<VoiceCommand>())
+            {
+                if (searchindex == selectedCommandWordIndex)
+                {
+                    settings.Commands.Remove(command);
+                    return;
+                }
+                else
+                {
+                    searchindex++;
+                }
+            }
         }
 
         private void btnDeleteSelectedOpenProgramCommand_Click(object sender, EventArgs e)
         {
+            //Check if an item is selected
+            if (dgvOpenProgram.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            int selectedCommandWordIndex = dgvOpenProgram.SelectedRows[0].Index;
 
+            //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
+            //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
+            int searchindex = 0;
+            foreach (OpenProgramCommand command in settings.Commands.OfType<OpenProgramCommand>())
+            {
+                if (searchindex == selectedCommandWordIndex)
+                {
+                    settings.Commands.Remove(command);
+                    return;
+                }
+                else
+                {
+                    searchindex++;
+                }
+            }
         }
 
         private void btnDeleteSelectedKeyBinding_Click(object sender, EventArgs e)
         {
+            //Check if an item is selected
+            if (dgvKeyBinding.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            int selectedCommandWordIndex = dgvKeyBinding.SelectedRows[0].Index;
 
+            //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
+            //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
+            int searchindex = 0;
+            foreach (KeyPressCommand command in settings.Commands.OfType<KeyPressCommand>())
+            {
+                if (searchindex == selectedCommandWordIndex)
+                {
+                    settings.Commands.Remove(command);
+                    return;
+                }
+                else
+                {
+                    searchindex++;
+                }
+            }
         }
 
         private void commandKeysFeildFocusChanged(object sender, EventArgs e)
         {
             commandFocusCounter = 0;
+        }
+
+        private void txtVoiceCommandKeys_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
