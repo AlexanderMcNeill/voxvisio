@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using FMUtils.KeyboardHook;
@@ -20,15 +21,31 @@ namespace VoxVisio.Singletons
         //public readonly List<KeyPressCommand> specialCommands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
-        
+        public bool ZoomEnabled { get; private set; }
+        public double ZoomMagnification { get; private set; }
+        public Size ZoomFormSize { get; private set; }
+
 
         protected SettingsSingleton()
         {
             loadCommands();
             //specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
-            saveCommands();
+            loadSettings();
+            //saveCommands();
             
+        }
+
+        private void loadSettings()
+        {
+            string fileContents = Properties.Resources.Settings;
+            using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
+            {
+                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                ZoomEnabled = (bool)o["zoom form"]["enabled"];
+                ZoomMagnification = (double) o["zoom form"]["magnification"];
+                ZoomFormSize = new Size((int)o["zoom form"]["width"], (int)o["zoom form"]["height"]);
+            }
         }
 
         
@@ -43,11 +60,6 @@ namespace VoxVisio.Singletons
             return _singleton;
         }
 
-        public void addSpecialCommand(KeyPressCommand toAddCommand)
-        {
-            commands.Add(toAddCommand);
-        }
-
         // A list of all currently loaded commands
         public EventList<Command> Commands
         {
@@ -57,8 +69,8 @@ namespace VoxVisio.Singletons
             }
         }
 
-        
 
+        #region command loading and saving
         public void SetCommands(List<Command> commands)
         {
             this.commands = (EventList<Command>)commands;
@@ -100,6 +112,6 @@ namespace VoxVisio.Singletons
             }
             commands = tempList;
         }
-
+#endregion
     }
 }

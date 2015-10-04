@@ -177,6 +177,7 @@
     <Content Include="Resources\Images\Icons\VoxLogo.png" />
     <None Include="Resources\Images\Icons\favicon.ico" />
     <None Include="Resources\settings\Commands.txt" />
+    <None Include="Resources\Settings.txt" />
     <Content Include="Tobii.EyeX.Client.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

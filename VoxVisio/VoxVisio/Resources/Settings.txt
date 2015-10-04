@@ -1,0 +1,10 @@
+{
+	"zoom form":
+	{
+		"enabled" : true,
+		"magnification" : 3,
+		"width" : 400,
+		"height" : 350
+	}
+
+}

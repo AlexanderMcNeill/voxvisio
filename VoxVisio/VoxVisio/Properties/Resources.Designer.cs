@@ -123,6 +123,24 @@ namespace VoxVisio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///	&quot;zoom form&quot;:
+        ///	{
+        ///		&quot;enabled&quot; : true,
+        ///		&quot;magnification&quot; : 3,
+        ///		&quot;width&quot; : 400,
+        ///		&quot;height&quot; : 350
+        ///	}
+        ///
+        ///}.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap VoxLogo {
