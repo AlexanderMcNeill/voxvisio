@@ -23,7 +23,17 @@ namespace VoxVisio.UI
             FillKeyBindingTable();
             FillStartProgramTable();
             commandFocusCounter = 0;
-           settings.Commands.OnChange += updateTables;
+            settings.Commands.OnChange += updateTables;
+            setUpSettingsControls();
+        }
+
+        //Configure all the settings controls to show the correct values from the settings file
+        private void setUpSettingsControls()
+        {
+            chkbxZoomEnabled.Checked = settings.ZoomEnabled;
+            trkbrMagnificationAmount.Value = (int)settings.ZoomMagnification;
+            udFormWidth.Value = settings.ZoomFormSize.Width;
+            udFormHeight.Value = settings.ZoomFormSize.Height;
         }
 
         private void updateTables(object sender, eListEvent changeType)
