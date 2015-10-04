@@ -512,6 +512,8 @@ namespace VoxVisio.UI
             // dgvKeyBinding
             // 
             this.dgvKeyBinding.AllowUserToAddRows = false;
+            this.dgvKeyBinding.AllowUserToDeleteRows = false;
+            this.dgvKeyBinding.AllowUserToResizeRows = false;
             this.dgvKeyBinding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKeyBinding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colKeyBind,
@@ -541,6 +543,8 @@ namespace VoxVisio.UI
             // dgvOpenProgram
             // 
             this.dgvOpenProgram.AllowUserToAddRows = false;
+            this.dgvOpenProgram.AllowUserToDeleteRows = false;
+            this.dgvOpenProgram.AllowUserToResizeRows = false;
             this.dgvOpenProgram.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOpenProgram.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProgramCommandWord,
@@ -570,6 +574,7 @@ namespace VoxVisio.UI
             // dgvVoiceCommands
             // 
             this.dgvVoiceCommands.AllowUserToAddRows = false;
+            this.dgvVoiceCommands.AllowUserToDeleteRows = false;
             this.dgvVoiceCommands.AllowUserToResizeRows = false;
             this.dgvVoiceCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVoiceCommands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
