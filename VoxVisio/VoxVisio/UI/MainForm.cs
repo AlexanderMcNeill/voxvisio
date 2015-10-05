@@ -80,6 +80,7 @@ namespace VoxVisio
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            
             base.OnFormClosing(e);
             EventSingleton.Instance().Dispose();
         }

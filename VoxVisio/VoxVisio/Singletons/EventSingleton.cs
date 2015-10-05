@@ -42,11 +42,6 @@ namespace VoxVisio.Singletons
             //keyboardHook = new Hook("Global Action Hook");
             //systemHook = new Hook();
 
-
-
-            //speechRecognizer = new SpeechRecognitionEngine();
-            SetupSpeechRecognition();
-
             fixationEvent += EventSingleton_fixationEvent;
 
             //Instantiating and starting the eye tracker host
@@ -76,9 +71,6 @@ namespace VoxVisio.Singletons
             //throw new NotImplementedException();
         }
 
-        private void SetupSpeechRecognition()
-        {
-        }
         public static EventSingleton Instance()
         {
             // Uses lazy initialization.

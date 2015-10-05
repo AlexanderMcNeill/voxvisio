@@ -287,5 +287,10 @@ namespace VoxVisio.UI
         {
             EventSingleton.Instance().setMouseFixationsStatus(chkbxDebugEyeTracking.Checked);
         }
+
+        private void btnVisualiseFixations_CheckedChanged(object sender, EventArgs e)
+        {
+            SharedFormsSingleton.Instance().EnableFixationVisualisation(btnVisualiseFixations.Checked);
+        }
     }
 }

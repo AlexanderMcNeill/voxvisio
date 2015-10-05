@@ -12,12 +12,27 @@ namespace VoxVisio.Singletons
         //Form for the zoom click
         public readonly ZoomForm zoomForm;
 
+        private FixationDot fixationDot;
+
         protected SharedFormsSingleton()
         {
             //Setting up the forms that need to always be available to the program
             overlayForm = new OverlayForm();
             zoomForm = new ZoomForm();
             overlayForm.Show();
+            fixationDot = new FixationDot();
+        }
+
+        public void EnableFixationVisualisation(bool enabled)
+        {
+            if (enabled)
+            {
+                overlayForm.RegisterOverlay(fixationDot);
+            }
+            else
+            {
+                overlayForm.RemoveOverlay(fixationDot);
+            }
         }
 
         public static SharedFormsSingleton Instance()
