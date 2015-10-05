@@ -4,7 +4,12 @@
 		"enabled" : true,
 		"magnification" : 3,
 		"width" : 400,
-		"height" : 350
+		"height" : 350,
+		
+	},
+	"eye tracking":
+	{
+		"debug mouse mode" : false
 	}
 
 }

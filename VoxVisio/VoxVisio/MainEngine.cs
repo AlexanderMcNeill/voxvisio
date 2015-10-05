@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Speech.Recognition;
+using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
 using VoxVisio.Singletons;
 
@@ -21,7 +22,8 @@ namespace VoxVisio
             stateController = new StateController();
 
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
-            EventSingleton.Instance().keyboardHook.KeyDownEvent += sharedData_keyboardEvent;
+            EventSingleton.Instance().systemHook.KeyDown += sharedData_keyboardEvent;
+            //EventSingleton.Instance().keyboardHook.KeyDownEvent += sharedData_keyboardEvent;
             speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
@@ -57,9 +59,9 @@ namespace VoxVisio
             speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
-        public void sharedData_keyboardEvent(KeyboardHookEventArgs e)
+        public void sharedData_keyboardEvent(object sender, KeyEventArgs keyEventArgs)
         {
-            stateController.KeyboardInput(e.Key);
+            stateController.KeyboardInput(keyEventArgs.KeyCode);
         }
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
@@ -91,7 +93,7 @@ namespace VoxVisio
         {
             speechRecognizer.Dispose();
             EventSingleton.Instance().fixationEvent -= sharedData_fixationEvent;
-            EventSingleton.Instance().keyboardHook.KeyDownEvent -= sharedData_keyboardEvent;
+            EventSingleton.Instance().systemHook.KeyDown -= sharedData_keyboardEvent;
             speechRecognizer.SpeechRecognized -= SpeechRecognised;
         }
     }

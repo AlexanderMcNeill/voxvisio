@@ -24,6 +24,7 @@ namespace VoxVisio.Singletons
         public bool ZoomEnabled { get; private set; }
         public double ZoomMagnification { get; private set; }
         public Size ZoomFormSize { get; private set; }
+        public bool DebugEyeMouseMode { get; private set; }
 
 
         protected SettingsSingleton()
@@ -45,6 +46,7 @@ namespace VoxVisio.Singletons
                 ZoomEnabled = (bool)o["zoom form"]["enabled"];
                 ZoomMagnification = (double) o["zoom form"]["magnification"];
                 ZoomFormSize = new Size((int)o["zoom form"]["width"], (int)o["zoom form"]["height"]);
+                DebugEyeMouseMode = (bool)o["eye tracking"]["debug mouse mode"];
             }
         }
 
@@ -59,13 +61,16 @@ namespace VoxVisio.Singletons
                 writer.Formatting = Formatting.Indented;
                 JObject obj1 = new JObject();
                 JObject obj2 = new JObject();
+                JObject obj3 = new JObject();
 
                 obj2["enabled"] = ZoomEnabled;
                 obj2["magnification"] = ZoomMagnification;
                 obj2["width"] = ZoomFormSize.Width;
                 obj2["height"] = ZoomFormSize.Height;
+                obj3["debug mouse mode"] = DebugEyeMouseMode;
 
                 obj1["zoom form"] = obj2;
+                obj1["eye tracking"] = obj3;
                 obj1.WriteTo(writer);
 
                 writer.Close();

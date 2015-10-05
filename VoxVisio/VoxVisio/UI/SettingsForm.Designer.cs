@@ -81,12 +81,14 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
+            this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFormHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFormWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkbrMagnificationAmount)).BeginInit();
+            this.tabEyeTracking.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbAddHotkeyCmd.SuspendLayout();
             this.gbAddProgramCmd.SuspendLayout();
@@ -230,6 +232,7 @@ namespace VoxVisio.UI
             // 
             // tabEyeTracking
             // 
+            this.tabEyeTracking.Controls.Add(this.chkbxDebugEyeTracking);
             this.tabEyeTracking.Location = new System.Drawing.Point(4, 22);
             this.tabEyeTracking.Name = "tabEyeTracking";
             this.tabEyeTracking.Padding = new System.Windows.Forms.Padding(3);
@@ -663,6 +666,17 @@ namespace VoxVisio.UI
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chkbxDebugEyeTracking
+            // 
+            this.chkbxDebugEyeTracking.AutoSize = true;
+            this.chkbxDebugEyeTracking.Location = new System.Drawing.Point(22, 22);
+            this.chkbxDebugEyeTracking.Name = "chkbxDebugEyeTracking";
+            this.chkbxDebugEyeTracking.Size = new System.Drawing.Size(158, 17);
+            this.chkbxDebugEyeTracking.TabIndex = 0;
+            this.chkbxDebugEyeTracking.Text = "Debug Mouse as Eye Mode";
+            this.chkbxDebugEyeTracking.UseVisualStyleBackColor = true;
+            this.chkbxDebugEyeTracking.CheckedChanged += new System.EventHandler(this.chkbxDebugEyeTracking_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -678,6 +692,8 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.udFormHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFormWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkbrMagnificationAmount)).EndInit();
+            this.tabEyeTracking.ResumeLayout(false);
+            this.tabEyeTracking.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.gbAddHotkeyCmd.ResumeLayout(false);
             this.gbAddHotkeyCmd.PerformLayout();
@@ -744,5 +760,6 @@ namespace VoxVisio.UI
         private NumericUpDown udFormWidth;
         private Label label9;
         private Label label8;
+        private CheckBox chkbxDebugEyeTracking;
     }
 }

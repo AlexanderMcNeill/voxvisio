@@ -3,8 +3,9 @@ using System.Drawing;
 using System.Speech.Recognition;
 using System.Windows.Forms;
 using EyeXFramework;
-using FMUtils.KeyboardHook;
+//using FMUtils.KeyboardHook;
 using Tobii.EyeX.Framework;
+using Gma.System.MouseKeyHook;
 
 namespace VoxVisio.Singletons
 {
@@ -27,7 +28,7 @@ namespace VoxVisio.Singletons
 
         private EyeXHost eyex;
         public event FixationEvent fixationEvent;
-        public readonly Hook keyboardHook;
+        public IKeyboardMouseEvents systemHook = Hook.GlobalEvents();
 
         protected EventSingleton()
         {
@@ -38,7 +39,10 @@ namespace VoxVisio.Singletons
             drawTimer.Interval = DRAWINTERVAL;
             drawTimer.Start();
 
-            keyboardHook = new Hook("Global Action Hook");
+            //keyboardHook = new Hook("Global Action Hook");
+            //systemHook = new Hook();
+
+
 
             //speechRecognizer = new SpeechRecognitionEngine();
             SetupSpeechRecognition();
@@ -47,8 +51,24 @@ namespace VoxVisio.Singletons
 
             //Instantiating and starting the eye tracker host
             eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp));
+            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y));
             eyex.Start();
+        }
+
+        public void setMouseFixationsStatus(bool status)
+        {
+            systemHook.MouseMove -= mouseToFixation;
+            if (status == true)
+            {
+                systemHook.MouseMove += mouseToFixation;
+            }
+
+            
+        }
+
+        private void mouseToFixation(object s, MouseEventArgs e)
+        {
+            fixationEvent(CreateFixation(FixationDataEventType.End, e.X, e.Y));
         }
 
         void EventSingleton_fixationEvent(Fixation newFixation)
@@ -71,7 +91,7 @@ namespace VoxVisio.Singletons
             return _singleton;
         }
 
-        private Fixation CreateFixation(FixationDataEventType fixationDataEventType, int x, int y, double timeStamp)
+        private Fixation CreateFixation(FixationDataEventType fixationDataEventType, int x, int y)
         {
             Fixation fx = null;
             switch (fixationDataEventType)

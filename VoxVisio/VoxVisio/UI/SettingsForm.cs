@@ -25,6 +25,8 @@ namespace VoxVisio.UI
             commandFocusCounter = 0;
             settings.Commands.OnChange += updateTables;
             setUpSettingsControls();
+            setDebugEyeState();
+
         }
 
         //Configure all the settings controls to show the correct values from the settings file
@@ -34,6 +36,7 @@ namespace VoxVisio.UI
             trkbrMagnificationAmount.Value = (int)settings.ZoomMagnification;
             udFormWidth.Value = settings.ZoomFormSize.Width;
             udFormHeight.Value = settings.ZoomFormSize.Height;
+            chkbxDebugEyeTracking.Checked = settings.DebugEyeMouseMode;
         }
 
         private void updateTables(object sender, eListEvent changeType)
@@ -273,6 +276,16 @@ namespace VoxVisio.UI
         private void txtVoiceCommandKeys_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkbxDebugEyeTracking_CheckedChanged(object sender, EventArgs e)
+        {
+            setDebugEyeState();
+        }
+
+        private void setDebugEyeState()
+        {
+            EventSingleton.Instance().setMouseFixationsStatus(chkbxDebugEyeTracking.Checked);
         }
     }
 }
