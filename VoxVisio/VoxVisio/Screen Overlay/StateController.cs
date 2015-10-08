@@ -27,11 +27,11 @@ namespace VoxVisio.Screen_Overlay
             int left = Screen.PrimaryScreen.Bounds.Width - HOTSPOTSIZE;
 
 
-            Rectangle commandStateHotspot = new Rectangle(left, top, HOTSPOTSIZE, HOTSPOTSIZE);
-            Rectangle dictationStateHotspot = new Rectangle(left, top + HOTSPOTSIZE + MARGIN, HOTSPOTSIZE, HOTSPOTSIZE);
+            Rectangle commandStateHotspot = new Rectangle(left, top - HOTSPOTSIZE, HOTSPOTSIZE, HOTSPOTSIZE*2);
+            Rectangle dictationStateHotspot = new Rectangle(left, top + HOTSPOTSIZE + MARGIN, HOTSPOTSIZE, HOTSPOTSIZE*2);
 
-            stateHotspots.Add(new StateHotspot("Command", ChangeStateCommand, commandStateHotspot, true));
-            stateHotspots.Add(new StateHotspot("Dication", ChangeStateDictation, dictationStateHotspot, false));
+            stateHotspots.Add(new StateHotspot("Command", ChangeStateCommand, commandStateHotspot, true, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive));
+            stateHotspots.Add(new StateHotspot("Dication", ChangeStateDictation, dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive));
 
             overlayForm = SharedFormsSingleton.Instance().overlayForm;
             overlayForm.RegisterOverlay(this);

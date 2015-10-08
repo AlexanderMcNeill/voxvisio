@@ -81,6 +81,26 @@ namespace VoxVisio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap commandButtonInactive {
+            get {
+                object obj = ResourceManager.GetObject("commandButtonInactive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap commandButtonsActive {
+            get {
+                object obj = ResourceManager.GetObject("commandButtonsActive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///  &quot;commands&quot;: [
         ///    {
@@ -113,6 +133,26 @@ namespace VoxVisio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap dictationButtonInactive {
+            get {
+                object obj = ResourceManager.GetObject("dictationButtonInactive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap dictationButtonsActive {
+            get {
+                object obj = ResourceManager.GetObject("dictationButtonsActive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon favicon {
@@ -129,7 +169,12 @@ namespace VoxVisio.Properties {
         ///		&quot;enabled&quot; : true,
         ///		&quot;magnification&quot; : 3,
         ///		&quot;width&quot; : 400,
-        ///		&quot;height&quot; : 350
+        ///		&quot;height&quot; : 350,
+        ///		
+        ///	},
+        ///	&quot;eye tracking&quot;:
+        ///	{
+        ///		&quot;debug mouse mode&quot; : false
         ///	}
         ///
         ///}.

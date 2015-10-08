@@ -5,33 +5,35 @@ namespace VoxVisio.Screen_Overlay
 {
     public class StateHotspot
     {
-
+        private Image activeImage;
+        private Image inactiveImage;
         private string name;
         private Action callback;
         private Rectangle hotspotRect;
         private int counter = 0;
         public bool selected = false;
         private bool focused = false;
+        private SolidBrush brush = new SolidBrush(Color.FromArgb(150, Color.Red));
 
-        public StateHotspot(string name, Action callback, Rectangle hotspotRect, bool selected)
+        public StateHotspot(string name, Action callback, Rectangle hotspotRect, bool selected, Image activeImage, Image inactiveImage)
         {
             this.name = name;
             this.selected = selected;
             this.callback = callback;
             this.hotspotRect = hotspotRect;
+            this.activeImage = activeImage;
+            this.inactiveImage = inactiveImage;
         }
 
         public void Draw(Graphics g)
         {
-            Font font1 = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point);
             if (selected)
             {
-                g.FillEllipse(Brushes.Green, hotspotRect);
-                
+               g.DrawImage(activeImage, hotspotRect);
             }
             else
             {
-                g.FillEllipse(Brushes.Blue, hotspotRect);
+                g.DrawImage(inactiveImage, hotspotRect);
 
                 //Getting how big the progress circle will be
                 int fillWidth = (hotspotRect.Width / 100) * counter;
@@ -41,9 +43,9 @@ namespace VoxVisio.Screen_Overlay
                 int xPos = (hotspotRect.Width - fillWidth) / 2 + hotspotRect.X;
                 int yPos = (hotspotRect.Width - fillHeight) / 2 + hotspotRect.Y;
 
-                g.FillEllipse(Brushes.Red, xPos, yPos, fillWidth, fillHeight);
+                g.FillEllipse(brush, xPos, yPos, fillWidth, fillHeight);
+                
             }
-            g.DrawString(name, font1, Brushes.YellowGreen, hotspotRect);
         }
 
         public void Update()

@@ -177,12 +177,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\imageActiveCommand.png" />
     <Content Include="Resources\Images\Command State\Arrow.bmp" />
     <Content Include="Resources\Images\Command State\ArrowFocused.bmp" />
     <Content Include="Resources\Images\Icons\VoxLogo.png" />
     <None Include="Resources\Images\Icons\favicon.ico" />
     <None Include="Resources\settings\Commands.txt" />
     <None Include="Resources\Settings.txt" />
+    <None Include="Resources\Images\StateButtons\commandButtonInactive.gif" />
+    <None Include="Resources\Images\StateButtons\commandButtonsActive.gif" />
+    <None Include="Resources\Images\StateButtons\dictationButtonInactive.png" />
+    <None Include="Resources\Images\StateButtons\dictationButtonsActive.png" />
     <Content Include="Tobii.EyeX.Client.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
