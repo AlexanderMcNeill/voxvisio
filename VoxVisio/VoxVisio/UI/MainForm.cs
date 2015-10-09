@@ -35,7 +35,7 @@ namespace VoxVisio
         {
             if (this.Bounds.Contains(newFixation.GetFixationLocation()))
             {
-
+                if(this != null)
                 Invoke(new Action(showForm));
                 
             }
@@ -80,7 +80,8 @@ namespace VoxVisio
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            
+            EventSingleton.Instance().updateTimer.Tick -= updateTimer_Tick;
+            EventSingleton.Instance().fixationEvent -= VoxVisio_fixationEvent;
             base.OnFormClosing(e);
             EventSingleton.Instance().Dispose();
         }
