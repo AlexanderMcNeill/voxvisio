@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Resources\EventList.cs" />
     <Compile Include="Screen Overlay\FixationDot.cs" />
+    <Compile Include="Screen Overlay\KeyboardManager.cs" />
     <Compile Include="Screen Overlay\StateController.cs" />
     <Compile Include="Screen Overlay\StateHotspot.cs" />
     <Compile Include="Singletons\EventSingleton.cs" />
