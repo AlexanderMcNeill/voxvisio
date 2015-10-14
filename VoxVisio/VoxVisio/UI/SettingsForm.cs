@@ -292,5 +292,10 @@ namespace VoxVisio.UI
         {
             SharedFormsSingleton.Instance().EnableFixationVisualisation(btnVisualiseFixations.Checked);
         }
+
+        private void btnCalibrate_Click(object sender, EventArgs e)
+        {
+            EventSingleton.Instance().eyex.LaunchRecalibration();
+        }
     }
 }
