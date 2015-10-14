@@ -29,13 +29,12 @@ namespace VoxVisio.Singletons
         protected SettingsSingleton()
         {
             loadCommands();
-            //specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
             loadSettings();
             saveSettings();
             
         }
-
+            
         private void loadSettings()
         {
             string fileContents = Properties.Resources.Settings;
@@ -140,6 +139,8 @@ namespace VoxVisio.Singletons
             }
             commands = tempList;
         }
+
+
 #endregion
     }
 }
