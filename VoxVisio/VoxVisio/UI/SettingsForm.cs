@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using VoxVisio.Resources;
 using VoxVisio.Singletons;
 
 namespace VoxVisio.UI
@@ -22,10 +23,23 @@ namespace VoxVisio.UI
             FillKeyBindingTable();
             FillStartProgramTable();
             commandFocusCounter = 0;
-           // settings.Commands.CollectionChanged += updateTables;
+            settings.Commands.OnChange += updateTables;
+            setUpSettingsControls();
+            setDebugEyeState();
+
         }
 
-        private void updateTables(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        //Configure all the settings controls to show the correct values from the settings file
+        private void setUpSettingsControls()
+        {
+            chkbxZoomEnabled.Checked = settings.ZoomEnabled;
+            trkbrMagnificationAmount.Value = (int)settings.ZoomMagnification;
+            udFormWidth.Value = settings.ZoomFormSize.Width;
+            udFormHeight.Value = settings.ZoomFormSize.Height;
+            chkbxDebugEyeTracking.Checked = settings.DebugEyeMouseMode;
+        }
+
+        private void updateTables(object sender, eListEvent changeType)
         {
             FillVoiceCommandTable();
             FillKeyBindingTable();
@@ -53,7 +67,6 @@ namespace VoxVisio.UI
                 txtVoiceCommandKeys.Text = "";
                 //Empty the keylist for new possible input
                 voiceCommandKeys = new List<Keys>();
-                FillVoiceCommandTable();
             }
 
 
@@ -122,6 +135,7 @@ namespace VoxVisio.UI
             {
                 dgvVoiceCommands.Rows.Add(c.VoiceKeyword, c.GetKeyStrings());
             }
+            dgvVoiceCommands.ClearSelection();
         }
 
         private void FillStartProgramTable()
@@ -205,26 +219,83 @@ namespace VoxVisio.UI
             txtBindKey.Clear();
             bindingKey = null;
         }
-
+        #region //delete functions
         private void btnDeleteSelectedVoiceCommands_Click(object sender, EventArgs e)
         {
-            //If an item is selected
-            int totalSelected = dgvVoiceCommands.SelectedCells.Count;
+            deleteCommand<VoiceCommand>(dgvVoiceCommands);
         }
 
         private void btnDeleteSelectedOpenProgramCommand_Click(object sender, EventArgs e)
         {
-
+            deleteCommand<OpenProgramCommand>(dgvOpenProgram);
         }
 
         private void btnDeleteSelectedKeyBinding_Click(object sender, EventArgs e)
         {
-
+            deleteCommand<KeyPressCommand>(dgvKeyBinding);
         }
+        private void deleteCommand<T>(DataGridView selecteDataGridView)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this command?", "Confirm deletion", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            {
+                // Break off the method if the user does not wish to delete the command
+                return;
+            }
+            //Check if an item is selected
+            if (selecteDataGridView.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("You must first select a command to delete", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            int selectedCommandWordIndex = selecteDataGridView.SelectedRows[0].Index;
+
+            //Commands must be searched through manually since each datya grid view only holds a subset of each command type, so the 
+            //straight index from the dgv won't nessicarily match the idext of the item in the list that needs to be removed.
+            int searchindex = 0;
+            foreach (T command in settings.Commands.OfType<T>())
+            {
+                if (searchindex == selectedCommandWordIndex)
+                {
+                    settings.Commands.Remove((Command)command);
+                    return;
+                }
+                else
+                {
+                    searchindex++;
+                }
+            }
+        }
+
+        #endregion
 
         private void commandKeysFeildFocusChanged(object sender, EventArgs e)
         {
             commandFocusCounter = 0;
+        }
+
+        private void txtVoiceCommandKeys_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkbxDebugEyeTracking_CheckedChanged(object sender, EventArgs e)
+        {
+            setDebugEyeState();
+        }
+
+        private void setDebugEyeState()
+        {
+            EventSingleton.Instance().setMouseFixationsStatus(chkbxDebugEyeTracking.Checked);
+        }
+
+        private void btnVisualiseFixations_CheckedChanged(object sender, EventArgs e)
+        {
+            SharedFormsSingleton.Instance().EnableFixationVisualisation(btnVisualiseFixations.Checked);
+        }
+
+        private void btnCalibrate_Click(object sender, EventArgs e)
+        {
+            EventSingleton.Instance().eyex.LaunchRecalibration();
         }
     }
 }

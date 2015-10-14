@@ -8,14 +8,13 @@ namespace VoxVisio
 {
     public partial class ZoomForm : Form
     {
-        private const int MAXZOOM = 3;
         private const int ZOOMTIME = 1;
         private Graphics g;
         private Bitmap bmp;
         private Graphics formGraphics;
         private int zoomCounter;
         private readonly InputSimulator inputSim;
-        private Command inputCommand;
+        private KeyCombo inputCommand;
         private Point fx;
         private Rectangle zoomRect;
         private Point formOffset;
@@ -48,20 +47,21 @@ namespace VoxVisio
             formGraphics.DrawImage(bmp, zoomRect.X, zoomRect.Y, zoomRect.Width, zoomRect.Height);
         }
 
-        public void startZoomClick(Command inputCommand)
+        public void startZoomClick(KeyCombo inputCommand)
         {
             if(!running)
             {
-            running = true;    
+            running = true;
+                this.ClientSize = SettingsSingleton.Instance().ZoomFormSize;
                 int xPos = MousePosition.X - (Width / 2);
                 int yPos = MousePosition.Y - (Height / 2);
                 GetFormPos(xPos, yPos);
 
                 g.FillRectangle(Brushes.Black, Bounds);
                 g.CopyFromScreen(xPos, yPos, 0, 0, new Size(Width, Height));
-
-                int zoomWidth = bmp.Width * MAXZOOM;
-                int zoomHeight = bmp.Height * MAXZOOM;
+                
+                int zoomWidth = (int)(bmp.Width * SettingsSingleton.Instance().ZoomMagnification);
+                int zoomHeight = (int)(bmp.Height * SettingsSingleton.Instance().ZoomMagnification);
 
                 int zoomXPos = -((zoomWidth - bmp.Width) / 2);
                 int zoomYPos = -((zoomHeight - bmp.Height) / 2);
@@ -118,8 +118,8 @@ namespace VoxVisio
         {
             this.Visible = false;
 
-            int zoomWidth = bmp.Width * MAXZOOM;
-            int zoomHeight = bmp.Height * MAXZOOM;
+            int zoomWidth = (int)(bmp.Width * SettingsSingleton.Instance().ZoomMagnification);
+            int zoomHeight = (int)(bmp.Height * SettingsSingleton.Instance().ZoomMagnification);
 
             int borderX = (zoomWidth - bmp.Width) / 2;
             int borderY = (zoomHeight - bmp.Height) / 2;
@@ -129,7 +129,7 @@ namespace VoxVisio
                 int mouseOnFormX = fx.X - Left;
                 int mouseOnFormY = fx.Y - Top;
 
-                Point mousePos = new Point(((mouseOnFormX + borderX) / MAXZOOM) + Left, ((mouseOnFormY + borderY) / MAXZOOM) + Top);
+                Point mousePos = new Point((int)(((mouseOnFormX + borderX) / SettingsSingleton.Instance().ZoomMagnification) + Left), (int)(((mouseOnFormY + borderY) / SettingsSingleton.Instance().ZoomMagnification) + Top));
 
                 mousePos.X += formOffset.X;
                 mousePos.Y += formOffset.Y;
@@ -146,7 +146,7 @@ namespace VoxVisio
             double mouseYPos = convertYToAbsolute(mousePos.Y);
             inputSim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
-            inputCommand.RunCommand();
+            inputCommand.PressKeys();
         }
 
        

@@ -16,22 +16,36 @@ namespace VoxVisio.Resources
         public delegate void ListChangeEventHandler(object sender, eListEvent e);
         public event ListChangeEventHandler OnChange;
 
-        public void Add(T item)
+        public new void Add(T item)
         {
+            base.Add(item);
             if (null != OnChange)
             {
                 OnChange(this, eListEvent.ItemAdded);
             }
-            base.Add(item);
+            
         }
 
-        public void Remove(T item)
+        public new void Remove(T item)
         {
+            base.Remove(item);
             if (null != OnChange)
             {
                 OnChange(this, eListEvent.ItemRemoved);
             }
-            base.Remove(item);
+            
         }
+
+        public new void RemoveAt(int index)
+        {
+            base.RemoveAt(index);
+            if (null != OnChange)
+            {
+                OnChange(this, eListEvent.ItemRemoved);
+            }
+           
+        }
+        
+
     }
 }

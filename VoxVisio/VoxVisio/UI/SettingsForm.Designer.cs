@@ -34,10 +34,16 @@ namespace VoxVisio.UI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.udFormHeight = new System.Windows.Forms.NumericUpDown();
+            this.udFormWidth = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.trkbrMagnificationAmount = new System.Windows.Forms.TrackBar();
+            this.chkbxZoomEnabled = new System.Windows.Forms.CheckBox();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
+            this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
+            this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gbAddHotkeyCmd = new System.Windows.Forms.GroupBox();
@@ -77,14 +83,14 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.btnCalibrate = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFormHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFormWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkbrMagnificationAmount)).BeginInit();
+            this.tabEyeTracking.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbAddHotkeyCmd.SuspendLayout();
             this.gbAddProgramCmd.SuspendLayout();
@@ -92,8 +98,6 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -121,19 +125,81 @@ namespace VoxVisio.UI
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown2);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.udFormHeight);
+            this.groupBox1.Controls.Add(this.udFormWidth);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.trackBar1);
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.trkbrMagnificationAmount);
+            this.groupBox1.Controls.Add(this.chkbxZoomEnabled);
             this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1118, 244);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Zoom Click Settings";
+            // 
+            // udFormHeight
+            // 
+            this.udFormHeight.Location = new System.Drawing.Point(102, 180);
+            this.udFormHeight.Maximum = new decimal(new int[] {
+            700,
+            0,
+            0,
+            0});
+            this.udFormHeight.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udFormHeight.Name = "udFormHeight";
+            this.udFormHeight.Size = new System.Drawing.Size(120, 20);
+            this.udFormHeight.TabIndex = 6;
+            this.udFormHeight.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // udFormWidth
+            // 
+            this.udFormWidth.Location = new System.Drawing.Point(102, 139);
+            this.udFormWidth.Maximum = new decimal(new int[] {
+            700,
+            0,
+            0,
+            0});
+            this.udFormWidth.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udFormWidth.Name = "udFormWidth";
+            this.udFormWidth.Size = new System.Drawing.Size(120, 20);
+            this.udFormWidth.TabIndex = 5;
+            this.udFormWidth.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 180);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(67, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Form Height:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 139);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Form Width:";
             // 
             // label7
             // 
@@ -144,30 +210,33 @@ namespace VoxVisio.UI
             this.label7.TabIndex = 2;
             this.label7.Text = "Magnification:";
             // 
-            // trackBar1
+            // trkbrMagnificationAmount
             // 
-            this.trackBar1.LargeChange = 2;
-            this.trackBar1.Location = new System.Drawing.Point(102, 54);
-            this.trackBar1.Maximum = 5;
-            this.trackBar1.Minimum = 1;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 1;
-            this.trackBar1.Value = 1;
+            this.trkbrMagnificationAmount.LargeChange = 2;
+            this.trkbrMagnificationAmount.Location = new System.Drawing.Point(102, 54);
+            this.trkbrMagnificationAmount.Maximum = 5;
+            this.trkbrMagnificationAmount.Minimum = 1;
+            this.trkbrMagnificationAmount.Name = "trkbrMagnificationAmount";
+            this.trkbrMagnificationAmount.Size = new System.Drawing.Size(104, 45);
+            this.trkbrMagnificationAmount.TabIndex = 1;
+            this.trkbrMagnificationAmount.Value = 1;
             // 
-            // checkBox1
+            // chkbxZoomEnabled
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkbxZoomEnabled.AutoSize = true;
+            this.chkbxZoomEnabled.Location = new System.Drawing.Point(6, 19);
+            this.chkbxZoomEnabled.Name = "chkbxZoomEnabled";
+            this.chkbxZoomEnabled.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkbxZoomEnabled.Size = new System.Drawing.Size(65, 17);
+            this.chkbxZoomEnabled.TabIndex = 0;
+            this.chkbxZoomEnabled.Text = "Enabled";
+            this.chkbxZoomEnabled.UseVisualStyleBackColor = true;
             // 
             // tabEyeTracking
             // 
+            this.tabEyeTracking.Controls.Add(this.btnCalibrate);
+            this.tabEyeTracking.Controls.Add(this.btnVisualiseFixations);
+            this.tabEyeTracking.Controls.Add(this.chkbxDebugEyeTracking);
             this.tabEyeTracking.Location = new System.Drawing.Point(4, 22);
             this.tabEyeTracking.Name = "tabEyeTracking";
             this.tabEyeTracking.Padding = new System.Windows.Forms.Padding(3);
@@ -175,6 +244,28 @@ namespace VoxVisio.UI
             this.tabEyeTracking.TabIndex = 2;
             this.tabEyeTracking.Text = "Eye Tracking";
             this.tabEyeTracking.UseVisualStyleBackColor = true;
+            // 
+            // btnVisualiseFixations
+            // 
+            this.btnVisualiseFixations.AutoSize = true;
+            this.btnVisualiseFixations.Location = new System.Drawing.Point(22, 54);
+            this.btnVisualiseFixations.Name = "btnVisualiseFixations";
+            this.btnVisualiseFixations.Size = new System.Drawing.Size(111, 17);
+            this.btnVisualiseFixations.TabIndex = 1;
+            this.btnVisualiseFixations.Text = "Visualise Fixations";
+            this.btnVisualiseFixations.UseVisualStyleBackColor = true;
+            this.btnVisualiseFixations.CheckedChanged += new System.EventHandler(this.btnVisualiseFixations_CheckedChanged);
+            // 
+            // chkbxDebugEyeTracking
+            // 
+            this.chkbxDebugEyeTracking.AutoSize = true;
+            this.chkbxDebugEyeTracking.Location = new System.Drawing.Point(22, 22);
+            this.chkbxDebugEyeTracking.Name = "chkbxDebugEyeTracking";
+            this.chkbxDebugEyeTracking.Size = new System.Drawing.Size(158, 17);
+            this.chkbxDebugEyeTracking.TabIndex = 0;
+            this.chkbxDebugEyeTracking.Text = "Debug Mouse as Eye Mode";
+            this.chkbxDebugEyeTracking.UseVisualStyleBackColor = true;
+            this.chkbxDebugEyeTracking.CheckedChanged += new System.EventHandler(this.chkbxDebugEyeTracking_CheckedChanged);
             // 
             // tabVoiceRecognition
             // 
@@ -432,10 +523,10 @@ namespace VoxVisio.UI
             this.txtVoiceCommandKeys.Name = "txtVoiceCommandKeys";
             this.txtVoiceCommandKeys.Size = new System.Drawing.Size(160, 20);
             this.txtVoiceCommandKeys.TabIndex = 23;
+            this.txtVoiceCommandKeys.TextChanged += new System.EventHandler(this.txtVoiceCommandKeys_TextChanged);
             this.txtVoiceCommandKeys.Enter += new System.EventHandler(this.commandKeysFeildFocusChanged);
             this.txtVoiceCommandKeys.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtVoiceCommandKeys_KeyUp);
             this.txtVoiceCommandKeys.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
-            this.txtVoiceCommandKeys.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtVoiceCommandKeys_MouseDown);
             // 
             // label5
             // 
@@ -480,6 +571,8 @@ namespace VoxVisio.UI
             // dgvKeyBinding
             // 
             this.dgvKeyBinding.AllowUserToAddRows = false;
+            this.dgvKeyBinding.AllowUserToDeleteRows = false;
+            this.dgvKeyBinding.AllowUserToResizeRows = false;
             this.dgvKeyBinding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKeyBinding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colKeyBind,
@@ -509,6 +602,8 @@ namespace VoxVisio.UI
             // dgvOpenProgram
             // 
             this.dgvOpenProgram.AllowUserToAddRows = false;
+            this.dgvOpenProgram.AllowUserToDeleteRows = false;
+            this.dgvOpenProgram.AllowUserToResizeRows = false;
             this.dgvOpenProgram.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOpenProgram.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProgramCommandWord,
@@ -538,6 +633,8 @@ namespace VoxVisio.UI
             // dgvVoiceCommands
             // 
             this.dgvVoiceCommands.AllowUserToAddRows = false;
+            this.dgvVoiceCommands.AllowUserToDeleteRows = false;
+            this.dgvVoiceCommands.AllowUserToResizeRows = false;
             this.dgvVoiceCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVoiceCommands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCommandWord,
@@ -595,37 +692,16 @@ namespace VoxVisio.UI
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // btnCalibrate
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 139);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Form Width:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 180);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(67, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Form Height:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(102, 139);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 5;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(102, 180);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown2.TabIndex = 6;
+            this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
+            this.btnCalibrate.Name = "btnCalibrate";
+            this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
+            this.btnCalibrate.TabIndex = 2;
+            this.btnCalibrate.Text = "Calibrate Eye Tracker";
+            this.btnCalibrate.UseVisualStyleBackColor = true;
+            this.btnCalibrate.Click += new System.EventHandler(this.btnCalibrate_Click);
             // 
             // SettingsForm
             // 
@@ -639,7 +715,11 @@ namespace VoxVisio.UI
             this.tabGeneral.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFormHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFormWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkbrMagnificationAmount)).EndInit();
+            this.tabEyeTracking.ResumeLayout(false);
+            this.tabEyeTracking.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.gbAddHotkeyCmd.ResumeLayout(false);
             this.gbAddHotkeyCmd.PerformLayout();
@@ -650,8 +730,6 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -702,11 +780,14 @@ namespace VoxVisio.UI
         private GroupBox gbAddVoiceCmd;
         private GroupBox groupBox1;
         private Label label7;
-        private TrackBar trackBar1;
-        private CheckBox checkBox1;
-        private NumericUpDown numericUpDown2;
-        private NumericUpDown numericUpDown1;
+        private TrackBar trkbrMagnificationAmount;
+        private CheckBox chkbxZoomEnabled;
+        private NumericUpDown udFormHeight;
+        private NumericUpDown udFormWidth;
         private Label label9;
         private Label label8;
+        private CheckBox chkbxDebugEyeTracking;
+        private CheckBox btnVisualiseFixations;
+        private Button btnCalibrate;
     }
 }

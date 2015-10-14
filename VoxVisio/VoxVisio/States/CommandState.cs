@@ -80,7 +80,7 @@ namespace VoxVisio
             if (firstOrDefault == null) return;
             string commandWord = firstOrDefault.commandWord;
             //Call the voice input method with the assicated command word
-            VoiceInput(commandWord, "Command");
+            VoiceInput(commandWord, GRAMMARNAME);
         }
     }
 }

@@ -3,8 +3,9 @@ using System.Drawing;
 using System.Speech.Recognition;
 using System.Windows.Forms;
 using EyeXFramework;
-using FMUtils.KeyboardHook;
+//using FMUtils.KeyboardHook;
 using Tobii.EyeX.Framework;
+using Gma.System.MouseKeyHook;
 
 namespace VoxVisio.Singletons
 {
@@ -25,9 +26,9 @@ namespace VoxVisio.Singletons
         public readonly Timer drawTimer = new Timer();
 
 
-        private EyeXHost eyex;
+        public readonly EyeXHost eyex;
         public event FixationEvent fixationEvent;
-        public readonly Hook keyboardHook;
+        public IKeyboardMouseEvents systemHook = Hook.GlobalEvents();
 
         protected EventSingleton()
         {
@@ -38,17 +39,32 @@ namespace VoxVisio.Singletons
             drawTimer.Interval = DRAWINTERVAL;
             drawTimer.Start();
 
-            keyboardHook = new Hook("Global Action Hook");
-
-            //speechRecognizer = new SpeechRecognitionEngine();
-            SetupSpeechRecognition();
+            //keyboardHook = new Hook("Global Action Hook");
+            //systemHook = new Hook();
 
             fixationEvent += EventSingleton_fixationEvent;
 
             //Instantiating and starting the eye tracker host
             eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp));
+            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y));
             eyex.Start();
+            
+        }
+
+        public void setMouseFixationsStatus(bool status)
+        {
+            systemHook.MouseMove -= mouseToFixation;
+            if (status == true)
+            {
+                systemHook.MouseMove += mouseToFixation;
+            }
+
+            
+        }
+
+        private void mouseToFixation(object s, MouseEventArgs e)
+        {
+            fixationEvent(CreateFixation(FixationDataEventType.End, e.X, e.Y));
         }
 
         void EventSingleton_fixationEvent(Fixation newFixation)
@@ -56,9 +72,6 @@ namespace VoxVisio.Singletons
             //throw new NotImplementedException();
         }
 
-        private void SetupSpeechRecognition()
-        {
-        }
         public static EventSingleton Instance()
         {
             // Uses lazy initialization.
@@ -71,7 +84,7 @@ namespace VoxVisio.Singletons
             return _singleton;
         }
 
-        private Fixation CreateFixation(FixationDataEventType fixationDataEventType, int x, int y, double timeStamp)
+        private Fixation CreateFixation(FixationDataEventType fixationDataEventType, int x, int y)
         {
             Fixation fx = null;
             switch (fixationDataEventType)
