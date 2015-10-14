@@ -42,6 +42,7 @@ namespace VoxVisio.UI
             this.trkbrMagnificationAmount = new System.Windows.Forms.TrackBar();
             this.chkbxZoomEnabled = new System.Windows.Forms.CheckBox();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
+            this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
             this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -82,7 +83,7 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
-            this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
+            this.btnCalibrate = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -233,6 +234,7 @@ namespace VoxVisio.UI
             // 
             // tabEyeTracking
             // 
+            this.tabEyeTracking.Controls.Add(this.btnCalibrate);
             this.tabEyeTracking.Controls.Add(this.btnVisualiseFixations);
             this.tabEyeTracking.Controls.Add(this.chkbxDebugEyeTracking);
             this.tabEyeTracking.Location = new System.Drawing.Point(4, 22);
@@ -242,6 +244,17 @@ namespace VoxVisio.UI
             this.tabEyeTracking.TabIndex = 2;
             this.tabEyeTracking.Text = "Eye Tracking";
             this.tabEyeTracking.UseVisualStyleBackColor = true;
+            // 
+            // btnVisualiseFixations
+            // 
+            this.btnVisualiseFixations.AutoSize = true;
+            this.btnVisualiseFixations.Location = new System.Drawing.Point(22, 54);
+            this.btnVisualiseFixations.Name = "btnVisualiseFixations";
+            this.btnVisualiseFixations.Size = new System.Drawing.Size(111, 17);
+            this.btnVisualiseFixations.TabIndex = 1;
+            this.btnVisualiseFixations.Text = "Visualise Fixations";
+            this.btnVisualiseFixations.UseVisualStyleBackColor = true;
+            this.btnVisualiseFixations.CheckedChanged += new System.EventHandler(this.btnVisualiseFixations_CheckedChanged);
             // 
             // chkbxDebugEyeTracking
             // 
@@ -679,16 +692,16 @@ namespace VoxVisio.UI
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnVisualiseFixations
+            // btnCalibrate
             // 
-            this.btnVisualiseFixations.AutoSize = true;
-            this.btnVisualiseFixations.Location = new System.Drawing.Point(22, 54);
-            this.btnVisualiseFixations.Name = "btnVisualiseFixations";
-            this.btnVisualiseFixations.Size = new System.Drawing.Size(111, 17);
-            this.btnVisualiseFixations.TabIndex = 1;
-            this.btnVisualiseFixations.Text = "Visualise Fixations";
-            this.btnVisualiseFixations.UseVisualStyleBackColor = true;
-            this.btnVisualiseFixations.CheckedChanged += new System.EventHandler(this.btnVisualiseFixations_CheckedChanged);
+            this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
+            this.btnCalibrate.Name = "btnCalibrate";
+            this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
+            this.btnCalibrate.TabIndex = 2;
+            this.btnCalibrate.Text = "Calibrate Eye Tracker";
+            this.btnCalibrate.UseVisualStyleBackColor = true;
+            this.btnCalibrate.Click += new System.EventHandler(this.btnCalibrate_Click);
             // 
             // SettingsForm
             // 
@@ -775,5 +788,6 @@ namespace VoxVisio.UI
         private Label label8;
         private CheckBox chkbxDebugEyeTracking;
         private CheckBox btnVisualiseFixations;
+        private Button btnCalibrate;
     }
 }

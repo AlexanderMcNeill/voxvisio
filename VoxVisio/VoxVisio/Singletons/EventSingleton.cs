@@ -26,7 +26,7 @@ namespace VoxVisio.Singletons
         public readonly Timer drawTimer = new Timer();
 
 
-        private EyeXHost eyex;
+        public readonly EyeXHost eyex;
         public event FixationEvent fixationEvent;
         public IKeyboardMouseEvents systemHook = Hook.GlobalEvents();
 
@@ -48,6 +48,7 @@ namespace VoxVisio.Singletons
             eyex = new EyeXHost();
             eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => fixationEvent(CreateFixation(e.EventType, (int)e.X, (int)e.Y));
             eyex.Start();
+            
         }
 
         public void setMouseFixationsStatus(bool status)
