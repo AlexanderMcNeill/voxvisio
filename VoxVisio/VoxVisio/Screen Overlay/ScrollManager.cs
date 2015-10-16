@@ -30,6 +30,7 @@ namespace VoxVisio.Screen_Overlay
         private Bitmap upArrow;
         private Bitmap downArrow;
         private OverlayForm overlayForm;
+        private Point lastFixation;
 
 
         public ScrollManager()
@@ -52,6 +53,8 @@ namespace VoxVisio.Screen_Overlay
             downArrowFocused = new Bitmap(Properties.Resources.ArrowFocused);
             downArrowFocused.MakeTransparent();
             downArrowFocused.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+            lastFixation = new Point(0, 0);
 
             setupHotspots();
         }
@@ -110,6 +113,20 @@ namespace VoxVisio.Screen_Overlay
                 case "stop scroll":
                     Stop();
                     break;
+                case "scroll":
+                    double mouseXPos = convertXToAbsolute(lastFixation.X);
+                    double mouseYPos = convertYToAbsolute(lastFixation.Y);
+                    inputSimulator.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
+                    inputSimulator.Mouse.LeftButtonClick();
+                    if (lastFixation.Y > Screen.PrimaryScreen.Bounds.Height / 2)
+                    {
+                        inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NEXT);
+                    }
+                    else
+                    {
+                        inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.PRIOR);
+                    }
+                    break;
                 default:
                     return false;
             }
@@ -119,6 +136,8 @@ namespace VoxVisio.Screen_Overlay
 
         public void UpdateScroll(Point fixation)
         {
+            lastFixation = fixation;
+
             //Checking if the fixation falls in one of the hotspots and changing to the 
             //corrosponding scroll state if it does
             if (topHotspot.Contains(fixation))
@@ -153,6 +172,18 @@ namespace VoxVisio.Screen_Overlay
                     g.DrawImage(downArrow, bottomHotspot);
                     break;
             }
+        }
+
+        //Method for converting the X position in pixels to the absolute number needed from the input simulator
+        private double convertXToAbsolute(int x)
+        {
+            return ((double)65535 * x) / (double)Screen.PrimaryScreen.Bounds.Width;
+        }
+
+        //Method for converting the Y position in pixels to the absolute number needed from the input simulator
+        private double convertYToAbsolute(int y)
+        {
+            return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
         }
     }
 }

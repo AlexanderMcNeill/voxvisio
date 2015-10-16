@@ -14,11 +14,10 @@ namespace VoxVisio.Singletons
     public class SettingsSingleton
     {
         private static SettingsSingleton _singleton;
+        public delegate void SettingsChangeEventHandler(object sender, SettingsSingleton e);
+        public event SettingsChangeEventHandler OnChange;
 
         private EventList<Command> commands;
-        //private readonly List<VoiceCommand> voiceCommands;
-        //private readonly List<OpenProgramCommand> openProgramCommand;
-        //public readonly List<KeyPressCommand> specialCommands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
         public bool ZoomEnabled { get; private set; }
@@ -30,13 +29,12 @@ namespace VoxVisio.Singletons
         protected SettingsSingleton()
         {
             loadCommands();
-            //specialCommands = new List<KeyPressCommand>();
             keyboardHook = new Hook("Global Action Hook");
             loadSettings();
             saveSettings();
             
         }
-
+            
         private void loadSettings()
         {
             string fileContents = Properties.Resources.Settings;
@@ -141,6 +139,8 @@ namespace VoxVisio.Singletons
             }
             commands = tempList;
         }
+
+
 #endregion
     }
 }

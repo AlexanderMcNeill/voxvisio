@@ -23,7 +23,6 @@ namespace VoxVisio
 
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
             EventSingleton.Instance().systemHook.KeyDown += sharedData_keyboardEvent;
-            //EventSingleton.Instance().keyboardHook.KeyDownEvent += sharedData_keyboardEvent;
             speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
@@ -81,6 +80,7 @@ namespace VoxVisio
 
             sList.Add("start scroll");
             sList.Add("stop scroll");
+            sList.Add("scroll");
 
             GrammarBuilder gb = new GrammarBuilder(sList);
             Grammar newCommandGrammar = new Grammar(gb);
