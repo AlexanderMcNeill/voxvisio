@@ -20,10 +20,10 @@ namespace VoxVisio.Singletons
         private EventList<Command> commands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
-        public bool ZoomEnabled { get; private set; }
-        public double ZoomMagnification { get; private set; }
-        public Size ZoomFormSize { get; private set; }
-        public bool DebugEyeMouseMode { get; private set; }
+        public bool ZoomEnabled { get; set; }
+        public double ZoomMagnification { get; set; }
+        public Size ZoomFormSize { get; set; }
+        public bool DebugEyeMouseMode { get; set; }
 
 
         protected SettingsSingleton()
@@ -37,42 +37,19 @@ namespace VoxVisio.Singletons
             
         private void loadSettings()
         {
-            string fileContents = Properties.Resources.Settings;
-            using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
-            {
-                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-                ZoomEnabled = (bool)o["zoom form"]["enabled"];
-                ZoomMagnification = (double) o["zoom form"]["magnification"];
-                ZoomFormSize = new Size((int)o["zoom form"]["width"], (int)o["zoom form"]["height"]);
-                DebugEyeMouseMode = (bool)o["eye tracking"]["debug mouse mode"];
-            }
+            ZoomEnabled = Settings.Default.ZoomEnabled;
+            ZoomMagnification = Settings.Default.ZoomMagnification;
+            ZoomFormSize = Settings.Default.ZoomFormSize;
+            DebugEyeMouseMode = Settings.Default.DebugEyeMouseMode;
         }
 
         private void saveSettings()
         {
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.NullValueHandling = NullValueHandling.Ignore;
-
-            using (StreamWriter sw = new StreamWriter(@"c:\jsonSettings.txt"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                writer.Formatting = Formatting.Indented;
-                JObject obj1 = new JObject();
-                JObject obj2 = new JObject();
-                JObject obj3 = new JObject();
-
-                obj2["enabled"] = ZoomEnabled;
-                obj2["magnification"] = ZoomMagnification;
-                obj2["width"] = ZoomFormSize.Width;
-                obj2["height"] = ZoomFormSize.Height;
-                obj3["debug mouse mode"] = DebugEyeMouseMode;
-
-                obj1["zoom form"] = obj2;
-                obj1["eye tracking"] = obj3;
-                obj1.WriteTo(writer);
-
-                writer.Close();
-            }
+            Settings.Default.ZoomEnabled = ZoomEnabled;
+            Settings.Default.ZoomMagnification = ZoomMagnification;
+            Settings.Default.ZoomFormSize = ZoomFormSize;
+            Settings.Default.DebugEyeMouseMode = DebugEyeMouseMode;
+            Settings.Default.Save();
         }
 
         

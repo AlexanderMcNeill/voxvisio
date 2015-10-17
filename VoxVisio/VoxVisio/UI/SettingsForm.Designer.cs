@@ -42,6 +42,7 @@ namespace VoxVisio.UI
             this.trkbrMagnificationAmount = new System.Windows.Forms.TrackBar();
             this.chkbxZoomEnabled = new System.Windows.Forms.CheckBox();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
+            this.btnCalibrate = new System.Windows.Forms.Button();
             this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
             this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
@@ -83,7 +84,6 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
-            this.btnCalibrate = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -231,6 +231,7 @@ namespace VoxVisio.UI
             this.chkbxZoomEnabled.TabIndex = 0;
             this.chkbxZoomEnabled.Text = "Enabled";
             this.chkbxZoomEnabled.UseVisualStyleBackColor = true;
+            this.chkbxZoomEnabled.CheckedChanged += new System.EventHandler(this.chkbxZoomEnabled_CheckedChanged);
             // 
             // tabEyeTracking
             // 
@@ -244,6 +245,17 @@ namespace VoxVisio.UI
             this.tabEyeTracking.TabIndex = 2;
             this.tabEyeTracking.Text = "Eye Tracking";
             this.tabEyeTracking.UseVisualStyleBackColor = true;
+            // 
+            // btnCalibrate
+            // 
+            this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
+            this.btnCalibrate.Name = "btnCalibrate";
+            this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
+            this.btnCalibrate.TabIndex = 2;
+            this.btnCalibrate.Text = "Calibrate Eye Tracker";
+            this.btnCalibrate.UseVisualStyleBackColor = true;
+            this.btnCalibrate.Click += new System.EventHandler(this.btnCalibrate_Click);
             // 
             // btnVisualiseFixations
             // 
@@ -691,17 +703,6 @@ namespace VoxVisio.UI
             this.lblVoiceCommandTitle.TabIndex = 8;
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnCalibrate
-            // 
-            this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
-            this.btnCalibrate.Name = "btnCalibrate";
-            this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
-            this.btnCalibrate.TabIndex = 2;
-            this.btnCalibrate.Text = "Calibrate Eye Tracker";
-            this.btnCalibrate.UseVisualStyleBackColor = true;
-            this.btnCalibrate.Click += new System.EventHandler(this.btnCalibrate_Click);
             // 
             // SettingsForm
             // 

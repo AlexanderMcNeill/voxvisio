@@ -297,5 +297,10 @@ namespace VoxVisio.UI
         {
             EventSingleton.Instance().eyex.LaunchRecalibration();
         }
+
+        private void chkbxZoomEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.ZoomEnabled = chkbxZoomEnabled.Checked;
+        }
     }
 }
