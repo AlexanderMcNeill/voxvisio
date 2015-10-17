@@ -302,5 +302,11 @@ namespace VoxVisio.UI
         {
             settings.ZoomEnabled = chkbxZoomEnabled.Checked;
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsSingleton.Instance().saveCommands();
+            SettingsSingleton.Instance().saveSettings();
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace VoxVisio.Singletons
             DebugEyeMouseMode = Settings.Default.DebugEyeMouseMode;
         }
 
-        private void saveSettings()
+        public void saveSettings()
         {
             Settings.Default.ZoomEnabled = ZoomEnabled;
             Settings.Default.ZoomMagnification = ZoomMagnification;
