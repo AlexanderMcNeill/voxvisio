@@ -32,7 +32,6 @@ namespace VoxVisio.Singletons
             keyboardHook = new Hook("Global Action Hook");
             loadSettings();
             saveSettings();
-            
         }
             
         private void loadSettings()
@@ -84,7 +83,7 @@ namespace VoxVisio.Singletons
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
 
-            using (StreamWriter sw = new StreamWriter(@"c:\json.txt"))
+            using (StreamWriter sw = new StreamWriter(@"commands.txt"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 writer.Formatting = Formatting.Indented;
@@ -105,8 +104,11 @@ namespace VoxVisio.Singletons
 
         private void loadCommands()
         {
+            // if the commands text file has been created, load it; otherwise load the defualt commands.
+            string fileContents = File.Exists("commands.txt") ? File.ReadAllText("commands.txt") : Properties.Resources.Commands;
+
             var tempList = new EventList<Command>();
-            string fileContents = Properties.Resources.Commands;
+            
             using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
             {
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
@@ -115,6 +117,7 @@ namespace VoxVisio.Singletons
                 
             }
             commands = tempList;
+            saveCommands();
         }
 
 
