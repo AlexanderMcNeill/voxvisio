@@ -70,5 +70,17 @@ namespace VoxVisio.Properties {
                 this["DebugEyeMouseMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DragonEnabled {
+            get {
+                return ((bool)(this["DragonEnabled"]));
+            }
+            set {
+                this["DragonEnabled"] = value;
+            }
+        }
     }
 }
