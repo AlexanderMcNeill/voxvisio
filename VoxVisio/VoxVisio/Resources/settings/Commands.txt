@@ -27,7 +27,7 @@
     },
     {
       "voice keyword": "create folder",
-      "keys": "ControlKey, ShiftKey, N",
+      "keys": "LButton, ControlKey, ShiftKey, N",
       "command type": "VoiceCommand"
     },
     {

@@ -9,8 +9,8 @@ namespace VoxVisio.Screen_Overlay
 {
     public class KeyboardManager
     {
-        private const string KEYBOARDPROCESSNAME = "";
-        private const string KEYBOARDPROGRAMPATH = "";
+        private const string KEYBOARDPROCESSNAME = "OptiKey";
+        private const string KEYBOARDPROGRAMPATH = "C:/Program Files (x86)/OptiKey/OptiKey.exe";
 
         public bool VoiceInput(string voiceData)
         {
@@ -36,13 +36,17 @@ namespace VoxVisio.Screen_Overlay
                 //Getting all processes that match the keyboard process name
                 procs = Process.GetProcessesByName(KEYBOARDPROCESSNAME);
 
-                //Killing the first process by that name
-                Process mspaintProc = procs[0];
-
-                if (!mspaintProc.HasExited)
+                if (procs.Length > 0)
                 {
-                    mspaintProc.Kill();
+                    //Killing the first process by that name
+                    Process mspaintProc = procs[0];
+
+                    if (!mspaintProc.HasExited)
+                    {
+                        mspaintProc.CloseMainWindow();
+                    }
                 }
+                
             }
             finally
             {
@@ -58,7 +62,6 @@ namespace VoxVisio.Screen_Overlay
 
         private void startKeyboard()
         {
-
             //Starting keyboard if there isn't already a keyboard instance running
             Process[] pname = Process.GetProcessesByName(KEYBOARDPROCESSNAME);
 

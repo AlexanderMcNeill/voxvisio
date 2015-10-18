@@ -114,10 +114,6 @@ namespace VoxVisio.Screen_Overlay
                     Stop();
                     break;
                 case "scroll":
-                    double mouseXPos = convertXToAbsolute(lastFixation.X);
-                    double mouseYPos = convertYToAbsolute(lastFixation.Y);
-                    inputSimulator.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
-                    inputSimulator.Mouse.LeftButtonClick();
                     if (lastFixation.Y > Screen.PrimaryScreen.Bounds.Height / 2)
                     {
                         inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NEXT);
