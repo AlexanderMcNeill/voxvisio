@@ -81,6 +81,8 @@ namespace VoxVisio
             sList.Add("start scroll");
             sList.Add("stop scroll");
             sList.Add("scroll");
+            sList.Add("start keyboard");
+            sList.Add("stop keyboard");
 
             GrammarBuilder gb = new GrammarBuilder(sList);
             Grammar newCommandGrammar = new Grammar(gb);

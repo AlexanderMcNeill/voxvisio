@@ -20,11 +20,18 @@ namespace VoxVisio.Singletons
         private EventList<Command> commands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
+<<<<<<< HEAD
         public bool ZoomEnabled { get; private set; }
         public double ZoomMagnification { get; private set; }
         public Size ZoomFormSize { get; private set; }
         public bool DebugEyeMouseMode { get; private set; }
         public bool DragonEnabled { get; private set; }
+=======
+        public bool ZoomEnabled { get; set; }
+        public double ZoomMagnification { get; set; }
+        public Size ZoomFormSize { get; set; }
+        public bool DebugEyeMouseMode { get; set; }
+>>>>>>> origin/master
 
 
         protected SettingsSingleton()
@@ -33,7 +40,6 @@ namespace VoxVisio.Singletons
             keyboardHook = new Hook("Global Action Hook");
             loadSettings();
             saveSettings();
-            
         }
             
         private void loadSettings()
@@ -48,10 +54,15 @@ namespace VoxVisio.Singletons
                 DebugEyeMouseMode = (bool)o["eye tracking"]["debug mouse mode"];
                 DragonEnabled = (bool) o["dragon enabled"];
             }
+            ZoomEnabled = Settings.Default.ZoomEnabled;
+            ZoomMagnification = Settings.Default.ZoomMagnification;
+            ZoomFormSize = Settings.Default.ZoomFormSize;
+            DebugEyeMouseMode = Settings.Default.DebugEyeMouseMode;
         }
 
-        private void saveSettings()
+        public void saveSettings()
         {
+<<<<<<< HEAD
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
 
@@ -76,6 +87,13 @@ namespace VoxVisio.Singletons
 
                 writer.Close();
             }
+=======
+            Settings.Default.ZoomEnabled = ZoomEnabled;
+            Settings.Default.ZoomMagnification = ZoomMagnification;
+            Settings.Default.ZoomFormSize = ZoomFormSize;
+            Settings.Default.DebugEyeMouseMode = DebugEyeMouseMode;
+            Settings.Default.Save();
+>>>>>>> origin/master
         }
 
         
@@ -110,7 +128,7 @@ namespace VoxVisio.Singletons
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
 
-            using (StreamWriter sw = new StreamWriter(@"c:\json.txt"))
+            using (StreamWriter sw = new StreamWriter(@"commands.txt"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 writer.Formatting = Formatting.Indented;
@@ -131,8 +149,11 @@ namespace VoxVisio.Singletons
 
         private void loadCommands()
         {
+            // if the commands text file has been created, load it; otherwise load the defualt commands.
+            string fileContents = File.Exists("commands.txt") ? File.ReadAllText("commands.txt") : Properties.Resources.Commands;
+
             var tempList = new EventList<Command>();
-            string fileContents = Properties.Resources.Commands;
+            
             using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
             {
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
@@ -141,6 +162,7 @@ namespace VoxVisio.Singletons
                 
             }
             commands = tempList;
+            saveCommands();
         }
 
 
