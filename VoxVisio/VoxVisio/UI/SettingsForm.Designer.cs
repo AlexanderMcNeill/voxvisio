@@ -42,6 +42,7 @@ namespace VoxVisio.UI
             this.trkbrMagnificationAmount = new System.Windows.Forms.TrackBar();
             this.chkbxZoomEnabled = new System.Windows.Forms.CheckBox();
             this.tabEyeTracking = new System.Windows.Forms.TabPage();
+            this.btnCalibrate = new System.Windows.Forms.Button();
             this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
             this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
@@ -83,7 +84,8 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
-            this.btnCalibrate = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -98,6 +100,7 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -106,10 +109,10 @@ namespace VoxVisio.UI
             this.tabControl1.Controls.Add(this.tabEyeTracking);
             this.tabControl1.Controls.Add(this.tabVoiceRecognition);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1139, 598);
+            this.tabControl1.Size = new System.Drawing.Size(1139, 583);
             this.tabControl1.TabIndex = 0;
             // 
             // tabGeneral
@@ -118,7 +121,7 @@ namespace VoxVisio.UI
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(1131, 572);
+            this.tabGeneral.Size = new System.Drawing.Size(1131, 557);
             this.tabGeneral.TabIndex = 1;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -231,6 +234,7 @@ namespace VoxVisio.UI
             this.chkbxZoomEnabled.TabIndex = 0;
             this.chkbxZoomEnabled.Text = "Enabled";
             this.chkbxZoomEnabled.UseVisualStyleBackColor = true;
+            this.chkbxZoomEnabled.CheckedChanged += new System.EventHandler(this.chkbxZoomEnabled_CheckedChanged);
             // 
             // tabEyeTracking
             // 
@@ -240,10 +244,21 @@ namespace VoxVisio.UI
             this.tabEyeTracking.Location = new System.Drawing.Point(4, 22);
             this.tabEyeTracking.Name = "tabEyeTracking";
             this.tabEyeTracking.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEyeTracking.Size = new System.Drawing.Size(1131, 572);
+            this.tabEyeTracking.Size = new System.Drawing.Size(1131, 557);
             this.tabEyeTracking.TabIndex = 2;
             this.tabEyeTracking.Text = "Eye Tracking";
             this.tabEyeTracking.UseVisualStyleBackColor = true;
+            // 
+            // btnCalibrate
+            // 
+            this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
+            this.btnCalibrate.Name = "btnCalibrate";
+            this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
+            this.btnCalibrate.TabIndex = 2;
+            this.btnCalibrate.Text = "Calibrate Eye Tracker";
+            this.btnCalibrate.UseVisualStyleBackColor = true;
+            this.btnCalibrate.Click += new System.EventHandler(this.btnCalibrate_Click);
             // 
             // btnVisualiseFixations
             // 
@@ -271,7 +286,7 @@ namespace VoxVisio.UI
             // 
             this.tabVoiceRecognition.Location = new System.Drawing.Point(4, 22);
             this.tabVoiceRecognition.Name = "tabVoiceRecognition";
-            this.tabVoiceRecognition.Size = new System.Drawing.Size(1131, 572);
+            this.tabVoiceRecognition.Size = new System.Drawing.Size(1131, 557);
             this.tabVoiceRecognition.TabIndex = 3;
             this.tabVoiceRecognition.Text = "Voice Recognition";
             this.tabVoiceRecognition.UseVisualStyleBackColor = true;
@@ -293,7 +308,7 @@ namespace VoxVisio.UI
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1131, 572);
+            this.tabPage1.Size = new System.Drawing.Size(1131, 557);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -307,7 +322,7 @@ namespace VoxVisio.UI
             this.gbAddHotkeyCmd.Controls.Add(this.txtBindKey);
             this.gbAddHotkeyCmd.Controls.Add(this.label6);
             this.gbAddHotkeyCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbAddHotkeyCmd.Location = new System.Drawing.Point(773, 472);
+            this.gbAddHotkeyCmd.Location = new System.Drawing.Point(773, 460);
             this.gbAddHotkeyCmd.Name = "gbAddHotkeyCmd";
             this.gbAddHotkeyCmd.Size = new System.Drawing.Size(350, 94);
             this.gbAddHotkeyCmd.TabIndex = 38;
@@ -384,7 +399,7 @@ namespace VoxVisio.UI
             this.gbAddProgramCmd.Controls.Add(this.btnOpenProgram);
             this.gbAddProgramCmd.Controls.Add(this.label2);
             this.gbAddProgramCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbAddProgramCmd.Location = new System.Drawing.Point(391, 472);
+            this.gbAddProgramCmd.Location = new System.Drawing.Point(391, 460);
             this.gbAddProgramCmd.Name = "gbAddProgramCmd";
             this.gbAddProgramCmd.Size = new System.Drawing.Size(350, 94);
             this.gbAddProgramCmd.TabIndex = 37;
@@ -469,7 +484,7 @@ namespace VoxVisio.UI
             this.gbAddVoiceCmd.Controls.Add(this.txtVoiceCommandKeys);
             this.gbAddVoiceCmd.Controls.Add(this.label5);
             this.gbAddVoiceCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbAddVoiceCmd.Location = new System.Drawing.Point(7, 472);
+            this.gbAddVoiceCmd.Location = new System.Drawing.Point(7, 460);
             this.gbAddVoiceCmd.Name = "gbAddVoiceCmd";
             this.gbAddVoiceCmd.Size = new System.Drawing.Size(349, 94);
             this.gbAddVoiceCmd.TabIndex = 36;
@@ -540,7 +555,7 @@ namespace VoxVisio.UI
             // 
             // btnDeleteSelectedKeyBinding
             // 
-            this.btnDeleteSelectedKeyBinding.Location = new System.Drawing.Point(773, 442);
+            this.btnDeleteSelectedKeyBinding.Location = new System.Drawing.Point(773, 430);
             this.btnDeleteSelectedKeyBinding.Name = "btnDeleteSelectedKeyBinding";
             this.btnDeleteSelectedKeyBinding.Size = new System.Drawing.Size(352, 23);
             this.btnDeleteSelectedKeyBinding.TabIndex = 35;
@@ -550,7 +565,7 @@ namespace VoxVisio.UI
             // 
             // btnDeleteSelectedOpenProgramCommand
             // 
-            this.btnDeleteSelectedOpenProgramCommand.Location = new System.Drawing.Point(391, 442);
+            this.btnDeleteSelectedOpenProgramCommand.Location = new System.Drawing.Point(391, 430);
             this.btnDeleteSelectedOpenProgramCommand.Name = "btnDeleteSelectedOpenProgramCommand";
             this.btnDeleteSelectedOpenProgramCommand.Size = new System.Drawing.Size(352, 23);
             this.btnDeleteSelectedOpenProgramCommand.TabIndex = 34;
@@ -560,7 +575,7 @@ namespace VoxVisio.UI
             // 
             // btnDeleteSelectedVoiceCommands
             // 
-            this.btnDeleteSelectedVoiceCommands.Location = new System.Drawing.Point(4, 442);
+            this.btnDeleteSelectedVoiceCommands.Location = new System.Drawing.Point(4, 430);
             this.btnDeleteSelectedVoiceCommands.Name = "btnDeleteSelectedVoiceCommands";
             this.btnDeleteSelectedVoiceCommands.Size = new System.Drawing.Size(352, 23);
             this.btnDeleteSelectedVoiceCommands.TabIndex = 33;
@@ -577,7 +592,7 @@ namespace VoxVisio.UI
             this.dgvKeyBinding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colKeyBind,
             this.colVoiceCommand});
-            this.dgvKeyBinding.Location = new System.Drawing.Point(775, 51);
+            this.dgvKeyBinding.Location = new System.Drawing.Point(775, 39);
             this.dgvKeyBinding.Name = "dgvKeyBinding";
             this.dgvKeyBinding.ReadOnly = true;
             this.dgvKeyBinding.RowHeadersVisible = false;
@@ -608,7 +623,7 @@ namespace VoxVisio.UI
             this.dgvOpenProgram.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProgramCommandWord,
             this.colProgramPath});
-            this.dgvOpenProgram.Location = new System.Drawing.Point(391, 51);
+            this.dgvOpenProgram.Location = new System.Drawing.Point(391, 39);
             this.dgvOpenProgram.Name = "dgvOpenProgram";
             this.dgvOpenProgram.ReadOnly = true;
             this.dgvOpenProgram.RowHeadersVisible = false;
@@ -639,7 +654,7 @@ namespace VoxVisio.UI
             this.dgvVoiceCommands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCommandWord,
             this.colKeys});
-            this.dgvVoiceCommands.Location = new System.Drawing.Point(4, 51);
+            this.dgvVoiceCommands.Location = new System.Drawing.Point(4, 39);
             this.dgvVoiceCommands.MultiSelect = false;
             this.dgvVoiceCommands.Name = "dgvVoiceCommands";
             this.dgvVoiceCommands.ReadOnly = true;
@@ -665,7 +680,7 @@ namespace VoxVisio.UI
             // lblKeyBindingTitle
             // 
             this.lblKeyBindingTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKeyBindingTitle.Location = new System.Drawing.Point(775, 17);
+            this.lblKeyBindingTitle.Location = new System.Drawing.Point(775, 5);
             this.lblKeyBindingTitle.Name = "lblKeyBindingTitle";
             this.lblKeyBindingTitle.Size = new System.Drawing.Size(350, 31);
             this.lblKeyBindingTitle.TabIndex = 10;
@@ -675,7 +690,7 @@ namespace VoxVisio.UI
             // lblOpenProgramTitle
             // 
             this.lblOpenProgramTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOpenProgramTitle.Location = new System.Drawing.Point(391, 17);
+            this.lblOpenProgramTitle.Location = new System.Drawing.Point(391, 5);
             this.lblOpenProgramTitle.Name = "lblOpenProgramTitle";
             this.lblOpenProgramTitle.Size = new System.Drawing.Size(350, 31);
             this.lblOpenProgramTitle.TabIndex = 9;
@@ -685,23 +700,29 @@ namespace VoxVisio.UI
             // lblVoiceCommandTitle
             // 
             this.lblVoiceCommandTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVoiceCommandTitle.Location = new System.Drawing.Point(7, 17);
+            this.lblVoiceCommandTitle.Location = new System.Drawing.Point(7, 5);
             this.lblVoiceCommandTitle.Name = "lblVoiceCommandTitle";
             this.lblVoiceCommandTitle.Size = new System.Drawing.Size(349, 31);
             this.lblVoiceCommandTitle.TabIndex = 8;
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnCalibrate
+            // menuStrip1
             // 
-            this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
-            this.btnCalibrate.Name = "btnCalibrate";
-            this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
-            this.btnCalibrate.TabIndex = 2;
-            this.btnCalibrate.Text = "Calibrate Eye Tracker";
-            this.btnCalibrate.UseVisualStyleBackColor = true;
-            this.btnCalibrate.Click += new System.EventHandler(this.btnCalibrate_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1163, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // SettingsForm
             // 
@@ -709,6 +730,8 @@ namespace VoxVisio.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 622);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "SettingsForm";
             this.Text = "Vox Viso Settings";
             this.tabControl1.ResumeLayout(false);
@@ -730,7 +753,10 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -789,5 +815,7 @@ namespace VoxVisio.UI
         private CheckBox chkbxDebugEyeTracking;
         private CheckBox btnVisualiseFixations;
         private Button btnCalibrate;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem saveToolStripMenuItem;
     }
 }
