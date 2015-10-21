@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsInput;
+using VoxVisio.Properties;
+using VoxVisio.Singletons;
+using System.Resources;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -26,23 +25,36 @@ namespace VoxVisio.Screen_Overlay
         private eScrollState scrollState;
         private InputSimulator inputSimulator;
         private bool running = false;
+        private Bitmap upArrowFocused;
+        private Bitmap downArrowFocused;
         private Bitmap upArrow;
         private Bitmap downArrow;
         private OverlayForm overlayForm;
+        private Point lastFixation;
 
 
         public ScrollManager()
         {
-            SharedDataSingleton sharedData = SharedDataSingleton.Instance();
-            overlayForm = sharedData.overlayForm;
-            inputSimulator = sharedData.inputSimulator;
-            sharedData.updateTimer.Tick += updateTimer_Tick;
+            overlayForm = SharedFormsSingleton.Instance().overlayForm;;
+            inputSimulator = SharedObjectsSingleton.Instance().inputSimulator;
+            EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
 
             scrollState = eScrollState.NOSCROLL;
 
             //Getting the images that will be used to 
-            upArrow = new Bitmap("UpArrow.png");
-            downArrow = new Bitmap("DownArrow.png");
+            upArrow = new Bitmap(Properties.Resources.Arrow);
+            upArrow.MakeTransparent();
+            downArrow = new Bitmap(Properties.Resources.Arrow);
+            downArrow.MakeTransparent();
+            downArrow.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+            upArrowFocused = new Bitmap(Properties.Resources.ArrowFocused);
+            upArrowFocused.MakeTransparent();
+            downArrowFocused = new Bitmap(Properties.Resources.ArrowFocused);
+            downArrowFocused.MakeTransparent();
+            downArrowFocused.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+            lastFixation = new Point(0, 0);
 
             setupHotspots();
         }
@@ -91,8 +103,37 @@ namespace VoxVisio.Screen_Overlay
             running = false;
         }
 
+        public bool VoiceInput(string voiceData)
+        {
+            switch (voiceData)
+            { 
+                case "start scroll":
+                    Start();
+                    break;
+                case "stop scroll":
+                    Stop();
+                    break;
+                case "scroll":
+                    if (lastFixation.Y > Screen.PrimaryScreen.Bounds.Height / 2)
+                    {
+                        inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NEXT);
+                    }
+                    else
+                    {
+                        inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.PRIOR);
+                    }
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
+        }
+
         public void UpdateScroll(Point fixation)
         {
+            lastFixation = fixation;
+
             //Checking if the fixation falls in one of the hotspots and changing to the 
             //corrosponding scroll state if it does
             if (topHotspot.Contains(fixation))
@@ -111,8 +152,34 @@ namespace VoxVisio.Screen_Overlay
 
         public void Draw(Graphics g)
         {
-            g.DrawImage(upArrow, topHotspot);
-            g.DrawImage(downArrow, bottomHotspot);
+
+            switch (scrollState)
+            {
+                case eScrollState.SCROLLUP:
+                    g.DrawImage(upArrowFocused, topHotspot);
+                    g.DrawImage(downArrow, bottomHotspot);
+                    break;
+                case eScrollState.SCROLLDOWN:
+                    g.DrawImage(upArrow, topHotspot);
+                    g.DrawImage(downArrowFocused, bottomHotspot);
+                    break;
+                default:
+                    g.DrawImage(upArrow, topHotspot);
+                    g.DrawImage(downArrow, bottomHotspot);
+                    break;
+            }
+        }
+
+        //Method for converting the X position in pixels to the absolute number needed from the input simulator
+        private double convertXToAbsolute(int x)
+        {
+            return ((double)65535 * x) / (double)Screen.PrimaryScreen.Bounds.Width;
+        }
+
+        //Method for converting the Y position in pixels to the absolute number needed from the input simulator
+        private double convertYToAbsolute(int y)
+        {
+            return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
         }
     }
 }

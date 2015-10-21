@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace VoxVisio.Screen_Overlay
 {
     class Toast : Overlay
     {
-        public void Draw(System.Drawing.Graphics g)
+        public void Draw(Graphics g)
         {
             throw new NotImplementedException();
         }

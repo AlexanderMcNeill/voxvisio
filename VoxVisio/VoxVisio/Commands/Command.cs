@@ -1,60 +1,241 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Speech.Synthesis.TtsEngine;
-using System.Text;
-using System.Xml.Serialization;
+using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using VoxVisio.Singletons;
+
+/*
+*   Notes:
+*   VirtualKeyCodes are used by the input simulator to simulate key presses,
+*   and Keys provided by the system hook whenever a key is pressed. VirtualKeyCodes and keys can be cast between eachother nativly.
+*/
 
 namespace VoxVisio
 {
-    public class CommandSingleton
+    public enum eCommandType
     {
-        private static CommandSingleton _singleton;
-        private List<Command> commands;
+        VoiceCommand,
+        KeyPressCommand,
+        OpenProgramCommand,
+    }
+    public interface Command
+    {
+        void RunCommand();
+        void LoadFromJson(JObject jsonData);
+        JObject SaveToJson();
+        string GetKeyWord();
+        eCommandType GetCommandType();
+    }
 
-        protected CommandSingleton()
+    public class OpenProgramCommand : Command
+    {
+        // How to start a program System.Diagnostics.Process.Start("C:/Program Files (x86)/OptiKey/OptiKey.exe");
+        private string ProgramLocation;
+        private string KeyWord;
+
+        public OpenProgramCommand(string programLocation, string KeyWord)
         {
-            
+            this.ProgramLocation = programLocation;
+            this.KeyWord = KeyWord;
         }
 
-        public List<Command> Commands
+        public OpenProgramCommand(JObject jsonData)
         {
-            get { return commands; }
+            LoadFromJson(jsonData);
         }
 
-        public static CommandSingleton Instance()
+        public void RunCommand()
         {
-            // Uses lazy initialization.
-            // Note: this is not thread safe.
-            if (_singleton == null)
-            {
-                _singleton = new CommandSingleton();
-            }
-
-            return _singleton;
+            Process.Start(ProgramLocation);
         }
 
-        public void SetCommands(List<Command> commands)
+        public void LoadFromJson(JObject jsonData)
         {
-            this.commands = commands;
+            ProgramLocation = (string) jsonData["program location"];
+            KeyWord =  (string)jsonData["keyword"];
+        }
+
+        public JObject SaveToJson()
+        {
+            JObject toReturn = new JObject();
+            toReturn["program location"] = ProgramLocation;
+            toReturn["keyword"] = KeyWord;
+            toReturn["command type"] = GetCommandType().ToString();
+            return toReturn;
+        }
+
+        public string GetKeyWord()
+        {
+            return KeyWord;
+        }
+
+        public string GetProgramLocation()
+        {
+            return ProgramLocation;
+        }
+        public eCommandType GetCommandType()
+        {
+            return eCommandType.OpenProgramCommand;
         }
     }
 
-    public class Command
+    public class KeyPressCommand : Command
+    {
+        // Key that triggers the command
+        public Keys triggerKey;
+        // Delegate to the method that needs to be called on trigger
+        public string commandWord;
+
+        public KeyPressCommand(string commandWord, Keys triggerKey)
+        {
+            this.triggerKey = triggerKey;
+            this.commandWord = commandWord;
+        }
+
+        public KeyPressCommand(JObject jsonData)
+        {
+            LoadFromJson(jsonData);
+        }
+
+        //Looks through all of the standard commands 
+        public void RunCommand()
+        {
+            SettingsSingleton.Instance().Commands.Find(x => x.GetKeyWord() == commandWord).RunCommand();
+        }
+
+        public void LoadFromJson(JObject jsonData)
+        {
+            string tempTriggerKey = (string) jsonData["trigger key"];         // Load String from json
+            VirtualKeyCode vkCode = KeyTranslater.GetKeyCode(tempTriggerKey); // Convert the string to a keycode using the Keytranslator
+            triggerKey = (Keys)vkCode;                                        // Cast the Vkeycode to a key and save to the class
+            commandWord = (string)jsonData["command word"];
+        }
+
+        public JObject SaveToJson()
+        {
+            JObject toReturn = new JObject();
+            toReturn["trigger key"] = KeyTranslater.GetKeyString((VirtualKeyCode)triggerKey);
+            toReturn["command word"] = commandWord;
+            toReturn["command type"] = GetCommandType().ToString();
+            return toReturn;
+        }
+
+
+        public string GetKeyWord()
+        {
+            return commandWord;
+        }
+
+        public eCommandType GetCommandType()
+        {
+            return eCommandType.KeyPressCommand;
+        }
+    }
+
+    public class CommandFactory
+    {
+        public static Command CreateCommandFromJson(JObject jsonData)
+        {
+            Command commandObject = null;
+            
+            string commandType= (string) jsonData["command type"];
+
+            if (commandType == eCommandType.KeyPressCommand.ToString())
+            {
+                commandObject = new KeyPressCommand(jsonData);
+            } else if (commandType == eCommandType.VoiceCommand.ToString())
+            {
+                commandObject = new VoiceCommand(jsonData);
+            }
+            else if (commandType == eCommandType.OpenProgramCommand.ToString())
+            {
+                commandObject = new OpenProgramCommand(jsonData);
+            }
+
+            return commandObject;
+        }
+    }
+
+    public class VoiceCommand : Command
     {
         public string VoiceKeyword { set; get; }
         public KeyCombo keyCombo { set; get; }
 
-        public Command(string commandWord, string keyStrings, InputSimulator inputSimulator)
+        private string keyStrings;
+
+        public VoiceCommand(string commandWord, string keyStrings, InputSimulator inputSimulator)
         {
+            this.keyStrings = keyStrings;
             this.VoiceKeyword = commandWord;
             this.keyCombo = new KeyCombo(keyStrings, inputSimulator);
         }
 
-        
+        public VoiceCommand(JObject JsonData)
+        {
+            LoadFromJson(JsonData);
+        }
+
+        public Dictionary<string,string> getDict()
+        {
+            var toReturn = new Dictionary<string, string>
+            {
+                {"voice keyword", VoiceKeyword},
+                {"keys", keyCombo.GetKeyString()}
+            };
+            return toReturn;
+        }
+
+        public void RunCommand()
+        {
+            if ((keyCombo.GetKeyString().Contains("LButton") || keyCombo.GetKeyString().Contains("RButton")) && SettingsSingleton.Instance().ZoomEnabled)
+            {
+                SharedFormsSingleton.Instance().zoomForm.startZoomClick(keyCombo);
+            }
+            else
+            {
+                keyCombo.PressKeys();
+            }
+        }
+
+        public void PressKeys()
+        {
+            keyCombo.PressKeys();
+        }
+
+        public void LoadFromJson(JObject jsonData)
+        {
+            this.VoiceKeyword = (string)jsonData["voice keyword"];
+            this.keyStrings = (string)jsonData["keys"];
+            this.keyCombo = new KeyCombo((string)jsonData["keys"], SharedObjectsSingleton.Instance().inputSimulator);
+        }
+
+        public JObject SaveToJson()
+        {
+            JObject toReturn = new JObject();
+            toReturn["voice keyword"] = VoiceKeyword;
+            toReturn["keys"] = keyCombo.GetKeyString();
+            toReturn["command type"] = GetCommandType().ToString();
+            return toReturn;
+        }
+
+        public string GetKeyWord()
+        {
+            return VoiceKeyword;
+        }
+
+        public string GetKeyStrings()
+        {
+            return keyStrings;
+        }
+
+        public eCommandType GetCommandType()
+        {
+            return eCommandType.VoiceCommand;
+        }
     }
 
     public class KeyCombo
@@ -78,7 +259,7 @@ namespace VoxVisio
             PressDownKeys();
             ReleaseHeldKeys();
         }
-        public void PressDownKeys()
+        private void PressDownKeys()
         {
             foreach (VirtualKeyCode virtualKeyCode in Keys)
             {
@@ -96,8 +277,7 @@ namespace VoxVisio
                 }
             }
         }
-
-        public void ReleaseHeldKeys()
+        private void ReleaseHeldKeys()
         {
             foreach (VirtualKeyCode virtualKeyCode in Keys)
             {
@@ -109,7 +289,7 @@ namespace VoxVisio
             var toReturn =
                 from k in Keys
                 select KeyTranslater.GetKeyString(k);
-            return String.Join(",", toReturn);
+            return String.Join(", ", toReturn);
         }
     }
 }

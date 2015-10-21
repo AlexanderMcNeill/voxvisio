@@ -1,140 +1,102 @@
-﻿using System;
+﻿using FMUtils.KeyboardHook;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using WindowsInput;
-using EyeXFramework;
-using Tobii.EyeX.Framework;
 using System.Speech.Recognition;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using VoxVisio.Properties;
+using System.Windows.Forms;
+using VoxVisio.Screen_Overlay;
+using VoxVisio.Singletons;
 
 namespace VoxVisio
 {
     public class MainEngine
     {
-        private ControlContext controlState;
-        private EyeXHost eyex;
-        private readonly InputSimulator inputSimulator;
-        private CommandSingleton commandList;
-        private SharedDataSingleton sharedData;
-
-        private List<Command> commands; 
-
-        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
-        private Grammar commandGrammar;
-        private Grammar dictationGrammar;
+        private List<Command> commandList;
+        private SpeechRecognitionEngine speechRecognizer;
+        private StateController stateController;
 
         public MainEngine()
         {
-            sharedData = SharedDataSingleton.Instance();
-            inputSimulator = sharedData.inputSimulator;
-            
-            controlState = new ControlContext();
-            controlState.changedState += StateChanged;
-            controlState.ControlState = new CommandState(inputSimulator, controlState);
-            
-            //System.Diagnostics.Process.Start("C:/Program Files (x86)/Nuance/NaturallySpeaking13/Program/natspeak.exe");
+            commandList = SettingsSingleton.Instance().Commands;
+            speechRecognizer = createSpeechRecogntionEngine();
 
+            stateController = new StateController();
 
-            loadCommands();
-            SetupSpeechRecognition();
-
-            //Instantiating and starting the eye tracker host
-            eyex = new EyeXHost();
-            eyex.CreateFixationDataStream(FixationDataMode.Sensitive).Next += (s, e) => Fixation(e.EventType, (int)e.X, (int)e.Y, e.Timestamp);
-            eyex.Start();
+            EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+            EventSingleton.Instance().systemHook.KeyDown += sharedData_keyboardEvent;
+            speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
 
-        private void SetupSpeechRecognition()
+        private void sharedData_fixationEvent(Fixation newFixation)
         {
-            //Setting up the grammars for the voice recognizer
-            loadCommandGrammar();
-            dictationGrammar = new DictationGrammar();
-            dictationGrammar.Name = "dictation";
+            stateController.EyeInput(newFixation);
+        }
 
-            commandList = CommandSingleton.Instance();
-            commandList.SetCommands(commands);
-            commandGrammar.Name = "command";
+        private SpeechRecognitionEngine createSpeechRecogntionEngine()
+        {
+            SpeechRecognitionEngine newSpeechRecognizer = new SpeechRecognitionEngine();
+
+            //Setting up the grammars for the voice recognizer
+            Grammar commandGrammar = createCommandGrammar();
+
+            Grammar dictationGrammar = new DictationGrammar();
+            dictationGrammar.Name = DictationState.GRAMMARNAME;
 
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
-            speechRecognizer.RequestRecognizerUpdate();
-            speechRecognizer.LoadGrammar(dictationGrammar);
-            speechRecognizer.LoadGrammar(commandGrammar);
-            speechRecognizer.SpeechRecognized += SpeechRecognised;
-            speechRecognizer.SetInputToDefaultAudioDevice();
-            speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+            newSpeechRecognizer.RequestRecognizerUpdate();
+            newSpeechRecognizer.LoadGrammar(dictationGrammar);
+            newSpeechRecognizer.LoadGrammar(commandGrammar);
+            newSpeechRecognizer.SetInputToDefaultAudioDevice();
+            newSpeechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+            return newSpeechRecognizer;
         }
 
-
-        public void Fixation(FixationDataEventType t, int x, int y, double timeStamp)
+        private void updateVoiceRecognition()
         {
-            Fixation fx = null;
-            switch (t)
-            {
-                case FixationDataEventType.Begin:
-                    fx = new Fixation(new Point(x, y), eFixationPhase.start);
-                    controlState.EyeRequest(fx);
-                    break;
-                case FixationDataEventType.End:
-                    fx = new Fixation(new Point(x,y),eFixationPhase.finished );
-                    controlState.EyeRequest(fx);
-                    break;
-            }
+            speechRecognizer.SpeechRecognized -= SpeechRecognised;
+            speechRecognizer = createSpeechRecogntionEngine();
+            speechRecognizer.SpeechRecognized += SpeechRecognised;
+        }
+
+        public void sharedData_keyboardEvent(object sender, KeyEventArgs keyEventArgs)
+        {
+            stateController.KeyboardInput(keyEventArgs.KeyCode);
         }
 
         public void SpeechRecognised(object sender, SpeechRecognizedEventArgs e)
         {
-
-            if (controlState.ControlState.GetType() == typeof(CommandState) && e.Result.Grammar.Name == "command")
-            {
-                controlState.VoiceRequest(e.Result.Text);
-            }
-            else if (controlState.ControlState.GetType() == typeof(DictationState) && e.Result.Grammar.Name == "dictation")
-            {
-                controlState.VoiceRequest(e.Result.Text);
-            }
+            stateController.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
         }
 
-        public void loadCommands()
-        {
-            commands = new List<Command>();
-            using (StreamReader reader = File.OpenText(@"Commands.json"))
-            {
-                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-                JArray a = (JArray)o.SelectToken("command");
-                
-                foreach (JObject variable in a)
-                {
-                    commands.Add(new Command((string)variable["word"], (string)variable["keys"] , inputSimulator));
-                }
-            }
-        }
+       
 
-        public void loadCommandGrammar()
+        public Grammar createCommandGrammar()
         {
-            var keywords = commands.Select(coms => coms.VoiceKeyword);
+            var keywords = commandList.Select(coms => coms.GetKeyWord());
+
             Choices sList = new Choices();
             sList.Add(keywords.ToArray());
-            sList.Add("dictation");
-            sList.Add("scroll");
+
+
+            sList.Add("start scroll");
             sList.Add("stop scroll");
+            sList.Add("scroll");
+            sList.Add("start keyboard");
+            sList.Add("stop keyboard");
+
             GrammarBuilder gb = new GrammarBuilder(sList);
-            commandGrammar = new Grammar(gb);
-        }
+            Grammar newCommandGrammar = new Grammar(gb);
+            newCommandGrammar.Name = CommandState.GRAMMARNAME;
 
-        public void StateChanged()
-        {
-
+            return newCommandGrammar;
         }
 
         internal void close()
         {
             speechRecognizer.Dispose();
-            eyex.Dispose();
+            EventSingleton.Instance().fixationEvent -= sharedData_fixationEvent;
+            EventSingleton.Instance().systemHook.KeyDown -= sharedData_keyboardEvent;
+            speechRecognizer.SpeechRecognized -= SpeechRecognised;
         }
     }
 }

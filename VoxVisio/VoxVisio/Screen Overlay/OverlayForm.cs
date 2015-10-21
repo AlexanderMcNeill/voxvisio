@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -79,6 +75,13 @@ namespace VoxVisio.Screen_Overlay
 
             //Getting reference to form graphics
             formGraphics = CreateGraphics();
+
+            EventSingleton.Instance().drawTimer.Tick += drawTimer_Tick; 
+        }
+
+        void drawTimer_Tick(object sender, EventArgs e)
+        {
+            DrawOverlays();
         }
 
         //==========================================================================================================
@@ -95,8 +98,6 @@ namespace VoxVisio.Screen_Overlay
 
         public void DrawOverlays()
         {
-            TopMost = true;
-
             //Clearing the buffer to the transparent color of the form
             bufferGraphics.Clear(BackColor);
 

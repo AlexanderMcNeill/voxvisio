@@ -1,40 +1,44 @@
-﻿using System;
-using System.Drawing;
-using VoxVisio.Screen_Overlay;
-using WindowsInput;
+﻿using WindowsInput;
+using WindowsInput.Native;
+using VoxVisio.Singletons;
+using System;
+using System.Windows.Forms;
 
 namespace VoxVisio
 {
     class DictationState : ControlState
     {
+        public const string GRAMMARNAME = "DictationGrammar";
 
         private InputSimulator inputsim;
-        private Hotspot closeHotspot;
-        private ControlContext context;
-        public DictationState(InputSimulator inputsim, ControlContext context)
+        public DictationState()
         {
-            this.inputsim = inputsim;
-           
-            this.context = context;
-            closeHotspot = new Hotspot(new Rectangle(0, 0, 250, 250), HotspotCallback);
+            this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
 
-            inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
+            if(SettingsSingleton.Instance().DragonEnabled)
+                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
 
-        public override void VoiceInput(string voiceData)
+        public override void VoiceInput(string voiceData, string grammarName)
         {
-            
-        }
-
-        public void HotspotCallback()
-        {
-            context.ControlState = new CommandState(inputsim, context);
-            inputsim.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.NUMPAD0);
+            if (!SettingsSingleton.Instance().DragonEnabled && grammarName.Equals(GRAMMARNAME))
+                inputsim.Keyboard.TextEntry(voiceData);
         }
 
         public override void EyeInput(IFixationData fixation)
         {
-            closeHotspot.update(fixation.GetFixationLocation());
+
+        }
+
+        public override void KeyboardInput(Keys keyPressed)
+        {
+
+        }
+
+        public override void Dispose()
+        {
+            if (SettingsSingleton.Instance().DragonEnabled)
+                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
     }
 }

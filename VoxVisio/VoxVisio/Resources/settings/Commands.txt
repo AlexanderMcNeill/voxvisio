@@ -1,0 +1,184 @@
+﻿{
+  "commands": [
+    {
+      "voice keyword": "click",
+      "keys": "LButton",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "double click",
+      "keys": "LButton, LButton",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "right Click",
+      "keys": "RButton",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "help",
+      "keys": "F1",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "close",
+      "keys": "Menu, F4",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "create folder",
+      "keys": "LButton, ControlKey, ShiftKey, N",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "create text file",
+      "keys": "RButton, W, T",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "properties",
+      "keys": "Menu, LButton, LButton",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "delete item",
+      "keys": "LButton, Del",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "start",
+      "keys": "LWin",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "show desktop",
+      "keys": "LWin, D",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "my computer",
+      "keys": "LWin, E",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "open",
+      "keys": "ControlKey, O",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "open item",
+      "keys": "LButton, LButton",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "rename item",
+      "keys": "LButton, F2",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "Enter",
+      "keys": "Enter",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "switch app",
+      "keys": "ControlKey, LWin, Tab",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "save",
+      "keys": "ControlKey, S",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "find",
+      "keys": "ControlKey, F",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "snap left",
+      "keys": "LWin, Left",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "snap right",
+      "keys": "LWin, Right",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "copy",
+      "keys": "ControlKey, C",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "copy item",
+      "keys": "LButton, ControlKey, C",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "paste",
+      "keys": "ControlKey, V",
+      "command type": "VoiceCommand"
+    },
+	    {
+      "voice keyword": "paste item",
+      "keys": "LButton, ControlKey, V",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "cut",
+      "keys": "ControlKey, X",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "cut item",
+      "keys": "LButton, ControlKey, X",
+      "command type": "VoiceCommand"
+    },
+	{
+      "voice keyword": "select all",
+      "keys": "ControlKey, A",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "print",
+      "keys": "ControlKey, P",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "minimize",
+      "keys": "LWin, Down",
+      "command type": "VoiceCommand"
+    },
+    {
+      "voice keyword": "maximize",
+      "keys": "LWin, Up",
+      "command type": "VoiceCommand"
+    },
+    {
+      "trigger key": "F12",
+      "command word": "double click",
+      "command type": "KeyPressCommand"
+    },
+	{
+      "keyword": "open google",
+      "program location": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+	  "command type": "OpenProgramCommand"
+    },
+	{
+      "keyword": "open word",
+      "program location": "C:/Program Files (x86)/Microsoft Office/Office15/WINWORD.EXE",
+	  "command type": "OpenProgramCommand"
+    },
+	{
+      "keyword": "open media player",
+      "program location": "C:/Program Files (x86)/Windows Media Player/wmplayer.exe",
+	  "command type": "OpenProgramCommand"
+    },
+	{
+      "keyword": "open keyboard",
+      "program location": "C:/Program Files (x86)/OptiKey/OptiKey.exe",
+	  "command type": "OpenProgramCommand"
+    }
+  ]
+}

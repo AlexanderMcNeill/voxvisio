@@ -1,11 +1,13 @@
-﻿namespace VoxVisio.Screen_Overlay
+﻿using System.ComponentModel;
+
+namespace VoxVisio.Screen_Overlay
 {
     partial class OverlayForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.

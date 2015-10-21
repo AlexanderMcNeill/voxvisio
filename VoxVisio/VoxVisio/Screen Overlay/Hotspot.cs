@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -20,11 +17,11 @@ namespace VoxVisio.Screen_Overlay
 
         public Hotspot(Rectangle hotspotRect, Action callback)
         {
-            SharedDataSingleton sharedData = SharedDataSingleton.Instance();
-            updateTimer = sharedData.updateTimer;
+            updateTimer = EventSingleton.Instance().updateTimer;
             updateTimer.Tick += updateTimer_Tick;
-            overlayForm = sharedData.overlayForm;
+            overlayForm = SharedFormsSingleton.Instance().overlayForm;
             overlayForm.RegisterOverlay(this);
+
             this.hotspotRect = hotspotRect;
             this.callback = callback;
         }
