@@ -21,7 +21,7 @@ namespace VoxVisio
             InitializeComponent();
             StartDragon();
             TopMost = true;
-            Top = 0;
+            Top = HIDDENYPOS;
             Left = Screen.PrimaryScreen.Bounds.Width / 2 - Width / 2;
 
             mainEngine = new MainEngine();
@@ -30,17 +30,6 @@ namespace VoxVisio
             helpForm = new HelpForm();
 
             EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
-            EventSingleton.Instance().fixationEvent += VoxVisio_fixationEvent;
-        }
-
-        private void VoxVisio_fixationEvent(Fixation newFixation)
-        {
-            if (this.Bounds.Contains(newFixation.GetFixationLocation()))
-            {
-                if(this != null)
-                Invoke(new Action(showForm));
-                
-            }
         }
 
         private void StartDragon()
@@ -94,7 +83,6 @@ namespace VoxVisio
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             EventSingleton.Instance().updateTimer.Tick -= updateTimer_Tick;
-            EventSingleton.Instance().fixationEvent -= VoxVisio_fixationEvent;
             base.OnFormClosing(e);
             EventSingleton.Instance().Dispose();
         }
