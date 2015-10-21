@@ -19,6 +19,7 @@ namespace VoxVisio
         private ScrollManager scrollManager;
         private ZoomForm zoomForm;
         private KeyboardManager keyboardManager;
+        private Toast toastOverlay;
 
         public CommandState()
         {
@@ -28,6 +29,7 @@ namespace VoxVisio
 
             scrollManager = new ScrollManager();
             keyboardManager = new KeyboardManager();
+            toastOverlay = SharedFormsSingleton.Instance().ToastOverlay;
         }
 
         public override void VoiceInput(string voiceData, string grammarName)
@@ -40,13 +42,17 @@ namespace VoxVisio
                 inputsim.Mouse.MoveMouseTo(mouseXPos, mouseYPos);
 
                 //Running a normal voice command
-                if(!scrollManager.VoiceInput(voiceData) && ! keyboardManager.VoiceInput(voiceData))
+                if (!scrollManager.VoiceInput(voiceData) && !keyboardManager.VoiceInput(voiceData))
                 {
                     //Load the command that matches the command word, that isnt a key press command.
                     Command commandToFire = commandList.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
                     commandToFire.RunCommand();
 
                 }
+            }
+            else 
+            {
+                toastOverlay.NewMessage("Sorry, I didn't catch that.\nPlease try again.");
             }
         }
 
