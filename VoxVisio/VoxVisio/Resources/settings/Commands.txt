@@ -30,6 +30,11 @@
       "keys": "LButton, ControlKey, ShiftKey, N",
       "command type": "VoiceCommand"
     },
+	{
+      "voice keyword": "create text file",
+      "keys": "RButton, W, T",
+      "command type": "VoiceCommand"
+    },
     {
       "voice keyword": "properties",
       "keys": "Menu, LButton, LButton",
