@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
 using VoxVisio.UI;
@@ -18,6 +19,7 @@ namespace VoxVisio
         public VoxVisio()
         {
             InitializeComponent();
+            StartDragon();
             TopMost = true;
             Top = 0;
             Left = Screen.PrimaryScreen.Bounds.Width / 2 - Width / 2;
@@ -38,6 +40,17 @@ namespace VoxVisio
                 if(this != null)
                 Invoke(new Action(showForm));
                 
+            }
+        }
+
+        private void StartDragon()
+        {
+            //Starting keyboard if there isn't already a keyboard instance running
+            Process[] pname = Process.GetProcessesByName("natspeak");
+
+            if (pname.Length == 0)
+            {
+                Process.Start(@"C:\Program Files (x86)\Nuance\NaturallySpeaking13\Program\natspeak.exe");
             }
         }
 
