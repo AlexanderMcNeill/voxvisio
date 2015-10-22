@@ -11,7 +11,9 @@ See the installation section of the wiki to get started. It will take you step b
 
 #Supported Platforms
 
-The system 
+Vox Visio targets the .NET 4.5 framework what means it will run on systems XX onward. It was designed to run on Windows 7.
+
+The system will work on Windows 8 and Windows 10 but we are unsure how it will interact with the metro and virtual desktops
 
 #Necessary Hardware 
 
