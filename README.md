@@ -13,7 +13,7 @@ See the installation section of the [wiki](https://github.com/AlexanderMcNeill/v
 
 Vox Visio targets the .NET 4.5 framework and uses the Tobii EyeX SDK. This means it will run on systems Windows 7 onward and was designed to run on Windows 7.
 
-The system will work on Windows 8 and Windows 10 but we are unsure how it will interact with the metro and virtual desktops
+The system will work on Windows 8 and Windows 10 but we are unsure how it will interact with the metro and virtual desktops.
 
 #Necessary Hardware 
 
