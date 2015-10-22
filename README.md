@@ -1,4 +1,4 @@
-# voxviso
+# Vox Visio
 Vox Visio is an assistive technology research project that has developed and proven an integrated eye gaze and voice control system. The system has been used for formal experiments into computer control and the application will form the basis for a open source repository for assistive technology.
 
 Note: This statement is using back casting and may be changed to match what we have actually achieved
