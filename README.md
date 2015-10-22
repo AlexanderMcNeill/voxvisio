@@ -7,9 +7,11 @@ Vox Visio was written as part of Daniel Mazur and Alex McNeill's undergraduate p
 
 #Getting Started
 
+See the installation section of the wiki to get started. It will take you step by step how to install and setup the software.
+
 #Supported Platforms
 
-Vox Visio 
+The system 
 
 #Necessary Hardware 
 
