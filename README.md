@@ -15,6 +15,10 @@ The system
 
 #Necessary Hardware 
 
+To use the software you will need the following hardware:
+* Tobii EyeX Gaze Tracker
+* A microphone. For testing we used the SpeechWare USB 3-in-1 TableMike
+
 #Problems?
 If you have any issues with the system please use the issue tracker to report the problem.
 
