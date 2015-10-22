@@ -21,6 +21,15 @@ To use the software you will need the following hardware:
 * Tobii EyeX Gaze Tracker
 * A microphone. For testing we used the SpeechWare USB 3-in-1 TableMike
 
+#Optional Software
+
+To add functionality and improve parts of our system you have to option of using some external software. The software we support is:
+
+*Dragon Naturally Speaking
+*Optikey
+
+To use this software adjust the settings to point at the executable for the software and add anyother setting our system asks for. For step by step instructions on this please see our [wiki](https://github.com/AlexanderMcNeill/voxvisio/wiki/).
+
 #Problems?
 If you have any issues with the system please use the issue tracker to report the problem.
 
