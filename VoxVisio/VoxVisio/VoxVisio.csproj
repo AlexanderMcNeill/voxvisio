@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Screen Overlay\ScrollManager.cs" />
     <Compile Include="Screen Overlay\Toast.cs" />
+    <Compile Include="States\eState.cs" />
     <Compile Include="UI\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>

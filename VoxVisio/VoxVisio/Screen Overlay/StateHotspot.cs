@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using VoxVisio.States;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -7,7 +8,7 @@ namespace VoxVisio.Screen_Overlay
     {
         private Image activeImage;
         private Image inactiveImage;
-        private string name;
+        private eState state;
         private Action callback;
         private Rectangle hotspotRect;
         private int counter = 0;
@@ -15,12 +16,21 @@ namespace VoxVisio.Screen_Overlay
         private bool focused = false;
         private SolidBrush brush = new SolidBrush(Color.FromArgb(150, Color.Red));
 
-        public StateHotspot(string name, Action callback, Rectangle hotspotRect, bool selected, Image activeImage, Image inactiveImage)
+        public delegate void HotspotActivatedEventHandler(StateHotspot sender, eScrollState e);
+        public event HotspotActivatedEventHandler OnChange;
+
+        public StateHotspot(eState state, Rectangle hotspotRect, bool selected, Image activeImage, Image inactiveImage)
         {
-            this.name = name;
+            //Setting what state the hotspot represents
+            this.state = state;
+
+            //Setting if it is currently selected
             this.selected = selected;
-            this.callback = callback;
+
+            //Setting the size and position of the hotspot
             this.hotspotRect = hotspotRect;
+
+            //Setting the images it will use to display if it is active
             this.activeImage = activeImage;
             this.inactiveImage = inactiveImage;
         }
@@ -29,10 +39,12 @@ namespace VoxVisio.Screen_Overlay
         {
             if (selected)
             {
-               g.DrawImage(activeImage, hotspotRect);
+                //If the hotspot is currently selected displaying the active image
+                g.DrawImage(activeImage, hotspotRect);
             }
             else
             {
+                //If the hotspot is not selected displaying the inactive image
                 g.DrawImage(inactiveImage, hotspotRect);
 
                 //Getting how big the progress circle will be
