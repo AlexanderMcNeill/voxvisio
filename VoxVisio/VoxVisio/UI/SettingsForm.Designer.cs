@@ -31,6 +31,7 @@ namespace VoxVisio.UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -84,8 +85,7 @@ namespace VoxVisio.UI
             this.lblKeyBindingTitle = new System.Windows.Forms.Label();
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSaveChanges = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -100,7 +100,6 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,7 +108,7 @@ namespace VoxVisio.UI
             this.tabControl1.Controls.Add(this.tabEyeTracking);
             this.tabControl1.Controls.Add(this.tabVoiceRecognition);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(12, 27);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1139, 583);
@@ -707,31 +706,24 @@ namespace VoxVisio.UI
             this.lblVoiceCommandTitle.Text = "Voice Commands";
             this.lblVoiceCommandTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // menuStrip1
+            // btnSaveChanges
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1163, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.btnSaveChanges.Location = new System.Drawing.Point(1045, 601);
+            this.btnSaveChanges.Name = "btnSaveChanges";
+            this.btnSaveChanges.Size = new System.Drawing.Size(106, 23);
+            this.btnSaveChanges.TabIndex = 2;
+            this.btnSaveChanges.Text = "Save Changes";
+            this.btnSaveChanges.UseVisualStyleBackColor = true;
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 622);
+            this.ClientSize = new System.Drawing.Size(1163, 632);
+            this.Controls.Add(this.btnSaveChanges);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
             this.Text = "Vox Viso Settings";
             this.tabControl1.ResumeLayout(false);
@@ -753,10 +745,7 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -815,7 +804,6 @@ namespace VoxVisio.UI
         private CheckBox chkbxDebugEyeTracking;
         private CheckBox btnVisualiseFixations;
         private Button btnCalibrate;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem saveToolStripMenuItem;
+        private Button btnSaveChanges;
     }
 }

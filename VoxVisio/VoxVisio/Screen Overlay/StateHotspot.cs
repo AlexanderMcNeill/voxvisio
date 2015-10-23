@@ -54,7 +54,7 @@ namespace VoxVisio.Screen_Overlay
             {
                 if (focused)
                 {
-                    if (counter < 100)
+                    if (counter < 40)
                     {
                         counter += 10;
                     }

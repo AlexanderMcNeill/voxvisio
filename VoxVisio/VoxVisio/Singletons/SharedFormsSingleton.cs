@@ -13,11 +13,14 @@ namespace VoxVisio.Singletons
         public readonly ZoomForm zoomForm;
 
         private FixationDot fixationDot;
+        public readonly Toast ToastOverlay;
 
         protected SharedFormsSingleton()
         {
             //Setting up the forms that need to always be available to the program
             overlayForm = new OverlayForm();
+            ToastOverlay = new Toast();
+            overlayForm.RegisterOverlay(ToastOverlay);
             zoomForm = new ZoomForm();
             overlayForm.Show();
             fixationDot = new FixationDot();

@@ -15,12 +15,14 @@ namespace VoxVisio
         {
             this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
 
-            inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
+            if(SettingsSingleton.Instance().DragonEnabled)
+                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
 
         public override void VoiceInput(string voiceData, string grammarName)
         {
-            
+            if (!SettingsSingleton.Instance().DragonEnabled && grammarName.Equals(GRAMMARNAME))
+                inputsim.Keyboard.TextEntry(voiceData);
         }
 
         public override void EyeInput(IFixationData fixation)
@@ -35,7 +37,8 @@ namespace VoxVisio
 
         public override void Dispose()
         {
-             inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
+            if (SettingsSingleton.Instance().DragonEnabled)
+                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
         }
     }
 }

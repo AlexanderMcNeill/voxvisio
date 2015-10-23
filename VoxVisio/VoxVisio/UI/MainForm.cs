@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
 using VoxVisio.UI;
@@ -18,8 +19,9 @@ namespace VoxVisio
         public VoxVisio()
         {
             InitializeComponent();
+            StartDragon();
             TopMost = true;
-            Top = 0;
+            Top = HIDDENYPOS;
             Left = Screen.PrimaryScreen.Bounds.Width / 2 - Width / 2;
 
             mainEngine = new MainEngine();
@@ -28,16 +30,16 @@ namespace VoxVisio
             helpForm = new HelpForm();
 
             EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
-            EventSingleton.Instance().fixationEvent += VoxVisio_fixationEvent;
         }
 
-        private void VoxVisio_fixationEvent(Fixation newFixation)
+        private void StartDragon()
         {
-            if (this.Bounds.Contains(newFixation.GetFixationLocation()))
+            //Starting keyboard if there isn't already a keyboard instance running
+            Process[] pname = Process.GetProcessesByName("natspeak");
+
+            if (pname.Length == 0)
             {
-                if(this != null)
-                Invoke(new Action(showForm));
-                
+                Process.Start(@"C:\Program Files (x86)\Nuance\NaturallySpeaking13\Program\natspeak.exe");
             }
         }
 
@@ -81,7 +83,6 @@ namespace VoxVisio
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             EventSingleton.Instance().updateTimer.Tick -= updateTimer_Tick;
-            EventSingleton.Instance().fixationEvent -= VoxVisio_fixationEvent;
             base.OnFormClosing(e);
             EventSingleton.Instance().Dispose();
         }

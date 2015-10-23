@@ -20,6 +20,7 @@ namespace VoxVisio.Singletons
         private EventList<Command> commands;
         public readonly Hook keyboardHook;
         public event EventHandler CommandsChanged;
+        public bool DragonEnabled { get; set; }
         public bool ZoomEnabled { get; set; }
         public double ZoomMagnification { get; set; }
         public Size ZoomFormSize { get; set; }
@@ -36,10 +37,21 @@ namespace VoxVisio.Singletons
             
         private void loadSettings()
         {
+            string fileContents = Properties.Resources.Settings;
+            using (StringReader reader = new StringReader(fileContents))//@"Commands.json"
+            {
+                JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                ZoomEnabled = (bool)o["zoom form"]["enabled"];
+                ZoomMagnification = (double) o["zoom form"]["magnification"];
+                ZoomFormSize = new Size((int)o["zoom form"]["width"], (int)o["zoom form"]["height"]);
+                DebugEyeMouseMode = (bool)o["eye tracking"]["debug mouse mode"];
+                DragonEnabled = (bool) o["dragon enabled"];
+            }
             ZoomEnabled = Settings.Default.ZoomEnabled;
             ZoomMagnification = Settings.Default.ZoomMagnification;
             ZoomFormSize = Settings.Default.ZoomFormSize;
             DebugEyeMouseMode = Settings.Default.DebugEyeMouseMode;
+            DragonEnabled = Settings.Default.DragonEnabled;
         }
 
         public void saveSettings()
@@ -48,6 +60,7 @@ namespace VoxVisio.Singletons
             Settings.Default.ZoomMagnification = ZoomMagnification;
             Settings.Default.ZoomFormSize = ZoomFormSize;
             Settings.Default.DebugEyeMouseMode = DebugEyeMouseMode;
+            Settings.Default.DragonEnabled = DragonEnabled;
             Settings.Default.Save();
         }
 
