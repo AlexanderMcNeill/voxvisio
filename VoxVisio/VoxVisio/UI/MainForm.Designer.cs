@@ -40,6 +40,7 @@ namespace VoxVisio
             this.btnExit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.infoPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSettings
@@ -95,9 +96,9 @@ namespace VoxVisio
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(476, -1);
+            this.btnExit.Location = new System.Drawing.Point(475, 0);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(25, 25);
+            this.btnExit.Size = new System.Drawing.Size(25, 15);
             this.btnExit.TabIndex = 3;
             this.btnExit.Text = "X";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -106,6 +107,7 @@ namespace VoxVisio
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.btnExit);
             this.panel1.Location = new System.Drawing.Point(0, 80);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(500, 15);
@@ -117,7 +119,6 @@ namespace VoxVisio
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 95);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.infoPanel);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnSettings);
@@ -129,6 +130,7 @@ namespace VoxVisio
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "VoxVisio";
             this.infoPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
