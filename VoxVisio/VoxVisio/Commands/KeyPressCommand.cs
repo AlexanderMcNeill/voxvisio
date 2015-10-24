@@ -8,6 +8,7 @@ using WindowsInput.Native;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
+using VoxVisio.Resources;
 
 namespace VoxVisio.Commands
 {
