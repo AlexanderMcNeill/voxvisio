@@ -3,6 +3,7 @@ using WindowsInput.Native;
 using VoxVisio.Singletons;
 using System;
 using System.Windows.Forms;
+using VoxVisio.Screen_Overlay;
 
 namespace VoxVisio
 {
@@ -11,6 +12,7 @@ namespace VoxVisio
         public const string GRAMMARNAME = "DictationGrammar";
 
         private InputSimulator inputsim;
+        private Toast toast;
         public DictationState()
         {
             this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
@@ -19,8 +21,16 @@ namespace VoxVisio
 
         public override void VoiceInput(string voiceData, string grammarName)
         {
-            if (!SettingsSingleton.Instance().DragonEnabled && grammarName.Equals(GRAMMARNAME))
-                inputsim.Keyboard.TextEntry(voiceData);
+            if (grammarName == CommandState.GRAMMARNAME)
+            {
+                toast.NewMessage("Commands can't be used in dictation mode");
+            }
+            else
+            {
+                if (!SettingsSingleton.Instance().DragonEnabled && grammarName.Equals(GRAMMARNAME))
+                    inputsim.Keyboard.TextEntry(voiceData);
+            }
+            
         }
 
         public override void EyeInput(IFixationData fixation)
