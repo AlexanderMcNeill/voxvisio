@@ -179,16 +179,6 @@ namespace VoxVisio
             LoadFromJson(JsonData);
         }
 
-        public Dictionary<string,string> getDict()
-        {
-            var toReturn = new Dictionary<string, string>
-            {
-                {"voice keyword", VoiceKeyword},
-                {"keys", keyCombo.GetKeyString()}
-            };
-            return toReturn;
-        }
-
         public void RunCommand()
         {
             if ((keyCombo.GetKeyString().Contains("LButton") || keyCombo.GetKeyString().Contains("RButton")) && SettingsSingleton.Instance().ZoomEnabled)
