@@ -2,7 +2,7 @@
 
 namespace VoxVisio
 {
-    enum eFixationPhase
+    public enum eFixationPhase
     {
         start,
         finished,
@@ -13,7 +13,7 @@ namespace VoxVisio
     /// Interface to allow basic fixation data collection.
     /// Allows the user to get the fixation's phase (If it is still occuring or has finished), and to get the screen location of the fixation.
     /// </summary>
-    interface IFixationData
+    public interface IFixationData
     {
         eFixationPhase GetFixationPhase();
         Point GetFixationLocation();

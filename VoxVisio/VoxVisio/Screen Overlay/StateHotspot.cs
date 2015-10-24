@@ -8,7 +8,7 @@ namespace VoxVisio.Screen_Overlay
     public class StateHotspot
     {
         //Setting up event for when the hotspot is activated
-        public delegate void HotspotActivatedEventHandler(StateHotspot sender, eState e);
+        public delegate void HotspotActivatedEventHandler(StateHotspot sender, ControlState e);
         public event HotspotActivatedEventHandler OnSelected;
 
         //Constants for how long it takes to activate a hotspot and how fast it grows
@@ -25,12 +25,12 @@ namespace VoxVisio.Screen_Overlay
         //Creating brush to how the color of the hotspots progress
         private SolidBrush brush = new SolidBrush(Color.FromArgb(150, Color.Red));
 
-        private eState representedState;
+        private ControlState representedState;
         private Rectangle hotspotRect;
         public bool selected = false;
         private bool focused = false;
 
-        public StateHotspot(eState representedState, Rectangle hotspotRect, bool selected, Image activeImage, Image inactiveImage)
+        public StateHotspot(ControlState representedState, Rectangle hotspotRect, bool selected, Image activeImage, Image inactiveImage)
         {
             //Setting what state the hotspot represents
             this.representedState = representedState;
@@ -44,6 +44,11 @@ namespace VoxVisio.Screen_Overlay
             //Setting the images it will use to display if it is active
             this.activeImage = activeImage;
             this.inactiveImage = inactiveImage;
+        }
+
+        public ControlState GetState()
+        {
+            return representedState;
         }
 
         public void Draw(Graphics g)

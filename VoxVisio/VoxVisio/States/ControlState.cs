@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace VoxVisio.States
 {
-    abstract class ControlState
+    public abstract class ControlState
     {
         public abstract void VoiceInput(String voiceData, String grammarName);
         public abstract void EyeInput(IFixationData fixation);

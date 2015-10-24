@@ -14,20 +14,17 @@ namespace VoxVisio.Screen_Overlay
         private const int MARGIN = 10;
 
         private ControlState currentState;
-        private ControlState[] states;
+
         private StateHotspot[] stateHotspots;
         private StateHotspot selectedStateHotspot;
 
         public StateController()
         {
-            //Creating states
-            states = createStateArray();
-
             //Creating the hotspots that will be used to change the states
-            stateHotspots = createStateHotspots();
+            setupStateHotspots();
 
             //Setting the current state to command state
-            currentState = states[(int)eState.Command];
+            currentState = stateHotspots[(int)eState.Command].GetState();
             selectedStateHotspot = stateHotspots[(int)eState.Command];
             selectedStateHotspot.selected = true;
 
@@ -38,44 +35,37 @@ namespace VoxVisio.Screen_Overlay
             EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
         }
 
-        private ControlState[] createStateArray()
-        { 
-            ControlState[] states = new ControlState[Enum.GetNames(typeof(eState)).Length];
-
-            states[(int)eState.Command] = new CommandState();
-            states[(int)eState.Dictation] = new DictationState();
-
-            return states;
-        }
-
-        private StateHotspot[] createStateHotspots()
+        private void setupStateHotspots()
         {
-            StateHotspot[] stateHotspots = new StateHotspot[Enum.GetNames(typeof(eState)).Length];
+            stateHotspots = new StateHotspot[Enum.GetNames(typeof(eState)).Length];
 
+            // Getting the rectangles for the hotspots
             int top = Screen.PrimaryScreen.Bounds.Height / 2 - MARGIN / 2 - HOTSPOTSIZE;
             int left = Screen.PrimaryScreen.Bounds.Width - HOTSPOTSIZE;
 
             Rectangle commandStateHotspot = new Rectangle(left, top - HOTSPOTSIZE, HOTSPOTSIZE, HOTSPOTSIZE * 2);
             Rectangle dictationStateHotspot = new Rectangle(left, top + HOTSPOTSIZE + MARGIN, HOTSPOTSIZE, HOTSPOTSIZE * 2);
 
-            StateHotspot commandState = new StateHotspot(eState.Command, commandStateHotspot, false, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive);
-            commandState.OnSelected += commandState_OnSelected;
-            stateHotspots[(int)eState.Command]= commandState;
+            // Creating the hotspots
+            StateHotspot commandState = new StateHotspot(new CommandState(), commandStateHotspot, true, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive);
+            commandState.OnSelected += CommandState_OnSelected;
+            stateHotspots[(int)eState.Command] = commandState;
 
-            StateHotspot dictationState = new StateHotspot(eState.Dictation, dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive);
-            dictationState.OnSelected += commandState_OnSelected;
+            StateHotspot dictationState = new StateHotspot(new DictationState(), dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive);
+            dictationState.OnSelected += CommandState_OnSelected;
             stateHotspots[(int)eState.Dictation] = dictationState;
 
-            return stateHotspots;
+            // Setting the current state to be the command state
+            currentState = commandState.GetState();
         }
 
-        void commandState_OnSelected(StateHotspot sender, eState newState)
+        private void CommandState_OnSelected(StateHotspot sender, ControlState newState)
         {
             // Stopping the current state
             currentState.Stop();
 
             // Switching to the new state
-            currentState = states[(int)newState];
+            currentState = newState;
 
             // Switching the selected state hotspot to the new state hotspot
             selectedStateHotspot.selected = false;
