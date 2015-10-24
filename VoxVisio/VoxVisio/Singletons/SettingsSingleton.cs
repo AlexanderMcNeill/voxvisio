@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VoxVisio.Properties;
 using VoxVisio.Resources;
+using VoxVisio.Commands;
 
 namespace VoxVisio.Singletons
 {

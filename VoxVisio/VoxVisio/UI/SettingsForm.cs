@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using VoxVisio.Resources;
 using VoxVisio.Singletons;
+using VoxVisio.Commands;
 
 namespace VoxVisio.UI
 {

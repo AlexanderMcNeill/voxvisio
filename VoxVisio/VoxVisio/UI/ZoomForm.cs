@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using WindowsInput;
 using VoxVisio.Singletons;
+using VoxVisio.Commands;
 
 namespace VoxVisio
 {

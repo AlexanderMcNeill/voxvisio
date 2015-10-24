@@ -88,6 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandFactory.cs" />
+    <Compile Include="Commands\eCommandType.cs" />
+    <Compile Include="Commands\KeyCombo.cs" />
+    <Compile Include="Commands\KeyPressCommand.cs" />
+    <Compile Include="Commands\OpenProgramCommand.cs" />
+    <Compile Include="Commands\VoiceCommand.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
