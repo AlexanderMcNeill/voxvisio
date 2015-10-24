@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace VoxVisio.Commands
 {
+    // Factory for creating all the different types of commands from json data
     public class CommandFactory
     {
         public static Command CreateCommandFromJson(JObject jsonData)

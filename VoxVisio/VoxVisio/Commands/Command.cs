@@ -15,7 +15,7 @@ using Newtonsoft.Json.Linq;
 
 namespace VoxVisio.Commands
 {
-
+    // Interface that describes the method every command needs to have
     public interface Command
     {
         void RunCommand();

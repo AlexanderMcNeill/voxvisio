@@ -8,9 +8,9 @@ using System.Diagnostics;
 
 namespace VoxVisio.Commands
 {
+    // Command that opens given program when the user uses the command
     public class OpenProgramCommand : Command
     {
-        // How to start a program System.Diagnostics.Process.Start("C:/Program Files (x86)/OptiKey/OptiKey.exe");
         private string ProgramLocation;
         private string KeyWord;
 

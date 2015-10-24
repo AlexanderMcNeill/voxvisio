@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VoxVisio.Commands
 {
+    // eNum to represent the different types of commands
     public enum eCommandType
     {
         VoiceCommand,
