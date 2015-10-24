@@ -1,23 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="VoxVisio.ControlContext">
-    <Position X="4.75" Y="0.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAABAACAAAAAAAACAAAAAAAAAAAAIAAAAAAAAQ=</HashCode>
-      <FileName>States\ControlContext.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VoxVisio.ControlState">
+  <Class Name="VoxVisio.ControlState" Collapsed="true">
     <Position X="1.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAIACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>States\ControlState.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="VoxVisio.DictationState">
+  <Class Name="VoxVisio.DictationState" Collapsed="true">
     <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACBAAIAAAgAAAAAAAAAAAEAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAIACAgAAAAAAAAAAAEAAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>States\DictationState.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -27,48 +21,100 @@
       <HashCode>AAAAABAAAKAAAAAAAQAAAAAAAAAAAAAAACAAAAAAgAA=</HashCode>
       <FileName>FixationData.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Orientation="Right" Position="0.1" Collapsed="true" />
+    <Lollipop Orientation="Left" Position="0.152" Collapsed="true" />
   </Class>
   <Class Name="VoxVisio.KeyTranslater">
     <Position X="9.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
-      <FileName>Commands\KeyTranslater.cs</FileName>
+      <FileName>Resources\KeyTranslater.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VoxVisio.MainEngine">
     <Position X="7" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgABABAAggAAAAAAAAAEAAAAAAAQAgBAIAAAAAAACw=</HashCode>
+      <HashCode>AAAAAAAAAAiAAAAACAAAAAAAAAAAAAgACIQAAAAAAA4=</HashCode>
       <FileName>MainEngine.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VoxVisio.CommandState">
+  <Class Name="VoxVisio.CommandState" Collapsed="true">
     <Position X="2.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQACBAAAAgAgAAAAAAEAAAgEgAAIAAAAAAQEACAAAAg=</HashCode>
+      <HashCode>AAAABQAIACAgAAAEAAAAAAAEgAAIAAAAAAAEACAAAAg=</HashCode>
       <FileName>States\CommandState.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="VoxVisio.KeyRep">
-    <Position X="10" Y="2" Width="1.5" />
+  <Class Name="VoxVisio.OpenProgramCommand" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAACAAAARABAAAAABACAAAAAACAA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VoxVisio.KeyPressCommand" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAACAgAAAACBA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VoxVisio.CommandFactory" Collapsed="true">
+    <Position X="8.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoxVisio.VoiceCommand" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAQAAAAAAAAAACACAAQggAAQAAAACAAAAIACAA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VoxVisio.KeyCombo">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQAAAAAAAACgAAAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="VoxVisio.KeyRep" Collapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
-      <FileName>Commands\KeyTranslater.cs</FileName>
+      <FileName>Resources\KeyTranslater.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Interface Name="VoxVisio.IFixationData">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>FixationData.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="VoxVisio.Command">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAACAAAAAACAA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="VoxVisio.eFixationPhase">
-    <Position X="9.75" Y="4" Width="1.5" />
+    <Position X="9.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>FixationData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VoxVisio.eCommandType">
+    <Position X="11.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAABAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Commands\Command.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
