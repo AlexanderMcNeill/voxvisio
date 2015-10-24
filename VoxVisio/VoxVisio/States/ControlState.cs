@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace VoxVisio
+namespace VoxVisio.States
 {
-    abstract class ControlState: IDisposable
+    public abstract class ControlState
     {
         public abstract void VoiceInput(String voiceData, String grammarName);
         public abstract void EyeInput(IFixationData fixation);
         public abstract void KeyboardInput(Keys keyPressed);
-        public abstract void Dispose();
+        public abstract void Start();
+        public abstract void Stop();
     }
 }

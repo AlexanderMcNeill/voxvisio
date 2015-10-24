@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace VoxVisio
+namespace VoxVisio.UI
 {
     partial class ZoomForm
     {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using WindowsInput;
 using VoxVisio.Singletons;
+using VoxVisio.Commands;
 
 namespace VoxVisio.Tests
 {

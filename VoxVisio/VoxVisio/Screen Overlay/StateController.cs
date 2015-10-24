@@ -3,58 +3,82 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using VoxVisio.Singletons;
+using VoxVisio.States;
 
 namespace VoxVisio.Screen_Overlay
 {
-    public enum eState
-    { 
-        Dictation,
-        Command
-    }
-    class StateController : ControlState, Overlay
+    //Class that keeps track of the current state and manages the changing of the systems state
+    class StateController : Overlay
     {
         private const int HOTSPOTSIZE = 100;
         private const int MARGIN = 10;
 
-        private List<StateHotspot> stateHotspots = new List<StateHotspot>();
-        private OverlayForm overlayForm;
-        private ControlState state;
+        private ControlState currentState;
+
+        private StateHotspot[] stateHotspots;
+        private StateHotspot selectedStateHotspot;
 
         public StateController()
         {
-            state = new CommandState();
-            int top = Screen.PrimaryScreen.Bounds.Height / 2 - MARGIN / 2 - HOTSPOTSIZE;
-            int left = Screen.PrimaryScreen.Bounds.Width - HOTSPOTSIZE;
+            //Creating the hotspots that will be used to change the states
+            setupStateHotspots();
 
+            //Setting the current state to command state
+            currentState = stateHotspots[(int)eState.Command].GetState();
+            selectedStateHotspot = stateHotspots[(int)eState.Command];
+            selectedStateHotspot.selected = true;
 
-            Rectangle commandStateHotspot = new Rectangle(left, top - HOTSPOTSIZE, HOTSPOTSIZE, HOTSPOTSIZE*2);
-            Rectangle dictationStateHotspot = new Rectangle(left, top + HOTSPOTSIZE + MARGIN, HOTSPOTSIZE, HOTSPOTSIZE*2);
+            //Registering state controller to be drawn to the overlay form
+            SharedFormsSingleton.Instance().overlayForm.RegisterOverlay(this);
 
-            stateHotspots.Add(new StateHotspot("Command", ChangeStateCommand, commandStateHotspot, true, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive));
-            stateHotspots.Add(new StateHotspot("Dication", ChangeStateDictation, dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive));
-
-            overlayForm = SharedFormsSingleton.Instance().overlayForm;
-            overlayForm.RegisterOverlay(this);
-
+            //Setting up state controller to listen to the update timer tick
             EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
         }
 
-        public void ChangeStateCommand()
+        private void setupStateHotspots()
         {
-            state.Dispose();
-            state = new CommandState();
-            stateHotspots[1].selected = false;
+            stateHotspots = new StateHotspot[Enum.GetNames(typeof(eState)).Length];
+
+            // Getting the rectangles for the hotspots
+            int top = Screen.PrimaryScreen.Bounds.Height / 2 - MARGIN / 2 - HOTSPOTSIZE;
+            int left = Screen.PrimaryScreen.Bounds.Width - HOTSPOTSIZE;
+
+            Rectangle commandStateHotspot = new Rectangle(left, top - HOTSPOTSIZE, HOTSPOTSIZE, HOTSPOTSIZE * 2);
+            Rectangle dictationStateHotspot = new Rectangle(left, top + HOTSPOTSIZE + MARGIN, HOTSPOTSIZE, HOTSPOTSIZE * 2);
+
+            // Creating the hotspots
+            StateHotspot commandState = new StateHotspot(new CommandState(), commandStateHotspot, true, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive);
+            commandState.OnSelected += CommandState_OnSelected;
+            stateHotspots[(int)eState.Command] = commandState;
+
+            StateHotspot dictationState = new StateHotspot(new DictationState(), dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive);
+            dictationState.OnSelected += CommandState_OnSelected;
+            stateHotspots[(int)eState.Dictation] = dictationState;
+
+            // Setting the current state to be the command state
+            currentState = commandState.GetState();
         }
 
-        public void ChangeStateDictation()
+        private void CommandState_OnSelected(StateHotspot sender, ControlState newState)
         {
-            state.Dispose();
-            state = new DictationState();
-            stateHotspots[0].selected = false;
+            // Stopping the current state
+            currentState.Stop();
+
+            // Switching to the new state
+            currentState = newState;
+
+            // Switching the selected state hotspot to the new state hotspot
+            selectedStateHotspot.selected = false;
+            selectedStateHotspot = sender;
+            selectedStateHotspot.selected = true;
+
+            // Starting the new state
+            currentState.Start();
         }
 
         private void updateTimer_Tick(object sender, EventArgs e)
         {
+            //Updating each of the state hotspots
             foreach (StateHotspot sh in stateHotspots)
             {
                 sh.Update();
@@ -63,49 +87,35 @@ namespace VoxVisio.Screen_Overlay
 
         public void Draw(Graphics g)
         {
+            //Drawing eacho of the state hotspots to the overlay form
             foreach (StateHotspot sh in stateHotspots)
             {
                 sh.Draw(g);
             }
         }
 
-        public void DrawHotspot(Graphics g, Rectangle hotspotRect, int percentFill)
+        public void VoiceInput(string voiceData, string grammarName)
         {
-            g.FillEllipse(Brushes.Blue, hotspotRect);
-
-            //Getting how big the progress circle will be
-            int fillWidth = (hotspotRect.Width / 100) * percentFill;
-            int fillHeight = (hotspotRect.Width / 100) * percentFill;
-
-            //Make the progress circle centered to the hotspot rectangle
-            int xPos = (hotspotRect.Width - fillWidth) / 2 + hotspotRect.X;
-            int yPos = (hotspotRect.Width - fillHeight) / 2 + hotspotRect.Y;
-            g.FillEllipse(Brushes.Red, xPos, yPos, fillWidth, fillHeight);
+            //Sending the voice input to the current state
+            currentState.VoiceInput(voiceData, grammarName);
         }
 
-        public override void VoiceInput(string voiceData, string grammarName)
+        public void EyeInput(IFixationData fixation)
         {
-            state.VoiceInput(voiceData, grammarName);
-        }
-
-        public override void EyeInput(IFixationData fixation)
-        {
+            //Sending the fixation data to each of the hotspots
             foreach (StateHotspot sh in stateHotspots)
             {
                 sh.Fixation(fixation.GetFixationLocation());
             }
 
-            state.EyeInput(fixation);
+            //Passing fixation data to the current state
+            currentState.EyeInput(fixation);
         }
 
-        public override void KeyboardInput(Keys keyPressed)
+        public void KeyboardInput(Keys keyPressed)
         {
-            state.KeyboardInput(keyPressed);
-        }
-
-        public override void Dispose()
-        {
-            throw new NotImplementedException();
+            //Sending keyboard input to the current state
+            currentState.KeyboardInput(keyPressed);
         }
     }
 }

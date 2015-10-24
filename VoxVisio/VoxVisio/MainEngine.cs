@@ -4,6 +4,8 @@ using System.Speech.Recognition;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
 using VoxVisio.Singletons;
+using VoxVisio.Commands;
+using VoxVisio.States;
 
 namespace VoxVisio
 {

@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
 using Newtonsoft.Json.Linq;
-using VoxVisio.Singletons;
 
 /*
 *   Notes:
@@ -14,14 +13,9 @@ using VoxVisio.Singletons;
 *   and Keys provided by the system hook whenever a key is pressed. VirtualKeyCodes and keys can be cast between eachother nativly.
 */
 
-namespace VoxVisio
+namespace VoxVisio.Commands
 {
-    public enum eCommandType
-    {
-        VoiceCommand,
-        KeyPressCommand,
-        OpenProgramCommand,
-    }
+    // Interface that describes the method every command needs to have
     public interface Command
     {
         void RunCommand();
@@ -30,6 +24,7 @@ namespace VoxVisio
         string GetKeyWord();
         eCommandType GetCommandType();
     }
+<<<<<<< HEAD
 
     public class OpenProgramCommand : Command
     {
@@ -282,4 +277,6 @@ namespace VoxVisio
             return String.Join(", ", toReturn);
         }
     }
+=======
+>>>>>>> refs/remotes/origin/alex
 }

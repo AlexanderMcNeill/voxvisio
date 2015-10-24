@@ -17,17 +17,17 @@ namespace VoxVisio.Screen_Overlay
             switch (voiceData)
             {
                 case "start keyboard":
-                    startKeyboard();
+                    StartKeyboard();
                     return true;
                 case "stop keyboard":
-                    killKeyboard();
+                    StopKeyboard();
                     return true;
                 default:
                     return false;
             }
         }
 
-        private void killKeyboard()
+        public void StopKeyboard()
         {
             Process[] procs = null;
 
@@ -60,7 +60,7 @@ namespace VoxVisio.Screen_Overlay
             }
         }
 
-        private void startKeyboard()
+        public void StartKeyboard()
         {
             //Starting keyboard if there isn't already a keyboard instance running
             Process[] pname = Process.GetProcessesByName(KEYBOARDPROCESSNAME);
