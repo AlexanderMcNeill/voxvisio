@@ -7,40 +7,50 @@ using VoxVisio.States;
 
 namespace VoxVisio.Screen_Overlay
 {
+    //Class that keeps track of the current state and manages the changing of the systems state
     class StateController : Overlay
     {
         private const int HOTSPOTSIZE = 100;
         private const int MARGIN = 10;
 
-        private List<StateHotspot> stateHotspots = new List<StateHotspot>();
-        private OverlayForm overlayForm;
-        private ControlState state;
-        private CommandState commandState;
-        private DictationState dictationState;
+        private ControlState currentState;
+        private ControlState[] states;
+        private StateHotspot[] stateHotspots;
+        private StateHotspot selectedStateHotspot;
 
         public StateController()
         {
             //Creating states
-            commandState = new CommandState();
-            dictationState = new DictationState();
-
-            //Setting the current state to command state
-            state = commandState;
+            states = createStateArray();
 
             //Creating the hotspots that will be used to change the states
             stateHotspots = createStateHotspots();
 
+            //Setting the current state to command state
+            currentState = states[(int)eState.Command];
+            selectedStateHotspot = stateHotspots[(int)eState.Command];
+            selectedStateHotspot.selected = true;
+
             //Registering state controller to be drawn to the overlay form
-            overlayForm = SharedFormsSingleton.Instance().overlayForm;
-            overlayForm.RegisterOverlay(this);
+            SharedFormsSingleton.Instance().overlayForm.RegisterOverlay(this);
 
             //Setting up state controller to listen to the update timer tick
             EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
         }
 
-        private List<StateHotspot> createStateHotspots()
+        private ControlState[] createStateArray()
+        { 
+            ControlState[] states = new ControlState[Enum.GetNames(typeof(eState)).Length];
+
+            states[(int)eState.Command] = new CommandState();
+            states[(int)eState.Dictation] = new DictationState();
+
+            return states;
+        }
+
+        private StateHotspot[] createStateHotspots()
         {
-            List<StateHotspot> stateHotspots = new List<StateHotspot>();
+            StateHotspot[] stateHotspots = new StateHotspot[Enum.GetNames(typeof(eState)).Length];
 
             int top = Screen.PrimaryScreen.Bounds.Height / 2 - MARGIN / 2 - HOTSPOTSIZE;
             int left = Screen.PrimaryScreen.Bounds.Width - HOTSPOTSIZE;
@@ -48,35 +58,32 @@ namespace VoxVisio.Screen_Overlay
             Rectangle commandStateHotspot = new Rectangle(left, top - HOTSPOTSIZE, HOTSPOTSIZE, HOTSPOTSIZE * 2);
             Rectangle dictationStateHotspot = new Rectangle(left, top + HOTSPOTSIZE + MARGIN, HOTSPOTSIZE, HOTSPOTSIZE * 2);
 
+            StateHotspot commandState = new StateHotspot(eState.Command, commandStateHotspot, false, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive);
+            commandState.OnSelected += commandState_OnSelected;
+            stateHotspots[(int)eState.Command]= commandState;
 
-            stateHotspots.Add(new StateHotspot(eState.Command, commandStateHotspot, true, Properties.Resources.commandButtonsActive, Properties.Resources.commandButtonInactive));
-            stateHotspots.Add(new StateHotspot(eState.Dictation, dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive));
+            StateHotspot dictationState = new StateHotspot(eState.Dictation, dictationStateHotspot, false, Properties.Resources.dictationButtonsActive, Properties.Resources.dictationButtonInactive);
+            dictationState.OnSelected += commandState_OnSelected;
+            stateHotspots[(int)eState.Dictation] = dictationState;
 
             return stateHotspots;
         }
 
-        public void StateChanged(eState newState)
+        void commandState_OnSelected(StateHotspot sender, eState newState)
         {
-            switch (newState)
-            { 
-                case eState.Command:
-                    state = commandState;
-                    break;
-                case eState.Dictation:
-                    state = dictationState;
-                    break;
-            }
-        }
-        public void ChangeStateCommand()
-        {
-            state = commandState;
-            stateHotspots[1].selected = false;
-        }
+            // Stopping the current state
+            currentState.Stop();
 
-        public void ChangeStateDictation()
-        {
-            state = dictationState;
-            stateHotspots[0].selected = false;
+            // Switching to the new state
+            currentState = states[(int)newState];
+
+            // Switching the selected state hotspot to the new state hotspot
+            selectedStateHotspot.selected = false;
+            selectedStateHotspot = sender;
+            selectedStateHotspot.selected = true;
+
+            // Starting the new state
+            currentState.Start();
         }
 
         private void updateTimer_Tick(object sender, EventArgs e)
@@ -97,13 +104,13 @@ namespace VoxVisio.Screen_Overlay
             }
         }
 
-        public override void VoiceInput(string voiceData, string grammarName)
+        public void VoiceInput(string voiceData, string grammarName)
         {
             //Sending the voice input to the current state
-            state.VoiceInput(voiceData, grammarName);
+            currentState.VoiceInput(voiceData, grammarName);
         }
 
-        public override void EyeInput(IFixationData fixation)
+        public void EyeInput(IFixationData fixation)
         {
             //Sending the fixation data to each of the hotspots
             foreach (StateHotspot sh in stateHotspots)
@@ -112,13 +119,13 @@ namespace VoxVisio.Screen_Overlay
             }
 
             //Passing fixation data to the current state
-            state.EyeInput(fixation);
+            currentState.EyeInput(fixation);
         }
 
-        public override void KeyboardInput(Keys keyPressed)
+        public void KeyboardInput(Keys keyPressed)
         {
             //Sending keyboard input to the current state
-            state.KeyboardInput(keyPressed);
+            currentState.KeyboardInput(keyPressed);
         }
     }
 }

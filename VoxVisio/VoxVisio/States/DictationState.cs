@@ -14,9 +14,7 @@ namespace VoxVisio
         public DictationState()
         {
             this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
-
-            if(SettingsSingleton.Instance().DragonEnabled)
-                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
+            toast = SharedFormsSingleton.Instance().ToastOverlay;
         }
 
         public override void VoiceInput(string voiceData, string grammarName)
@@ -35,7 +33,13 @@ namespace VoxVisio
 
         }
 
-        public override void Dispose()
+        public override void Start()
+        {
+            if (SettingsSingleton.Instance().DragonEnabled)
+                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
+        }
+
+        public override void Stop()
         {
             if (SettingsSingleton.Instance().DragonEnabled)
                 inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);

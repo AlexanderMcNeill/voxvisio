@@ -76,19 +76,26 @@ namespace VoxVisio
             return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
         }
 
-        public override void Dispose()
-        {
-            //Dispose of the scroll manager
-        }
-
         public override void KeyboardInput(Keys keyPressed)
         {
             // Gets the associated command word from the pressed key
             var firstOrDefault = commandList.OfType<KeyPressCommand>().FirstOrDefault(x => x.triggerKey == keyPressed);
             if (firstOrDefault == null) return;
             string commandWord = firstOrDefault.commandWord;
+
             //Call the voice input method with the assicated command word
             VoiceInput(commandWord, GRAMMARNAME);
+        }
+
+        public override void Start()
+        {
+            
+        }
+
+        public override void Stop()
+        {
+            scrollManager.Stop();
+            keyboardManager.StopKeyboard();
         }
     }
 }
