@@ -4,7 +4,7 @@ using WindowsInput.Native;
 // https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
 
 
-namespace VoxVisio
+namespace VoxVisio.Resources
 {
     /// <summary>
     /// Represents a Virtual keycode and the string used to refer to it.

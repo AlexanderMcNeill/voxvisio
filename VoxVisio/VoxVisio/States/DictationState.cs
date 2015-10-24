@@ -5,7 +5,7 @@ using System;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
 
-namespace VoxVisio
+namespace VoxVisio.States
 {
     class DictationState : ControlState
     {

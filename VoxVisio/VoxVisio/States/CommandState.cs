@@ -8,7 +8,7 @@ using VoxVisio.Commands;
 using System;
 using System.Collections.Generic;
 
-namespace VoxVisio
+namespace VoxVisio.States
 {
     class CommandState : ControlState
     {

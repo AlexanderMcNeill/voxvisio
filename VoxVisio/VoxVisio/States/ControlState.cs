@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace VoxVisio
+namespace VoxVisio.States
 {
     abstract class ControlState
     {
