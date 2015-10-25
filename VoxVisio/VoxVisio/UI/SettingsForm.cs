@@ -20,11 +20,13 @@ namespace VoxVisio.UI
         {
             InitializeComponent();
             settings = SettingsSingleton.Instance();
-            FillVoiceCommandTable();
-            FillKeyBindingTable();
-            FillStartProgramTable();
+            //Populate the command lists with the loaded commands
+            updateTables(null, eListEvent.ItemAdded);
+            //A counter that makes sure when the user clicks on the text box to add key presses, the initial mouse click is not added.
             commandFocusCounter = 0;
+            //Bind the update tables method to the change event of the command list
             settings.Commands.OnChange += updateTables;
+            //Load all of the settings into the controls so they display the correct information
             setUpSettingsControls();
             setDebugEyeState();
 
