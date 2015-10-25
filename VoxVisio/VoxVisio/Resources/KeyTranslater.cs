@@ -19,7 +19,12 @@ namespace VoxVisio.Resources
             Key = key;
             KeyCode = keyCode;
         }
+
     }
+
+    /// <summary>
+    /// The KeyTranslator class is used to convert VirtualKeyCodes to and from their string representations, and is refered to statically.
+    /// </summary>
     public class KeyTranslater
     {
         
