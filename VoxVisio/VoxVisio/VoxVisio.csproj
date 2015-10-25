@@ -94,6 +94,7 @@
     <Compile Include="Commands\KeyPressCommand.cs" />
     <Compile Include="Commands\OpenProgramCommand.cs" />
     <Compile Include="Commands\VoiceCommand.cs" />
+    <Compile Include="Dictation\Dictation.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,7 +123,9 @@
     </Compile>
     <Compile Include="Screen Overlay\ScrollManager.cs" />
     <Compile Include="Screen Overlay\Toast.cs" />
+    <Compile Include="Dictation\DragonDictation.cs" />
     <Compile Include="States\eState.cs" />
+    <Compile Include="Dictation\WindowsDictation.cs" />
     <Compile Include="UI\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>

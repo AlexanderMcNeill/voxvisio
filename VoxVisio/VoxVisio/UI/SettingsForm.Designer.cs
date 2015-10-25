@@ -47,6 +47,9 @@ namespace VoxVisio.UI
             this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
             this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
+            this.grpbxVoiceOption = new System.Windows.Forms.GroupBox();
+            this.rbWindowsVoice = new System.Windows.Forms.RadioButton();
+            this.rbDragon = new System.Windows.Forms.RadioButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gbAddHotkeyCmd = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -86,9 +89,9 @@ namespace VoxVisio.UI
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
             this.btnSaveChanges = new System.Windows.Forms.Button();
-            this.grpbxVoiceOption = new System.Windows.Forms.GroupBox();
-            this.rbDragon = new System.Windows.Forms.RadioButton();
-            this.rbWindowsVoice = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtbxDragonFile = new System.Windows.Forms.TextBox();
+            this.btnDragonFile = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -97,6 +100,7 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.trkbrMagnificationAmount)).BeginInit();
             this.tabEyeTracking.SuspendLayout();
             this.tabVoiceRecognition.SuspendLayout();
+            this.grpbxVoiceOption.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbAddHotkeyCmd.SuspendLayout();
             this.gbAddProgramCmd.SuspendLayout();
@@ -104,7 +108,6 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).BeginInit();
-            this.grpbxVoiceOption.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -288,6 +291,9 @@ namespace VoxVisio.UI
             // 
             // tabVoiceRecognition
             // 
+            this.tabVoiceRecognition.Controls.Add(this.txtbxDragonFile);
+            this.tabVoiceRecognition.Controls.Add(this.btnDragonFile);
+            this.tabVoiceRecognition.Controls.Add(this.label10);
             this.tabVoiceRecognition.Controls.Add(this.grpbxVoiceOption);
             this.tabVoiceRecognition.Location = new System.Drawing.Point(4, 22);
             this.tabVoiceRecognition.Name = "tabVoiceRecognition";
@@ -295,6 +301,41 @@ namespace VoxVisio.UI
             this.tabVoiceRecognition.TabIndex = 3;
             this.tabVoiceRecognition.Text = "Voice Recognition";
             this.tabVoiceRecognition.UseVisualStyleBackColor = true;
+            // 
+            // grpbxVoiceOption
+            // 
+            this.grpbxVoiceOption.Controls.Add(this.rbWindowsVoice);
+            this.grpbxVoiceOption.Controls.Add(this.rbDragon);
+            this.grpbxVoiceOption.Location = new System.Drawing.Point(15, 12);
+            this.grpbxVoiceOption.Name = "grpbxVoiceOption";
+            this.grpbxVoiceOption.Size = new System.Drawing.Size(200, 124);
+            this.grpbxVoiceOption.TabIndex = 0;
+            this.grpbxVoiceOption.TabStop = false;
+            this.grpbxVoiceOption.Text = "Voice Dictation Mode";
+            // 
+            // rbWindowsVoice
+            // 
+            this.rbWindowsVoice.AutoSize = true;
+            this.rbWindowsVoice.Location = new System.Drawing.Point(20, 29);
+            this.rbWindowsVoice.Name = "rbWindowsVoice";
+            this.rbWindowsVoice.Size = new System.Drawing.Size(159, 17);
+            this.rbWindowsVoice.TabIndex = 1;
+            this.rbWindowsVoice.TabStop = true;
+            this.rbWindowsVoice.Text = "Windows Voice Recognition";
+            this.rbWindowsVoice.UseVisualStyleBackColor = true;
+            this.rbWindowsVoice.CheckedChanged += new System.EventHandler(this.rbWindowsVoice_CheckedChanged);
+            // 
+            // rbDragon
+            // 
+            this.rbDragon.AutoSize = true;
+            this.rbDragon.Location = new System.Drawing.Point(20, 67);
+            this.rbDragon.Name = "rbDragon";
+            this.rbDragon.Size = new System.Drawing.Size(149, 17);
+            this.rbDragon.TabIndex = 0;
+            this.rbDragon.TabStop = true;
+            this.rbDragon.Text = "Dragon NaturallySpeaking";
+            this.rbDragon.UseVisualStyleBackColor = true;
+            this.rbDragon.CheckedChanged += new System.EventHandler(this.rbDragon_CheckedChanged);
             // 
             // tabPage1
             // 
@@ -722,39 +763,33 @@ namespace VoxVisio.UI
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
-            // grpbxVoiceOption
+            // label10
             // 
-            this.grpbxVoiceOption.Controls.Add(this.rbWindowsVoice);
-            this.grpbxVoiceOption.Controls.Add(this.rbDragon);
-            this.grpbxVoiceOption.Location = new System.Drawing.Point(15, 12);
-            this.grpbxVoiceOption.Name = "grpbxVoiceOption";
-            this.grpbxVoiceOption.Size = new System.Drawing.Size(200, 124);
-            this.grpbxVoiceOption.TabIndex = 0;
-            this.grpbxVoiceOption.TabStop = false;
-            this.grpbxVoiceOption.Text = "Voice Dictation Mode";
-            this.grpbxVoiceOption.Enter += new System.EventHandler(this.grpbxVoiceOption_Enter);
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(32, 153);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(124, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Dragon exe File address:";
             // 
-            // rbDragon
+            // txtbxDragonFile
             // 
-            this.rbDragon.AutoSize = true;
-            this.rbDragon.Location = new System.Drawing.Point(20, 67);
-            this.rbDragon.Name = "rbDragon";
-            this.rbDragon.Size = new System.Drawing.Size(149, 17);
-            this.rbDragon.TabIndex = 0;
-            this.rbDragon.TabStop = true;
-            this.rbDragon.Text = "Dragon NaturallySpeaking";
-            this.rbDragon.UseVisualStyleBackColor = true;
+            this.txtbxDragonFile.Enabled = false;
+            this.txtbxDragonFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxDragonFile.Location = new System.Drawing.Point(23, 169);
+            this.txtbxDragonFile.Name = "txtbxDragonFile";
+            this.txtbxDragonFile.Size = new System.Drawing.Size(133, 20);
+            this.txtbxDragonFile.TabIndex = 20;
             // 
-            // rbWindowsVoice
+            // btnDragonFile
             // 
-            this.rbWindowsVoice.AutoSize = true;
-            this.rbWindowsVoice.Location = new System.Drawing.Point(20, 29);
-            this.rbWindowsVoice.Name = "rbWindowsVoice";
-            this.rbWindowsVoice.Size = new System.Drawing.Size(159, 17);
-            this.rbWindowsVoice.TabIndex = 1;
-            this.rbWindowsVoice.TabStop = true;
-            this.rbWindowsVoice.Text = "Windows Voice Recognition";
-            this.rbWindowsVoice.UseVisualStyleBackColor = true;
+            this.btnDragonFile.Location = new System.Drawing.Point(156, 167);
+            this.btnDragonFile.Name = "btnDragonFile";
+            this.btnDragonFile.Size = new System.Drawing.Size(27, 23);
+            this.btnDragonFile.TabIndex = 21;
+            this.btnDragonFile.Text = "...";
+            this.btnDragonFile.UseVisualStyleBackColor = true;
+            this.btnDragonFile.Click += new System.EventHandler(this.btnDragonFile_Click);
             // 
             // SettingsForm
             // 
@@ -776,6 +811,9 @@ namespace VoxVisio.UI
             this.tabEyeTracking.ResumeLayout(false);
             this.tabEyeTracking.PerformLayout();
             this.tabVoiceRecognition.ResumeLayout(false);
+            this.tabVoiceRecognition.PerformLayout();
+            this.grpbxVoiceOption.ResumeLayout(false);
+            this.grpbxVoiceOption.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.gbAddHotkeyCmd.ResumeLayout(false);
             this.gbAddHotkeyCmd.PerformLayout();
@@ -786,8 +824,6 @@ namespace VoxVisio.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyBinding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenProgram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVoiceCommands)).EndInit();
-            this.grpbxVoiceOption.ResumeLayout(false);
-            this.grpbxVoiceOption.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -851,5 +887,8 @@ namespace VoxVisio.UI
         private GroupBox grpbxVoiceOption;
         private RadioButton rbWindowsVoice;
         private RadioButton rbDragon;
+        private TextBox txtbxDragonFile;
+        private Button btnDragonFile;
+        private Label label10;
     }
 }

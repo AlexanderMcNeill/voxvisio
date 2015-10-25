@@ -30,7 +30,6 @@ namespace VoxVisio.Screen_Overlay
         public void StopKeyboard()
         {
             Process[] procs = null;
-
             try
             {
                 //Getting all processes that match the keyboard process name

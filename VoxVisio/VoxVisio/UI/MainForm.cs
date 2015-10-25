@@ -14,12 +14,11 @@ namespace VoxVisio
         private MainEngine mainEngine;
         private HelpForm helpForm;
         private SettingsForm settingsForm;
-
+        //TODO: Tell alex the form is never showing and crashing when arrow button is clicked
 
         public VoxVisio()
         {
             InitializeComponent();
-            StartDragon();
             TopMost = true;
             Top = HIDDENYPOS;
             Left = Screen.PrimaryScreen.Bounds.Width / 2 - Width / 2;
@@ -30,17 +29,6 @@ namespace VoxVisio
             helpForm = new HelpForm();
 
             EventSingleton.Instance().updateTimer.Tick += updateTimer_Tick;
-        }
-
-        private void StartDragon()
-        {
-            //Starting keyboard if there isn't already a keyboard instance running
-            Process[] pname = Process.GetProcessesByName("natspeak");
-
-            if (pname.Length == 0)
-            {
-                Process.Start(@"C:\Program Files (x86)\Nuance\NaturallySpeaking13\Program\natspeak.exe");
-            }
         }
 
 

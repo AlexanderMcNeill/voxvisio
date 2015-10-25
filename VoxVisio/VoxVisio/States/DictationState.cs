@@ -2,8 +2,11 @@
 using WindowsInput.Native;
 using VoxVisio.Singletons;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
+using VoxVisio.Properties;
 using VoxVisio.Screen_Overlay;
+using VoxVisio.DictationModes;
 
 namespace VoxVisio.States
 {
@@ -13,10 +16,22 @@ namespace VoxVisio.States
 
         private InputSimulator inputsim;
         private Toast toast;
+        private Dictation dictation;
         public DictationState()
         {
-            this.inputsim = SharedObjectsSingleton.Instance().inputSimulator;
+            inputsim = SharedObjectsSingleton.Instance().inputSimulator;
             toast = SharedFormsSingleton.Instance().ToastOverlay;
+            
+            if (SettingsSingleton.Instance().DragonEnabled)
+            {
+                dictation = new DragonDictation();
+            }
+            else
+            {
+                dictation = new WindowsDictation();
+            }
+            Settings.Default.PropertyChanged += CheckState;
+
         }
 
         public override void VoiceInput(string voiceData, string grammarName)
@@ -27,10 +42,28 @@ namespace VoxVisio.States
             }
             else
             {
-                if (!SettingsSingleton.Instance().DragonEnabled && grammarName.Equals(GRAMMARNAME))
-                    inputsim.Keyboard.TextEntry(voiceData);
+                
+                dictation.VoiceInput(voiceData);
             }
-            
+        }
+
+        // Checks if the dictation class is still of the correct type, and changes it if requiered
+        public void CheckState(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != "DragonEnabled")
+            {
+                return;
+            }
+            if (Settings.Default.DragonEnabled && dictation.GetType() == typeof (WindowsDictation))
+            {
+                dictation.Dispose();
+                dictation = new DragonDictation();
+            }
+            else if (!Settings.Default.DragonEnabled && dictation.GetType() == typeof(DragonDictation))
+            {
+                dictation.Dispose();
+                dictation = new WindowsDictation();
+            }
         }
 
         public override void EyeInput(IFixationData fixation)
@@ -45,14 +78,13 @@ namespace VoxVisio.States
 
         public override void Start()
         {
-            if (SettingsSingleton.Instance().DragonEnabled)
-                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
+            dictation.StartDictation();
         }
 
         public override void Stop()
         {
-            if (SettingsSingleton.Instance().DragonEnabled)
-                inputsim.Keyboard.KeyPress(VirtualKeyCode.NUMPAD0);
+            dictation.StopDictation();
         }
+        
     }
 }

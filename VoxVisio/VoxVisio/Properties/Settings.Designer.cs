@@ -61,7 +61,7 @@ namespace VoxVisio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool DebugEyeMouseMode {
             get {
                 return ((bool)(this["DebugEyeMouseMode"]));
@@ -73,13 +73,49 @@ namespace VoxVisio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool DragonEnabled {
             get {
                 return ((bool)(this["DragonEnabled"]));
             }
             set {
                 this["DragonEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OptiKeyEnabled {
+            get {
+                return ((bool)(this["OptiKeyEnabled"]));
+            }
+            set {
+                this["OptiKeyEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        public string OptiKeyFileAddress {
+            get {
+                return ((string)(this["OptiKeyFileAddress"]));
+            }
+            set {
+                this["OptiKeyFileAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        public string DragonFileAddress {
+            get {
+                return ((string)(this["DragonFileAddress"]));
+            }
+            set {
+                this["DragonFileAddress"] = value;
             }
         }
     }
