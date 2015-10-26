@@ -26,6 +26,7 @@ namespace VoxVisio.Singletons
         public double ZoomMagnification { get; set; }
         public Size ZoomFormSize { get; set; }
         public bool DebugEyeMouseMode { get; set; }
+        public bool OptiKeyEnabled { get; set; }
 
 
         protected SettingsSingleton()
@@ -53,6 +54,7 @@ namespace VoxVisio.Singletons
             ZoomFormSize = Settings.Default.ZoomFormSize;
             DebugEyeMouseMode = Settings.Default.DebugEyeMouseMode;
             DragonEnabled = Settings.Default.DragonEnabled;
+            OptiKeyEnabled = Settings.Default.OptiKeyEnabled;
         }
 
         public void saveSettings()
@@ -62,6 +64,7 @@ namespace VoxVisio.Singletons
             Settings.Default.ZoomFormSize = ZoomFormSize;
             Settings.Default.DebugEyeMouseMode = DebugEyeMouseMode;
             Settings.Default.DragonEnabled = DragonEnabled;
+            Settings.Default.OptiKeyEnabled = OptiKeyEnabled;
             Settings.Default.Save();
         }
 

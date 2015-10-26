@@ -12,10 +12,19 @@
       <Value Profile="(Default)">400, 350</Value>
     </Setting>
     <Setting Name="DebugEyeMouseMode" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DragonEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OptiKeyEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OptiKeyFileAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+    <Setting Name="DragonFileAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
     </Setting>
   </Settings>
 </SettingsFile>

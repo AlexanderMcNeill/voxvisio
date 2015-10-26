@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using VoxVisio.Resources;
 using VoxVisio.Singletons;
 using VoxVisio.Commands;
+using VoxVisio.Properties;
 
 namespace VoxVisio.UI
 {
@@ -16,15 +17,18 @@ namespace VoxVisio.UI
         private Keys? bindingKey = null;
         private SettingsSingleton settings;
         private int commandFocusCounter;
+
         public SettingsForm()
         {
             InitializeComponent();
             settings = SettingsSingleton.Instance();
-            FillVoiceCommandTable();
-            FillKeyBindingTable();
-            FillStartProgramTable();
+            //Populate the command lists with the loaded commands
+            updateTables(null, eListEvent.ItemAdded);
+            //A counter that makes sure when the user clicks on the text box to add key presses, the initial mouse click is not added.
             commandFocusCounter = 0;
+            //Bind the update tables method to the change event of the command list
             settings.Commands.OnChange += updateTables;
+            //Load all of the settings into the controls so they display the correct information
             setUpSettingsControls();
             setDebugEyeState();
 
@@ -34,10 +38,12 @@ namespace VoxVisio.UI
         private void setUpSettingsControls()
         {
             chkbxZoomEnabled.Checked = settings.ZoomEnabled;
-            trkbrMagnificationAmount.Value = (int)settings.ZoomMagnification;
+            trkbrMagnificationAmount.Value = (int) settings.ZoomMagnification;
             udFormWidth.Value = settings.ZoomFormSize.Width;
             udFormHeight.Value = settings.ZoomFormSize.Height;
             chkbxDebugEyeTracking.Checked = settings.DebugEyeMouseMode;
+            txtbxDragonFile.Text = Settings.Default.DragonFileAddress;
+
         }
 
         private void updateTables(object sender, eListEvent changeType)
@@ -46,12 +52,14 @@ namespace VoxVisio.UI
             FillKeyBindingTable();
             FillStartProgramTable();
         }
+
         private void btnAddVoiceCommand_Click(object sender, EventArgs e)
         {
             // Checking that the user has filled out the form correctly
             if (txtVoiceCommandWord.Text == "" || txtVoiceCommandKeys.Text == "")
             {
-                MessageBox.Show("Please ensure you have added a voice keyword and selected the keys you want to fire.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Please ensure you have added a voice keyword and selected the keys you want to fire.",
+                    "Error", MessageBoxButtons.OK);
             }
             else
             {
@@ -59,7 +67,8 @@ namespace VoxVisio.UI
                 voiceCommandKeys.ForEach(x => keystrings += (x).ToString() + " ");
                 keystrings = keystrings.TrimEnd();
                 keystrings = keystrings.Replace(" ", ",");
-                Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings, SharedObjectsSingleton.Instance().inputSimulator);
+                Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings,
+                    SharedObjectsSingleton.Instance().inputSimulator);
                 settings.Commands.Add(command);
                 // Update the list of commands
                 FillVoiceCommandTable();
@@ -80,7 +89,7 @@ namespace VoxVisio.UI
 
         private void txtVoiceCommandKeys_MouseDown(object sender, MouseEventArgs e)
         {
-            
+
             if (commandFocusCounter > 0)
             {
                 MouseButtons mb = e.Button;
@@ -102,7 +111,7 @@ namespace VoxVisio.UI
             {
                 commandFocusCounter ++;
             }
-            
+
         }
 
         private void addVoiceCommandKey(Keys newKey)
@@ -168,9 +177,10 @@ namespace VoxVisio.UI
             }
             else
             {
-                MessageBox.Show("Please make sure the executable file's address is correct", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Please make sure the executable file's address is correct", "Error",
+                    MessageBoxButtons.OK);
             }
-            
+
         }
 
         private void btnClearOpenProgram_Click(object sender, EventArgs e)
@@ -196,7 +206,8 @@ namespace VoxVisio.UI
         {
             if (string.IsNullOrEmpty(cmbxCommandWords.SelectedText))
             {
-                MessageBox.Show("You must select a command that is triggered when the key is pressed", "Incorrect Input", MessageBoxButtons.OK);
+                MessageBox.Show("You must select a command that is triggered when the key is pressed", "Incorrect Input",
+                    MessageBoxButtons.OK);
             }
             else if (txtBindKey.Text == null)
             {
@@ -204,13 +215,13 @@ namespace VoxVisio.UI
             }
             else
             {
-                KeyPressCommand newCommand = new KeyPressCommand(cmbxCommandWords.SelectedText, (Keys)bindingKey);
+                KeyPressCommand newCommand = new KeyPressCommand(cmbxCommandWords.SelectedText, (Keys) bindingKey);
             }
         }
 
         private void txtBindKey_KeyUp(object sender, KeyEventArgs e)
         {
-            
+
             bindingKey = e.KeyCode;
             txtBindKey.Text = bindingKey.ToString();
         }
@@ -220,7 +231,9 @@ namespace VoxVisio.UI
             txtBindKey.Clear();
             bindingKey = null;
         }
+
         #region //delete functions
+
         private void btnDeleteSelectedVoiceCommands_Click(object sender, EventArgs e)
         {
             deleteCommand<VoiceCommand>(dgvVoiceCommands);
@@ -235,9 +248,12 @@ namespace VoxVisio.UI
         {
             deleteCommand<KeyPressCommand>(dgvKeyBinding);
         }
+
         private void deleteCommand<T>(DataGridView selecteDataGridView)
         {
-            if (MessageBox.Show("Are you sure you want to delete this command?", "Confirm deletion", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (
+                MessageBox.Show("Are you sure you want to delete this command?", "Confirm deletion",
+                    MessageBoxButtons.OKCancel) == DialogResult.Cancel)
             {
                 // Break off the method if the user does not wish to delete the command
                 return;
@@ -257,7 +273,7 @@ namespace VoxVisio.UI
             {
                 if (searchindex == selectedCommandWordIndex)
                 {
-                    settings.Commands.Remove((Command)command);
+                    settings.Commands.Remove((Command) command);
                     return;
                 }
                 else
@@ -276,7 +292,7 @@ namespace VoxVisio.UI
 
         private void txtVoiceCommandKeys_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void chkbxDebugEyeTracking_CheckedChanged(object sender, EventArgs e)
@@ -308,6 +324,76 @@ namespace VoxVisio.UI
         {
             SettingsSingleton.Instance().saveCommands();
             SettingsSingleton.Instance().saveSettings();
+        }
+
+        private void rbWindowsVoice_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.DragonEnabled = false;
+        }
+
+        private void rbDragon_CheckedChanged(object sender, EventArgs e)
+        {
+            //if the radio box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
+            if (Settings.Default.DragonFileAddress != "" && rbDragon.Checked)
+            {
+                Settings.Default.DragonEnabled = true;
+            }
+            else if (rbDragon.Checked)
+            {
+                MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK);
+                rbDragon.Checked = false;
+                rbWindowsVoice.Checked = true;
+            }
+            else
+            {
+                Settings.Default.DragonEnabled = false;
+            }
+            
+        }
+
+        private void btnDragonFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            ofd.Filter = "Executable (*.exe)|*.exe";
+            ofd.Title = "Find Dragon NaturallySpeaking .exe File";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                txtbxDragonFile.Text = ofd.FileName;
+                Settings.Default.DragonFileAddress = ofd.FileName;
+            }
+        }
+
+        private void chkbxOptikeyEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            //if the check box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
+            if (Settings.Default.OptiKeyFileAddress != "" && chkbxOptikeyEnabled.Checked) 
+            {
+                Settings.Default.OptiKeyEnabled = true;
+            }
+            else if(chkbxOptikeyEnabled.Checked)
+            {
+                MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK); MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK);
+            }
+            else
+            {
+                Settings.Default.OptiKeyEnabled = false;
+            }
+        }
+
+        private void btnOptikeyAddress_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            ofd.Filter = "Executable (*.exe)|*.exe";
+            ofd.Title = "Find Optikey .exe File";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                txtbxDragonFile.Text = ofd.FileName;
+                Settings.Default.OptiKeyFileAddress = ofd.FileName;
+            }
         }
     }
 }
