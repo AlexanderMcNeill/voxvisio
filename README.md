@@ -18,15 +18,15 @@ The system will work on Windows 8 and Windows 10 but we are unsure how it will i
 #Necessary Hardware 
 
 To use the software you will need the following hardware:
-* Tobii EyeX Gaze Tracker
+* [Tobii EyeX Gaze Tracker](http://www.tobii.com/xperience/)
 * A microphone. For testing we used the SpeechWare USB 3-in-1 TableMike
 
 #Optional Software
 
 To add functionality and improve parts of our system you have to option of using some external software. The software we support is:
 
-* Dragon Naturally Speaking
-* Optikey
+* [Dragon Naturally Speaking](http://www.nuance.com/for-individuals/by-product/dragon-for-pc/index.htm)
+* [Optikey](https://github.com/JuliusSweetland/OptiKey)
 
 To use this software adjust the settings to point at the executable for the software and add anyother setting our system asks for. For step by step instructions on this please see our [wiki](https://github.com/AlexanderMcNeill/voxvisio/wiki/).
 
