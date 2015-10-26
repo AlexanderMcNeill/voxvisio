@@ -4,27 +4,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VoxVisio.Properties;
 
 namespace VoxVisio.Screen_Overlay
 {
     public class KeyboardManager
     {
         private const string KEYBOARDPROCESSNAME = "OptiKey";
-        private const string KEYBOARDPROGRAMPATH = "C:/Program Files (x86)/OptiKey/OptiKey.exe";
 
         public bool VoiceInput(string voiceData)
         {
-            switch (voiceData)
+            if (Settings.Default.OptiKeyEnabled) // HACK : There would be an easier way to do this with a change to the Keyboard manager's interaction structure.
             {
-                case "start keyboard":
-                    StartKeyboard();
-                    return true;
-                case "stop keyboard":
-                    StopKeyboard();
-                    return true;
-                default:
-                    return false;
+                switch (voiceData)
+                {
+                    case "start keyboard":
+                        StartKeyboard();
+                        return true;
+                    case "stop keyboard":
+                        StopKeyboard();
+                        return true;
+                    default:
+                        return false;
+                }
             }
+            return false;
         }
 
         public void StopKeyboard()
@@ -38,11 +42,11 @@ namespace VoxVisio.Screen_Overlay
                 if (procs.Length > 0)
                 {
                     //Killing the first process by that name
-                    Process mspaintProc = procs[0];
+                    Process optikeyProcess = procs[0];
 
-                    if (!mspaintProc.HasExited)
+                    if (!optikeyProcess.HasExited)
                     {
-                        mspaintProc.CloseMainWindow();
+                        optikeyProcess.CloseMainWindow();
                     }
                 }
                 
@@ -66,7 +70,7 @@ namespace VoxVisio.Screen_Overlay
 
             if (pname.Length == 0)
             {
-                Process.Start(KEYBOARDPROGRAMPATH);
+                Process.Start(Settings.Default.OptiKeyFileAddress);
             }
         }
     }

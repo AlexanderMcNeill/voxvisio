@@ -333,15 +333,20 @@ namespace VoxVisio.UI
 
         private void rbDragon_CheckedChanged(object sender, EventArgs e)
         {
-            if (Settings.Default.DragonFileAddress != "")
+            //if the radio box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
+            if (Settings.Default.DragonFileAddress != "" && rbDragon.Checked)
             {
                 Settings.Default.DragonEnabled = true;
             }
-            else
+            else if (rbDragon.Checked)
             {
                 MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK);
                 rbDragon.Checked = false;
                 rbWindowsVoice.Checked = true;
+            }
+            else
+            {
+                Settings.Default.DragonEnabled = false;
             }
             
         }
@@ -351,11 +356,43 @@ namespace VoxVisio.UI
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             ofd.Filter = "Executable (*.exe)|*.exe";
+            ofd.Title = "Find Dragon NaturallySpeaking .exe File";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 txtbxDragonFile.Text = ofd.FileName;
                 Settings.Default.DragonFileAddress = ofd.FileName;
+            }
+        }
+
+        private void chkbxOptikeyEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            //if the check box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
+            if (Settings.Default.OptiKeyFileAddress != "" && chkbxOptikeyEnabled.Checked) 
+            {
+                Settings.Default.OptiKeyEnabled = true;
+            }
+            else if(chkbxOptikeyEnabled.Checked)
+            {
+                MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK); MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK);
+            }
+            else
+            {
+                Settings.Default.OptiKeyEnabled = false;
+            }
+        }
+
+        private void btnOptikeyAddress_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            ofd.Filter = "Executable (*.exe)|*.exe";
+            ofd.Title = "Find Optikey .exe File";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                txtbxDragonFile.Text = ofd.FileName;
+                Settings.Default.OptiKeyFileAddress = ofd.FileName;
             }
         }
     }

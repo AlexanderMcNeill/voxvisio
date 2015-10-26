@@ -47,6 +47,9 @@ namespace VoxVisio.UI
             this.btnVisualiseFixations = new System.Windows.Forms.CheckBox();
             this.chkbxDebugEyeTracking = new System.Windows.Forms.CheckBox();
             this.tabVoiceRecognition = new System.Windows.Forms.TabPage();
+            this.txtbxDragonFile = new System.Windows.Forms.TextBox();
+            this.btnDragonFile = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.grpbxVoiceOption = new System.Windows.Forms.GroupBox();
             this.rbWindowsVoice = new System.Windows.Forms.RadioButton();
             this.rbDragon = new System.Windows.Forms.RadioButton();
@@ -89,9 +92,10 @@ namespace VoxVisio.UI
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
             this.btnSaveChanges = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtbxDragonFile = new System.Windows.Forms.TextBox();
-            this.btnDragonFile = new System.Windows.Forms.Button();
+            this.chkbxOptikeyEnabled = new System.Windows.Forms.CheckBox();
+            this.txtbxOptikeyAddress = new System.Windows.Forms.TextBox();
+            this.btnOptikeyAddress = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -124,6 +128,10 @@ namespace VoxVisio.UI
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.txtbxOptikeyAddress);
+            this.tabGeneral.Controls.Add(this.btnOptikeyAddress);
+            this.tabGeneral.Controls.Add(this.label11);
+            this.tabGeneral.Controls.Add(this.chkbxOptikeyEnabled);
             this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
@@ -259,7 +267,7 @@ namespace VoxVisio.UI
             // btnCalibrate
             // 
             this.btnCalibrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalibrate.Location = new System.Drawing.Point(385, 227);
+            this.btnCalibrate.Location = new System.Drawing.Point(22, 427);
             this.btnCalibrate.Name = "btnCalibrate";
             this.btnCalibrate.Size = new System.Drawing.Size(280, 105);
             this.btnCalibrate.TabIndex = 2;
@@ -301,6 +309,34 @@ namespace VoxVisio.UI
             this.tabVoiceRecognition.TabIndex = 3;
             this.tabVoiceRecognition.Text = "Voice Recognition";
             this.tabVoiceRecognition.UseVisualStyleBackColor = true;
+            // 
+            // txtbxDragonFile
+            // 
+            this.txtbxDragonFile.Enabled = false;
+            this.txtbxDragonFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxDragonFile.Location = new System.Drawing.Point(23, 169);
+            this.txtbxDragonFile.Name = "txtbxDragonFile";
+            this.txtbxDragonFile.Size = new System.Drawing.Size(133, 20);
+            this.txtbxDragonFile.TabIndex = 20;
+            // 
+            // btnDragonFile
+            // 
+            this.btnDragonFile.Location = new System.Drawing.Point(156, 167);
+            this.btnDragonFile.Name = "btnDragonFile";
+            this.btnDragonFile.Size = new System.Drawing.Size(27, 23);
+            this.btnDragonFile.TabIndex = 21;
+            this.btnDragonFile.Text = "...";
+            this.btnDragonFile.UseVisualStyleBackColor = true;
+            this.btnDragonFile.Click += new System.EventHandler(this.btnDragonFile_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(32, 153);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(124, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Dragon exe File address:";
             // 
             // grpbxVoiceOption
             // 
@@ -763,33 +799,44 @@ namespace VoxVisio.UI
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
-            // label10
+            // chkbxOptikeyEnabled
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(32, 153);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(124, 13);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Dragon exe File address:";
+            this.chkbxOptikeyEnabled.AutoSize = true;
+            this.chkbxOptikeyEnabled.Location = new System.Drawing.Point(15, 264);
+            this.chkbxOptikeyEnabled.Name = "chkbxOptikeyEnabled";
+            this.chkbxOptikeyEnabled.Size = new System.Drawing.Size(98, 17);
+            this.chkbxOptikeyEnabled.TabIndex = 1;
+            this.chkbxOptikeyEnabled.Text = "Enable Optikey";
+            this.chkbxOptikeyEnabled.UseVisualStyleBackColor = true;
+            this.chkbxOptikeyEnabled.CheckedChanged += new System.EventHandler(this.chkbxOptikeyEnabled_CheckedChanged);
             // 
-            // txtbxDragonFile
+            // txtbxOptikeyAddress
             // 
-            this.txtbxDragonFile.Enabled = false;
-            this.txtbxDragonFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxDragonFile.Location = new System.Drawing.Point(23, 169);
-            this.txtbxDragonFile.Name = "txtbxDragonFile";
-            this.txtbxDragonFile.Size = new System.Drawing.Size(133, 20);
-            this.txtbxDragonFile.TabIndex = 20;
+            this.txtbxOptikeyAddress.Enabled = false;
+            this.txtbxOptikeyAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxOptikeyAddress.Location = new System.Drawing.Point(7, 308);
+            this.txtbxOptikeyAddress.Name = "txtbxOptikeyAddress";
+            this.txtbxOptikeyAddress.Size = new System.Drawing.Size(133, 20);
+            this.txtbxOptikeyAddress.TabIndex = 23;
             // 
-            // btnDragonFile
+            // btnOptikeyAddress
             // 
-            this.btnDragonFile.Location = new System.Drawing.Point(156, 167);
-            this.btnDragonFile.Name = "btnDragonFile";
-            this.btnDragonFile.Size = new System.Drawing.Size(27, 23);
-            this.btnDragonFile.TabIndex = 21;
-            this.btnDragonFile.Text = "...";
-            this.btnDragonFile.UseVisualStyleBackColor = true;
-            this.btnDragonFile.Click += new System.EventHandler(this.btnDragonFile_Click);
+            this.btnOptikeyAddress.Location = new System.Drawing.Point(140, 306);
+            this.btnOptikeyAddress.Name = "btnOptikeyAddress";
+            this.btnOptikeyAddress.Size = new System.Drawing.Size(27, 23);
+            this.btnOptikeyAddress.TabIndex = 24;
+            this.btnOptikeyAddress.Text = "...";
+            this.btnOptikeyAddress.UseVisualStyleBackColor = true;
+            this.btnOptikeyAddress.Click += new System.EventHandler(this.btnOptikeyAddress_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 289);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(125, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Optikey exe File address:";
             // 
             // SettingsForm
             // 
@@ -803,6 +850,7 @@ namespace VoxVisio.UI
             this.Text = "Vox Viso Settings";
             this.tabControl1.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
+            this.tabGeneral.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFormHeight)).EndInit();
@@ -890,5 +938,9 @@ namespace VoxVisio.UI
         private TextBox txtbxDragonFile;
         private Button btnDragonFile;
         private Label label10;
+        private TextBox txtbxOptikeyAddress;
+        private Button btnOptikeyAddress;
+        private Label label11;
+        private CheckBox chkbxOptikeyEnabled;
     }
 }
