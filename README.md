@@ -1,5 +1,5 @@
 # Vox Visio
-Vox Visio is an assistive technology research project that has developed and proven an integrated eye gaze and voice control system. The system has been used for formal experiments into computer control and the application will form the basis for a open source repository for assistive technology.
+Vox Visio is an assistive technology research project that has developed and proven the effectiveness of an integrated eye gaze and voice control system. The system has been used for formal experiments into computer control and the application will form the basis for a open source repository for assistive technology.
 
 Note: This statement is using back casting and may be changed to match what we have actually achieved
 
@@ -25,12 +25,13 @@ To use the software you will need the following hardware:
 
 To add functionality and improve parts of our system you have to option of using some external software. The software we support is:
 
-*Dragon Naturally Speaking
-*Optikey
+* Dragon Naturally Speaking
+* Optikey
 
 To use this software adjust the settings to point at the executable for the software and add anyother setting our system asks for. For step by step instructions on this please see our [wiki](https://github.com/AlexanderMcNeill/voxvisio/wiki/).
 
 #Problems?
+
 If you have any issues with the system please use the issue tracker to report the problem.
 
 When reporting a issue please include the following:
