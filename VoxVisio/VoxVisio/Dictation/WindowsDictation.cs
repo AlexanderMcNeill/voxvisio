@@ -17,6 +17,8 @@ namespace VoxVisio.DictationModes
         }
         public override void VoiceInput(string input)
         {
+            //Add a string to the end of the word, otherwise single detected words will not have spaced between them.
+            input += " ";
             inputSimulator.Keyboard.TextEntry(input);
         }
 
