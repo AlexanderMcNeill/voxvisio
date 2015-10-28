@@ -97,7 +97,7 @@ namespace VoxVisio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string OptiKeyFileAddress {
             get {
                 return ((string)(this["OptiKeyFileAddress"]));
@@ -109,7 +109,7 @@ namespace VoxVisio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DragonFileAddress {
             get {
                 return ((string)(this["DragonFileAddress"]));

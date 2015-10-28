@@ -175,7 +175,9 @@ namespace VoxVisio.Properties {
         ///	&quot;eye tracking&quot;:
         ///	{
         ///		&quot;debug mouse mode&quot; : false
-        ///	}
+        ///	},
+        ///
+        ///	&quot;dragon enabled&quot; : true
         ///
         ///}.
         /// </summary>

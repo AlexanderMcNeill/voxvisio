@@ -14,7 +14,7 @@ namespace VoxVisio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VoxVisio());
+            Application.Run(new MainSystemTray());
         }
     }
 }
