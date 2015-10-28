@@ -43,6 +43,16 @@ namespace VoxVisio.UI
             udFormHeight.Value = settings.ZoomFormSize.Height;
             chkbxDebugEyeTracking.Checked = settings.DebugEyeMouseMode;
             txtbxDragonFile.Text = Settings.Default.DragonFileAddress;
+            txtbxOptikeyAddress.Text = Settings.Default.OptiKeyFileAddress;
+           
+            if (Settings.Default.DragonEnabled)
+            {
+                rbDragon.Checked = true;
+            }
+            else
+            {
+                rbWindowsVoice.Checked = true;
+            }
 
         }
 
@@ -334,9 +344,10 @@ namespace VoxVisio.UI
         private void rbDragon_CheckedChanged(object sender, EventArgs e)
         {
             //if the radio box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
-            if (Settings.Default.DragonFileAddress != "" && rbDragon.Checked)
+            if (File.Exists(Settings.Default.DragonFileAddress) && rbDragon.Checked)
             {
                 Settings.Default.DragonEnabled = true;
+                txtbxDragonFile.Text = Settings.Default.DragonFileAddress;
             }
             else if (rbDragon.Checked)
             {
@@ -362,19 +373,21 @@ namespace VoxVisio.UI
             {
                 txtbxDragonFile.Text = ofd.FileName;
                 Settings.Default.DragonFileAddress = ofd.FileName;
+                txtbxDragonFile.Text = Settings.Default.DragonFileAddress;
             }
         }
 
         private void chkbxOptikeyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             //if the check box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
-            if (Settings.Default.OptiKeyFileAddress != "" && chkbxOptikeyEnabled.Checked) 
+            if (chkbxOptikeyEnabled.Checked && File.Exists(Settings.Default.OptiKeyFileAddress)) 
             {
                 Settings.Default.OptiKeyEnabled = true;
             }
             else if(chkbxOptikeyEnabled.Checked)
             {
-                MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK); MessageBox.Show("You must fist add an address for the dragon exe file", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("You must fist add an address for the OptiKey .exe file", "Error", MessageBoxButtons.OK);
+                chkbxOptikeyEnabled.Checked = false;
             }
             else
             {
@@ -393,6 +406,7 @@ namespace VoxVisio.UI
             {
                 txtbxDragonFile.Text = ofd.FileName;
                 Settings.Default.OptiKeyFileAddress = ofd.FileName;
+                txtbxOptikeyAddress.Text = Settings.Default.OptiKeyFileAddress;
             }
         }
     }
