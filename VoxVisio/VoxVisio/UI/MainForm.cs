@@ -14,7 +14,6 @@ namespace VoxVisio
         private MainEngine mainEngine;
         private HelpForm helpForm;
         private SettingsForm settingsForm;
-        //TODO: Tell alex the form is never showing and crashing when arrow button is clicked
 
         public VoxVisio()
         {

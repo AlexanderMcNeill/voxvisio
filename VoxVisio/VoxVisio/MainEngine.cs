@@ -69,8 +69,6 @@ namespace VoxVisio
             stateController.VoiceInput(e.Result.Text, e.Result.Grammar.Name);
         }
 
-       
-
         public Grammar createCommandGrammar()
         {
             var keywords = commandList.Select(coms => coms.GetKeyWord());
