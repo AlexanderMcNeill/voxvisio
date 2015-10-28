@@ -16,6 +16,7 @@ namespace VoxVisio.UI
         private SettingsForm settingsForm;
         private ContextMenu contextMenu;
         private MenuItem menuItemExit;
+        private MenuItem menuItemSettings;
 
         private readonly NotifyIcon notifyicon;
         private IContainer component;
@@ -31,12 +32,17 @@ namespace VoxVisio.UI
             // Create the NotifyIcon. 
             notifyicon = new NotifyIcon(component);
             notifyicon.MouseClick += notifyIcon_MouseClick;
+
             //Setting up the right click menu for the icon
             this.contextMenu = new ContextMenu();
             this.menuItemExit = new MenuItem();
+            menuItemSettings = new MenuItem();
             this.contextMenu.MenuItems.AddRange(
-                    new MenuItem[] { this.menuItemExit });
-            menuItemExit.Index = 0;
+                    new MenuItem[] { menuItemSettings, menuItemExit });
+            menuItemSettings.Index = 0;
+            menuItemSettings.Text = "Settings";
+            menuItemSettings.Click += delegate { showSettings(); };
+            menuItemExit.Index = 1;
             menuItemExit.Text = "Exit";
             menuItemExit.Click += menuItem1_Click;
             notifyicon.ContextMenu = contextMenu;
@@ -70,8 +76,13 @@ namespace VoxVisio.UI
         {
             //Anything that needs to happen when the tray icon is clicked goes here.
 
-            settingsForm.ShowDialog(this);
+            showSettings();
 
+        }
+
+        private void showSettings()
+        {
+            settingsForm.ShowDialog(this);
         }
        
 
