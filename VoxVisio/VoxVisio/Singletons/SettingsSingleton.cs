@@ -15,12 +15,10 @@ namespace VoxVisio.Singletons
     public class SettingsSingleton
     {
         private static SettingsSingleton _singleton;
-        public delegate void SettingsChangeEventHandler(object sender, SettingsSingleton e);
-        public event SettingsChangeEventHandler OnChange;
+        
 
         private EventList<Command> commands;
         public readonly Hook keyboardHook;
-        public event EventHandler CommandsChanged;
         public bool DragonEnabled { get; set; }
         public bool ZoomEnabled { get; set; }
         public double ZoomMagnification { get; set; }
