@@ -29,7 +29,7 @@ namespace VoxVisio.Resources
             }
         }
 
-        public void Remove(TKey key)
+        public new void Remove(TKey key)
         {
             base.Remove(key);
             if (null != OnChange)
