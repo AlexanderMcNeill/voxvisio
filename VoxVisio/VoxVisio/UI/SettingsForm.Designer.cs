@@ -34,6 +34,10 @@ namespace VoxVisio.UI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.txtbxOptikeyAddress = new System.Windows.Forms.TextBox();
+            this.btnOptikeyAddress = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.chkbxOptikeyEnabled = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.udFormHeight = new System.Windows.Forms.NumericUpDown();
             this.udFormWidth = new System.Windows.Forms.NumericUpDown();
@@ -92,10 +96,6 @@ namespace VoxVisio.UI
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
             this.btnSaveChanges = new System.Windows.Forms.Button();
-            this.chkbxOptikeyEnabled = new System.Windows.Forms.CheckBox();
-            this.txtbxOptikeyAddress = new System.Windows.Forms.TextBox();
-            this.btnOptikeyAddress = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -140,6 +140,45 @@ namespace VoxVisio.UI
             this.tabGeneral.TabIndex = 1;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // txtbxOptikeyAddress
+            // 
+            this.txtbxOptikeyAddress.Enabled = false;
+            this.txtbxOptikeyAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxOptikeyAddress.Location = new System.Drawing.Point(7, 308);
+            this.txtbxOptikeyAddress.Name = "txtbxOptikeyAddress";
+            this.txtbxOptikeyAddress.Size = new System.Drawing.Size(133, 20);
+            this.txtbxOptikeyAddress.TabIndex = 23;
+            // 
+            // btnOptikeyAddress
+            // 
+            this.btnOptikeyAddress.Location = new System.Drawing.Point(140, 306);
+            this.btnOptikeyAddress.Name = "btnOptikeyAddress";
+            this.btnOptikeyAddress.Size = new System.Drawing.Size(27, 23);
+            this.btnOptikeyAddress.TabIndex = 24;
+            this.btnOptikeyAddress.Text = "...";
+            this.btnOptikeyAddress.UseVisualStyleBackColor = true;
+            this.btnOptikeyAddress.Click += new System.EventHandler(this.btnOptikeyAddress_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 289);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(125, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Optikey exe File address:";
+            // 
+            // chkbxOptikeyEnabled
+            // 
+            this.chkbxOptikeyEnabled.AutoSize = true;
+            this.chkbxOptikeyEnabled.Location = new System.Drawing.Point(15, 264);
+            this.chkbxOptikeyEnabled.Name = "chkbxOptikeyEnabled";
+            this.chkbxOptikeyEnabled.Size = new System.Drawing.Size(98, 17);
+            this.chkbxOptikeyEnabled.TabIndex = 1;
+            this.chkbxOptikeyEnabled.Text = "Enable Optikey";
+            this.chkbxOptikeyEnabled.UseVisualStyleBackColor = true;
+            this.chkbxOptikeyEnabled.CheckedChanged += new System.EventHandler(this.chkbxOptikeyEnabled_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -238,6 +277,7 @@ namespace VoxVisio.UI
             this.trkbrMagnificationAmount.Size = new System.Drawing.Size(104, 45);
             this.trkbrMagnificationAmount.TabIndex = 1;
             this.trkbrMagnificationAmount.Value = 1;
+            this.trkbrMagnificationAmount.Scroll += new System.EventHandler(this.trkbrMagnificationAmount_Scroll);
             // 
             // chkbxZoomEnabled
             // 
@@ -798,45 +838,6 @@ namespace VoxVisio.UI
             this.btnSaveChanges.Text = "Save Changes";
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
-            // 
-            // chkbxOptikeyEnabled
-            // 
-            this.chkbxOptikeyEnabled.AutoSize = true;
-            this.chkbxOptikeyEnabled.Location = new System.Drawing.Point(15, 264);
-            this.chkbxOptikeyEnabled.Name = "chkbxOptikeyEnabled";
-            this.chkbxOptikeyEnabled.Size = new System.Drawing.Size(98, 17);
-            this.chkbxOptikeyEnabled.TabIndex = 1;
-            this.chkbxOptikeyEnabled.Text = "Enable Optikey";
-            this.chkbxOptikeyEnabled.UseVisualStyleBackColor = true;
-            this.chkbxOptikeyEnabled.CheckedChanged += new System.EventHandler(this.chkbxOptikeyEnabled_CheckedChanged);
-            // 
-            // txtbxOptikeyAddress
-            // 
-            this.txtbxOptikeyAddress.Enabled = false;
-            this.txtbxOptikeyAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxOptikeyAddress.Location = new System.Drawing.Point(7, 308);
-            this.txtbxOptikeyAddress.Name = "txtbxOptikeyAddress";
-            this.txtbxOptikeyAddress.Size = new System.Drawing.Size(133, 20);
-            this.txtbxOptikeyAddress.TabIndex = 23;
-            // 
-            // btnOptikeyAddress
-            // 
-            this.btnOptikeyAddress.Location = new System.Drawing.Point(140, 306);
-            this.btnOptikeyAddress.Name = "btnOptikeyAddress";
-            this.btnOptikeyAddress.Size = new System.Drawing.Size(27, 23);
-            this.btnOptikeyAddress.TabIndex = 24;
-            this.btnOptikeyAddress.Text = "...";
-            this.btnOptikeyAddress.UseVisualStyleBackColor = true;
-            this.btnOptikeyAddress.Click += new System.EventHandler(this.btnOptikeyAddress_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 289);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(125, 13);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "Optikey exe File address:";
             // 
             // SettingsForm
             // 

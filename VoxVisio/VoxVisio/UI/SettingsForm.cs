@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -307,6 +308,7 @@ namespace VoxVisio.UI
 
         private void chkbxDebugEyeTracking_CheckedChanged(object sender, EventArgs e)
         {
+            SettingsSingleton.Instance().DebugEyeMouseMode = chkbxDebugEyeTracking.Checked;
             setDebugEyeState();
         }
 
@@ -332,8 +334,14 @@ namespace VoxVisio.UI
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            SettingsSingleton.Instance().saveCommands();
-            SettingsSingleton.Instance().saveSettings();
+            int width, height;
+            if (int.TryParse(udFormWidth.Text, out width) && int.TryParse(udFormHeight.Text, out height))
+            {
+                settings.ZoomFormSize = new Size(width, height);
+            }
+            
+            settings.saveCommands();
+            settings.saveSettings();
         }
 
         private void rbWindowsVoice_CheckedChanged(object sender, EventArgs e)
@@ -408,6 +416,12 @@ namespace VoxVisio.UI
                 Settings.Default.OptiKeyFileAddress = ofd.FileName;
                 txtbxOptikeyAddress.Text = Settings.Default.OptiKeyFileAddress;
             }
+        }
+       
+
+        private void trkbrMagnificationAmount_Scroll(object sender, EventArgs e)
+        {
+            settings.ZoomMagnification = trkbrMagnificationAmount.Value;
         }
     }
 }
