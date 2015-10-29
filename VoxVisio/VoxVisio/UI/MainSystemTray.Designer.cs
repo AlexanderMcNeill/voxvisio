@@ -39,6 +39,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainSystemTray";
             this.Text = "MainSystemTray";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainSystemTray_FormClosing);
             this.Load += new System.EventHandler(this.MainSystemTray_Load);
             this.ResumeLayout(false);
 

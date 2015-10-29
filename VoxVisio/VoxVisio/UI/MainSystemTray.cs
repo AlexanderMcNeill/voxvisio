@@ -86,5 +86,10 @@ namespace VoxVisio.UI
         {
             
         }
+
+        private void MainSystemTray_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyicon.Icon = null;
+        }
     }
 }
