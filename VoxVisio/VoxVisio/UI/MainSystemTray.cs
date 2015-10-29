@@ -34,14 +34,13 @@ namespace VoxVisio.UI
             notifyicon.MouseClick += notifyIcon_MouseClick;
 
             //Setting up the right click menu for the icon
-            this.contextMenu = new ContextMenu();
-            this.menuItemExit = new MenuItem();
+            contextMenu = new ContextMenu();
+            menuItemExit = new MenuItem();
             menuItemSettings = new MenuItem();
-            this.contextMenu.MenuItems.AddRange(
-                    new MenuItem[] { menuItemSettings, menuItemExit });
+            contextMenu.MenuItems.AddRange(new MenuItem[] { menuItemSettings, menuItemExit });
             menuItemSettings.Index = 0;
             menuItemSettings.Text = "Settings";
-            menuItemSettings.Click += delegate { showSettings(); };
+            menuItemSettings.Click += delegate { ShowSettings(); };
             menuItemExit.Index = 1;
             menuItemExit.Text = "Exit";
             menuItemExit.Click += menuItem1_Click;
@@ -57,30 +56,27 @@ namespace VoxVisio.UI
             // in a tooltip, when the mouse hovers over the systray icon.
             notifyicon.Text = "VoxVisio is Running";
 
-            this.WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
             notifyicon.Visible = true;
-            this.ShowInTaskbar = false;
-            this.Hide();
+            ShowInTaskbar = false;
+            Hide();
 
             //this.Resize += frmMain_Resize;
-
 
         }
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
             //Anything that needs to happen when the tray icon is clicked goes here.
-
-            showSettings();
-
+            ShowSettings();
         }
 
-        private void showSettings()
+        private void ShowSettings()
         {
             settingsForm.ShowDialog(this);
         }
