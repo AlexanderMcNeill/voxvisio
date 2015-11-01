@@ -43,6 +43,7 @@ namespace VoxVisio.UI
             udFormWidth.Value = settings.ZoomFormSize.Width;
             udFormHeight.Value = settings.ZoomFormSize.Height;
             chkbxDebugEyeTracking.Checked = settings.DebugEyeMouseMode;
+            chkbxOptikeyEnabled.Checked = Settings.Default.OptiKeyEnabled;
             txtbxDragonFile.Text = Settings.Default.DragonFileAddress;
             txtbxOptikeyAddress.Text = Settings.Default.OptiKeyFileAddress;
            
@@ -390,7 +391,7 @@ namespace VoxVisio.UI
             //if the check box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
             if (chkbxOptikeyEnabled.Checked && File.Exists(Settings.Default.OptiKeyFileAddress)) 
             {
-                Settings.Default.OptiKeyEnabled = true;
+               SettingsSingleton.Instance().OptiKeyEnabled = true;
             }
             else if(chkbxOptikeyEnabled.Checked)
             {
@@ -399,7 +400,7 @@ namespace VoxVisio.UI
             }
             else
             {
-                Settings.Default.OptiKeyEnabled = false;
+                SettingsSingleton.Instance().OptiKeyEnabled = false;
             }
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VoxVisio.Properties;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.Screen_Overlay
 {
@@ -14,7 +15,7 @@ namespace VoxVisio.Screen_Overlay
 
         public bool VoiceInput(string voiceData)
         {
-            if (Settings.Default.OptiKeyEnabled) // HACK : There would be an easier way to do this with a change to the Keyboard manager's interaction structure.
+            if (SettingsSingleton.Instance().OptiKeyEnabled) // HACK : There would be an easier way to do this with a change to the Keyboard manager's interaction structure.
             {
                 switch (voiceData)
                 {
