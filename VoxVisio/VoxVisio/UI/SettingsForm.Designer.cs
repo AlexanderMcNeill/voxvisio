@@ -96,6 +96,8 @@ namespace VoxVisio.UI
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
             this.btnSaveChanges = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -182,6 +184,8 @@ namespace VoxVisio.UI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.udFormHeight);
             this.groupBox1.Controls.Add(this.udFormWidth);
             this.groupBox1.Controls.Add(this.label9);
@@ -839,6 +843,24 @@ namespace VoxVisio.UI
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(110, 102);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(13, 13);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "1";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(187, 102);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(13, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "5";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -943,5 +965,7 @@ namespace VoxVisio.UI
         private Button btnOptikeyAddress;
         private Label label11;
         private CheckBox chkbxOptikeyEnabled;
+        private Label label13;
+        private Label label12;
     }
 }
