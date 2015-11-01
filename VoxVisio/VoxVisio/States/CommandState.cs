@@ -47,7 +47,7 @@ namespace VoxVisio.States
                 {
                     //Load the command that matches the command word, that isnt a key press command.
                     Command commandToFire = commandList.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
-                    commandToFire.RunCommand();
+                    commandToFire?.RunCommand();
 
                 }
             }
