@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using System.IO;
+using VoxVisio.Screen_Overlay;
+using VoxVisio.Singletons;
 
 namespace VoxVisio.Commands
 {
@@ -27,7 +30,14 @@ namespace VoxVisio.Commands
 
         public void RunCommand()
         {
-            Process.Start(ProgramLocation);
+            if (File.Exists(ProgramLocation))
+            {
+                Process.Start(ProgramLocation);
+            }
+            else
+            {
+                SharedFormsSingleton.Instance().ToastOverlay.NewMessage("The program " + ProgramLocation + " was not found.");
+            }
         }
 
         public void LoadFromJson(JObject jsonData)
