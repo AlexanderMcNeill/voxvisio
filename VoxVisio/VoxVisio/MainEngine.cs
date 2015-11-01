@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Speech.Recognition;
+using System.Threading;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
 using VoxVisio.Singletons;
@@ -41,13 +43,15 @@ namespace VoxVisio
 
         private SpeechRecognitionEngine createSpeechRecogntionEngine(MainSystemTray form)
         {
-            SpeechRecognitionEngine newSpeechRecognizer = new SpeechRecognitionEngine();
+            SpeechRecognitionEngine newSpeechRecognizer = new SpeechRecognitionEngine(CultureInfo.CurrentCulture);
 
             //Setting up the grammars for the voice recognizer
             Grammar commandGrammar = createCommandGrammar();
 
             Grammar dictationGrammar = new DictationGrammar();
             dictationGrammar.Name = DictationState.GRAMMARNAME;
+            //SpeechRecognitionEngine.InstalledRecognizers().First();
+          
 
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method
             newSpeechRecognizer.RequestRecognizerUpdate();
@@ -105,6 +109,8 @@ namespace VoxVisio
             sList.Add("stop keyboard");
 
             GrammarBuilder gb = new GrammarBuilder(sList);
+            gb.Culture = Thread.CurrentThread.CurrentCulture;
+
             Grammar newCommandGrammar = new Grammar(gb);
             newCommandGrammar.Name = CommandState.GRAMMARNAME;
 
