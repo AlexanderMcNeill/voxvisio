@@ -54,7 +54,7 @@ namespace VoxVisio.UI
         {
             if(!running)
             {
-            running = true;
+                running = true;
                 int xPos = MousePosition.X - (Width / 2);
                 int yPos = MousePosition.Y - (Height / 2);
                 GetFormPos(xPos, yPos);
