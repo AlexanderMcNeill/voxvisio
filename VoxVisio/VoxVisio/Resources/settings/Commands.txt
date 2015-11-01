@@ -174,11 +174,6 @@
       "keyword": "open media player",
       "program location": "C:/Program Files (x86)/Windows Media Player/wmplayer.exe",
 	  "command type": "OpenProgramCommand"
-    },
-	{
-      "keyword": "open keyboard",
-      "program location": "C:/Program Files (x86)/OptiKey/OptiKey.exe",
-	  "command type": "OpenProgramCommand"
     }
   ]
 }
