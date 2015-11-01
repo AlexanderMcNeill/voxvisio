@@ -156,13 +156,20 @@ namespace VoxVisio.UI
         //Method for converting the X position in pixels to the absolute number needed from the input simulator
         private double convertXToAbsolute(int x)
         {
-            return ((double)65535 * x) / (double)Screen.PrimaryScreen.Bounds.Width;
+            //65535, Used in conversion between the absolute number provided by the mouse event.
+            //For more information see remarks here https://msdn.microsoft.com/en-us/library/windows/desktop/ms646273(v=vs.85).aspx
+            int magicNumber = UInt16.MaxValue; 
+            
+            return ((double)magicNumber * x) / (double)Screen.PrimaryScreen.Bounds.Width;
         }
 
         //Method for converting the Y position in pixels to the absolute number needed from the input simulator
         private double convertYToAbsolute(int y)
         {
-            return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
+            //65535, Used in conversion between the absolute number provided by the mouse event.
+            //For more information see remarks here https://msdn.microsoft.com/en-us/library/windows/desktop/ms646273(v=vs.85).aspx
+            int magicNumber = UInt16.MaxValue; 
+            return ((double)magicNumber * y) / (double)Screen.PrimaryScreen.Bounds.Height;
         }
 
         private void zoomTimer_Tick(object sender, EventArgs e)
