@@ -62,8 +62,8 @@ namespace VoxVisio.UI
                 g.FillRectangle(Brushes.Black, Bounds);
                 g.CopyFromScreen(xPos, yPos, 0, 0, new Size(Width, Height));
                 
-                int zoomWidth = (int)(bmp.Width * 3);
-                int zoomHeight = (int)(bmp.Height * 3);
+                int zoomWidth = (int)(bmp.Width * SettingsSingleton.Instance().ZoomMagnification);
+                int zoomHeight = (int)(bmp.Height * SettingsSingleton.Instance().ZoomMagnification);
 
                 int zoomXPos = -((zoomWidth - bmp.Width) / 2);
                 int zoomYPos = -((zoomHeight - bmp.Height) / 2);
