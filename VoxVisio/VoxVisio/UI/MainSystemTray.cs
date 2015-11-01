@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,7 +26,7 @@ namespace VoxVisio.UI
         {
             InitializeComponent();
             
-            mainEngine = new MainEngine();
+            mainEngine = new MainEngine(this);
             settingsForm = new SettingsForm();
 
             this.component = new Container();
@@ -79,6 +80,16 @@ namespace VoxVisio.UI
         private void ShowSettings()
         {
             settingsForm.ShowDialog(this);
+        }
+
+        public void ExitProgram()
+        {
+            // The exit call must wait for a second for all the other processes to start before exiting the program otherwise 
+            // Object disposal errors occur.
+            new Thread(delegate () {
+                Thread.Sleep(1000);
+                Application.Exit();
+            }).Start();
         }
        
 

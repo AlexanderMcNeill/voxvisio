@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Speech.Recognition;
 using System.Windows.Forms;
 using VoxVisio.Screen_Overlay;
 using VoxVisio.Singletons;
 using VoxVisio.Commands;
 using VoxVisio.States;
+using VoxVisio.UI;
 
 namespace VoxVisio
 {
@@ -15,14 +18,18 @@ namespace VoxVisio
         private SpeechRecognitionEngine speechRecognizer;
         private StateController stateController;
 
-        public MainEngine()
+        public MainEngine(MainSystemTray form)
         {
+            //Fetch the list of commands
             commandList = SettingsSingleton.Instance().Commands;
-            speechRecognizer = createSpeechRecogntionEngine();
+            // Create the speech recognition engine
+            speechRecognizer = createSpeechRecogntionEngine(form);
 
             stateController = new StateController();
 
+            //Register to the event that provides the fixations
             EventSingleton.Instance().fixationEvent += sharedData_fixationEvent;
+            //Register to the event that fires when keyboard keys are pressed
             EventSingleton.Instance().systemHook.KeyDown += sharedData_keyboardEvent;
             speechRecognizer.SpeechRecognized += SpeechRecognised;
         }
@@ -32,7 +39,7 @@ namespace VoxVisio
             stateController.EyeInput(newFixation);
         }
 
-        private SpeechRecognitionEngine createSpeechRecogntionEngine()
+        private SpeechRecognitionEngine createSpeechRecogntionEngine(MainSystemTray form)
         {
             SpeechRecognitionEngine newSpeechRecognizer = new SpeechRecognitionEngine();
 
@@ -46,18 +53,32 @@ namespace VoxVisio
             newSpeechRecognizer.RequestRecognizerUpdate();
             newSpeechRecognizer.LoadGrammar(dictationGrammar);
             newSpeechRecognizer.LoadGrammar(commandGrammar);
-            newSpeechRecognizer.SetInputToDefaultAudioDevice();
-            newSpeechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+            try
+            {
+                newSpeechRecognizer.SetInputToDefaultAudioDevice();
+                newSpeechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            catch (System.InvalidOperationException)
+            {
+                if (MessageBox.Show(
+                    "You do not have an audio capture device installed \nPlease install a microphone and restart the program",
+                    "No Capture Device", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    form.ExitProgram();
+                }
+                
+            }
+            
 
             return newSpeechRecognizer;
         }
 
-        private void updateVoiceRecognition()
-        {
-            speechRecognizer.SpeechRecognized -= SpeechRecognised;
-            speechRecognizer = createSpeechRecogntionEngine();
-            speechRecognizer.SpeechRecognized += SpeechRecognised;
-        }
+        //private void updateVoiceRecognition()
+        //{
+        //    speechRecognizer.SpeechRecognized -= SpeechRecognised;
+        //    speechRecognizer = createSpeechRecogntionEngine();
+        //    speechRecognizer.SpeechRecognized += SpeechRecognised;
+        //}
 
         public void sharedData_keyboardEvent(object sender, KeyEventArgs keyEventArgs)
         {
