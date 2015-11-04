@@ -347,7 +347,7 @@ namespace VoxVisio.UI
 
         private void rbWindowsVoice_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.DragonEnabled = false;
+            settings.DragonEnabled = false;
         }
 
         private void rbDragon_CheckedChanged(object sender, EventArgs e)
@@ -355,7 +355,7 @@ namespace VoxVisio.UI
             //if the radio box is checked, and a file path has been set, then allow the program to be enabled, otherwise give an error.
             if (File.Exists(Settings.Default.DragonFileAddress) && rbDragon.Checked)
             {
-                Settings.Default.DragonEnabled = true;
+                settings.DragonEnabled = true;
                 txtbxDragonFile.Text = Settings.Default.DragonFileAddress;
             }
             else if (rbDragon.Checked)
@@ -366,7 +366,7 @@ namespace VoxVisio.UI
             }
             else
             {
-                Settings.Default.DragonEnabled = false;
+                settings.DragonEnabled = false;
             }
             
         }
