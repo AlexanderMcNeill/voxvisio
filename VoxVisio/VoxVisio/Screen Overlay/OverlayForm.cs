@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -46,6 +47,10 @@ namespace VoxVisio.Screen_Overlay
             SetLayeredWindowAttributes(this.Handle, 0, 128, LWA.Alpha);
         }
         //==================================================================================================
+
+        //Getting the get forground window method from user32
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
 
         //Objects for smoothly drawing to the screen
         private Bitmap buffer;
@@ -96,8 +101,17 @@ namespace VoxVisio.Screen_Overlay
             overlays.Remove(toRemove);
         }
 
+        private void setTopMost()
+        {
+            if (GetForegroundWindow() == Process.GetCurrentProcess().MainWindowHandle)
+            {
+                TopMost = true;
+            }
+        }
+
         public void DrawOverlays()
         {
+            setTopMost();
             //Clearing the buffer to the transparent color of the form
             bufferGraphics.Clear(BackColor);
 

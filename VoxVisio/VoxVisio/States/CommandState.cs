@@ -35,8 +35,9 @@ namespace VoxVisio.States
 
         public override void VoiceInput(string voiceData, string grammarName)
         {
-            if (grammarName.Equals(GRAMMARNAME))
+            try
             {
+                voiceData = voiceData.ToLower();
                 //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
                 double mouseXPos = convertXToAbsolute(latestFixation.GetFixationLocation().X);
                 double mouseYPos = convertYToAbsolute(latestFixation.GetFixationLocation().Y);
@@ -47,13 +48,13 @@ namespace VoxVisio.States
                 {
                     //Load the command that matches the command word, that isnt a key press command.
                     Command commandToFire = commandList.FirstOrDefault(i => i.GetKeyWord() == voiceData && i.GetCommandType() != eCommandType.KeyPressCommand);
-                    commandToFire?.RunCommand();
+                    commandToFire.RunCommand();
 
                 }
             }
-            else 
+            catch(Exception e) 
             {
-                toastOverlay.NewMessage("Sorry, I didn't catch that.\nPlease try again.");
+                toastOverlay.NewMessage(voiceData + " not recognized.\nPlease try again.");
             }
         }
 
