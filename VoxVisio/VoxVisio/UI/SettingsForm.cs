@@ -79,7 +79,7 @@ namespace VoxVisio.UI
                 voiceCommandKeys.ForEach(x => keystrings += (x).ToString() + " ");
                 keystrings = keystrings.TrimEnd();
                 keystrings = keystrings.Replace(" ", ",");
-                Command command = new VoiceCommand(txtVoiceCommandWord.Text, keystrings,
+                Command command = new VoiceCommand(txtVoiceCommandWord.Text.ToLower(), keystrings,
                     SharedObjectsSingleton.Instance().inputSimulator);
                 settings.Commands.Add(command);
                 // Update the list of commands
@@ -185,7 +185,7 @@ namespace VoxVisio.UI
             //Checking that the user has extered a valid program path
             if (File.Exists(txtExecutablePath.Text))
             {
-                Command command = new OpenProgramCommand(txtExecutablePath.Text, txtOpenProgramCommandWord.Text);
+                Command command = new OpenProgramCommand(txtExecutablePath.Text, txtOpenProgramCommandWord.Text.ToLower());
             }
             else
             {
