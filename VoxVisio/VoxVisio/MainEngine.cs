@@ -50,7 +50,7 @@ namespace VoxVisio
             commandGrammar.Weight = 1f;
 
 
-            Grammar dictationGrammar = new DictationGrammar();
+            Grammar dictationGrammar = new DictationGrammar("grammar:dictation");
             dictationGrammar.Name = DictationState.GRAMMARNAME;
             dictationGrammar.Weight = .5f;
           
