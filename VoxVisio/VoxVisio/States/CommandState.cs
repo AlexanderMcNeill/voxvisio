@@ -35,7 +35,7 @@ namespace VoxVisio.States
 
         public override void VoiceInput(string voiceData, string grammarName)
         {
-            try
+             if (grammarName == GRAMMARNAME)//try
             {
                 voiceData = voiceData.ToLower();
                 //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
@@ -52,7 +52,7 @@ namespace VoxVisio.States
 
                 }
             }
-            catch(Exception e) 
+            else //catch(Exception e) 
             {
                 toastOverlay.NewMessage(voiceData + " not recognized.\nPlease try again.");
             }
