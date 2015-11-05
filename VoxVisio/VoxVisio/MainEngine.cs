@@ -47,12 +47,12 @@ namespace VoxVisio
 
             //Setting up the grammars for the voice recognizer
             Grammar commandGrammar = createCommandGrammar();
-            commandGrammar.Weight = 1f;
+            commandGrammar.Weight = 1f;           
 
             //"grammar:dictation#pronunciation"
             Grammar dictationGrammar = new DictationGrammar("grammar:dictation");
             dictationGrammar.Name = DictationState.GRAMMARNAME;
-            dictationGrammar.Weight = .5f;
+            dictationGrammar.Weight = .3f;
           
 
             //Setting up the voice recognizer to start listening for commands and send them to the SpeechRecognised method

@@ -54,7 +54,7 @@ namespace VoxVisio.States
             }
             else //catch(Exception e) 
             {
-                toastOverlay.NewMessage(voiceData + " not recognized.\nPlease try again.");
+                toastOverlay.NewMessage("\""+voiceData + "\" not recognized.\nPlease try again.");
             }
         }
 
