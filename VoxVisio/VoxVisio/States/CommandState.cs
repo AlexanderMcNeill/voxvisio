@@ -55,8 +55,8 @@ namespace VoxVisio.States
             catch(Exception e) 
             {
                 // If the length of the words that wasnt recognized is longer than 10 characters, concatenate it.
-                voiceData = voiceData.Length > 10 ? voiceData.Substring(0,10)+"..." : voiceData;
-                toastOverlay.NewMessage("\""+voiceData + "\" not recognized.\nPlease try again.");
+                string toPrint = voiceData.Length > 10 ? voiceData.Substring(0,10)+"..." : voiceData;
+                toastOverlay.NewMessage("\"" + toPrint + "\" not recognized.\nPlease try again.");
             }
         }
 
