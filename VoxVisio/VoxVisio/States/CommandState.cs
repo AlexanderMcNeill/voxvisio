@@ -35,7 +35,7 @@ namespace VoxVisio.States
 
         public override void VoiceInput(string voiceData, string grammarName)
         {
-             if (grammarName == GRAMMARNAME)//try
+             try
             {
                 voiceData = voiceData.ToLower();
                 //Getting the latest fixation and converting it to a absolute so the mouse can be moved to it
@@ -52,8 +52,10 @@ namespace VoxVisio.States
 
                 }
             }
-            else //catch(Exception e) 
+            catch(Exception e) 
             {
+                // If the length of the words that wasnt recognized is longer than 10 characters, concatenate it.
+                voiceData = voiceData.Length > 10 ? voiceData.Substring(0,10)+"..." : voiceData;
                 toastOverlay.NewMessage("\""+voiceData + "\" not recognized.\nPlease try again.");
             }
         }
