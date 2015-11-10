@@ -63,6 +63,14 @@ namespace VoxVisio.UI
             FillVoiceCommandTable();
             FillKeyBindingTable();
             FillStartProgramTable();
+            cmbxCommandWords.Items.Clear();
+            foreach (Command item in settings.Commands)
+            {
+                if( item is VoiceCommand)
+                {
+                    cmbxCommandWords.Items.Add(item.GetKeyWord());
+                }
+            }
         }
 
         private void btnAddVoiceCommand_Click(object sender, EventArgs e)
@@ -230,6 +238,8 @@ namespace VoxVisio.UI
             else
             {
                 KeyPressCommand newCommand = new KeyPressCommand(cmbxCommandWords.SelectedText, (Keys) bindingKey);
+                settings.Commands.Add(newCommand);
+                FillKeyBindingTable();
             }
         }
 
