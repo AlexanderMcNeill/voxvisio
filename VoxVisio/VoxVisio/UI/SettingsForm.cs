@@ -226,7 +226,8 @@ namespace VoxVisio.UI
 
         private void btnAddKeyBinding_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxCommandWords.SelectedText))
+            string selectedCommandWord = cmbxCommandWords.GetItemText(cmbxCommandWords.SelectedItem);
+            if (string.IsNullOrEmpty(selectedCommandWord))
             {
                 MessageBox.Show("You must select a command that is triggered when the key is pressed", "Incorrect Input",
                     MessageBoxButtons.OK);
@@ -237,7 +238,7 @@ namespace VoxVisio.UI
             }
             else
             {
-                KeyPressCommand newCommand = new KeyPressCommand(cmbxCommandWords.SelectedText, (Keys) bindingKey);
+                KeyPressCommand newCommand = new KeyPressCommand(selectedCommandWord, (Keys)bindingKey);
                 settings.Commands.Add(newCommand);
                 FillKeyBindingTable();
             }
@@ -355,6 +356,7 @@ namespace VoxVisio.UI
             
             settings.saveCommands();
             settings.saveSettings();
+            MessageBox.Show("A restart of the program is reccomended for new commands to work effectivly.", "Please Note", MessageBoxButtons.OK);
         }
 
         private void rbWindowsVoice_CheckedChanged(object sender, EventArgs e)
