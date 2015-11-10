@@ -186,6 +186,8 @@ namespace VoxVisio.UI
             if (File.Exists(txtExecutablePath.Text))
             {
                 Command command = new OpenProgramCommand(txtExecutablePath.Text, txtOpenProgramCommandWord.Text.ToLower());
+                settings.Commands.Add(command);
+                FillStartProgramTable();
             }
             else
             {
