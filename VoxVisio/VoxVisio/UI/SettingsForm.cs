@@ -424,5 +424,10 @@ namespace VoxVisio.UI
         {
             settings.ZoomMagnification = trkbrMagnificationAmount.Value;
         }
+
+        private void btnAddNewUser_Click(object sender, EventArgs e)
+        {
+            EventSingleton.Instance().eyex.LaunchProfileCreation();
+        }
     }
 }

@@ -39,6 +39,8 @@ namespace VoxVisio.UI
             this.label11 = new System.Windows.Forms.Label();
             this.chkbxOptikeyEnabled = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.udFormHeight = new System.Windows.Forms.NumericUpDown();
             this.udFormWidth = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -96,8 +98,7 @@ namespace VoxVisio.UI
             this.lblOpenProgramTitle = new System.Windows.Forms.Label();
             this.lblVoiceCommandTitle = new System.Windows.Forms.Label();
             this.btnSaveChanges = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.btnAddNewUser = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -200,6 +201,24 @@ namespace VoxVisio.UI
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Zoom Click Settings";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(187, 102);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(13, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "5";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(110, 102);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(13, 13);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "1";
+            // 
             // udFormHeight
             // 
             this.udFormHeight.Location = new System.Drawing.Point(102, 180);
@@ -297,6 +316,7 @@ namespace VoxVisio.UI
             // 
             // tabEyeTracking
             // 
+            this.tabEyeTracking.Controls.Add(this.btnAddNewUser);
             this.tabEyeTracking.Controls.Add(this.btnCalibrate);
             this.tabEyeTracking.Controls.Add(this.btnVisualiseFixations);
             this.tabEyeTracking.Controls.Add(this.chkbxDebugEyeTracking);
@@ -843,23 +863,16 @@ namespace VoxVisio.UI
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
-            // label12
+            // btnAddNewUser
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(110, 102);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(13, 13);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "1";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(187, 102);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(13, 13);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "5";
+            this.btnAddNewUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNewUser.Location = new System.Drawing.Point(356, 427);
+            this.btnAddNewUser.Name = "btnAddNewUser";
+            this.btnAddNewUser.Size = new System.Drawing.Size(280, 105);
+            this.btnAddNewUser.TabIndex = 3;
+            this.btnAddNewUser.Text = "Add New User";
+            this.btnAddNewUser.UseVisualStyleBackColor = true;
+            this.btnAddNewUser.Click += new System.EventHandler(this.btnAddNewUser_Click);
             // 
             // SettingsForm
             // 
@@ -967,5 +980,6 @@ namespace VoxVisio.UI
         private CheckBox chkbxOptikeyEnabled;
         private Label label13;
         private Label label12;
+        private Button btnAddNewUser;
     }
 }
